@@ -81,9 +81,7 @@ var ldBusiness = map[string]any{
 var staticFS embed.FS
 
 // Register wires the public routes. NOTE: chi's InsertRoute updates existing
-// nodes, so for duplicate exact paths the LAST registration wins — marketing
-// owns referral/socials/help/links/search/sitemap/legal/contact/manifest/sw
-// and must NOT be duplicated by the legacy stub module (see legacy.go).
+// nodes, so for duplicate exact paths the LAST registration wins.
 func (m *Module) Register(r chi.Router) bool {
 	if !m.Enabled {
 		return false
@@ -116,10 +114,24 @@ func (m *Module) Register(r chi.Router) bool {
 	// FR-031 PWA — real manifest + service worker (legacy JSON stubs shadowed).
 	r.Get("/manifest.webmanifest", m.manifest)
 	r.Get("/sw.js", m.serviceWorker)
+	// First-party visitor beacon — the embedded beacon.js posts here on every
+	// page view. Retention analytics proper belongs to the AlphaFlux platform;
+	// the site accepts the hit so visitor_id/session_id keep flowing.
+	r.Post("/api/track/view", m.beacon)
+	r.Post("/api/track/event", m.beacon)
+	r.Post("/api/track/session_end", m.beacon)
 	// Assets — serve identical tactical assets from the embedded FS.
 	sub, _ := fs.Sub(view.Assets, "assets")
 	r.Handle("/assets/*", http.StripPrefix("/assets/", http.FileServer(http.FS(sub))))
 	return true
+}
+
+// beacon accepts a visitor-tracking hit. The beacon is fire-and-forget
+// (navigator.sendBeacon), so the body is irrelevant — 204 keeps it cheap.
+func (m *Module) beacon(w http.ResponseWriter, _ *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusAccepted)
+	_, _ = w.Write([]byte(`{"status":"ok"}`))
 }
 
 // manifest serves the PWA web-app manifest (canonical public/manifest.webmanifest).
