@@ -50,9 +50,9 @@ const pageLinks = `<section class="block">
       <div class="card">
         <h3 style="font-family:var(--display);color:var(--orange);font-size:1.05rem;margin-bottom:.8rem">Account</h3>
         <div style="display:flex;flex-direction:column;gap:.5rem">
-          <a href="/login" style="color:var(--cream);text-decoration:none">Sign In ▸</a>
-          <a href="/customer-dashboard" style="color:var(--cream);text-decoration:none">Customer Dashboard ▸</a>
-          <a href="/staff-dashboard" style="color:var(--cream);text-decoration:none">Staff Dashboard ▸</a>
+          <a href="{{login}}" style="color:var(--cream);text-decoration:none">Sign In ▸</a>
+          <a href="{{login}}" style="color:var(--cream);text-decoration:none">Customer Portal ▸</a>
+          <a href="{{login}}" style="color:var(--cream);text-decoration:none">Staff / Admin Console ▸</a>
         </div>
       </div>
       <div class="card">

@@ -1,6 +1,6 @@
-// Package view renders the tactical front-end: the shared page shell (SEO head,
-// nav, footer) wrapping each page template, plus the light authenticated app
-// shell. It mirrors templates/layouts/main.php and app.php pixel-for-pixel.
+// Package view renders the public landing site: the shared page shell (SEO head,
+// nav, footer) wrapping each page template. Customer, staff and admin
+// dashboards are served by the AlphaFlux platform; this site links out to it.
 package view
 
 import (
@@ -16,10 +16,25 @@ import (
 	"github.com/David2024patton/patriot-pest-go/internal/data"
 )
 
+// ---- Sign-in destination -----------------------------------------------
+
+// loginURL is where every sign-in link and every former dashboard URL sends
+// visitors: the AlphaFlux platform.
+var loginURL = "https://alphaflux.net/login"
+
+// SetLoginURL overrides the sign-in destination (ALPHAFLUX_LOGIN_URL).
+// Call it once at boot, before serving.
+func SetLoginURL(u string) {
+	if s := strings.TrimSpace(u); s != "" {
+		loginURL = s
+	}
+}
+
 // ---- FuncMap (stateless helpers; per-request values come in the data map) ----
 
 var funcMap = template.FuncMap{
 	"asset":  func(p string) string { return "/assets/" + p },
+	"login":  func() string { return loginURL },
 	"upper":  strings.ToUpper,
 	"lower":  strings.ToLower,
 	"ucfirst": func(s string) string {
@@ -128,9 +143,9 @@ const layoutHTML = `<!DOCTYPE html>
   <button id="menu-btn" aria-label="Toggle menu">☰ Menu</button>
   <div class="navlinks">
     <a class="nl{{if eq .Page "home"}} active{{end}}" href="/">Home</a><a class="nl" href="/about">About</a><a class="nl" href="/services">Services</a><a class="nl" href="/prices">Prices</a><a class="nl" href="/service-areas">Areas</a><a class="nl" href="/blogs">Blog</a><a class="nl" href="/faqs">FAQs</a><a class="nl" href="/contact">Contact</a><a class="nl" href="/links">🔗 All Links</a>
-    {{if eq .UserType "customer"}}<a class="nl" href="/customer-dashboard">My Account</a>
-    {{else if eq .UserType "staff"}}<a class="nl" href="/staff-dashboard">Dashboard</a>{{if .IsAdmin}}<a class="nl" href="/admin">Admin</a>{{end}}
-    {{else}}<a class="nl" href="/login">Sign In</a>{{end}}
+    {{if eq .UserType "customer"}}<a class="nl" href="{{login}}">My Account</a>
+    {{else if eq .UserType "staff"}}<a class="nl" href="{{login}}">Dashboard</a>
+    {{else}}<a class="nl" href="{{login}}">Sign In</a>{{end}}
     <a class="nav-cta" href="{{.PhoneHref}}">☎ {{.PhoneDisplay}}</a>
   </div>
 </nav>
