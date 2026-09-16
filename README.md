@@ -22,3 +22,6 @@ Dockerfile path `Dockerfile.go`. Runtime mounts:
 - `/home/server/go-patriot/data/settings.json` → `/app/storage/settings.json`
 
 Domains: `patriotpest.pro`, `www.patriotpest.pro` (Let's Encrypt via the Dokploy Traefik).
+
+## Auto-deploy
+Pushes to `main` auto-deploy via the Dokploy GitHub App (app `Patriot`, project PPC).
