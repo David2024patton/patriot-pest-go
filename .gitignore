@@ -9,8 +9,8 @@
 *.db-wal
 *.db-shm
 *.db-journal
-database/
-data/
+/database/
+/data/
 storage/logs/
 storage/cache/
 storage/uploads/
