@@ -1,6 +1,6 @@
 /* ============================================================
    PATRIOT PEST CONTROL - Tactical Design System
-   Display: Black Ops One Â· Body: Barlow Â· Mono: IBM Plex Mono
+   Display: Black Ops One · Body: Barlow · Mono: IBM Plex Mono
    ============================================================ */
 :root{
   --ink:#141a10;
@@ -140,7 +140,7 @@ h2 em,h1 em{font-style:normal;color:var(--orange)}
   font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;
   border:1px solid var(--olive-500);color:var(--khaki);padding:.4rem .8rem;
 }
-.page-head .head-tags span::before{content:"âœ“ ";color:var(--orange)}
+.page-head .head-tags span::before{content:"✓ ";color:var(--orange)}
 
 /* ---------- content blocks ---------- */
 .block{padding:5.5rem 0}
@@ -195,7 +195,7 @@ h2 em,h1 em{font-style:normal;color:var(--orange)}
   display:inline-block;margin-top:.9rem;font-family:var(--mono);font-size:.66rem;
   letter-spacing:.18em;color:var(--orange);text-decoration:none;text-transform:uppercase;
 }
-.card a.more::after{content:" â–¸";transition:margin .2s}
+.card a.more::after{content:" ▸";transition:margin .2s}
 .card a.more:hover::after{margin-left:4px}
 
 /* paper cards (for light sections) */
@@ -704,11 +704,11 @@ img, video, canvas, iframe {
     opacity: 0.8;
   }
 }
-.plan li::before{content:"â–¸ ";color:var(--orange)}
+.plan li::before{content:"▸ ";color:var(--orange)}
 .plan li.bonus{color:var(--cream)}
-.plan li.bonus::before{content:"â˜… ";color:var(--orange)}
+.plan li.bonus::before{content:"★ ";color:var(--orange)}
 .plan li.excl{color:var(--olive-300);font-size:.74rem}
-.plan li.excl::before{content:"âœ• ";color:var(--red)}
+.plan li.excl::before{content:"✕ ";color:var(--red)}
 .plan.gold{border:2px solid var(--orange);background:var(--olive-700);box-shadow:0 16px 38px rgba(0,0,0,.4);transform:scale(1.03)}
 .plan.gold:hover{transform:scale(1.03) translateY(-8px)}
 .plan.gold .pname{color:var(--orange)}
@@ -742,7 +742,7 @@ img, video, canvas, iframe {
 .blog-card h3{font-size:.98rem;color:var(--cream);letter-spacing:.02em;line-height:1.35;font-family:var(--body);font-weight:700;text-transform:none}
 .blog-card p{font-size:.82rem;color:var(--khaki);line-height:1.5;flex:1}
 .blog-card .bdate{font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;color:var(--olive-300)}
-.blog-card .bdate::after{content:" â†’";color:var(--orange)}
+.blog-card .bdate::after{content:" →";color:var(--orange)}
 
 /* ---------- link tree ---------- */
 .linktree{max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:.9rem}
@@ -885,7 +885,7 @@ footer{background:var(--olive-950);border-top:2px solid var(--olive-700);padding
 }
 .hud-top{position:absolute;top:74px;left:0;right:0;display:flex;justify-content:space-between;padding:.9rem clamp(1rem,4vw,2.5rem);font-family:var(--mono);font-size:.64rem;letter-spacing:.2em;color:var(--olive-300);text-transform:uppercase;gap:1rem;flex-wrap:wrap}
 .hud-top .live{color:var(--orange)}
-.hud-top .live::before{content:"â—";animation:blink 1.4s infinite;margin-right:.4rem}
+.hud-top .live::before{content:"●";animation:blink 1.4s infinite;margin-right:.4rem}
 @keyframes blink{50%{opacity:.15}}
 .hero-grid{display:grid;grid-template-columns:1.35fr .85fr;gap:clamp(1.5rem,4vw,4rem);align-items:end;padding-bottom:2.5rem}
 @media(max-width:900px){.hero-grid{grid-template-columns:1fr;align-items:start}}
@@ -897,7 +897,7 @@ footer{background:var(--olive-950);border-top:2px solid var(--olive-700);padding
 .hero-sub b{color:var(--cream)}
 .hero-ctas{display:flex;gap:1rem;margin-top:1.8rem;flex-wrap:wrap}
 .hero-badges{display:flex;gap:1.6rem;margin-top:2rem;flex-wrap:wrap;font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;color:var(--olive-300);text-transform:uppercase}
-.hero-badges span::before{content:"âœ“ ";color:var(--orange)}
+.hero-badges span::before{content:"✓ ";color:var(--orange)}
 .brief{background:rgba(20,26,16,.82);border:1px solid var(--olive-700);padding:1.4rem 1.4rem 1.1rem;position:relative;font-family:var(--mono);box-shadow:10px 10px 0 rgba(0,0,0,.35)}
 .brief::before,.brief::after,.brief .corner::before,.brief .corner::after{content:"";position:absolute;width:18px;height:18px;border:2px solid var(--orange)}
 .brief::before{top:-2px;left:-2px;border-right:0;border-bottom:0}
@@ -967,7 +967,7 @@ html.has-crosshair #xh-v,html.has-crosshair #xh-h,html.has-crosshair #xh-ring{op
 .card:hover .pemoji.s-md{transform:scale(1.15) rotate(-6deg)}
 .target-photo{margin:1.4rem 0 1.6rem}
 .target-photo figcaption{font-family:var(--mono);font-size:.58rem;letter-spacing:.22em;color:var(--olive-300);text-transform:uppercase;margin-top:.55rem;display:flex;justify-content:space-between}
-.target-photo figcaption::after{content:"â—¤ VERIFIED SPECIMEN";color:var(--orange)}
+.target-photo figcaption::after{content:"◤ VERIFIED SPECIMEN";color:var(--orange)}
 .threat-card h3{font-size:1.1rem;color:var(--cream)}
 .threat-card p{font-size:.85rem;color:var(--khaki);line-height:1.55;margin-top:.5rem;min-height:3.2em}
 .meter{margin-top:1.1rem}
@@ -1008,7 +1008,7 @@ html.has-crosshair #xh-v,html.has-crosshair #xh-h,html.has-crosshair #xh-ring{op
 .drow dd{font-weight:600;letter-spacing:.03em;color:var(--ink)}
 .redact{background:var(--ink);color:var(--ink);border-radius:2px;padding:0 .4rem;user-select:none}
 .bigquote{margin-top:2rem;border-left:6px solid var(--red);padding:1.2rem 1.6rem;background:#e4dabf;font-size:clamp(1.02rem,1.7vw,1.25rem);line-height:1.55;font-weight:600;color:var(--ink);position:relative}
-.bigquote::before{content:"â€œ";font-family:var(--display);font-size:4rem;color:var(--red);position:absolute;top:-1.4rem;left:.6rem;opacity:.35}
+.bigquote::before{content:"“";font-family:var(--display);font-size:4rem;color:var(--red);position:absolute;top:-1.4rem;left:.6rem;opacity:.35}
 
 /* ---------- themed scrollbars (document only - never add stray bars to cards/panels) ---------- */
 html::-webkit-scrollbar{width:12px;height:12px}
