@@ -1,0 +1,21 @@
+# secrets / environment
+.env
+.env.*
+*.pem
+*.key
+
+# database + runtime data (contains customer PII) — never commit
+*.db
+*.db-wal
+*.db-shm
+*.db-journal
+database/
+data/
+storage/logs/
+storage/cache/
+storage/uploads/
+
+# build artifacts
+/patriot-server
+/go-deploy.tar.gz
+node_modules/

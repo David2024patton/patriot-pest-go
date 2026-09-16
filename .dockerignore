@@ -1,0 +1,7 @@
+.git
+*.db
+*.db-wal
+*.db-shm
+data/
+storage/logs
+node_modules
