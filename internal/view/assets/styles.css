@@ -1075,3 +1075,11 @@ html.js.no-gsap [data-reveal]{opacity:1;transform:none}
     padding-top: 150px;
   }
 }
+
+/* --- Mobile threat board: show 3 pests, view-more links to /services --- */
+.threat-more{display:none}
+@media(max-width:640px){
+  .threat-pin .threat-card:nth-child(n+4){display:none}
+  .threat-pin .threat-end{display:none}
+  .threat-more{display:block;text-align:center;margin:1.4rem auto 0}
+}
