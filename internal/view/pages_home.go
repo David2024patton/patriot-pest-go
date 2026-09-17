@@ -56,6 +56,7 @@ const pageHome = `<!-- ============ HERO ============ -->
     {{end}}
     <div class="threat-end" data-reveal><p>Every target on this board is covered by Patriot Pest Control.</p><a class="btn btn-primary" href="/services">Full Service List ▸</a></div>
   </div></div>
+  <div class="wrap threat-more"><a class="btn btn-primary" href="/services">View all {{.PestCount}} pests ▸</a></div>
 </section>
 
 <!-- ============ OPERATOR ============ -->
