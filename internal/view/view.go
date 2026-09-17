@@ -194,7 +194,7 @@ const layoutHTML = `<!DOCTYPE html>
 </nav>
 <div class="mobile-nav-spacer"></div>
 
-<footer>
+<footer class="site-footer">
   <div class="wrap">
     <div class="foot-grid">
       <div>
