@@ -81,9 +81,10 @@ func (m *Module) signupPost(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	res := data.CreateSignup(name, email, phone, city, state, zip)
+	res := data.CreateSignup(m.DBPath, name, email, phone, city, state, zip)
 	if !res.OK {
-		slog.Warn("signup failed", "email", email)
+		// The user gets the generic message; the log gets the real error.
+		slog.Error("signup failed", "email", email, "err", res.Err)
 		view.PageStatus(w, r, 422, "signup", signupT, signupD, metaKeywords, m.base(map[string]any{
 			"Errors":  []string{res.Message},
 			"OldName": name, "OldEmail": email, "OldPhone": phone,

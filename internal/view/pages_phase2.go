@@ -96,8 +96,14 @@ const pageDashHeatmap = `
         radius: radius * 400, color: '#f4772e', weight: 1.5,
         fillColor: '#f4772e', fillOpacity: 0.35
       }).addTo(map);
-      var names = (s.names || []).join('<br>');
-      c.bindPopup('<b>' + s.city + ', ' + s.state + '</b><br>' + s.count + ' customer(s)<br><span style="font-size:.8em">' + names + '</span>');
+      // Names come from customer records: escape before building popup HTML.
+      function esc(v) {
+        return String(v == null ? '' : v).replace(/[&<>"']/g, function (ch) {
+          return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch];
+        });
+      }
+      var names = (s.names || []).map(esc).join('<br>');
+      c.bindPopup('<b>' + esc(s.city) + ', ' + esc(s.state) + '</b><br>' + s.count + ' customer(s)<br><span style="font-size:.8em">' + names + '</span>');
     });
     if (spots.length) {
       var b = L.latLngBounds(spots.map(function (s) { return [s.lat, s.lng]; }));

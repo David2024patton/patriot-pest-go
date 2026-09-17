@@ -9,15 +9,17 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log/slog"
 	"net/http"
 	"os"
 	"os/signal"
+	"runtime/debug"
+	"strings"
 	"syscall"
 	"time"
 
 	"github.com/go-chi/chi/v5"
-	"github.com/go-chi/chi/v5/middleware"
 
 	"github.com/David2024patton/patriot-pest-go/internal/config"
 	"github.com/David2024patton/patriot-pest-go/internal/data"
@@ -26,6 +28,10 @@ import (
 	"github.com/David2024patton/patriot-pest-go/internal/modules/marketing"
 	"github.com/David2024patton/patriot-pest-go/internal/view"
 )
+
+// version is the build stamp, injected with:
+//   go build -ldflags "-X main.version=$(git rev-parse --short HEAD)"
+var version = "dev"
 
 // movedPaths are the URLs that used to serve a dashboard, login flow or admin
 // console from this app. They are kept as redirects so bookmarks, ads and
@@ -50,10 +56,15 @@ func main() {
 	}
 
 	cfg := config.Load()
-	// The landing pages render from the SQLite catalog (pest library, posts, areas).
-	data.Load(cfg.DBPath)
-	logger := slog.New(slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelInfo}))
+	logger := slog.New(slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{Level: logLevel(cfg)}))
 	slog.SetDefault(logger)
+
+	// The landing pages render from the SQLite catalog (pest library, posts,
+	// areas). Fail-open on a broken catalog — empty pages, not a dead site —
+	// but a broken catalog must be loud in the logs, never silent.
+	if _, err := data.Load(cfg.DBPath); err != nil {
+		logger.Error("catalog load failed, running with empty catalog", "err", err, "db", cfg.DBPath)
+	}
 
 	// One place owns the "sign in" destination: the AlphaFlux platform.
 	view.SetLoginURL(cfg.LoginURL)
@@ -61,7 +72,7 @@ func main() {
 	r := chi.NewRouter()
 	r.Use(custommw.RequestID)
 	r.Use(custommw.SlogLogger(logger))
-	r.Use(middleware.Recoverer)
+	r.Use(recoverer(logger))
 	r.Use(custommw.Timeout(15 * time.Second))
 	r.Use(custommw.SecurityHeaders)
 	r.Use(custommw.CORS)
@@ -71,7 +82,7 @@ func main() {
 	}
 
 	// Marketing — the public site. Flag-gated like every module.
-	if mkt := (&marketing.Module{Enabled: cfg.MarketingEnabled}); mkt.Register(r) {
+	if mkt := (&marketing.Module{Enabled: cfg.MarketingEnabled, DBPath: cfg.DBPath}); mkt.Register(r) {
 		logger.Info("module enabled", "module", "marketing")
 	}
 
@@ -104,7 +115,7 @@ func main() {
 
 	srv := &http.Server{Addr: cfg.Addr, Handler: r}
 	go func() {
-		logger.Info("listening", "addr", cfg.Addr, "env", cfg.Env, "login_url", cfg.LoginURL)
+		logger.Info("listening", "addr", cfg.Addr, "env", cfg.Env, "login_url", cfg.LoginURL, "version", version)
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 			logger.Error("listen failed", "err", err)
 			os.Exit(1)
@@ -115,6 +126,45 @@ func main() {
 	<-quit
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
-	_ = srv.Shutdown(ctx)
+	if err := srv.Shutdown(ctx); err != nil {
+		logger.Error("shutdown failed", "err", err)
+	}
 	logger.Info("shutdown complete")
+}
+
+// logLevel honors APP_LOG_LEVEL when set, else APP_DEBUG, else info.
+func logLevel(cfg config.Config) slog.Level {
+	switch strings.ToLower(strings.TrimSpace(os.Getenv("APP_LOG_LEVEL"))) {
+	case "debug":
+		return slog.LevelDebug
+	case "warn", "warning":
+		return slog.LevelWarn
+	case "error":
+		return slog.LevelError
+	}
+	if cfg.Debug {
+		return slog.LevelDebug
+	}
+	return slog.LevelInfo
+}
+
+// recoverer converts panics into 500s and logs them as structured JSON with
+// a stack trace and request ID — chi's Recoverer only prints to stderr.
+func recoverer(logger *slog.Logger) func(http.Handler) http.Handler {
+	return func(next http.Handler) http.Handler {
+		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			defer func() {
+				if rec := recover(); rec != nil {
+					logger.Error("panic recovered",
+						"err", fmt.Sprint(rec),
+						"stack", string(debug.Stack()),
+						"path", r.URL.Path,
+						"request_id", custommw.RequestIDFromContext(r.Context()),
+					)
+					http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+				}
+			}()
+			next.ServeHTTP(w, r)
+		})
+	}
 }

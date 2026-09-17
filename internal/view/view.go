@@ -8,12 +8,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"html/template"
-	"log"
+	"log/slog"
 	"net/http"
 	"strings"
 	"time"
 
 	"github.com/David2024patton/patriot-pest-go/internal/data"
+	custommw "github.com/David2024patton/patriot-pest-go/internal/middleware"
 )
 
 // ---- Sign-in destination -----------------------------------------------
@@ -45,6 +46,14 @@ var funcMap = template.FuncMap{
 	},
 	"p3": func(n int) string { return fmt.Sprintf("%03d", n) },
 	"raw":  func(v any) template.HTML { return template.HTML(fmt.Sprintf("%v", v)) },
+	// mask hides secrets in admin surfaces: first 4 + last 4 chars visible.
+	"mask": func(v any) string {
+		s := fmt.Sprintf("%v", v)
+		if len(s) <= 10 {
+			return "••••••"
+		}
+		return s[:4] + "••••••" + s[len(s)-4:]
+	},
 	"jld":  func(v any) template.HTML { b, _ := json.Marshal(v); return template.HTML(string(b)) },
 	"json": func(v any) template.HTML { b, _ := json.Marshal(v); return template.HTML(string(b)) },
 	// date formats for published_at / created strings
@@ -293,8 +302,12 @@ const layoutHTML = `<!DOCTYPE html>
       results.appendChild(h);
       list.forEach(function (row) {
         var a = document.createElement('a');
-        a.className = 'cmdk-item'; a.href = row.url;
-        a.innerHTML = '<span>' + row.title + '</span>' + (row.sub ? '<small>' + row.sub + '</small>' : '');
+        a.className = 'cmdk-item';
+        // Only http(s) or site-relative URLs: never let API data plant a javascript: href.
+        if (typeof row.url === 'string' && /^(https?:|\/)/i.test(row.url)) a.href = row.url;
+        var sp = document.createElement('span'); sp.textContent = row.title || '';
+        a.appendChild(sp);
+        if (row.sub) { var sm = document.createElement('small'); sm.textContent = row.sub; a.appendChild(sm); }
         results.appendChild(a); items.push(a);
       });
     });
@@ -319,9 +332,17 @@ const layoutHTML = `<!DOCTYPE html>
     var es = new EventSource('/api/staff/events');
     function toast(ev) {
       var box = document.getElementById('hud-toasts');
+      if (!box) return;
       var t = document.createElement('div');
       t.className = 'hud-toast';
-      t.innerHTML = '<small>' + ev.at + ' · ' + ev.type.toUpperCase() + '</small>' + ev.text;
+      // textContent only: event text comes from the SSE stream and must never
+      // be parsed as HTML.
+      var meta = document.createElement('small');
+      meta.textContent = (ev.at || '') + ' · ' + String(ev.type || 'info').toUpperCase();
+      t.appendChild(meta);
+      var body = document.createElement('div');
+      body.textContent = ev.text || '';
+      t.appendChild(body);
       box.appendChild(t);
       setTimeout(function () { t.remove(); }, 6000);
     }
@@ -436,15 +457,24 @@ func withBase(r *http.Request, page, title, description, keywords string) map[st
 	return d
 }
 
+// canonicalHosts are the only Host values trusted for canonical/OG URLs.
+// Anything else (e.g. a forged Host header) falls back to the primary domain.
+var canonicalHosts = map[string]bool{
+	"patriotpest.pro":      true,
+	"www.patriotpest.pro":  true,
+	"go.patriotpest.pro":   true,
+	"test.patriotpest.pro": true,
+}
+
 // canonical builds the absolute canonical URL for the current request.
 func canonical(r *http.Request) string {
-	host := r.Host
+	host := strings.ToLower(r.Host)
+	if !canonicalHosts[host] {
+		host = "www.patriotpest.pro"
+	}
 	scheme := "https"
 	if r.Header.Get("X-Forwarded-Proto") == "http" {
 		scheme = "http"
-	}
-	if host == "" {
-		host = "go.patriotpest.pro"
 	}
 	return scheme + "://" + host + r.URL.Path
 }
@@ -453,23 +483,31 @@ func canonical(r *http.Request) string {
 // Go 1.26's template parser only accepts static names in {{template ...}}, so
 // the page body is rendered first via ExecuteTemplate and embedded as raw HTML.
 func render(w http.ResponseWriter, r *http.Request, d map[string]any, status int) {
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	tpl, err := compile()
 	if err != nil {
-		http.Error(w, "template error: "+err.Error(), http.StatusInternalServerError)
+		slog.Error("template compile failed", "err", err.Error(), "request_id", requestIDOf(r))
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return
 	}
 	page, _ := d["Page"].(string)
 	var buf bytes.Buffer
 	if err := tpl.ExecuteTemplate(&buf, page, d); err != nil {
-		http.Error(w, "template error: "+err.Error(), http.StatusInternalServerError)
+		slog.Error("template execute failed", "page", page, "err", err.Error(), "request_id", requestIDOf(r))
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return
 	}
 	d["PageBody"] = template.HTML(buf.String())
 	if status != http.StatusOK {
 		w.WriteHeader(status)
 	}
-	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	if err := tpl.Execute(w, d); err != nil {
-		log.Printf("view: template exec error: %v", err)
+		slog.Error("template layout exec failed", "page", page, "err", err.Error(), "request_id", requestIDOf(r))
 	}
+}
+
+// requestIDOf pulls the request ID the middleware stashed in the context.
+// It never touches the inbound header: RequestID is the only writer.
+func requestIDOf(r *http.Request) string {
+	return custommw.RequestIDFromContext(r.Context())
 }

@@ -7,9 +7,13 @@ package data
 
 import (
 	"database/sql"
+	"fmt"
+	"log/slog"
+	"strings"
 	"sync"
 	"time"
 
+	"github.com/microcosm-cc/bluemonday"
 	_ "modernc.org/sqlite" // pure-Go SQLite driver
 )
 
@@ -53,33 +57,56 @@ type Store struct {
 var (
 	mu   sync.RWMutex
 	load = &Store{}
+
+	// catalogDB stays open for the life of the process so /ready can verify
+	// the catalog is reachable. Guarded by mu.
+	catalogDB *sql.DB
 )
 
+// htmlSanitizer strips scripts, event handlers and javascript: URLs from blog
+// body HTML at load time. Content is sanitized on save, but the save path
+// lives outside this repo — read-time sanitizing is the backstop.
+var htmlSanitizer = bluemonday.UGCPolicy()
+
 // Load reads the catalog from dbPath (database/patriot.db). Safe to call once;
-// subsequent calls return the cached store. Fail-open on any error.
-func Load(dbPath string) *Store {
+// subsequent calls return the cached store. An error is returned when the
+// catalog cannot be read — the caller decides whether to fail or run degraded,
+// but a broken catalog must never be silent.
+func Load(dbPath string) (*Store, error) {
 	mu.Lock()
 	defer mu.Unlock()
-	if len(load.Pests) > 0 || load.loaded {
-		return load
+	if load.loaded {
+		return load, nil
 	}
 	load.loaded = true
-	var db *sql.DB
-	var err error
-	db, err = sql.Open("sqlite", "file:"+dbPath+"?_pragma=journal_mode(WAL)&_busy_timeout=5000")
+	if strings.ContainsAny(dbPath, "?#") {
+		return load, fmt.Errorf("refusing db path with url metacharacters: %q", dbPath)
+	}
+	db, err := sql.Open("sqlite", "file:"+dbPath+"?_pragma=journal_mode(WAL)&_busy_timeout=5000")
 	if err != nil {
-		return load
+		return load, fmt.Errorf("open catalog db: %w", err)
 	}
-	defer db.Close()
-
 	if err := db.Ping(); err != nil {
-		return load
+		db.Close()
+		return load, fmt.Errorf("ping catalog db: %w", err)
 	}
+	catalogDB = db
 	load.Pests = queryPests(db)
 	load.Posts = queryPosts(db)
 	load.pestBySlug = mapPests(load.Pests)
 	load.postBySlug = mapPosts(load.Posts)
-	return load
+	return load, nil
+}
+
+// Ping verifies the catalog database is reachable. Used by /ready.
+func Ping() error {
+	mu.RLock()
+	db := catalogDB
+	mu.RUnlock()
+	if db == nil {
+		return fmt.Errorf("catalog db not loaded")
+	}
+	return db.Ping()
 }
 
 func mapPests(ps []Pest) map[string]Pest {
@@ -108,11 +135,17 @@ func queryPests(db *sql.DB) []Pest {
 	for rows.Next() {
 		var p Pest
 		var sci *string
-		rows.Scan(&p.ID, &p.Slug, &p.Name, &sci, &p.Filename, &p.Description, &p.Category, &p.ThreatLevel, &p.SortOrder)
+		if err := rows.Scan(&p.ID, &p.Slug, &p.Name, &sci, &p.Filename, &p.Description, &p.Category, &p.ThreatLevel, &p.SortOrder); err != nil {
+			slog.Error("catalog pest row scan failed", "err", err.Error())
+			continue
+		}
 		if sci != nil {
 			p.ScientificName = *sci
 		}
 		out = append(out, p)
+	}
+	if err := rows.Err(); err != nil {
+		slog.Error("catalog pest query failed", "err", err.Error())
 	}
 	return out
 }
@@ -132,11 +165,18 @@ func queryPosts(db *sql.DB) []Post {
 	for rows.Next() {
 		var p Post
 		var author *string
-		rows.Scan(&p.Slug, &p.Title, &p.Excerpt, &p.BodyHTML, &author, &p.PublishedAt, &p.Season, &p.PestCategory, &p.Photo, &p.PestName, &p.PestSlug)
+		if err := rows.Scan(&p.Slug, &p.Title, &p.Excerpt, &p.BodyHTML, &author, &p.PublishedAt, &p.Season, &p.PestCategory, &p.Photo, &p.PestName, &p.PestSlug); err != nil {
+			slog.Error("catalog post row scan failed", "err", err.Error())
+			continue
+		}
 		if author != nil {
 			p.Author = *author
 		}
+		p.BodyHTML = htmlSanitizer.Sanitize(p.BodyHTML)
 		out = append(out, p)
+	}
+	if err := rows.Err(); err != nil {
+		slog.Error("catalog post query failed", "err", err.Error())
 	}
 	return out
 }

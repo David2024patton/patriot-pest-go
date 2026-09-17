@@ -5,11 +5,37 @@ import (
 	"crypto/rand"
 	"encoding/hex"
 	"log/slog"
+	"net"
 	"net/http"
 	"strings"
 	"sync"
+	"sync/atomic"
 	"time"
 )
+
+// requestsTotal counts every request through SlogLogger. Read by /metrics.
+var requestsTotal atomic.Uint64
+
+// RequestsTotal returns the lifetime request count.
+func RequestsTotal() uint64 { return requestsTotal.Load() }
+
+// requestIDKey is the context key carrying the request ID. Typed to avoid
+// collisions with other context values. Middleware is the only writer.
+type requestIDKeyT string
+
+// RequestIDKey is the context key under which RequestID stores the request ID.
+const RequestIDKey requestIDKeyT = "request_id"
+
+// RequestIDFromContext returns the request ID stashed by the RequestID
+// middleware, or "" when absent.
+func RequestIDFromContext(ctx context.Context) string {
+	if v := ctx.Value(RequestIDKey); v != nil {
+		if s, ok := v.(string); ok {
+			return s
+		}
+	}
+	return ""
+}
 
 // SlogLogger logs each request as JSON with X-Request-ID.
 func SlogLogger(l *slog.Logger) func(http.Handler) http.Handler {
@@ -18,12 +44,13 @@ func SlogLogger(l *slog.Logger) func(http.Handler) http.Handler {
 			start := time.Now()
 			ww := &wrapWriter{ResponseWriter: w, status: 200}
 			next.ServeHTTP(ww, r)
+			requestsTotal.Add(1)
 			l.Info("request",
 				"method", r.Method,
 				"path", r.URL.Path,
 				"status", ww.status,
 				"duration_ms", time.Since(start).Milliseconds(),
-				"request_id", r.Header.Get("X-Request-ID"),
+				"request_id", RequestIDFromContext(r.Context()),
 				"remote", r.RemoteAddr,
 			)
 		})
@@ -50,16 +77,24 @@ func (w *wrapWriter) Flush() {
 }
 
 // SecurityHeaders adds HSTS + secure cookie hints + CSP basics.
+// The CSP enumerates the script/style/image hosts the site actually uses —
+// no scheme wildcards, so a compromised CDN or ad host cannot inject JS.
 func SecurityHeaders(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("X-Content-Type-Options", "nosniff")
 		w.Header().Set("X-Frame-Options", "SAMEORIGIN")
 		w.Header().Set("Referrer-Policy", "strict-origin-when-cross-origin")
-		w.Header().Set("X-Content-Type-Options", "nosniff")
 		if r.TLS != nil || r.Header.Get("X-Forwarded-Proto") == "https" {
 			w.Header().Set("Strict-Transport-Security", "max-age=31536000; includeSubDomains")
 		}
-		w.Header().Set("Content-Security-Policy", "default-src 'self' https: http: data:; script-src 'self' 'unsafe-inline' https: http:; style-src 'self' 'unsafe-inline' https: http:; img-src 'self' data: https: http:;")
+		w.Header().Set("Content-Security-Policy",
+			"default-src 'self'; "+
+				"script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com https://www.googletagmanager.com https://connect.facebook.net https://www.clarity.ms; "+
+				"style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "+
+				"img-src 'self' data: https://*.tile.openstreetmap.org; "+
+				"font-src 'self' https://fonts.gstatic.com; "+
+				"connect-src 'self'; "+
+				"frame-ancestors 'self';")
 		next.ServeHTTP(w, r)
 	})
 }
@@ -88,16 +123,20 @@ func RequestID(next http.Handler) http.Handler {
 		id := r.Header.Get("X-Request-ID")
 		if id == "" {
 			b := make([]byte, 8)
-			_, _ = rand.Read(b)
-			id = hex.EncodeToString(b)
+			if _, err := rand.Read(b); err != nil {
+				slog.Error("request id generation failed", "err", err.Error())
+				id = "req-fallback"
+			} else {
+				id = hex.EncodeToString(b)
+			}
 		}
 		w.Header().Set("X-Request-ID", id)
-		ctx := context.WithValue(r.Context(), "request_id", id)
+		ctx := context.WithValue(r.Context(), RequestIDKey, id)
 		next.ServeHTTP(w, r.WithContext(ctx))
 	})
 }
 
-// RateLimiter is a simple in-memory token bucket per IP.
+// RateLimiter is a simple in-memory fixed window per client IP.
 type RateLimiter struct {
 	mu     sync.Mutex
 	count  map[string]int
@@ -110,16 +149,32 @@ func NewRateLimiter(limit int, window time.Duration) *RateLimiter {
 	return &RateLimiter{count: make(map[string]int), reset: make(map[string]time.Time), limit: limit, window: window}
 }
 
+// clientIP strips the port from RemoteAddr so one client is one bucket.
+func clientIP(r *http.Request) string {
+	if h, _, err := net.SplitHostPort(r.RemoteAddr); err == nil {
+		return h
+	}
+	return r.RemoteAddr
+}
+
 func (rl *RateLimiter) Middleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		ip := r.RemoteAddr
+		ip := clientIP(r)
+		now := time.Now()
 		rl.mu.Lock()
-		if time.Now().After(rl.reset[ip]) {
+		if now.After(rl.reset[ip]) {
 			rl.count[ip] = 0
-			rl.reset[ip] = time.Now().Add(rl.window)
+			rl.reset[ip] = now.Add(rl.window)
 		}
 		rl.count[ip]++
 		n := rl.count[ip]
+		// Evict stale buckets so the maps cannot grow without bound.
+		for k, exp := range rl.reset {
+			if now.After(exp) {
+				delete(rl.reset, k)
+				delete(rl.count, k)
+			}
+		}
 		rl.mu.Unlock()
 		if n > rl.limit {
 			http.Error(w, `{"error":"rate limited"}`, http.StatusTooManyRequests)

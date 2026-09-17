@@ -291,9 +291,9 @@ const pageAdminStaffEdit = `
       <input type="text" id="name" name="name" required value="{{ index .StaffRow "name" }}"></div>
     <div class="form-group"><label for="role">Role</label>
       <select id="role" name="role">
-        <option value="staff">staff</option>
-        <option value="admin">admin</option>
-        <option value="super-user">super-user</option>
+        <option value="staff"{{ if or .IsNew (eq (index .StaffRow "role") "staff") }} selected{{ end }}>staff</option>
+        <option value="admin"{{ if eq (index .StaffRow "role") "admin" }} selected{{ end }}>admin</option>
+        <option value="super-user"{{ if eq (index .StaffRow "role") "super-user" }} selected{{ end }}>super-user</option>
       </select></div>
     <div class="form-group"><label for="title">Title</label>
       <input type="text" id="title" name="title" value="{{ index .StaffRow "title" }}" placeholder="Dispatch Coordinator"></div>

@@ -16,6 +16,7 @@ import (
 const CSRFCookieName = "_csrf"
 
 // CSRFField renders the hidden input and sets the cookie when absent or short.
+// Fail-closed: if the RNG fails the request gets a 500, never a guessable token.
 func CSRFField(w http.ResponseWriter, r *http.Request) template.HTML {
 	ck, err := r.Cookie(CSRFCookieName)
 	tok := ""
@@ -25,13 +26,27 @@ func CSRFField(w http.ResponseWriter, r *http.Request) template.HTML {
 	if len(tok) < 32 {
 		b := make([]byte, 32)
 		if _, err := rand.Read(b); err != nil {
-			tok = "dev-csrf-token"
-		} else {
-			tok = hex.EncodeToString(b)
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+			return template.HTML("")
 		}
-		http.SetCookie(w, &http.Cookie{Name: CSRFCookieName, Value: tok, Path: "/", SameSite: http.SameSiteLaxMode})
+		tok = hex.EncodeToString(b)
+		http.SetCookie(w, csrfCookie(CSRFCookieName, tok, r))
 	}
 	return template.HTML(`<input type="hidden" name="_csrf" value="` + tok + `">`)
+}
+
+// csrfCookie builds the double-submit cookie: HttpOnly so JS cannot read it,
+// Secure on TLS so it never travels in the clear, SameSite=Lax against CSRF.
+func csrfCookie(name, value string, r *http.Request) *http.Cookie {
+	secure := r.TLS != nil || r.Header.Get("X-Forwarded-Proto") == "https"
+	return &http.Cookie{
+		Name:     name,
+		Value:    value,
+		Path:     "/",
+		SameSite: http.SameSiteLaxMode,
+		HttpOnly: true,
+		Secure:   secure,
+	}
 }
 
 // VerifyCSRF checks the posted _csrf field against the cookie (constant time).

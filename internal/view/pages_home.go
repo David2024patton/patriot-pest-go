@@ -120,7 +120,7 @@ const pageHome = `<!-- ============ HERO ============ -->
       <div class="card plan" data-reveal><span class="plan-tier">BRONZE</span><h3>Exterior-Only Protection</h3><p>Monthly exterior treatment keeps ants, spiders, wasps &amp; more away.</p><a class="more" href="/prices">View Pricing ▸</a></div>
       <div class="card plan" data-reveal><span class="plan-tier">SILVER</span><h3>Interior + Exterior</h3><p>Complete indoor + outdoor coverage ideal for families &amp; pets.</p><a class="more" href="/prices">View Pricing ▸</a></div>
       <div class="card plan featured" data-reveal><span class="rec">MOST POPULAR</span><span class="plan-tier">GOLD</span><h3>Priority Interior &amp; Exterior</h3><p>Everything in Silver + fast response &amp; seasonal deep checks.</p><a class="more" href="/prices">View Pricing ▸</a></div>
-      <div class="card plan" data-reveal><span class="plan-tier">PLATINUM</h3><h3>Full Coverage (Fleas+Ticks)</h3><p>All-in-one: Gold + Flea &amp; Tick treatment, rodent stations &amp; monitoring.</p><a class="more" href="/prices">View Pricing ▸</a></div>
+      <div class="card plan" data-reveal><span class="plan-tier">PLATINUM</span><h3>Full Coverage (Fleas+Ticks)</h3><p>All-in-one: Gold + Flea &amp; Tick treatment, rodent stations &amp; monitoring.</p><a class="more" href="/prices">View Pricing ▸</a></div>
     </div>
   </div>
 </section>

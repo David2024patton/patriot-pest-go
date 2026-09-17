@@ -17,10 +17,12 @@ const pageSignup = `<section class="block">
       {{if .Success}}<div class="notice success">{{.Success}}</div>
         {{if eq .AnalyticsEvent "generate_lead"}}
         <script>
-          gtag('event', 'generate_lead', {
-            'event_category': 'conversion',
-            'event_label': 'Account Signup'
-          });
+          if (window.gtag) {
+            gtag('event', 'generate_lead', {
+              'event_category': 'conversion',
+              'event_label': 'Account Signup'
+            });
+          }
         </script>
         {{end}}
       {{end}}

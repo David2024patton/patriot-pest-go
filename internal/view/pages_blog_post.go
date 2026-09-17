@@ -1,8 +1,8 @@
 package view
 
 // pageBlogPost — templates/pages/blog-post.php. The unified single-post template.
-// Data: .Post (data.Post), .Related ([]data.Post). BodyHTML is sanitized on save,
-// so it is emitted via raw().
+// Data: .Post (data.Post), .Related ([]data.Post). BodyHTML is sanitized at
+// catalog load (bluemonday UGC policy) as well as on save, so raw() is safe.
 const pageBlogPost = `<article class="block">
   <div class="wrap" style="max-width:820px">
     <div class="post-meta">

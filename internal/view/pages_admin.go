@@ -158,7 +158,7 @@ const pageDashKeys = `
           <tr>
             <td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:{{ .color }};margin-right:.4rem"></span>{{ .code }}</td>
             <td class="mono">{{ .base }}</td>
-            <td class="mono">{{ .key }}</td>
+            <td class="mono">{{ .key | mask }}</td>
             <td>{{ .code }}</td>
           </tr>
           {{ end }}
@@ -172,7 +172,7 @@ const pageDashKeys = `
     <h3 style="font-family:var(--display);color:var(--cream);margin:2rem 0 1rem">Twilio Line</h3>
     <dl class="kv">
       <dt>SID</dt><dd class="mono">{{ .Twilio.sid }}</dd>
-      <dt>Auth Token</dt><dd class="mono">{{ .Twilio.token }}</dd>
+      <dt>Auth Token</dt><dd class="mono">{{ .Twilio.token | mask }}</dd>
       <dt>Phone</dt><dd class="mono">{{ .Twilio.phone }}</dd>
     </dl>
   </div>
@@ -209,8 +209,8 @@ const pageDashApiKeys = `
         <thead><tr><th>Label</th><th>Token</th><th>Scopes</th><th>Created</th><th></th></tr></thead>
         <tbody>
           {{ range .Keys }}
-          <tr><td>{{ .label }}</td><td class="mono">{{ .token }}</td><td>{{ .scopes }}</td><td>{{ .created }}</td>
-            <td style="text-align:right"><form method="post" action="/admin/api-keys/revoke">{{ .Csrf }}<input type="hidden" name="token" value="{{ .token }}"><button type="submit" class="btn btn-ghost">Revoke</button></form></td></tr>
+          <tr><td>{{ .label }}</td><td class="mono">{{ .token | mask }}</td><td>{{ .scopes }}</td><td>{{ .created }}</td>
+            <td style="text-align:right"><form method="post" action="/admin/api-keys/revoke">{{ $.Csrf }}<input type="hidden" name="label" value="{{ .label }}"><button type="submit" class="btn btn-ghost">Revoke</button></form></td></tr>
           {{ end }}
         </tbody>
       </table>

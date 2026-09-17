@@ -25,12 +25,15 @@ import (
 
 	"github.com/David2024patton/patriot-pest-go/internal/data"
 	"github.com/David2024patton/patriot-pest-go/internal/view"
+	custommw "github.com/David2024patton/patriot-pest-go/internal/middleware"
 	"github.com/go-chi/chi/v5"
 )
 
 // Module serves the patriotic tactical theme — pixel-identical to PHP.
 type Module struct {
 	Enabled bool
+	// DBPath is the configured SQLite catalog path (signups write here).
+	DBPath string
 }
 
 // metaKeywords — shared <meta name="keywords"> value, mirrored from
@@ -93,9 +96,9 @@ func (m *Module) Register(r chi.Router) bool {
 	r.Get("/service-areas", m.areas)
 	r.Get("/faqs", m.page("faqs", faqsT, faqsD, nil))
 	r.Get("/contact", m.contactGet)
-	r.Post("/contact", m.contactPost)
+	r.With(postLimiter.Middleware).Post("/contact", m.contactPost)
 	r.Get("/signup", m.signupGet)
-	r.Post("/signup", m.signupPost)
+	r.With(postLimiter.Middleware).Post("/signup", m.signupPost)
 	r.Get("/pest/{slug}", m.pest)
 	r.Get("/areas/{slug}", m.area)
 	r.Get("/blogs", m.blogIndex)
@@ -125,6 +128,10 @@ func (m *Module) Register(r chi.Router) bool {
 	r.Handle("/assets/*", http.StripPrefix("/assets/", http.FileServer(http.FS(sub))))
 	return true
 }
+
+// postLimiter caps form and beacon POSTs per client IP: 30 requests per
+// minute is generous for humans, cheap for bots to hit and get 429.
+var postLimiter = custommw.NewRateLimiter(30, time.Minute)
 
 // beacon accepts a visitor-tracking hit. The beacon is fire-and-forget
 // (navigator.sendBeacon), so the body is irrelevant — 204 keeps it cheap.
@@ -489,16 +496,30 @@ func newCSRFToken() string {
 	return hex.EncodeToString(b)
 }
 
+// csrfTokenRe is the only shape an incoming CSRF cookie may have: 64 hex
+// chars from newCSRFToken. Anything else (including an attacker planting
+// `"><script>`) is discarded and replaced with a fresh token, so the raw
+// cookie value can never break out of the hidden input it is rendered into.
+var csrfTokenRe = regexp.MustCompile(`^[0-9a-f]{64}$`)
+
 // csrfField renders the hidden input with this session's CSRF value
 // (PHP Csrf::field). The double-submit cookie carries the same value.
 func (m *Module) csrfField(r *http.Request, w http.ResponseWriter) template.HTML {
 	c, err := r.Cookie(csrfCookieName)
 	tok := ""
-	if err == nil && len(c.Value) >= 32 {
+	if err == nil && csrfTokenRe.MatchString(c.Value) {
 		tok = c.Value
 	} else {
 		tok = newCSRFToken()
-		http.SetCookie(w, &http.Cookie{Name: csrfCookieName, Value: tok, Path: "/", SameSite: http.SameSiteLaxMode})
+		secure := r.TLS != nil || r.Header.Get("X-Forwarded-Proto") == "https"
+		http.SetCookie(w, &http.Cookie{
+			Name:     csrfCookieName,
+			Value:    tok,
+			Path:     "/",
+			SameSite: http.SameSiteLaxMode,
+			HttpOnly: true,
+			Secure:   secure,
+		})
 	}
 	return template.HTML(`<input type="hidden" name="_csrf" value="` + tok + `">`)
 }
@@ -523,6 +544,11 @@ func (m *Module) contactGet(w http.ResponseWriter, r *http.Request) {
 func (m *Module) contactPost(w http.ResponseWriter, r *http.Request) {
 	if err := r.ParseForm(); err != nil {
 		slog.Warn("contact form parse failed", "err", err.Error())
+		view.PageStatus(w, r, 400, "contact", contactT, contactD, metaKeywords, m.base(map[string]any{
+			"Errors": []string{"Could not read the form. Please try again."},
+			"Csrf":   m.csrfField(r, w),
+		}))
+		return
 	}
 	token := r.FormValue("_csrf")
 	if token == "" {
