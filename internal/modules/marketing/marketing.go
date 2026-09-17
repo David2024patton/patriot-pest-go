@@ -213,8 +213,10 @@ func (m *Module) base(extra map[string]any) map[string]any {
 // home — the flagship. The threat board is DB-driven: every pest in the photo
 // library, ordered for display (sort_order).
 func (m *Module) home(w http.ResponseWriter, r *http.Request) {
+	pests := data.AllPests()
 	view.Page(w, r, "home", homeT, homeD, metaKeywords, m.base(map[string]any{
-		"Pests": data.AllPests(),
+		"Pests":     pests,
+		"PestCount": len(pests),
 	}))
 }
 
