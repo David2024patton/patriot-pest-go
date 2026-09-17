@@ -1083,3 +1083,10 @@ html.js.no-gsap [data-reveal]{opacity:1;transform:none}
   .threat-pin .threat-end{display:none}
   .threat-more{display:block;text-align:center;margin:1.4rem auto 0}
 }
+
+/* --- Dossier veteran stamp: desktop overlaps border, mobile sits inside --- */
+.dossier-stamp{color:var(--red);position:absolute;top:-16px;right:18px;background:#f6f0dd}
+@media(max-width:600px){
+  .dossier-file{padding-top:3rem}
+  .dossier-stamp{top:10px;right:12px}
+}
