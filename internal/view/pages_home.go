@@ -65,7 +65,7 @@ const pageHome = `<!-- ============ HERO ============ -->
     <div class="eyebrow">SEC. 02 // PERSONNEL FILE</div>
     <div class="split" style="margin-top:1.5rem">
       <div class="dossier-file" data-reveal>
-        <span class="stamp" style="color:var(--red);position:absolute;top:-16px;right:18px;background:#f6f0dd">Veteran</span>
+        <span class="stamp dossier-stamp">Veteran</span>
         <div class="form-id"><span>FORM PPC-14 · PERSONNEL</span><span>FILE 001</span></div>
         <dl>
           <div class="drow"><dt>Name</dt><dd>SKYLER ROSE</dd></div>
