@@ -215,7 +215,8 @@ h2 em,h1 em{font-style:normal;color:var(--orange)}
 .stat:hover{background:#f6f0dd}
 .stat .num{font-family:var(--display);font-size:clamp(2.2rem,4.2vw,3.3rem);color:var(--ink);line-height:1}
 .stat .num i{font-style:normal;color:var(--red)}
-.stat .cap{font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:#7a7258;margin-top:.6rem}
+.stat .unit{font-family:var(--display);font-size:clamp(1.2rem,2.4vw,1.7rem);color:var(--ink);line-height:1}
+.stat .cap{font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:#4f4836;margin-top:.6rem}
 
 /* ---------- forms ---------- */
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
@@ -842,6 +843,10 @@ img, video, canvas, iframe {
 .report .who b{display:block;font-size:.88rem}
 .report .who span{font-family:var(--mono);font-size:.58rem;letter-spacing:.16em;color:#7a7258;text-transform:uppercase}
 .report .declass{position:absolute;top:12px;right:-10px;font-family:var(--display);font-size:.52rem;letter-spacing:.14em;color:var(--red);border:2px solid var(--red);padding:.2rem .5rem;transform:rotate(10deg);background:var(--paper);text-transform:uppercase}
+.quote-foot{margin-top:1.1rem;display:flex;align-items:center;gap:.85rem}
+.quote-foot .medal{font-size:1.6rem}
+.quote-foot b{display:block;font-size:.9rem;color:var(--ink)}
+.quote-foot small{font-family:var(--mono);font-size:.58rem;letter-spacing:.16em;color:#4f4836;text-transform:uppercase}
 
 /* ---------- CTA band ---------- */
 .cta-band{
@@ -855,7 +860,7 @@ img, video, canvas, iframe {
 .cta-band .inner{position:relative;z-index:2}
 
 /* ---------- footer ---------- */
-footer{background:var(--olive-950);border-top:2px solid var(--olive-700);padding:3rem 0 2rem;position:relative;z-index:1}
+footer.site-footer{background:var(--olive-950);border-top:2px solid var(--olive-700);padding:3rem 0 2rem;position:relative;z-index:1}
 .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:2.5rem}
 @media(max-width:900px){.foot-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:560px){.foot-grid{grid-template-columns:1fr}}
