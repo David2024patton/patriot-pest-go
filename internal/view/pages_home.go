@@ -81,7 +81,7 @@ const pageHome = `<!-- ============ HERO ============ -->
         <p class="lead" data-reveal>Patriot Pest Control was founded by <b>U.S. Military Veteran Skyler Rose</b>, bringing military discipline, integrity, and uncompromising excellence to pest control across four states. Over a decade of field experience. Thousands of homes and businesses protected.</p>
         <blockquote class="quote" data-reveal>
           <p>After serving our country, I founded Patriot Pest Control to continue serving American families and businesses with the same dedication, precision, and integrity I learned in the military. We're not just eliminating pests. We're protecting what matters most.</p>
-          <footer><span class="medal">🎖️</span><div><b>Skyler Rose</b><small>FOUNDER &amp; VETERAN · PATRIOT PEST CONTROL</small></div></footer>
+          <div class="quote-foot"><span class="medal">🎖️</span><div><b>Skyler Rose</b><small>FOUNDER &amp; VETERAN · PATRIOT PEST CONTROL</small></div></div>
         </blockquote>
       </div>
     </div>
@@ -148,9 +148,9 @@ const pageHome = `<!-- ============ HERO ============ -->
     <div class="eyebrow">SEC. 06 // FIELD REPORTS</div>
     <h2 data-reveal>Debriefs from <em>the front line.</em></h2>
     <div class="grid g3">
-      <div class="card report" data-reveal><span class="ver">VERIFIED</span><span class="rid">REPORT #WA-0117</span><div class="stars">★★★★★</div><p>"Patriot Pest Control saved our home from a serious ant infestation. Professional, thorough, and the results were immediate."</p><footer><span class="avatar">SM</span><div><b>Sarah M.</b><small>WASHINGTON</small></div></footer></div>
-      <div class="card report" data-reveal><span class="ver">VERIFIED</span><span class="rid">REPORT #WA-0242</span><div class="stars">★★★★★</div><p>"We've used Patriot for our restaurant for 2 years. Reliable, discreet, always on time. Our health inspections have never been better."</p><footer><span class="avatar">JT</span><div><b>James T.</b><small>LIBERTY LAKE, WA</small></div></footer></div>
-      <div class="card report" data-reveal><span class="ver">VERIFIED</span><span class="rid">REPORT #ID-0089</span><div class="stars">★★★★★</div><p>"Fast response and eco-friendly products safe for my kids and pets. The technician was knowledgeable and explained everything."</p><footer><span class="avatar">LR</span><div><b>Lisa R.</b><small>COEUR D'ALENE, ID</small></div></footer></div>
+      <div class="card report" data-reveal><span class="ver">VERIFIED</span><span class="rid">REPORT #WA-0117</span><div class="stars">★★★★★</div><p>"Patriot Pest Control saved our home from a serious ant infestation. Professional, thorough, and the results were immediate."</p><div class="who"><span class="avatar">SM</span><div><b>Sarah M.</b><small>WASHINGTON</small></div></div></div>
+      <div class="card report" data-reveal><span class="ver">VERIFIED</span><span class="rid">REPORT #WA-0242</span><div class="stars">★★★★★</div><p>"We've used Patriot for our restaurant for 2 years. Reliable, discreet, always on time. Our health inspections have never been better."</p><div class="who"><span class="avatar">JT</span><div><b>James T.</b><small>LIBERTY LAKE, WA</small></div></div></div>
+      <div class="card report" data-reveal><span class="ver">VERIFIED</span><span class="rid">REPORT #ID-0089</span><div class="stars">★★★★★</div><p>"Fast response and eco-friendly products safe for my kids and pets. The technician was knowledgeable and explained everything."</p><div class="who"><span class="avatar">LR</span><div><b>Lisa R.</b><small>COEUR D'ALENE, ID</small></div></div></div>
     </div>
   </div>
 </section>
