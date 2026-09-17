@@ -90,9 +90,9 @@ func main() {
 	for _, p := range movedPaths {
 		r.Handle(p, loginRedirect)
 	}
-	// Admin console, staff tools and the removed API surface.
-	r.Handle("/admin", loginRedirect)
-	r.Handle("/admin/*", loginRedirect)
+	// The removed API surface. NOTE: /admin is the live analytics console
+	// (registered by the marketing module when ADMIN_EMAILS +
+	// ADMIN_PASSWORD_HASH are configured); it is intentionally not redirected.
 	r.Handle("/api/*", http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusGone)

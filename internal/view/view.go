@@ -233,7 +233,7 @@ const layoutHTML = `<!DOCTYPE html>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="/assets/main.js"></script>
-{{if .Track}}<script src="/assets/beacon.js"></script>{{end}}
+{{if .Track}}<script src="/assets/js/tracker.js" defer></script>{{end}}
 {{template "install-banner" .}}
 <script src="/assets/pwa-install.js"></script>
 {{if .AppUI}}

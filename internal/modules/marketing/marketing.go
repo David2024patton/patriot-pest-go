@@ -13,8 +13,10 @@ import (
 	"encoding/xml"
 	"fmt"
 	"html/template"
+	"io"
 	"io/fs"
 	"log/slog"
+	"net"
 	"net/http"
 	"os"
 	"regexp"
@@ -32,8 +34,14 @@ import (
 // Module serves the patriotic tactical theme — pixel-identical to PHP.
 type Module struct {
 	Enabled bool
-	// DBPath is the configured SQLite catalog path (signups write here).
+	// DBPath is the configured SQLite catalog path (signups + analytics
+	// events write here).
 	DBPath string
+	// adminEmails / adminHash gate the /admin analytics console. Populated
+	// by initAdmin from ADMIN_EMAILS / ADMIN_PASSWORD_HASH; empty means the
+	// console is disabled and its routes are not registered.
+	adminEmails []string
+	adminHash   []byte
 }
 
 // metaKeywords — shared <meta name="keywords"> value, mirrored from
@@ -120,12 +128,21 @@ func (m *Module) Register(r chi.Router) bool {
 	// FR-031 PWA — real manifest + service worker (legacy JSON stubs shadowed).
 	r.Get("/manifest.webmanifest", m.manifest)
 	r.Get("/sw.js", m.serviceWorker)
-	// First-party visitor beacon — the embedded beacon.js posts here on every
-	// page view. Retention analytics proper belongs to the AlphaFlux platform;
-	// the site accepts the hit so visitor_id/session_id keep flowing.
-	r.Post("/api/track/view", m.beacon)
-	r.Post("/api/track/event", m.beacon)
-	r.Post("/api/track/session_end", m.beacon)
+	// First-party visitor beacons — tracker.js posts here on every page
+	// view and click. Bots are filtered, sources attributed, events stored
+	// in SQLite for the /admin dashboard.
+	r.With(postLimiter.Middleware).Post("/api/track/view", m.trackEndpoint("pageview"))
+	r.With(postLimiter.Middleware).Post("/api/track/event", m.trackEndpoint("event"))
+	r.With(postLimiter.Middleware).Post("/api/track/session_end", m.trackEndpoint("session_end"))
+	// Admin analytics console — only when ADMIN_EMAILS + ADMIN_PASSWORD_HASH
+	// are set; otherwise these routes do not exist (404, fail closed).
+	m.initAdmin()
+	if m.adminConfigured() {
+		r.Get("/admin/login", m.adminLoginGet)
+		r.With(adminLoginLimiter.Middleware).Post("/admin/login", m.adminLoginPost)
+		r.Get("/admin/logout", m.adminLogout)
+		r.With(m.requireAdmin).Get("/admin", m.adminDashboard)
+	}
 	// Assets — serve identical tactical assets from the embedded FS.
 	sub, _ := fs.Sub(view.Assets, "assets")
 	r.Handle("/assets/*", http.StripPrefix("/assets/", http.FileServer(http.FS(sub))))
@@ -136,12 +153,96 @@ func (m *Module) Register(r chi.Router) bool {
 // minute is generous for humans, cheap for bots to hit and get 429.
 var postLimiter = custommw.NewRateLimiter(30, time.Minute)
 
-// beacon accepts a visitor-tracking hit. The beacon is fire-and-forget
-// (navigator.sendBeacon), so the body is irrelevant — 204 keeps it cheap.
-func (m *Module) beacon(w http.ResponseWriter, _ *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusAccepted)
-	_, _ = w.Write([]byte(`{"status":"ok"}`))
+// trackEndpoint returns the handler for one beacon path. defaultKind is the
+// event kind when the body does not name one ("pageview" for /view,
+// "session_end" for /session_end). The /event path takes kind/event_name
+// from the body (click, event, ...).
+//
+// The beacon is fire-and-forget: malformed bodies, bot user-agents and
+// storage failures all still answer 202 so tracking can never break a page.
+func (m *Module) trackEndpoint(defaultKind string) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusAccepted)
+		_, _ = w.Write([]byte(`{"status":"ok"}`))
+
+		body, err := io.ReadAll(io.LimitReader(r.Body, 64*1024))
+		if err != nil || len(body) == 0 {
+			return
+		}
+		var p map[string]any
+		if err := json.Unmarshal(body, &p); err != nil {
+			return
+		}
+		str := func(keys ...string) string {
+			for _, k := range keys {
+				if v, ok := p[k].(string); ok && v != "" {
+					return v
+				}
+			}
+			return ""
+		}
+		ua := r.UserAgent()
+		if data.IsBot(ua) {
+			return
+		}
+		kind := defaultKind
+		if defaultKind == "event" {
+			if k := str("kind", "event_name"); k != "" {
+				kind = k
+			}
+		}
+		ref := str("ref", "referrer")
+		source, medium := data.AttributeSource(ref, str("utm_source"), str("utm_medium"))
+		label := str("label")
+		if href := str("href"); href != "" {
+			if label == "" {
+				label = href
+			} else if !strings.Contains(label, href) {
+				label = label + " (" + href + ")"
+			}
+		}
+		db, err := data.AnalyticsDB(m.DBPath)
+		if err != nil {
+			slog.Warn("track: analytics db unavailable", "err", err.Error())
+			return
+		}
+		ev := data.Event{
+			TS:        time.Now().Unix(),
+			VisitorID: str("vid", "visitor_id"),
+			SessionID: str("sid", "session_id"),
+			Kind:      kind,
+			Path:      str("path", "page_path"),
+			Referrer:  ref,
+			Source:    source,
+			Medium:    medium,
+			Campaign:  str("utm_campaign"),
+			Element:   str("el", "element"),
+			Label:     label,
+			UA:        ua,
+			IPHash:    data.HashIP(clientIP(r)),
+		}
+		if err := data.InsertEvent(db, ev); err != nil {
+			slog.Warn("track: insert failed", "err", err.Error())
+		}
+	}
+}
+
+// clientIP prefers X-Forwarded-For (the app sits behind Traefik in Dokploy)
+// and falls back to the direct remote address, port stripped.
+func clientIP(r *http.Request) string {
+	if xff := r.Header.Get("X-Forwarded-For"); xff != "" {
+		if i := strings.Index(xff, ","); i >= 0 {
+			xff = xff[:i]
+		}
+		if ip := strings.TrimSpace(xff); ip != "" {
+			return ip
+		}
+	}
+	if h, _, err := net.SplitHostPort(r.RemoteAddr); err == nil {
+		return h
+	}
+	return r.RemoteAddr
 }
 
 // manifest serves the PWA web-app manifest (canonical public/manifest.webmanifest).
@@ -299,7 +400,7 @@ func (m *Module) robots(w http.ResponseWriter, r *http.Request) {
 	base := view.SiteBase(r)
 	w.Header().Set("Content-Type", "text/plain; charset=utf-8")
 	w.Header().Set("Cache-Control", "public, max-age=86400")
-	fmt.Fprintf(w, "User-agent: *\nAllow: /\n\n"+
+	fmt.Fprintf(w, "User-agent: *\nAllow: /\nDisallow: /admin\n\n"+
 		"# AI search crawlers are welcome\n"+
 		"User-agent: GPTBot\nAllow: /\n\n"+
 		"User-agent: ChatGPT-User\nAllow: /\n\n"+
