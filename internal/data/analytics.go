@@ -18,6 +18,8 @@ import (
 
 // Event is one first-party analytics hit: a pageview, a click, or a
 // generic named event. Timestamps are unix seconds (UTC).
+// Device/geo/screen fields are filled server-side at ingest; raw IPs and
+// raw User-Agents drive attribution only and are never shown raw.
 type Event struct {
 	TS        int64
 	VisitorID string
@@ -30,8 +32,22 @@ type Event struct {
 	Campaign  string // utm_campaign when present
 	Element   string // tag name for clicks
 	Label     string // click label / event detail
+	Href      string // click target path (same-origin) or URL
+	ElemHint  string // #id or .class hint for the clicked element
 	UA        string
 	IPHash    string
+	// Parsed at ingest from the User-Agent.
+	DeviceType string // phone | tablet | desktop
+	OS         string // Windows | macOS | Linux | Android | iOS | ChromeOS | Other
+	Browser    string // Chrome | Safari | Firefox | Edge | Samsung Internet | Other
+	// Screen size in CSS pixels from tracker.js (0 when unknown).
+	ScreenW int
+	ScreenH int
+	// Coarse geo from the request IP (looked up, then the IP is dropped).
+	CountryCode string
+	CountryName string
+	Region      string
+	City        string
 }
 
 var (
@@ -67,7 +83,10 @@ func AnalyticsDB(dbPath string) (*sql.DB, error) {
 	return db, nil
 }
 
-// EnsureAnalyticsTables creates the analytics schema when missing.
+// EnsureAnalyticsTables creates the analytics schema when missing and
+// migrates older databases forward. New columns are added idempotently
+// (ALTER TABLE ... ADD COLUMN after a PRAGMA check) so existing rows and
+// the already-deployed production database keep working untouched.
 func EnsureAnalyticsTables(db *sql.DB) error {
 	stmts := []string{
 		`CREATE TABLE IF NOT EXISTS analytics_events (
@@ -83,8 +102,19 @@ func EnsureAnalyticsTables(db *sql.DB) error {
 			campaign TEXT,
 			element TEXT,
 			label TEXT,
+			href TEXT,
+			elem_hint TEXT,
 			ua TEXT,
-			ip_hash TEXT
+			ip_hash TEXT,
+			device_type TEXT,
+			os_name TEXT,
+			browser TEXT,
+			screen_w INTEGER NOT NULL DEFAULT 0,
+			screen_h INTEGER NOT NULL DEFAULT 0,
+			country_code TEXT,
+			country_name TEXT,
+			region TEXT,
+			city TEXT
 		)`,
 		`CREATE INDEX IF NOT EXISTS idx_ae_ts ON analytics_events (ts)`,
 		`CREATE INDEX IF NOT EXISTS idx_ae_path ON analytics_events (path)`,
@@ -100,6 +130,58 @@ func EnsureAnalyticsTables(db *sql.DB) error {
 		)`,
 	}
 	for _, s := range stmts {
+		if _, err := db.Exec(s); err != nil {
+			return fmt.Errorf("analytics schema: %w", err)
+		}
+	}
+	// Idempotent migration for databases created before the new columns.
+	// This runs BEFORE the indexes below: an index on a column that does
+	// not exist yet would fail on a legacy database.
+	migrations := []struct{ col, ddl string }{
+		{"href", "ALTER TABLE analytics_events ADD COLUMN href TEXT"},
+		{"elem_hint", "ALTER TABLE analytics_events ADD COLUMN elem_hint TEXT"},
+		{"device_type", "ALTER TABLE analytics_events ADD COLUMN device_type TEXT"},
+		{"os_name", "ALTER TABLE analytics_events ADD COLUMN os_name TEXT"},
+		{"browser", "ALTER TABLE analytics_events ADD COLUMN browser TEXT"},
+		{"screen_w", "ALTER TABLE analytics_events ADD COLUMN screen_w INTEGER NOT NULL DEFAULT 0"},
+		{"screen_h", "ALTER TABLE analytics_events ADD COLUMN screen_h INTEGER NOT NULL DEFAULT 0"},
+		{"country_code", "ALTER TABLE analytics_events ADD COLUMN country_code TEXT"},
+		{"country_name", "ALTER TABLE analytics_events ADD COLUMN country_name TEXT"},
+		{"region", "ALTER TABLE analytics_events ADD COLUMN region TEXT"},
+		{"city", "ALTER TABLE analytics_events ADD COLUMN city TEXT"},
+	}
+	existing := map[string]bool{}
+	rows, err := db.Query(`PRAGMA table_info(analytics_events)`)
+	if err != nil {
+		return fmt.Errorf("analytics schema pragma: %w", err)
+	}
+	for rows.Next() {
+		var cid int
+		var name, typ string
+		var notnull int
+		var dflt any
+		var pk int
+		if err := rows.Scan(&cid, &name, &typ, &notnull, &dflt, &pk); err != nil {
+			rows.Close()
+			return fmt.Errorf("analytics schema pragma scan: %w", err)
+		}
+		existing[name] = true
+	}
+	rows.Close()
+	for _, m := range migrations {
+		if existing[m.col] {
+			continue
+		}
+		if _, err := db.Exec(m.ddl); err != nil {
+			return fmt.Errorf("analytics migrate %s: %w", m.col, err)
+		}
+	}
+	// Indexes on the new columns land after the migration so legacy
+	// databases never try to index a column that is not there yet.
+	for _, s := range []string{
+		`CREATE INDEX IF NOT EXISTS idx_ae_device ON analytics_events (device_type)`,
+		`CREATE INDEX IF NOT EXISTS idx_ae_country ON analytics_events (country_code)`,
+	} {
 		if _, err := db.Exec(s); err != nil {
 			return fmt.Errorf("analytics schema: %w", err)
 		}
@@ -122,21 +204,49 @@ func InsertEvent(db *sql.DB, e Event) error {
 	if e.Path == "" {
 		e.Path = "/"
 	}
+	if e.DeviceType == "" {
+		e.DeviceType = "desktop"
+	}
+	if e.OS == "" {
+		e.OS = "Other"
+	}
+	if e.Browser == "" {
+		e.Browser = "Other"
+	}
 	_, err := db.Exec(
 		`INSERT INTO analytics_events
-		 (ts, visitor_id, session_id, kind, path, referrer, source, medium, campaign, element, label, ua, ip_hash)
-		 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+		 (ts, visitor_id, session_id, kind, path, referrer, source, medium, campaign,
+		  element, label, href, elem_hint, ua, ip_hash,
+		  device_type, os_name, browser, screen_w, screen_h,
+		  country_code, country_name, region, city)
+		 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
 		e.TS,
 		capStr(e.VisitorID, 512), capStr(e.SessionID, 512), capStr(e.Kind, 64),
 		capStr(e.Path, 512), capStr(e.Referrer, 2048),
 		capStr(e.Source, 64), capStr(e.Medium, 64), capStr(e.Campaign, 128),
 		capStr(e.Element, 16), capStr(e.Label, 512),
+		capStr(e.Href, 512), capStr(e.ElemHint, 128),
 		capStr(e.UA, 512), capStr(e.IPHash, 128),
+		capStr(e.DeviceType, 16), capStr(e.OS, 32), capStr(e.Browser, 32),
+		clampInt(e.ScreenW, 0, 10000), clampInt(e.ScreenH, 0, 10000),
+		capStr(e.CountryCode, 8), capStr(e.CountryName, 128),
+		capStr(e.Region, 128), capStr(e.City, 128),
 	)
 	if err != nil {
 		return fmt.Errorf("insert analytics event: %w", err)
 	}
 	return nil
+}
+
+// clampInt bounds v to [lo, hi] so garbage client numbers cannot skew stats.
+func clampInt(v, lo, hi int) int {
+	if v < lo {
+		return lo
+	}
+	if v > hi {
+		return hi
+	}
+	return v
 }
 
 // AttributeSource turns a referrer URL plus UTM params into a human traffic
@@ -271,10 +381,10 @@ type AnalyticsStats struct {
 }
 
 // QueryAnalytics aggregates the dashboard stats for the last `days` days.
-// days must be one of 7, 30, 90; anything else becomes 30.
+// days must be one of 1, 7, 30, 90; anything else becomes 30.
 func QueryAnalytics(db *sql.DB, days int, now int64) (*AnalyticsStats, error) {
 	switch days {
-	case 7, 30, 90:
+	case 1, 7, 30, 90:
 	default:
 		days = 30
 	}

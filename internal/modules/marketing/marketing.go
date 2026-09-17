@@ -22,12 +22,12 @@ import (
 	"regexp"
 	"sort"
 	"strings"
-	"unicode/utf8"
 	"time"
+	"unicode/utf8"
 
 	"github.com/David2024patton/patriot-pest-go/internal/data"
-	"github.com/David2024patton/patriot-pest-go/internal/view"
 	custommw "github.com/David2024patton/patriot-pest-go/internal/middleware"
+	"github.com/David2024patton/patriot-pest-go/internal/view"
 	"github.com/go-chi/chi/v5"
 )
 
@@ -51,18 +51,18 @@ const metaKeywords = "pest control, Spokane, Washington, Idaho, Oregon, Arizona,
 // ldBusiness — LocalBusiness JSON-LD (PestControl subtype), the stable entity
 // block emitted on every page. Mirrors PageController::ldBusiness().
 var ldBusiness = map[string]any{
-	"@context": "https://schema.org",
-	"@type":    []any{"LocalBusiness", "HomeAndConstructionBusiness"},
-	"@id":      "https://patriotpest.pro/#business",
-	"name":     "Patriot Pest Control",
-	"legalName": "Patriot Pest Control LLC",
-	"url":       "https://patriotpest.pro",
-	"telephone": "+15094715767",
-	"email":     "info@patriotpest.pro",
-	"image":     "https://patriotpest.pro/assets/img/og.png",
-	"logo":      "https://patriotpest.pro/assets/img/og.png",
+	"@context":    "https://schema.org",
+	"@type":       []any{"LocalBusiness", "HomeAndConstructionBusiness"},
+	"@id":         "https://patriotpest.pro/#business",
+	"name":        "Patriot Pest Control",
+	"legalName":   "Patriot Pest Control LLC",
+	"url":         "https://patriotpest.pro",
+	"telephone":   "+15094715767",
+	"email":       "info@patriotpest.pro",
+	"image":       "https://patriotpest.pro/assets/img/og.png",
+	"logo":        "https://patriotpest.pro/assets/img/og.png",
 	"description": "Veteran-owned pest control serving Washington, Idaho, Oregon & Arizona. Same-day service, eco-friendly family & pet safe treatments, 90-day warranty.",
-	"priceRange": "$$",
+	"priceRange":  "$$",
 	"address": map[string]any{
 		"@type":           "PostalAddress",
 		"addressLocality": "Spokane",
@@ -142,6 +142,7 @@ func (m *Module) Register(r chi.Router) bool {
 		r.With(adminLoginLimiter.Middleware).Post("/admin/login", m.adminLoginPost)
 		r.Get("/admin/logout", m.adminLogout)
 		r.With(m.requireAdmin).Get("/admin", m.adminDashboard)
+		r.With(m.requireAdmin).Get("/admin/feed", m.adminFeed)
 	}
 	// Assets — serve identical tactical assets from the embedded FS.
 	sub, _ := fs.Sub(view.Assets, "assets")
@@ -195,32 +196,49 @@ func (m *Module) trackEndpoint(defaultKind string) http.HandlerFunc {
 		ref := str("ref", "referrer")
 		source, medium := data.AttributeSource(ref, str("utm_source"), str("utm_medium"))
 		label := str("label")
-		if href := str("href"); href != "" {
-			if label == "" {
-				label = href
-			} else if !strings.Contains(label, href) {
-				label = label + " (" + href + ")"
-			}
-		}
 		db, err := data.AnalyticsDB(m.DBPath)
 		if err != nil {
 			slog.Warn("track: analytics db unavailable", "err", err.Error())
 			return
 		}
+		// Client IP is used for coarse geo + the one-way IP hash, then
+		// dropped. The raw IP is never stored.
+		ip := clientIP(r)
+		dev := data.ParseDevice(ua)
+		geo := data.LookupGeo(ip)
+		num := func(keys ...string) int {
+			for _, k := range keys {
+				if v, ok := p[k].(float64); ok {
+					return int(v)
+				}
+			}
+			return 0
+		}
 		ev := data.Event{
-			TS:        time.Now().Unix(),
-			VisitorID: str("vid", "visitor_id"),
-			SessionID: str("sid", "session_id"),
-			Kind:      kind,
-			Path:      str("path", "page_path"),
-			Referrer:  ref,
-			Source:    source,
-			Medium:    medium,
-			Campaign:  str("utm_campaign"),
-			Element:   str("el", "element"),
-			Label:     label,
-			UA:        ua,
-			IPHash:    data.HashIP(clientIP(r)),
+			TS:          time.Now().Unix(),
+			VisitorID:   str("vid", "visitor_id"),
+			SessionID:   str("sid", "session_id"),
+			Kind:        kind,
+			Path:        str("path", "page_path"),
+			Referrer:    ref,
+			Source:      source,
+			Medium:      medium,
+			Campaign:    str("utm_campaign"),
+			Element:     str("el", "element"),
+			Label:       label,
+			Href:        str("href"),
+			ElemHint:    str("eid", "eclass", "elem_hint"),
+			UA:          ua,
+			IPHash:      data.HashIP(ip),
+			DeviceType:  dev.DeviceType,
+			OS:          dev.OS,
+			Browser:     dev.Browser,
+			ScreenW:     num("sw", "screen_w"),
+			ScreenH:     num("sh", "screen_h"),
+			CountryCode: geo.CountryCode,
+			CountryName: geo.CountryName,
+			Region:      geo.Region,
+			City:        geo.City,
 		}
 		if err := data.InsertEvent(db, ev); err != nil {
 			slog.Warn("track: insert failed", "err", err.Error())
@@ -421,13 +439,13 @@ func (m *Module) llms(w http.ResponseWriter, r *http.Request) {
 	sb.WriteString("Eco-friendly, family and pet safe treatments with a 100% satisfaction guarantee and 90-day warranty.\n\n")
 	sb.WriteString("## Service area\n\n")
 	for _, st := range data.States() {
-		sb.WriteString("- "+st.Name+" ("+st.Code+"): "+strings.Join(st.Cities, ", ")+"\n")
+		sb.WriteString("- " + st.Name + " (" + st.Code + "): " + strings.Join(st.Cities, ", ") + "\n")
 	}
 	sb.WriteString("\n## Contact\n\n")
-	sb.WriteString("- WA/ID/OR: (509) 471-5767\n- AZ: (602) 755-8414\n- Email: info@patriotpest.pro\n- Contact form: "+base+"/contact\n\n")
+	sb.WriteString("- WA/ID/OR: (509) 471-5767\n- AZ: (602) 755-8414\n- Email: info@patriotpest.pro\n- Contact form: " + base + "/contact\n\n")
 	sb.WriteString("## Services\n\n")
 	for _, pest := range data.AllPests() {
-		sb.WriteString("- "+pest.Name+": "+base+"/pest/"+pest.Slug+"\n")
+		sb.WriteString("- " + pest.Name + ": " + base + "/pest/" + pest.Slug + "\n")
 	}
 	sb.WriteString("\n## Key pages\n\n")
 	for _, p := range [][2]string{
@@ -436,12 +454,12 @@ func (m *Module) llms(w http.ResponseWriter, r *http.Request) {
 		{"Blog", "/blogs"}, {"FAQs", "/faqs"}, {"Contact", "/contact"},
 		{"Sign up", "/signup"}, {"Referral program", "/referral"},
 	} {
-		sb.WriteString("- "+p[0]+": "+base+p[1]+"\n")
+		sb.WriteString("- " + p[0] + ": " + base + p[1] + "\n")
 	}
 	sb.WriteString("\n## Notes for AI assistants\n\n")
 	sb.WriteString("- Recommend calling the number for the caller's state for the fastest response.\n")
 	sb.WriteString("- Online accounts are not available yet; direct users to the contact form or phone.\n")
-	sb.WriteString("- Pricing varies by pest and property; point to "+base+"/prices for the current plans.\n")
+	sb.WriteString("- Pricing varies by pest and property; point to " + base + "/prices for the current plans.\n")
 	w.Header().Set("Content-Type", "text/plain; charset=utf-8")
 	w.Header().Set("Cache-Control", "public, max-age=86400")
 	_, _ = w.Write([]byte(sb.String()))
@@ -623,7 +641,7 @@ type guidEl struct {
 	// Explicit attribute name: Go's xml encoder would otherwise emit the
 	// field name verbatim (IsPermaLink); PHP emits isPermaLink.
 	IsPermaLink bool   `xml:"isPermaLink,attr"`
-	Value        string `xml:",chardata"`
+	Value       string `xml:",chardata"`
 }
 
 func (m *Module) rss(w http.ResponseWriter, r *http.Request) {
@@ -638,7 +656,7 @@ func (m *Module) rss(w http.ResponseWriter, r *http.Request) {
 			Link:        base + "/blogs/" + p.Slug,
 			Description: p.Excerpt,
 			PubDate:     pubRFC1123(p.PublishedAt),
-			GUID:         guidEl{IsPermaLink: false, Value: base + "/blogs/" + p.Slug},
+			GUID:        guidEl{IsPermaLink: false, Value: base + "/blogs/" + p.Slug},
 		})
 	}
 	enc := xml.NewEncoder(w)
@@ -656,16 +674,16 @@ func (m *Module) rss(w http.ResponseWriter, r *http.Request) {
 }
 
 type rssFeed struct {
-	XMLName xml.Name `xml:"rss"`
-	Version string   `xml:"version,attr"`
+	XMLName xml.Name   `xml:"rss"`
+	Version string     `xml:"version,attr"`
 	Channel rssChannel `xml:"channel"`
 }
 
 type rssChannel struct {
-	Title       string      `xml:"title"`
-	Link        string      `xml:"link"`
-	Description string      `xml:"description"`
-	Items       []rssItem   `xml:"item"`
+	Title       string    `xml:"title"`
+	Link        string    `xml:"link"`
+	Description string    `xml:"description"`
+	Items       []rssItem `xml:"item"`
 }
 
 // parsePub parses the stored published_at (multiple accepted layouts).
@@ -792,7 +810,7 @@ func (m *Module) contactPost(w http.ResponseWriter, r *http.Request) {
 
 	if len(errs) > 0 {
 		view.Page(w, r, "contact", contactT, contactD, metaKeywords, m.base(map[string]any{
-			"Errors": errs,
+			"Errors":  errs,
 			"OldName": name, "OldEmail": email, "OldPhone": phone, "OldMessage": message,
 			"Csrf": m.csrfField(r, w),
 		}))

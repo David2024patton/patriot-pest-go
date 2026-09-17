@@ -5,6 +5,7 @@ go 1.26.0
 require (
 	github.com/go-chi/chi/v5 v5.0.12
 	github.com/microcosm-cc/bluemonday v1.0.27
+	github.com/oschwald/maxminddb-golang v1.13.1
 	golang.org/x/crypto v0.57.0
 	modernc.org/sqlite v1.57.0
 )

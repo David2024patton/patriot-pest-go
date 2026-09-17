@@ -83,7 +83,7 @@ func TestAdminDisabledWhenUnconfigured(t *testing.T) {
 	if !m.Register(r) {
 		t.Fatal("Register returned false")
 	}
-	for _, path := range []string{"/admin", "/admin/login"} {
+	for _, path := range []string{"/admin", "/admin/login", "/admin/feed"} {
 		req := httptest.NewRequest(http.MethodGet, path, nil)
 		rec := httptest.NewRecorder()
 		r.ServeHTTP(rec, req)
@@ -168,10 +168,33 @@ func TestAdminLoginAcceptsAndServesDashboard(t *testing.T) {
 		t.Fatalf("authed /admin = %d, want 200", drec.Code)
 	}
 	body := drec.Body.String()
-	for _, want := range []string{"PATRIOT ANALYTICS", "/prices-test", "Google", "TRAFFIC SOURCES", "TOP CLICKS"} {
+	for _, want := range []string{"PATRIOT", "/prices-test", "Google", "TOP PAGES", "DEVICE SPLIT", "BOUNCE RATE"} {
 		if !strings.Contains(body, want) {
 			t.Errorf("dashboard missing %q", want)
 		}
+	}
+
+	// Every section renders 200 for an authenticated admin.
+	for _, sec := range []string{"pages", "clicks", "traffic", "devices", "geo", "visitors", "activity"} {
+		sreq := httptest.NewRequest(http.MethodGet, "/admin?s="+sec+"&days=30", nil)
+		sreq.AddCookie(sessCookie)
+		srec := httptest.NewRecorder()
+		r.ServeHTTP(srec, sreq)
+		if srec.Code != http.StatusOK {
+			t.Errorf("section %s = %d, want 200", sec, srec.Code)
+		}
+	}
+
+	// The live feed endpoint returns rows for an authenticated admin.
+	freq := httptest.NewRequest(http.MethodGet, "/admin/feed", nil)
+	freq.AddCookie(sessCookie)
+	frec := httptest.NewRecorder()
+	r.ServeHTTP(frec, freq)
+	if frec.Code != http.StatusOK {
+		t.Errorf("feed = %d, want 200", frec.Code)
+	}
+	if !strings.Contains(frec.Body.String(), "/prices-test") {
+		t.Error("feed missing the seeded pageview")
 	}
 
 	// Logout kills the session: dashboard redirects to login again.
@@ -208,7 +231,7 @@ func TestAdminDashboardRejectsBadRange(t *testing.T) {
 	if rec.Code != http.StatusOK {
 		t.Fatalf("/admin?days=banana = %d, want 200 (defaults to 30)", rec.Code)
 	}
-	if !strings.Contains(rec.Body.String(), "LAST 30 DAYS") {
+	if !strings.Contains(rec.Body.String(), "Last 30 days.") {
 		t.Error("bad days param did not default to 30")
 	}
 }

@@ -8,7 +8,18 @@ RUN go mod download
 COPY . .
 ARG VERSION=dev
 RUN CGO_ENABLED=0 GOOS=linux GOTOOLCHAIN=local go build -ldflags "-X main.version=${VERSION}" -o /out/patriot-server ./cmd/server \
- && mkdir -p /out/storage/logs /out/database && chmod 750 /out/storage/logs /out/database
+ && mkdir -p /out/storage/logs /out/database /out/geo && chmod 750 /out/storage/logs /out/database
+# Coarse IP geolocation database for analytics. Best effort: if the
+# download fails (offline build) the build still succeeds and the server
+# simply reports country/city as unknown. Raw IPs are never stored.
+RUN (curl -fsSL -o /out/geo/GeoLite2-City.mmdb \
+	"https://github.com/P3TERX/GeoLite.mmdb/raw/download/GeoLite2-City.mmdb" \
+	|| echo "geo db download failed, continuing without it")
+
+FROM gcr.io/distroless/static-debian12:nonroot
+WORKDIR /app
+COPY --from=build /out/patriot-server /app/patriot-server
+COPY --from=build /out/geo /app/geo
 
 FROM gcr.io/distroless/static-debian12:nonroot
 WORKDIR /app

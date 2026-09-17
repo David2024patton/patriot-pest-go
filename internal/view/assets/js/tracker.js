@@ -91,6 +91,10 @@
   }
 
   /* ---------- page view ---------- */
+  var sw = 0, sh = 0;
+  try {
+    if (window.screen) { sw = window.screen.width | 0; sh = window.screen.height | 0; }
+  } catch (e) {}
   send("/api/track/view", {
     vid: vid,
     sid: sid,
@@ -99,7 +103,9 @@
     utm_source: cap(qs("utm_source"), 64),
     utm_medium: cap(qs("utm_medium"), 64),
     utm_campaign: cap(qs("utm_campaign"), 64),
-    lang: cap(navigator.language || "", 16)
+    lang: cap(navigator.language || "", 16),
+    sw: sw,
+    sh: sh
   });
 
   /* ---------- clicks (delegated: catches dynamically added links too) ---------- */
@@ -122,6 +128,10 @@
       el.id || el.value || hrefPath;
     label = cap(label, 120);
 
+    var hint = el.id ? ("#" + cap(el.id, 60)) :
+      (el.className && typeof el.className === "string" && el.className.trim() ?
+        ("." + cap(el.className.trim().split(/\s+/).join("."), 60)) : "");
+
     send("/api/track/event", {
       vid: vid,
       sid: sid,
@@ -129,7 +139,8 @@
       kind: "click",
       el: cap(el.tagName || "", 16),
       label: label,
-      href: cap(hrefPath, 512)
+      href: cap(hrefPath, 512),
+      eid: hint
     });
   }, false);
 })();

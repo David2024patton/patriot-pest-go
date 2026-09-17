@@ -30,7 +30,8 @@ import (
 )
 
 // version is the build stamp, injected with:
-//   go build -ldflags "-X main.version=$(git rev-parse --short HEAD)"
+//
+//	go build -ldflags "-X main.version=$(git rev-parse --short HEAD)"
 var version = "dev"
 
 // movedPaths are the URLs that used to serve a dashboard, login flow or admin
@@ -58,6 +59,17 @@ func main() {
 
 	cfg := config.Load()
 	logger := slog.New(slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{Level: logLevel(cfg)}))
+	// Coarse IP geolocation for analytics. The MaxMind database is
+	// downloaded at Docker build time; when it is missing (local dev,
+	// offline build) InitGeoDB is a no-op and geo fields stay empty.
+	geoPath := os.Getenv("GEOIP_DB_PATH")
+	if geoPath == "" {
+		geoPath = "geo/GeoLite2-City.mmdb"
+	}
+	data.InitGeoDB(geoPath)
+	if !data.GeoConfigured() {
+		logger.Info("geo: no GeoIP database, country/city will report unknown", "path", geoPath)
+	}
 	slog.SetDefault(logger)
 
 	// The landing pages render from the SQLite catalog (pest library, posts,
