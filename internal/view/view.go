@@ -17,25 +17,16 @@ import (
 	custommw "github.com/David2024patton/patriot-pest-go/internal/middleware"
 )
 
-// ---- Sign-in destination -----------------------------------------------
-
-// loginURL is where every sign-in link and every former dashboard URL sends
-// visitors: the AlphaFlux platform.
-var loginURL = "https://alphaflux.net/login"
-
-// SetLoginURL overrides the sign-in destination (ALPHAFLUX_LOGIN_URL).
-// Call it once at boot, before serving.
-func SetLoginURL(u string) {
-	if s := strings.TrimSpace(u); s != "" {
-		loginURL = s
-	}
-}
+// ---- Sign-in placeholder ---------------------------------------------
+// The top-nav "Sign In" button is intentionally inert (a disabled span, not a
+// link) until the AlphaFlux platform is ready to host accounts. When it is,
+// replace the .signin-soon span in the nav with a real link and re-add the
+// destination here.
 
 // ---- FuncMap (stateless helpers; per-request values come in the data map) ----
 
 var funcMap = template.FuncMap{
 	"asset":  func(p string) string { return "/assets/" + p },
-	"login":  func() string { return loginURL },
 	"upper":  strings.ToUpper,
 	"lower":  strings.ToLower,
 	"ucfirst": func(s string) string {
@@ -152,9 +143,8 @@ const layoutHTML = `<!DOCTYPE html>
   <button id="menu-btn" aria-label="Toggle menu">☰ Menu</button>
   <div class="navlinks">
     <a class="nl{{if eq .Page "home"}} active{{end}}" href="/">Home</a><a class="nl" href="/about">About</a><a class="nl" href="/services">Services</a><a class="nl" href="/prices">Prices</a><a class="nl" href="/service-areas">Areas</a><a class="nl" href="/blogs">Blog</a><a class="nl" href="/faqs">FAQs</a><a class="nl" href="/contact">Contact</a><a class="nl" href="/links">🔗 All Links</a>
-    {{if eq .UserType "customer"}}<a class="nl" href="{{login}}">My Account</a>
-    {{else if eq .UserType "staff"}}<a class="nl" href="{{login}}">Dashboard</a>
-    {{else}}<a class="nl" href="{{login}}">Sign In</a>{{end}}
+    {{/* Sign In is intentionally inert until the AlphaFlux platform is ready. */}}
+    <span class="nl signin-soon" aria-disabled="true" title="Online accounts are coming soon">Sign In</span>
     <a class="nav-cta" href="{{.PhoneHref}}">☎ {{.PhoneDisplay}}</a>
   </div>
 </nav>
@@ -196,10 +186,10 @@ const layoutHTML = `<!DOCTYPE html>
     <svg width="22" height="22" viewBox="0 0 16 16" fill="currentColor"><path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.143l-6.57-4.027L8 9.586zm1.964.372 6.57 4.027A2 2 0 0 0 16 13.802V4.697l-5.803 3.546z"/></svg>
     <span class="label">Contact</span>
   </a>
-  <a href="/login" aria-label="Login">
+  <span class="mnav-soon" aria-disabled="true" title="Online accounts are coming soon" aria-label="Login (coming soon)">
     <svg width="22" height="22" viewBox="0 0 16 16" fill="currentColor"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/></svg>
     <span class="label">Login</span>
-  </a>
+  </span>
 </nav>
 <div class="mobile-nav-spacer"></div>
 
@@ -447,7 +437,6 @@ func withBase(r *http.Request, page, title, description, keywords string) map[st
 		"OtherLabel":   ph.Other.Label,
 		"IsAZ":         ph.IsAZ,
 		"Year":         time.Now().Year(),
-		"UserType":     "",
 		"IsAdmin":      false,
 		"AppUI":        false,
 		"BodyClass":    "",
@@ -477,6 +466,21 @@ func canonical(r *http.Request) string {
 		scheme = "http"
 	}
 	return scheme + "://" + host + r.URL.Path
+}
+
+// SiteBase returns the trusted absolute base URL (scheme + host) for the
+// current request — used by robots.txt, sitemap.xml and llms.txt so they
+// always advertise the real domain even under a forged Host header.
+func SiteBase(r *http.Request) string {
+	host := strings.ToLower(r.Host)
+	if !canonicalHosts[host] {
+		host = "www.patriotpest.pro"
+	}
+	scheme := "https"
+	if r.Header.Get("X-Forwarded-Proto") == "http" {
+		scheme = "http"
+	}
+	return scheme + "://" + host
 }
 
 // render runs the layout for a page, merging page-specific data into base.

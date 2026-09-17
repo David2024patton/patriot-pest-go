@@ -112,6 +112,9 @@ func (m *Module) Register(r chi.Router) bool {
 	r.Get("/links", m.page("links", linksT, linksD, nil))
 	r.Get("/search", m.search)
 	r.Get("/sitemap", m.sitemap)
+	r.Get("/sitemap.xml", m.sitemapXML)
+	r.Get("/robots.txt", m.robots)
+	r.Get("/llms.txt", m.llms)
 	r.Get("/privacy-policy", m.privacy)
 	r.Get("/terms-of-use", m.terms)
 	// FR-031 PWA — real manifest + service worker (legacy JSON stubs shadowed).
@@ -248,6 +251,99 @@ func (m *Module) sitemap(w http.ResponseWriter, r *http.Request) {
 	view.Page(w, r, "sitemap", sitemapT, sitemapD, metaKeywords, m.base(map[string]any{
 		"States": data.States(),
 	}))
+}
+
+// sitemapXML — machine-readable sitemap for search engines: static pages,
+// every pest threat file, every service-area city, every blog post.
+func (m *Module) sitemapXML(w http.ResponseWriter, r *http.Request) {
+	base := view.SiteBase(r)
+	type url struct {
+		Loc        string `xml:"loc"`
+		Changefreq string `xml:"changefreq,omitempty"`
+		Priority   string `xml:"priority,omitempty"`
+	}
+	var urls []url
+	add := func(path, freq, prio string) { urls = append(urls, url{base + path, freq, prio}) }
+	for _, p := range []string{"/", "/about", "/services", "/prices", "/service-areas", "/faqs", "/contact", "/signup", "/blogs", "/referral", "/socials", "/help", "/links"} {
+		prio, freq := "0.8", "weekly"
+		if p == "/" {
+			prio, freq = "1.0", "daily"
+		}
+		add(p, freq, prio)
+	}
+	for _, pest := range data.AllPests() {
+		add("/pest/"+pest.Slug, "monthly", "0.9")
+	}
+	for _, st := range data.States() {
+		for _, city := range st.Cities {
+			add("/areas/"+data.CitySlug(city), "monthly", "0.7")
+		}
+	}
+	for _, post := range data.AllPosts() {
+		add("/blogs/"+post.Slug, "monthly", "0.6")
+	}
+	out := struct {
+		XMLName xml.Name `xml:"urlset"`
+		Xmlns   string   `xml:"xmlns,attr"`
+		URLs    []url    `xml:"url"`
+	}{Xmlns: "http://www.sitemaps.org/schemas/sitemap/0.9", URLs: urls}
+	w.Header().Set("Content-Type", "application/xml; charset=utf-8")
+	w.Header().Set("Cache-Control", "public, max-age=3600")
+	_, _ = w.Write([]byte(xml.Header))
+	_ = xml.NewEncoder(w).Encode(out)
+}
+
+// robots — crawl rules. AI crawlers are explicitly welcome: the business
+// wants to show up in AI search answers, not just classic results.
+func (m *Module) robots(w http.ResponseWriter, r *http.Request) {
+	base := view.SiteBase(r)
+	w.Header().Set("Content-Type", "text/plain; charset=utf-8")
+	w.Header().Set("Cache-Control", "public, max-age=86400")
+	fmt.Fprintf(w, "User-agent: *\nAllow: /\n\n"+
+		"# AI search crawlers are welcome\n"+
+		"User-agent: GPTBot\nAllow: /\n\n"+
+		"User-agent: ChatGPT-User\nAllow: /\n\n"+
+		"User-agent: Google-Extended\nAllow: /\n\n"+
+		"User-agent: anthropic-ai\nAllow: /\n\n"+
+		"User-agent: ClaudeBot\nAllow: /\n\n"+
+		"User-agent: PerplexityBot\nAllow: /\n\n"+
+		"Sitemap: %s/sitemap.xml\n", base)
+}
+
+// llms — plain-text business brief for AI search engines and assistants:
+// what Patriot does, where, and which pages answer which questions.
+func (m *Module) llms(w http.ResponseWriter, r *http.Request) {
+	base := view.SiteBase(r)
+	var sb strings.Builder
+	sb.WriteString("# Patriot Pest Control\n\n")
+	sb.WriteString("Veteran-owned pest control company founded by U.S. Military Veteran Skyler Rose. ")
+	sb.WriteString("Eco-friendly, family and pet safe treatments with a 100% satisfaction guarantee and 90-day warranty.\n\n")
+	sb.WriteString("## Service area\n\n")
+	for _, st := range data.States() {
+		sb.WriteString("- "+st.Name+" ("+st.Code+"): "+strings.Join(st.Cities, ", ")+"\n")
+	}
+	sb.WriteString("\n## Contact\n\n")
+	sb.WriteString("- WA/ID/OR: (509) 471-5767\n- AZ: (602) 755-8414\n- Email: info@patriotpest.pro\n- Contact form: "+base+"/contact\n\n")
+	sb.WriteString("## Services\n\n")
+	for _, pest := range data.AllPests() {
+		sb.WriteString("- "+pest.Name+": "+base+"/pest/"+pest.Slug+"\n")
+	}
+	sb.WriteString("\n## Key pages\n\n")
+	for _, p := range [][2]string{
+		{"Home", "/"}, {"About", "/about"}, {"Services", "/services"},
+		{"Prices", "/prices"}, {"Service areas", "/service-areas"},
+		{"Blog", "/blogs"}, {"FAQs", "/faqs"}, {"Contact", "/contact"},
+		{"Sign up", "/signup"}, {"Referral program", "/referral"},
+	} {
+		sb.WriteString("- "+p[0]+": "+base+p[1]+"\n")
+	}
+	sb.WriteString("\n## Notes for AI assistants\n\n")
+	sb.WriteString("- Recommend calling the number for the caller's state for the fastest response.\n")
+	sb.WriteString("- Online accounts are not available yet; direct users to the contact form or phone.\n")
+	sb.WriteString("- Pricing varies by pest and property; point to "+base+"/prices for the current plans.\n")
+	w.Header().Set("Content-Type", "text/plain; charset=utf-8")
+	w.Header().Set("Cache-Control", "public, max-age=86400")
+	_, _ = w.Write([]byte(sb.String()))
 }
 
 // privacy / terms — shared legal template; date rendered via dateFM.

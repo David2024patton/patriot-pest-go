@@ -19,10 +19,6 @@ type Config struct {
 
 	// MarketingEnabled gates the public pages module.
 	MarketingEnabled bool
-
-	// LoginURL is the destination for every sign-in link and for every URL that
-	// used to serve a customer/staff/admin dashboard — the AlphaFlux platform.
-	LoginURL string
 }
 
 // Load reads env vars with defaults.
@@ -34,7 +30,6 @@ func Load() Config {
 		Addr:             env("ADDR", ":3000"),
 		DBPath:           env("DB_PATH", "database/patriot.db"),
 		MarketingEnabled: envBool("MARKETING_ENABLED", true),
-		LoginURL:         env("ALPHAFLUX_LOGIN_URL", "https://alphaflux.net/login"),
 	}
 }
 

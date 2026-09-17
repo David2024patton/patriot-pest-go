@@ -48,11 +48,11 @@ const pageLinks = `<section class="block">
         </div>
       </div>
       <div class="card">
-        <h3 style="font-family:var(--display);color:var(--orange);font-size:1.05rem;margin-bottom:.8rem">Account</h3>
+        <h3 style="font-family:var(--display);color:var(--orange);font-size:1.05rem;margin-bottom:.8rem">Get Started</h3>
         <div style="display:flex;flex-direction:column;gap:.5rem">
-          <a href="{{login}}" style="color:var(--cream);text-decoration:none">Sign In ▸</a>
-          <a href="{{login}}" style="color:var(--cream);text-decoration:none">Customer Portal ▸</a>
-          <a href="{{login}}" style="color:var(--cream);text-decoration:none">Staff / Admin Console ▸</a>
+          <a href="/signup" style="color:var(--cream);text-decoration:none">Create Account ▸</a>
+          <a href="/contact" style="color:var(--cream);text-decoration:none">Request Service ▸</a>
+          <a href="/referral" style="color:var(--cream);text-decoration:none">Referral Program ▸</a>
         </div>
       </div>
       <div class="card">

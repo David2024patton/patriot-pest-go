@@ -1,8 +1,7 @@
 package view
 
-// CSRF helpers for authenticated app pages (dashboards + admin surfaces).
-// The cookie name matches internal/auth's login flow ("_csrf") so one token
-// covers every surface in a single browser session.
+// CSRF helpers for the marketing forms (contact, signup). Fail closed: if
+// randomness is unavailable the request 500s instead of issuing a weak token.
 
 import (
 	"crypto/rand"

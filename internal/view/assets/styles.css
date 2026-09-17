@@ -67,6 +67,8 @@ nav .brand .star{color:var(--orange);font-size:1.15rem;display:inline-block;anim
 .navlinks a.nl::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--orange);transition:width .25s}
 .navlinks a.nl:hover::after,.navlinks a.nl.active::after{width:100%}
 .navlinks a.nl:hover,.navlinks a.nl.active{color:var(--cream)}
+/* Sign In placeholder: visible but inert until the AlphaFlux platform is ready. */
+.navlinks span.nl.signin-soon{font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;color:var(--khaki);text-transform:uppercase;padding:.3rem 0;opacity:.45;cursor:not-allowed;user-select:none}
 .nav-cta{
   font-family:var(--display);font-size:.72rem;letter-spacing:.06em;text-decoration:none;
   background:var(--orange);color:var(--ink);padding:.55rem 1rem;white-space:nowrap;
@@ -148,6 +150,15 @@ h2 em,h1 em{font-style:normal;color:var(--orange)}
 .block.paper{background:var(--paper);color:var(--ink)}
 .block.paper h2,.block.paper h3{color:var(--ink)}
 .block.paper .eyebrow{color:var(--red)}
+/* Bug Blaster arena */
+.bb-arena{position:relative;margin-top:2rem;border:2px solid var(--olive-700);border-radius:12px;overflow:hidden;background:#14120c}
+.bb-arena canvas{display:block;width:100%;height:440px;touch-action:none;cursor:crosshair}
+.bb-top{position:absolute;top:.8rem;left:1rem;font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;color:var(--orange);background:rgba(20,18,12,.75);padding:.35rem .7rem;border:1px solid var(--olive-700);border-radius:6px;pointer-events:none}
+.bb-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(20,18,12,.82);z-index:2}
+.bb-card{text-align:center;padding:2rem}
+.bb-title{font-family:var(--display);font-size:2rem;color:var(--cream);letter-spacing:.06em;margin-bottom:.6rem}
+.bb-card p{color:var(--khaki);line-height:1.7;margin-bottom:1.2rem}
+@media (max-width:640px){.bb-arena canvas{height:360px}}
 .block.paper .eyebrow::before{background:var(--red)}
 .block.paper .lead{color:#4a4636}
 .sec-head{margin-bottom:2.6rem}
@@ -674,6 +685,27 @@ img, video, canvas, iframe {
   
   .mobile-sticky-nav a:active {
     color: var(--orange);
+  }
+
+  /* Inert login placeholder in the mobile quick nav. */
+  .mobile-sticky-nav span.mnav-soon {
+    flex: 1;
+    min-height: 48px;
+    min-width: 0;
+    padding: .3rem .15rem;
+    color: var(--cream);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .1rem;
+    font-size: .56rem;
+    font-family: var(--mono);
+    text-transform: uppercase;
+    white-space: nowrap;
+    opacity: .45;
+    cursor: not-allowed;
+    user-select: none;
   }
   
   /* Add space at bottom for sticky nav */

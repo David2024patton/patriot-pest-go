@@ -5,65 +5,14 @@ package view
 // AppUI:true; auth surfaces reuse the authx design system.
 
 func init() {
-	RegisterPageTemplate("account", pageAccount)
 	RegisterPageTemplate("customer-messages", pageCustomerMessages)
-	RegisterPageTemplate("su-login", pageSuLogin)
-	RegisterPageTemplate("su-verify", pageSuVerify)
 	RegisterPageTemplate("tech-ask", pageTechAsk)
 	RegisterPageTemplate("dash-fieldroutes", pageDashFieldRoutes)
 	RegisterPageTemplate("admin-post-edit", pageAdminPostEdit)
 	RegisterPageTemplate("admin-staff-edit", pageAdminStaffEdit)
 	RegisterPageTemplate("admin-settings", pageAdminSettings)
 	RegisterPageTemplate("apikey-audit", pageApiKeyAudit)
-	RegisterPageTemplate("customer-portal", pageCustomerPortal)
 }
-
-// Data keys: Type ("staff"|"customer"), Name, RoleLabel, Record map, Flash.
-const pageAccount = `
-<div class="app"><div class="wrap">
-  <div class="app-head">
-    <div>
-      <h1>My Account</h1>
-      <div class="sub">Signed in as {{ .Name }} · <span class="badge role">{{ .RoleLabel }}</span></div>
-    </div>
-    <div class="actions">
-      {{ if eq .Type "staff" }}<a class="btn btn-ghost" href="/staff-dashboard">◂ Dashboard</a>
-      {{ else }}<a class="btn btn-ghost" href="/customer-dashboard">◂ Dashboard</a>{{ end }}
-      <a class="btn btn-ghost" href="/logout">Sign Out</a>
-    </div>
-  </div>
-
-  {{ if .Flash }}<div class="notice info">{{ .Flash }}</div>{{ end }}
-
-  {{ if not .Record }}
-    <div class="panel"><p class="empty">We couldn't load your account record.</p></div>
-  {{ else if eq .Type "staff" }}
-    <div class="panel">
-      <h3>Staff Profile</h3>
-      <dl class="kv" style="margin-top:.8rem">
-        <dt>Name</dt><dd>{{ index .Record "name" }}</dd>
-        <dt>Email</dt><dd>{{ index .Record "email" }}</dd>
-        <dt>Role</dt><dd><span class="badge role">{{ index .Record "role" }}</span></dd>
-        <dt>Status</dt><dd><span class="badge active">Active</span></dd>
-      </dl>
-    </div>
-    <p class="muted" style="margin-top:1rem;line-height:1.7">Sign-in is passwordless: we email a one-time code each time. To change your name or email, contact an administrator.</p>
-  {{ else }}
-    <div class="panel">
-      <h3>Account Details</h3>
-      <dl class="kv" style="margin-top:.8rem">
-        <dt>Account #</dt><dd class="mono">{{ index .Record "account_number" }}</dd>
-        <dt>Name</dt><dd>{{ index .Record "name" }}</dd>
-        <dt>Email</dt><dd>{{ index .Record "email" }}</dd>
-        <dt>Phone</dt><dd>{{ index .Record "phone" }}</dd>
-        <dt>District</dt><dd>{{ index .Record "district" }}</dd>
-        <dt>Status</dt><dd><span class="badge active">{{ index .Record "status" }}</span></dd>
-      </dl>
-    </div>
-    <p class="muted" style="margin-top:1rem;line-height:1.7">Need to update your contact info or service address? Call <a href="{{ .PhoneHref }}">{{ .PhoneDisplay }}</a> or use the <a href="/contact">contact form</a>.</p>
-  {{ end }}
-</div></div>
-`
 
 // Data keys: Csrf, Flash, Messages []map{from,text,at,mine}.
 const pageCustomerMessages = `
@@ -102,59 +51,6 @@ const pageCustomerMessages = `
     <button type="submit" class="btn btn-primary">Send Message ▸</button>
   </form>
 </div></div>
-`
-
-// Data keys: Csrf, FlashError, SentTo.
-const pageSuLogin = `
-<div class="authx">
-  <div class="authx-form" style="margin:4rem auto">
-    <div class="authx-card2">
-      <span class="step">ELEVATED ACCESS</span>
-      <h1>Superuser Sign In</h1>
-      <p class="sub">Enter your email to receive a secure 8-digit sign-in code. This surface is restricted to command-level accounts.</p>
-
-      {{ if .FlashError }}<div class="notice error">{{ .FlashError }}</div>{{ end }}
-      {{ if .SentTo }}<div class="notice info">Code sent to <b>{{ .SentTo }}</b>. Enter it below.</div>{{ end }}
-
-      <form method="post" action="/su" novalidate>
-        {{ .Csrf }}
-        <div class="authx-field">
-          <label for="email">Email address</label>
-          <input type="email" id="email" name="email" required autofocus autocomplete="email" placeholder="you@example.com" maxlength="254">
-        </div>
-        <button type="submit" class="authx-btn">Send Code ▸</button>
-      </form>
-
-      <p class="authx-foot"><a href="/login">Staff &amp; customer sign in</a></p>
-    </div>
-  </div>
-</div>
-`
-
-// Data keys: Csrf, FlashError, SentTo.
-const pageSuVerify = `
-<div class="authx">
-  <div class="authx-form" style="margin:4rem auto">
-    <div class="authx-card2">
-      <span class="step">COMMAND VERIFICATION</span>
-      <h1>Enter your 8-digit code</h1>
-      <p class="sub">{{ if .SentTo }}We sent an 8-digit code to <span class="sent">{{ .SentTo }}</span>. It expires in 5 minutes and works once.{{ else }}Type the 8-digit code we sent you.{{ end }}</p>
-
-      {{ if .FlashError }}<div class="notice error">{{ .FlashError }}</div>{{ end }}
-
-      <form method="post" action="/su/verify" novalidate>
-        {{ .Csrf }}
-        <div class="authx-field">
-          <label for="code">8-digit code</label>
-          <input type="text" id="code" name="code" class="authx-code" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{8}" maxlength="8" required autofocus placeholder="••••••••">
-        </div>
-        <button type="submit" class="authx-btn">Verify &amp; Sign In ▸</button>
-      </form>
-
-      <p class="authx-foot"><a href="/su">◂ Use a different email</a></p>
-    </div>
-  </div>
-</div>
 `
 
 // Data keys: Q, Hits []map{title,url,snippet}.
@@ -384,24 +280,5 @@ const pageApiKeyAudit = `
   {{ else }}
   <p class="empty">No audit events recorded yet.</p>
   {{ end }}
-</div></div>
-`
-
-// Landing alias page for /customer-portal.
-const pageCustomerPortal = `
-<div class="app"><div class="wrap">
-  <div class="app-head">
-    <div>
-      <h1>Customer Portal</h1>
-      <p class="sub">Your account, appointments, invoices and messages in one place.</p>
-    </div>
-  </div>
-  <div class="stat-cards">
-    <a class="stat-card" href="/customer-dashboard" style="text-decoration:none"><span class="v">▸</span><span class="k">My Dashboard</span></a>
-    <a class="stat-card" href="/customer/messages" style="text-decoration:none"><span class="v">▸</span><span class="k">Messages</span></a>
-    <a class="stat-card" href="/account" style="text-decoration:none"><span class="v">▸</span><span class="k">Account Details</span></a>
-    <a class="stat-card" href="/prices" style="text-decoration:none"><span class="v">▸</span><span class="k">Plans &amp; Pricing</span></a>
-  </div>
-  <p class="muted" style="margin-top:1.4rem">Payments are handled securely by FieldRoutes — Patriot never stores card numbers. Use “Make a Payment” inside your dashboard.</p>
 </div></div>
 `

@@ -35,7 +35,8 @@ var version = "dev"
 
 // movedPaths are the URLs that used to serve a dashboard, login flow or admin
 // console from this app. They are kept as redirects so bookmarks, ads and
-// inbound links never 404.
+// inbound links never 404. They point at the marketing home page until the
+// AlphaFlux platform is ready to host accounts.
 var movedPaths = []string{
 	"/login", "/login/verify", "/logout",
 	"/customer-auth", "/customer-verify", "/account",
@@ -66,9 +67,6 @@ func main() {
 		logger.Error("catalog load failed, running with empty catalog", "err", err, "db", cfg.DBPath)
 	}
 
-	// One place owns the "sign in" destination: the AlphaFlux platform.
-	view.SetLoginURL(cfg.LoginURL)
-
 	r := chi.NewRouter()
 	r.Use(custommw.RequestID)
 	r.Use(custommw.SlogLogger(logger))
@@ -87,7 +85,7 @@ func main() {
 	}
 
 	loginRedirect := http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
-		http.Redirect(w, req, cfg.LoginURL, http.StatusFound)
+		http.Redirect(w, req, "/", http.StatusFound)
 	})
 	for _, p := range movedPaths {
 		r.Handle(p, loginRedirect)
@@ -115,7 +113,7 @@ func main() {
 
 	srv := &http.Server{Addr: cfg.Addr, Handler: r}
 	go func() {
-		logger.Info("listening", "addr", cfg.Addr, "env", cfg.Env, "login_url", cfg.LoginURL, "version", version)
+		logger.Info("listening", "addr", cfg.Addr, "env", cfg.Env, "version", version)
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 			logger.Error("listen failed", "err", err)
 			os.Exit(1)

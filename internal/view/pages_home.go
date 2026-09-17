@@ -155,6 +155,27 @@ const pageHome = `<!-- ============ HERO ============ -->
   </div>
 </section>
 
+<!-- ============ BUG BLASTER ============ -->
+<section id="bugblaster-sec" class="block">
+  <div class="wrap">
+    <div class="eyebrow">FIELD EXERCISE // BUG BLASTER</div>
+    <h2 data-reveal>Take a break. <em>Blow up some bugs.</em></h2>
+    <p class="lead" data-reveal>The classics are back: hostiles crawl in from the treeline, you click (or tap) to drop a pest bomb, and everything in the blast radius goes down. This is the fun version. The real one involves our technicians.</p>
+    <div class="bb-arena" data-reveal>
+      <canvas id="bugblaster" aria-label="Bug Blaster minigame: click to drop bombs on incoming bugs"></canvas>
+      <div class="bb-top"><span id="bugblaster-hud">BUGS ELIMINATED: 0</span></div>
+      <div class="bb-overlay" id="bugblaster-start">
+        <div class="bb-card">
+          <div class="bb-title">BUG BLASTER</div>
+          <p>Click / tap anywhere to drop a bomb.<br>Blast radius does the rest.</p>
+          <button type="button" class="btn btn-primary">START MISSION</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="/assets/js/bugblaster.js" defer></script>
+
 <!-- ============ FINAL ORDERS ============ -->
 <section id="final" class="block cta-band">
   <div class="wrap" style="text-align:center">

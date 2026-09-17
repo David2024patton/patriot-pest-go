@@ -17,8 +17,8 @@ const pageHelp = `<section class="block">
         <p style="color:var(--khaki);line-height:1.7;margin:.5rem 0">Call <a href="tel:+15094715767" style="color:var(--orange)">(509) 471-5767</a> (WA/ID/OR) or <a href="tel:+16027558414" style="color:var(--orange)">(602) 755-8414</a> (AZ), or email <a href="mailto:info@patriotpest.pro" style="color:var(--orange)">info@patriotpest.pro</a>.</p>
       </div>
       <div class="card">
-        <h3 style="font-family:var(--display);color:var(--cream)">🔐 Account Access</h3>
-        <p style="color:var(--khaki);line-height:1.7;margin:.5rem 0">Everyone signs in passwordless. We email a secure code and send you to the right dashboard. <a href="{{login}}" style="color:var(--orange)">Go to sign in ▸</a></p>
+        <h3 style="font-family:var(--display);color:var(--cream)">💳 Billing &amp; Payments</h3>
+        <p style="color:var(--khaki);line-height:1.7;margin:.5rem 0">Questions about a charge or invoice? Call the line above and we'll sort it out on the spot.</p>
       </div>
       <div class="card">
         <h3 style="font-family:var(--display);color:var(--cream)">📅 Reschedule Service</h3>

@@ -60,7 +60,7 @@ const pageSignup = `<section class="block">
           <input type="text" id="zip" name="zip" maxlength="10" value="{{.OldZip}}">
         </div>
         <button type="submit" style="min-height:48px;background:var(--orange);color:var(--ink);border:0;padding:0 1.6rem;font-family:var(--display);text-transform:uppercase;cursor:pointer">Sign Up</button>
-        <p style="color:var(--khaki);font-size:.8rem">Already have an account? <a href="/login" style="color:var(--orange)">Log in</a> (staff &amp; existing customers).</p>
+        <p style="color:var(--khaki);font-size:.8rem">Online accounts are coming soon. For now, call or message us and a real human will take care of you.</p>
       </form>
     </div>
   </div>
