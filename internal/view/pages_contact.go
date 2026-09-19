@@ -22,7 +22,7 @@ const pageContact = `<section class="block">
             <dt>WA · ID · OR</dt><dd><a href="tel:+15094715767" style="color:var(--orange)">(509) 471-5767</a></dd>
             <dt>Arizona</dt><dd><a href="tel:+16027558414" style="color:var(--orange)">(602) 755-8414</a></dd>
             <dt>Email</dt><dd><a href="mailto:info@patriotpest.pro" style="color:var(--orange)">info@patriotpest.pro</a></dd>
-            <dt>HQ</dt><dd>Spokane, WA 99201</dd>
+            <dt>HQ</dt><dd>Deer Park, WA 99006</dd>
             <dt>Hours</dt><dd>Mon–Fri 9a–5p · Sat–Sun 10a–4p · 24/7 line</dd>
           </dl>
         </div>

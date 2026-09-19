@@ -65,9 +65,9 @@ var ldBusiness = map[string]any{
 	"priceRange":  "$$",
 	"address": map[string]any{
 		"@type":           "PostalAddress",
-		"addressLocality": "Spokane",
+		"addressLocality": "Deer Park",
 		"addressRegion":   "WA",
-		"postalCode":      "99201",
+		"postalCode":      "99006",
 		"addressCountry":  "US",
 	},
 	"geo": map[string]any{"@type": "GeoCoordinates", "latitude": 47.6588, "longitude": -117.426},

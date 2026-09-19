@@ -218,7 +218,7 @@ const layoutHTML = `<!DOCTYPE html>
         <a href="{{.PhoneHref}}">{{.PhoneDisplay}} - {{.PhoneLabel}}</a>
         <a href="{{.OtherTel}}">{{.OtherDisplay}} - {{.OtherLabel}}</a>
         <a href="mailto:info@patriotpest.pro">info@patriotpest.pro</a>
-        <a href="/contact">Spokane, WA 99201, United States</a>
+        <a href="/contact">Deer Park, WA 99006, United States</a>
         <a href="/socials">Social Media</a>
       </div>
     </div>

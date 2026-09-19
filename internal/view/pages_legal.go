@@ -31,7 +31,7 @@ const pageLegal = `<section class="block">
       <h3>Your Choices</h3>
       <p>You may request access to, correction of, or deletion of your personal information by contacting us at <a href="mailto:info@patriotpest.pro">info@patriotpest.pro</a>.</p>
       <h3>Contact</h3>
-      <p>Questions about this policy? Contact Patriot Pest Control Co., Spokane, WA 99201, <a href="mailto:info@patriotpest.pro">info@patriotpest.pro</a>, (509) 471-5767.</p>
+      <p>Questions about this policy? Contact Patriot Pest Control Co., Deer Park, WA 99006, <a href="mailto:info@patriotpest.pro">info@patriotpest.pro</a>, (509) 471-5767.</p>
     </div>
     {{else}}
     <div class="prose" style="margin-top:1.6rem">
@@ -53,7 +53,7 @@ const pageLegal = `<section class="block">
       <h3>Changes</h3>
       <p>We may update these terms from time to time. Continued use of the site after changes constitutes acceptance of the revised terms.</p>
       <h3>Contact</h3>
-      <p>Questions? Contact Patriot Pest Control Co., Spokane, WA 99201, <a href="mailto:info@patriotpest.pro">info@patriotpest.pro</a>, (509) 471-5767.</p>
+      <p>Questions? Contact Patriot Pest Control Co., Deer Park, WA 99006, <a href="mailto:info@patriotpest.pro">info@patriotpest.pro</a>, (509) 471-5767.</p>
     </div>
     {{end}}
   </div>
