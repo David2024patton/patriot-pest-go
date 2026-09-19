@@ -7,7 +7,7 @@ const pageHome = `<!-- ============ HERO ============ -->
   <div id="xh-v"></div><div id="xh-h"></div><div id="xh-ring"></div>
   <div class="hud-top">
     <span>PATRIOT PEST CONTROL <span class="live">SYSTEMS ONLINE</span></span>
-    <span>47.6588° N / 117.4260° W - SPOKANE, WA</span>
+    <span>47.9544° N / 117.4768° W - DEER PARK, WA</span>
     <span id="hud-clock">--:--:--</span>
   </div>
   <div class="wrap hero-grid">
@@ -24,7 +24,7 @@ const pageHome = `<!-- ============ HERO ============ -->
     </div>
     <aside class="brief" aria-label="Mission brief"><div class="corner"></div>
       <h3>// Mission Brief</h3><div id="brief-lines"></div>
-      <div class="coords">GRID: SPOKANE HQ · EST. BY VETERAN SKYLER ROSE · 24/7 LINE OPEN</div>
+      <div class="coords">GRID: DEER PARK HQ · EST. BY VETERAN SKYLER ROSE · 24/7 LINE OPEN</div>
     </aside>
   </div>
   <div class="scroll-cue">Scroll to begin mission</div>

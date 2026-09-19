@@ -70,7 +70,7 @@ var ldBusiness = map[string]any{
 		"postalCode":      "99006",
 		"addressCountry":  "US",
 	},
-	"geo": map[string]any{"@type": "GeoCoordinates", "latitude": 47.6588, "longitude": -117.426},
+	"geo": map[string]any{"@type": "GeoCoordinates", "latitude": 47.9544, "longitude": -117.4768},
 	"areaServed": []any{
 		map[string]string{"@type": "State", "name": "Washington"},
 		map[string]string{"@type": "State", "name": "Idaho"},
