@@ -74,7 +74,7 @@ const pageContact = `<section class="block">
           <div class="field">
             <label for="message">How can we help?</label>
             <textarea id="message" name="message" required placeholder="Tell us about the pest, your location, and preferred timing…">{{.OldMessage}}</textarea>
-          </div>
+          </div>` + smsConsent + `
           <div class="form-actions">
             <button type="submit" class="btn btn-primary">Send Message ▸</button>
           </div>
