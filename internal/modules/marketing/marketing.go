@@ -55,7 +55,7 @@ var ldBusiness = map[string]any{
 	"@type":       []any{"LocalBusiness", "HomeAndConstructionBusiness"},
 	"@id":         "https://patriotpest.pro/#business",
 	"name":        "Patriot Pest Control",
-	"legalName":   "Patriot Pest Control LLC",
+	"legalName":   "Patriot Pest Control Co.",
 	"url":         "https://patriotpest.pro",
 	"telephone":   "+15094715767",
 	"email":       "info@patriotpest.pro",

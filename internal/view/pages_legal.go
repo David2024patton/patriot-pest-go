@@ -10,7 +10,7 @@ const pageLegal = `<section class="block">
 
     {{if eq .LegalKind "privacy"}}
     <div class="prose" style="margin-top:1.6rem">
-      <p>Patriot Pest Control LLC ("we," "us") respects your privacy. This policy explains what information we collect, how we use it, and your choices.</p>
+      <p>Patriot Pest Control Co. ("we," "us") respects your privacy. This policy explains what information we collect, how we use it, and your choices.</p>
       <h3>Information We Collect</h3>
       <p>We collect information you provide directly, such as your name, contact details, address, and service information, when you request a quote, schedule service, or create an account. We also collect limited technical data (like browser type and pages visited) to improve our site.</p>
       <h3>How We Use Information</h3>
@@ -31,7 +31,7 @@ const pageLegal = `<section class="block">
       <h3>Your Choices</h3>
       <p>You may request access to, correction of, or deletion of your personal information by contacting us at <a href="mailto:info@patriotpest.pro">info@patriotpest.pro</a>.</p>
       <h3>Contact</h3>
-      <p>Questions about this policy? Contact Patriot Pest Control LLC, Spokane, WA 99201, <a href="mailto:info@patriotpest.pro">info@patriotpest.pro</a>, (509) 471-5767.</p>
+      <p>Questions about this policy? Contact Patriot Pest Control Co., Spokane, WA 99201, <a href="mailto:info@patriotpest.pro">info@patriotpest.pro</a>, (509) 471-5767.</p>
     </div>
     {{else}}
     <div class="prose" style="margin-top:1.6rem">
@@ -41,7 +41,7 @@ const pageLegal = `<section class="block">
       <h3>Electronic Communications</h3>
       <p>By providing your phone number through our website, you consent to receive text messages from Patriot Pest Control Co. related to your service. You may opt out at any time by replying STOP. Message and data rates may apply.</p>
       <h3>Content</h3>
-      <p>The content on this site, including text, graphics, logos, and images, is the property of Patriot Pest Control LLC or its licensors and is protected by applicable law. You may not reproduce or distribute it without permission.</p>
+      <p>The content on this site, including text, graphics, logos, and images, is the property of Patriot Pest Control Co. or its licensors and is protected by applicable law. You may not reproduce or distribute it without permission.</p>
       <h3>Service Quotes &amp; Estimates</h3>
       <p>Quotes provided through this site are estimates. Final pricing depends on an assessment of your specific situation, including property size, pest type, and severity.</p>
       <h3>Warranty</h3>
@@ -49,11 +49,11 @@ const pageLegal = `<section class="block">
       <h3>Disclaimer</h3>
       <p>This site is provided "as is" without warranties of any kind. We do not guarantee that the site will be uninterrupted or error-free.</p>
       <h3>Limitation of Liability</h3>
-      <p>To the fullest extent permitted by law, Patriot Pest Control LLC is not liable for indirect or consequential damages arising from your use of this site.</p>
+      <p>To the fullest extent permitted by law, Patriot Pest Control Co. is not liable for indirect or consequential damages arising from your use of this site.</p>
       <h3>Changes</h3>
       <p>We may update these terms from time to time. Continued use of the site after changes constitutes acceptance of the revised terms.</p>
       <h3>Contact</h3>
-      <p>Questions? Contact Patriot Pest Control LLC, Spokane, WA 99201, <a href="mailto:info@patriotpest.pro">info@patriotpest.pro</a>, (509) 471-5767.</p>
+      <p>Questions? Contact Patriot Pest Control Co., Spokane, WA 99201, <a href="mailto:info@patriotpest.pro">info@patriotpest.pro</a>, (509) 471-5767.</p>
     </div>
     {{end}}
   </div>
