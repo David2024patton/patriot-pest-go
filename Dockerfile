@@ -1,7 +1,14 @@
 # Build: docker build -f Dockerfile -t patriot-pest-go .
 # Production image for patriotpest.pro. The SQLite database is NOT baked in —
 # it is bind-mounted at runtime onto /app/database/patriot.db.
-FROM golang:1.26-alpine AS build
+#
+# The patch version is pinned on purpose. The build below sets
+# GOTOOLCHAIN=local, so the container will not fetch a newer toolchain: it uses
+# the one in the image and fails outright if that is older than the go directive
+# in go.mod ("go.mod requires go >= 1.27.1 (running go 1.26.0)"). The floating
+# golang:1.27-alpine tag would normally be fine, but it can lag a patch release
+# and turn a routine deploy into a failed build.
+FROM golang:1.27.1-alpine AS build
 WORKDIR /src
 COPY go.mod go.sum ./
 RUN go mod download
