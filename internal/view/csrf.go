@@ -9,20 +9,28 @@ import (
 	"encoding/hex"
 	"html/template"
 	"net/http"
+	"regexp"
 )
 
-// CSRFCookieName is shared with internal/auth's web flow.
+// CSRFCookieName is the double-submit cookie for the marketing forms. It is
+// also read by internal/modules/marketing, which issues the same 64-character
+// hex token, so both writers and this reader agree on the shape.
 const CSRFCookieName = "_csrf"
 
-// CSRFField renders the hidden input and sets the cookie when absent or short.
-// Fail-closed: if the RNG fails the request gets a 500, never a guessable token.
+// csrfTokenRe is the shape this package and the marketing module issue: 32
+// random bytes, hex encoded. A cookie that does not match is replaced rather
+// than rendered, so a value planted by a sibling subdomain or an XSS foothold
+// cannot reach the attribute below.
+var csrfTokenRe = regexp.MustCompile(`^[0-9a-f]{64}$`)
+
+// CSRFField renders the hidden input, issuing a token when the cookie is
+// missing or is not one we could have issued. Fail-closed: if the RNG fails the
+// request gets a 500, never a guessable token.
 func CSRFField(w http.ResponseWriter, r *http.Request) template.HTML {
-	ck, err := r.Cookie(CSRFCookieName)
 	tok := ""
-	if err == nil {
+	if ck, err := r.Cookie(CSRFCookieName); err == nil && csrfTokenRe.MatchString(ck.Value) {
 		tok = ck.Value
-	}
-	if len(tok) < 32 {
+	} else {
 		b := make([]byte, 32)
 		if _, err := rand.Read(b); err != nil {
 			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
@@ -31,7 +39,9 @@ func CSRFField(w http.ResponseWriter, r *http.Request) template.HTML {
 		tok = hex.EncodeToString(b)
 		http.SetCookie(w, csrfCookie(CSRFCookieName, tok, r))
 	}
-	return template.HTML(`<input type="hidden" name="_csrf" value="` + tok + `">`)
+	// Escaped as well as validated: the token is hex, but the attribute is
+	// written as template.HTML, which turns escaping off entirely.
+	return template.HTML(`<input type="hidden" name="_csrf" value="` + template.HTMLEscapeString(tok) + `">`)
 }
 
 // csrfCookie builds the double-submit cookie: HttpOnly so JS cannot read it,
