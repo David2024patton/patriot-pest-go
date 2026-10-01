@@ -81,7 +81,7 @@ const pagePest = `<!-- ===== THREAT FILE HEADER ===== -->
           <div class="bar"><div class="fill" data-lvl="{{.Pest.ThreatLevel}}"></div></div>
         </div>
         <div class="hero-ctas" style="margin-top:1.6rem">
-          <a class="btn btn-primary" href="tel:+15094715767">☎ Get a Free Quote</a>
+          <a class="btn btn-primary" href="tel:+15098180993">☎ Get a Free Quote</a>
           <a class="btn btn-ghost" href="/contact">Book Service ▸</a>
         </div>
       </div>
@@ -144,7 +144,7 @@ const pagePest = `<!-- ===== THREAT FILE HEADER ===== -->
     <h2 style="font-family:var(--display);color:var(--cream);margin:.4rem 0 1rem">Seeing {{lower .Pest.Name}}? <em>Let's end it.</em></h2>
     <p class="lead">Same-day service available. Free quotes, transparent pricing, 90-day warranty.</p>
     <div class="hero-ctas" style="justify-content:center;margin-top:1.4rem">
-      <a class="btn btn-primary" href="tel:+15094715767">☎ (509) 471-5767 <small>WA, ID, OR</small></a>
+      <a class="btn btn-primary" href="tel:+15098180993">☎ (509) 818-0993 <small>WA, ID, OR</small></a>
       <a class="btn btn-ghost" href="tel:+16027558414">☎ (602) 755-8414 <small>ARIZONA</small></a>
     </div>
   </div>

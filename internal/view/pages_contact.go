@@ -19,7 +19,7 @@ const pageContact = `<section class="block">
         <div class="panel">
           <h3 style="font-family:var(--display);color:var(--cream)">Direct Lines</h3>
           <dl class="kv" style="margin-top:.8rem">
-            <dt>WA · ID · OR</dt><dd><a href="tel:+15094715767" style="color:var(--orange)">(509) 471-5767</a></dd>
+            <dt>WA · ID · OR</dt><dd><a href="tel:+15098180993" style="color:var(--orange)">(509) 818-0993</a></dd>
             <dt>Arizona</dt><dd><a href="tel:+16027558414" style="color:var(--orange)">(602) 755-8414</a></dd>
             <dt>Email</dt><dd><a href="mailto:info@patriotpest.pro" style="color:var(--orange)">info@patriotpest.pro</a></dd>
             <dt>HQ</dt><dd>Deer Park, WA 99006</dd>

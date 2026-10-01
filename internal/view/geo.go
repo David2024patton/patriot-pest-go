@@ -15,7 +15,7 @@ type regionLine struct {
 }
 
 var regions = map[string]regionLine{
-	"wa": {"(509) 471-5767", "+15094715767", "WA, ID, OR"},
+	"wa": {"(509) 818-0993", "+15098180993", "WA, ID, OR"},
 	"az": {"(602) 755-8414", "+16027558414", "ARIZONA"},
 }
 

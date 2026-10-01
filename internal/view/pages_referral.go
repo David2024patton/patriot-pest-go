@@ -24,7 +24,7 @@ const pageReferral = `<section class="block">
   <div class="wrap" style="text-align:center">
     <h2 style="font-family:var(--display);color:var(--cream)">Ready to <em>refer?</em></h2>
     <div class="hero-ctas" style="justify-content:center;margin-top:1.2rem">
-      <a class="btn btn-primary" href="tel:+15094715767">☎ Call to Refer</a>
+      <a class="btn btn-primary" href="tel:+15098180993">☎ Call to Refer</a>
       <a class="btn btn-ghost" href="/contact">Contact Us ▸</a>
     </div>
   </div>

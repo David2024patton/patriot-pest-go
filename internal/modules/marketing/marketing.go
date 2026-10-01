@@ -57,7 +57,7 @@ var ldBusiness = map[string]any{
 	"name":        "Patriot Pest Control",
 	"legalName":   "Patriot Pest Control Co.",
 	"url":         "https://www.patriotpest.pro",
-	"telephone":   "+15094715767",
+	"telephone":   "+15098180993",
 	"email":       "info@patriotpest.pro",
 	"image":       "https://www.patriotpest.pro/assets/img/og.png",
 	"logo":        "https://www.patriotpest.pro/assets/img/og.png",
@@ -305,7 +305,7 @@ const (
 	faqsT     = "Pest Control FAQs | Patriot Pest Control"
 	faqsD     = "Answers to common pest control questions: safety, pricing, guarantees, preparation, and what to expect."
 	contactT  = "Free Pest Control Quotes | Patriot Pest Control"
-	contactD  = "Call (509) 471-5767 (WA/ID/OR) or (602) 755-8414 (AZ). Free quotes, same-day pest control service, 24/7 line."
+	contactD  = "Call (509) 818-0993 (WA/ID/OR) or (602) 755-8414 (AZ). Free quotes, same-day pest control service, 24/7 line."
 	referralT = "Referral Program - Earn $25 | Patriot Pest Control"
 	referralD = "Refer a neighbor, both get $25. Patriot Pest Control referral program."
 	socialsT  = "Social Media | Patriot Pest Control"
@@ -453,7 +453,7 @@ func (m *Module) llms(w http.ResponseWriter, r *http.Request) {
 		sb.WriteString("- " + st.Name + " (" + st.Code + "): " + strings.Join(st.Cities, ", ") + "\n")
 	}
 	sb.WriteString("\n## Contact\n\n")
-	sb.WriteString("- WA/ID/OR: (509) 471-5767\n- AZ: (602) 755-8414\n- Email: info@patriotpest.pro\n- Contact form: " + base + "/contact\n\n")
+	sb.WriteString("- WA/ID/OR: (509) 818-0993\n- AZ: (602) 755-8414\n- Email: info@patriotpest.pro\n- Contact form: " + base + "/contact\n\n")
 	sb.WriteString("## Services\n\n")
 	for _, pest := range data.AllPests() {
 		sb.WriteString("- " + pest.Name + ": " + base + "/pest/" + pest.Slug + "\n")

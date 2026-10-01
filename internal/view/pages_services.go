@@ -28,7 +28,7 @@ const pageServices = `<section class="block">
     <h2 style="font-family:var(--display);color:var(--cream)">Don't see your pest? <em>Call us anyway.</em></h2>
     <p class="lead">If it invades, we handle it. Free quotes, same-day service available.</p>
     <div class="hero-ctas" style="justify-content:center;margin-top:1.2rem">
-      <a class="btn btn-primary" href="tel:+15094715767">☎ (509) 471-5767</a>
+      <a class="btn btn-primary" href="tel:+15098180993">☎ (509) 818-0993</a>
       <a class="btn btn-ghost" href="/contact">Request Service ▸</a>
     </div>
   </div>
@@ -86,7 +86,7 @@ const pageAbout = `<section class="block">
   <div class="wrap" style="text-align:center">
     <h2 style="font-family:var(--display);color:var(--cream)">Join the families who <em>trust Patriot.</em></h2>
     <div class="hero-ctas" style="justify-content:center;margin-top:1.2rem">
-      <a class="btn btn-primary" href="tel:+15094715767">☎ (509) 471-5767</a>
+      <a class="btn btn-primary" href="tel:+15098180993">☎ (509) 818-0993</a>
       <a class="btn btn-ghost" href="/contact">Get a Free Quote ▸</a>
     </div>
   </div>
