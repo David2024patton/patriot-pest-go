@@ -96,7 +96,7 @@ const pagePest = `<!-- ===== THREAT FILE HEADER ===== -->
 <section class="block alt">
   <div class="wrap">
     <div class="grid g3">
-      {{with pestcopy .Pest.Category}}
+      {{with pestcopy2 .Pest.Slug .Pest.Category}}
       <div class="card">
         <h3 style="font-family:var(--display);color:var(--cream)">⚠ Signs of Activity</h3>
         <ul style="margin:.6rem 0 0 1.1rem;color:var(--khaki);line-height:1.7">

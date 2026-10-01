@@ -91,6 +91,8 @@ var funcMap = template.FuncMap{
 	"pestimg":  func(f string) string { return "/assets/img/pests/" + f },
 	// Category-specific copy for the pest threat file (see pages_pest.go).
 	"pestcopy": PestCopyFor,
+	// Slug-specific copy (audit F5/F6); falls back to the category copy.
+	"pestcopy2": pestCopyForSlug,
 }
 
 func parseDate(s string) time.Time {

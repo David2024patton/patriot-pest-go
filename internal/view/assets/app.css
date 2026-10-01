@@ -391,3 +391,27 @@ body.appshell-body .code-block pre { font-family: var(--mono); font-size: .78rem
 body.appshell-body .media-preview { max-width: 320px; border: 1px solid var(--shell-line); display: block; }
 body.appshell-body .error-message { color: #8a2c1c; font-size: .85rem; margin-top: .4rem; }
 body.appshell-body .inline-form { display: inline-flex; align-items: center; gap: .6rem; }
+
+/* ==========================================================================
+   Keystone audit remediation (2026-10-01).
+   Small-text legibility and WCAG AA contrast fixes for the marketing site.
+   These rules are intentionally UNSCOPED: they target the marketing
+   components from styles.css and win by loading after it.
+   ========================================================================== */
+
+/* Testimonial report IDs: 8.96px -> 12px, muted olive -> dark olive for AA */
+.report .rid{font-size:.75rem;color:#4f4836}
+/* Testimonial attribution line: 9.28px -> 12px, muted olive -> dark olive */
+.report .who span{font-size:.75rem;color:#4f4836}
+/* Personnel-file labels: 9.6px -> 12px, muted olive -> dark olive for AA */
+.drow dt{font-size:.75rem;color:#4f4836}
+/* Dossier file header: 9.28px -> 12px, muted olive -> dark olive */
+.dossier-file .form-id{font-size:.75rem;color:#4f4836}
+/* Paper-section form labels: muted olive 3.78:1 -> dark olive 7.15:1 */
+.paper .field label{color:#4f4836}
+/* Paper-section form notes: 2.48:1 -> 7.15:1 */
+.paper .form-note{color:#4f4836}
+/* Paper-section eyebrows and report stamps: red 3.92:1 -> dark red 5.47:1 */
+.block.paper .eyebrow{color:#a52f1e}
+.block.paper .eyebrow::before{background:#a52f1e}
+.report .declass{color:#a52f1e;border-color:#a52f1e}

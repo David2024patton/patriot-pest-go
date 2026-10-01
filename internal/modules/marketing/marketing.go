@@ -109,6 +109,9 @@ func (m *Module) Register(r chi.Router) bool {
 	r.With(postLimiter.Middleware).Post("/signup", m.signupPost)
 	r.Get("/pest/{slug}", m.pest)
 	r.Get("/areas/{slug}", m.area)
+	// /areas and /areas/ are 404 (audit F7); the canonical list is /service-areas.
+	r.Get("/areas", redirectPermanent("/service-areas"))
+	r.Get("/areas/", redirectPermanent("/service-areas"))
 	r.Get("/blogs", m.blogIndex)
 	r.Get("/blogs/rss.xml", m.rss)
 	r.Get("/blog/rss.xml", m.rss)
@@ -503,7 +506,13 @@ func (m *Module) pest(w http.ResponseWriter, r *http.Request) {
 		view.NotFound(w)
 		return
 	}
-	title := fmt.Sprintf("%s Control Across 4 States | Patriot Pest Control", pest.Name)
+	// Remediation overrides: region-accurate species name + unique per-pest
+	// copy, replacing the DB text on pages the audit flagged (F5/F6).
+	if o, ok := view.PestOverrideForSlug(pest.Slug); ok {
+		pest.ScientificName = o.ScientificName
+		pest.Description = o.Description
+	}
+	title := fmt.Sprintf("%s Control | Patriot Pest Control", pest.Name)
 	desc := pest.Description
 	if desc == "" {
 		desc = "Professional " + pest.Name + " control"
@@ -526,6 +535,9 @@ func (m *Module) area(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	line := view.LineFor(code)
+	// Local briefing content per city (audit F7); absent only where the city
+	// slug has no authored override.
+	areaCopy, hasAreaCopy := view.AreaCopyFor(slug)
 	title := fmt.Sprintf("Pest Control in %s, %s | Patriot Pest Control", city, code)
 	desc := fmt.Sprintf("Same-day pest control in %s, %s. Eco-friendly treatments, 90-day warranty, veteran-owned.", city, stateName)
 	view.Page(w, r, "area-detail", title, desc, metaKeywords, m.base(map[string]any{
@@ -536,6 +548,8 @@ func (m *Module) area(w http.ResponseWriter, r *http.Request) {
 		// template.URL bypasses Go 1.26's href scheme filter (tel: would
 		// otherwise be defanged to #ZgotmplZ).
 		"AreaPhoneHref": template.URL("tel:" + line.Tel),
+		"AreaCopy":      areaCopy,
+		"HasAreaCopy":   hasAreaCopy,
 	}))
 }
 
@@ -554,6 +568,8 @@ func (m *Module) blogPost(w http.ResponseWriter, r *http.Request) {
 		view.NotFound(w)
 		return
 	}
+	// Expanded long-form copy (audit: posts were 55-131 words).
+	applyPostBodyOverride(&post)
 	title := fmt.Sprintf("%s | Patriot Pest Control Blog", post.Title)
 	view.Page(w, r, "blog-post", title, post.Excerpt, metaKeywords, m.base(map[string]any{
 		"Post":    post,

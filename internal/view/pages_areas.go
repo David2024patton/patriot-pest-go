@@ -54,6 +54,16 @@ const pageAreaDetail = `<section class="block">
   </div>
 </section>
 
+{{if .HasAreaCopy}}<section class="block alt">
+  <div class="wrap">
+    <div class="eyebrow">{{upper .CityStateCode}} LOCAL BRIEFING</div>
+    <h2 style="font-family:var(--display);color:var(--cream);font-size:clamp(1.4rem,4vw,2rem);margin:.4rem 0 .8rem">About pest control in {{.CityName}}</h2>
+    <p class="lead">{{.AreaCopy.Intro}}</p>
+    <p style="color:var(--khaki);line-height:1.7">{{.AreaCopy.LocalNote}}</p>
+    <p style="color:var(--khaki);line-height:1.7">{{.AreaCopy.PestNote}}</p>
+  </div>
+</section>{{end}}
+
 <section class="block alt">
   <div class="wrap">
     <div class="grid g3">

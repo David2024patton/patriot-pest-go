@@ -1,6 +1,6 @@
 package view
 
-// pageHome — templates/pages/home.php. Threat board is DB-driven: it renders
+// pageHome renders templates/pages/home.php. Threat board is DB-driven: it renders
 // every pest in the photo library ({{.Pests}}), each with its real photo.
 const pageHome = `<!-- ============ HERO ============ -->
 <section id="hero">
@@ -70,7 +70,7 @@ const pageHome = `<!-- ============ HERO ============ -->
         <dl>
           <div class="drow"><dt>Name</dt><dd>SKYLER ROSE</dd></div>
           <div class="drow"><dt>Role</dt><dd>FOUNDER &amp; OPERATOR</dd></div>
-          <div class="drow"><dt>Service</dt><dd>U.S. MILITARY VETERAN <span class="redact">██████</span></dd></div>
+          <div class="drow"><dt>Service</dt><dd>U.S. MILITARY VETERAN</dd></div>
           <div class="drow"><dt>Theater</dt><dd>WA · ID · OR · AZ</dd></div>
           <div class="drow"><dt>Clearance</dt><dd>LICENSED · BONDED · INSURED</dd></div>
           <div class="drow"><dt>Status</dt><dd>ACTIVE - SAME-DAY RESPONSE</dd></div>
@@ -132,11 +132,10 @@ const pageHome = `<!-- ============ HERO ============ -->
     <h2 data-reveal>We stand behind <em>every mission.</em></h2>
     <div class="stat-grid">
       <div class="stat" data-reveal><span class="num" data-count="100">0</span><span class="unit">%</span><span class="cap">SATISFACTION GUARANTEED</span></div>
-      <div class="stat" data-reveal><span class="num" data-count="90">0</span><span class="unit">-DAY</span><span class="cap">WARRANTY ON ALL TREATMENTS</span></div>
+      <div class="stat" data-reveal><span class="num" data-count="90">90</span><span class="unit">-DAY</span><span class="cap">WARRANTY ON ALL TREATMENTS</span></div>
       <div class="stat" data-reveal><span class="num">24/7</span><span class="cap">CUSTOMER SERVICE LINE</span></div>
-      <div class="stat" data-reveal><span class="num" data-count="4">0</span><span class="unit"> STATES</span><span class="cap">WA · ID · OR · AZ</span></div>
-      <div class="stat" data-reveal><span class="num" data-count="10">0</span><span class="unit">+</span><span class="cap">YEARS OF EXPERIENCE</span></div>
-      <div class="stat" data-reveal><span class="num" data-count="48">0</span><span class="unit">-48H</span><span class="cap">EMERGENCY RESPONSE WINDOW</span></div>
+      <div class="stat" data-reveal><span class="num" data-count="4">4</span><span class="unit"> STATES</span><span class="cap">WA · ID · OR · AZ</span></div>
+      <div class="stat" data-reveal><span class="num" data-count="10">10</span><span class="unit">+</span><span class="cap">YEARS OF EXPERIENCE</span></div>
     </div>
     <div class="promise" data-reveal><b>🛡️ Our promise:</b> if pests return between scheduled visits, we re-treat at no additional cost. No hassles, no excuses. Licensed, bonded, and insured, with eco-friendly, low-toxicity products safe for kids, pets, and the environment.</div>
   </div>
