@@ -189,6 +189,34 @@ func AllPests() []Pest { mu.RLock(); defer mu.RUnlock(); return load.Pests }
 // AllPosts returns published posts newest first.
 func AllPosts() []Post { mu.RLock(); defer mu.RUnlock(); return load.Posts }
 
+// IsDraftPost reports whether a post is a test/draft entry. Drafts use a
+// "test-" slug prefix and are hidden from the blog index, sitemap, RSS, and
+// direct URLs (they 404) so test content never leaks to search engines.
+func IsDraftPost(p Post) bool { return strings.HasPrefix(p.Slug, "test-") }
+
+// PublishedPosts returns posts excluding drafts, newest first.
+func PublishedPosts() []Post {
+	mu.RLock()
+	defer mu.RUnlock()
+	var out []Post
+	for _, p := range load.Posts {
+		if !IsDraftPost(p) {
+			out = append(out, p)
+		}
+	}
+	return out
+}
+
+// PublishedPostBySlug returns the post with a slug, or ok=false when the
+// slug is unknown or belongs to a draft.
+func PublishedPostBySlug(slug string) (Post, bool) {
+	p, ok := PostBySlug(slug)
+	if !ok || IsDraftPost(p) {
+		return Post{}, false
+	}
+	return p, true
+}
+
 // PestBySlug returns the pest with a slug, or ok=false.
 func PestBySlug(slug string) (Pest, bool) { mu.RLock(); defer mu.RUnlock(); p, ok := load.pestBySlug[slug]; return p, ok }
 

@@ -45,7 +45,14 @@ var funcMap = template.FuncMap{
 		}
 		return s[:4] + "••••••" + s[len(s)-4:]
 	},
-	"jld":  func(v any) template.HTML { b, _ := json.Marshal(v); return template.HTML(string(b)) },
+	// jld marshals a value to JSON-LD for a <script type="application/ld+json">
+	// block. It must return template.JS, not template.HTML: html/template
+	// treats script element contents as a JS context and re-escapes
+	// template.HTML values into quoted JS strings (double-encoded JSON that
+	// schema parsers cannot read). encoding/json already escapes <, >, and &
+	// as unicode sequences, so a literal </script> in the data cannot break
+	// out of the block.
+	"jld":  func(v any) template.JS { b, _ := json.Marshal(v); return template.JS(string(b)) },
 	"json": func(v any) template.HTML { b, _ := json.Marshal(v); return template.HTML(string(b)) },
 	// date formats for published_at / created strings
 	"dateMD": func(s string) string {
@@ -188,7 +195,7 @@ const layoutHTML = `<!DOCTYPE html>
   </span>
   <a href="javascript:history.forward()" aria-label="Forward">
     <svg width="22" height="22" viewBox="0 0 16 16" fill="currentColor"><path d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>
-    <span class="label">Next</span>
+    <span class="label">Forward</span>
   </a>
 </nav>
 <div class="mobile-nav-spacer"></div>
@@ -425,7 +432,7 @@ func withBase(r *http.Request, page, title, description, keywords string) map[st
 		"Keywords":     keywords,
 		"Robots":       "index, follow, max-snippet:-1",
 		"Canonical":    canonical(r),
-		"OGImage":      "https://go.patriotpest.pro/assets/img/og.png",
+		"OGImage":      "https://www.patriotpest.pro/assets/img/og.png",
 		"JSONLD":       []any{},
 		// tel: links are wrapped in template.URL so Go 1.26's context-aware
 		// href filter (http/https/mailto only) passes them through untouched.

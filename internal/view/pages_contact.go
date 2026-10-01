@@ -59,16 +59,16 @@ const pageContact = `<section class="block">
           {{raw .Csrf}}
           <div class="field">
             <label for="name">Name</label>
-            <input type="text" id="name" name="name" required value="{{.OldName}}">
+            <input type="text" id="name" name="name" required autocomplete="name" value="{{.OldName}}">
           </div>
           <div class="form-row">
             <div class="field">
               <label for="email">Email</label>
-              <input type="email" id="email" name="email" required value="{{.OldEmail}}">
+              <input type="email" id="email" name="email" required autocomplete="email" value="{{.OldEmail}}">
             </div>
             <div class="field">
               <label for="phone">Phone</label>
-              <input type="tel" id="phone" name="phone" value="{{.OldPhone}}">
+              <input type="tel" id="phone" name="phone" autocomplete="tel" value="{{.OldPhone}}">
             </div>
           </div>
           <div class="field">

@@ -22,7 +22,7 @@ const pageHelp = `<section class="block">
       </div>
       <div class="card">
         <h3 style="font-family:var(--display);color:var(--cream)">📅 Reschedule Service</h3>
-        <p style="color:var(--khaki);line-height:1.7;margin:.5rem 0">Need to move an appointment? Call the line or message us from your dashboard and we'll adjust fast.</p>
+        <p style="color:var(--khaki);line-height:1.7;margin:.5rem 0">Need to move an appointment? Call the line above or send us a message through the contact form and we'll adjust fast.</p>
       </div>
       <div class="card">
         <h3 style="font-family:var(--display);color:var(--cream)">♿ Accessibility</h3>

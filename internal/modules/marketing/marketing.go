@@ -53,14 +53,14 @@ const metaKeywords = "pest control, Spokane, Washington, Idaho, Oregon, Arizona,
 var ldBusiness = map[string]any{
 	"@context":    "https://schema.org",
 	"@type":       []any{"LocalBusiness", "HomeAndConstructionBusiness"},
-	"@id":         "https://patriotpest.pro/#business",
+	"@id":         "https://www.patriotpest.pro/#business",
 	"name":        "Patriot Pest Control",
 	"legalName":   "Patriot Pest Control Co.",
-	"url":         "https://patriotpest.pro",
+	"url":         "https://www.patriotpest.pro",
 	"telephone":   "+15094715767",
 	"email":       "info@patriotpest.pro",
-	"image":       "https://patriotpest.pro/assets/img/og.png",
-	"logo":        "https://patriotpest.pro/assets/img/og.png",
+	"image":       "https://www.patriotpest.pro/assets/img/og.png",
+	"logo":        "https://www.patriotpest.pro/assets/img/og.png",
 	"description": "Veteran-owned pest control serving Washington, Idaho, Oregon & Arizona. Same-day service, eco-friendly family & pet safe treatments, 90-day warranty.",
 	"priceRange":  "$$",
 	"address": map[string]any{
@@ -125,6 +125,10 @@ func (m *Module) Register(r chi.Router) bool {
 	r.Get("/llms.txt", m.llms)
 	r.Get("/privacy-policy", m.privacy)
 	r.Get("/terms-of-use", m.terms)
+	// Short-URL aliases: the carrier SMS consent and older links point at
+	// /privacy and /terms. Keep one canonical URL per page (301).
+	r.Get("/privacy", redirectPermanent("/privacy-policy"))
+	r.Get("/terms", redirectPermanent("/terms-of-use"))
 	// FR-031 PWA — real manifest + service worker (legacy JSON stubs shadowed).
 	r.Get("/manifest.webmanifest", m.manifest)
 	r.Get("/sw.js", m.serviceWorker)
@@ -288,19 +292,19 @@ func (m *Module) serviceWorker(w http.ResponseWriter, _ *http.Request) {
 // ---- Per-page SEO meta, mirrored from PageController::meta() call sites. ----
 
 const (
-	homeT     = "Pest Control in Washington, Idaho, Oregon & Arizona | Patriot Pest Control"
-	homeD     = "Veteran-owned pest control across WA, ID, OR & AZ. Same-day service, eco-friendly family & pet safe treatments, 90-day warranty. Ants, spiders, rodents, bed bugs, termites & more."
+	homeT     = "Pest Control WA, ID, OR & AZ | Patriot Pest Control"
+	homeD     = "Veteran-owned pest control across WA, ID, OR & AZ. Same-day service, eco-friendly family & pet safe treatments, 90-day warranty."
 	aboutT    = "About Us - Veteran-Owned | Patriot Pest Control"
 	aboutD    = "Founded by U.S. Military Veteran Skyler Rose. Military discipline, integrity, and eco-friendly pest control across Washington, Idaho, Oregon & Arizona."
-	servicesT = "Pest Control Services - Every Pest We Treat | Patriot Pest Control"
+	servicesT = "Pest Control Services | Patriot Pest Control"
 	servicesD = "Complete pest control: ants, spiders, rodents, bed bugs, termites, mosquitoes, wasps, roaches, scorpions, wildlife & more across WA, ID, OR, AZ."
-	pricesT   = "Pricing & Plans - Transparent Online Pricing | Patriot Pest Control"
+	pricesT   = "Pest Control Pricing & Plans | Patriot Pest Control"
 	pricesD   = "Transparent pest control pricing. Exterior-Only, Interior + Exterior, Priority, and Full Coverage plans. Free quotes, no hidden fees, 90-day warranty."
 	areasT    = "Service Areas - WA, ID, OR & AZ | Patriot Pest Control"
 	areasD    = "Pest control service areas across Spokane WA, Coeur d'Alene ID, Hermiston OR, Phoenix AZ and surrounding communities."
 	faqsT     = "Pest Control FAQs | Patriot Pest Control"
 	faqsD     = "Answers to common pest control questions: safety, pricing, guarantees, preparation, and what to expect."
-	contactT  = "Contact Us - Free Quotes & Same-Day Service | Patriot Pest Control"
+	contactT  = "Free Pest Control Quotes | Patriot Pest Control"
 	contactD  = "Call (509) 471-5767 (WA/ID/OR) or (602) 755-8414 (AZ). Free quotes, same-day pest control service, 24/7 line."
 	referralT = "Referral Program - Earn $25 | Patriot Pest Control"
 	referralD = "Refer a neighbor, both get $25. Patriot Pest Control referral program."
@@ -316,9 +320,16 @@ const (
 	privacyD  = "How Patriot Pest Control collects, uses, and protects your information."
 	termsT    = "Terms of Use | Patriot Pest Control"
 	termsD    = "Terms of use for the Patriot Pest Control website and services."
-	blogT     = "Pest Control Blog & Tips - Seasonal Guides | Patriot Pest Control"
+	blogT     = "Pest Control Blog & Tips | Patriot Pest Control"
 	blogD     = "Expert pest control tips, seasonal guides, and identification help for WA, ID, OR, AZ. Written by licensed technicians."
 )
+
+// redirectPermanent issues a 301 to a fixed path (canonical URL aliases).
+func redirectPermanent(to string) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, to, http.StatusMovedPermanently)
+	}
+}
 
 // page renders a static marketing page (no extra data beyond SEO + JSON-LD).
 func (m *Module) page(pageName, title, description string, extra map[string]any) http.HandlerFunc {
@@ -398,7 +409,7 @@ func (m *Module) sitemapXML(w http.ResponseWriter, r *http.Request) {
 			add("/areas/"+data.CitySlug(city), "monthly", "0.7")
 		}
 	}
-	for _, post := range data.AllPosts() {
+	for _, post := range data.PublishedPosts() {
 		add("/blogs/"+post.Slug, "monthly", "0.6")
 	}
 	out := struct {
@@ -528,17 +539,17 @@ func (m *Module) area(w http.ResponseWriter, r *http.Request) {
 	}))
 }
 
-// blogIndex — all published posts, newest first.
+// blogIndex — published posts only (drafts excluded), newest first.
 func (m *Module) blogIndex(w http.ResponseWriter, r *http.Request) {
 	view.Page(w, r, "blog-index", blogT, blogD, metaKeywords, m.base(map[string]any{
-		"Posts": data.AllPosts(),
+		"Posts": data.PublishedPosts(),
 		"Crumb": [][2]string{{"Home", "/"}, {"Blog", "/blogs"}},
 	}))
 }
 
-// blogPost — a single post through the unified template.
+// blogPost — a single post through the unified template. Drafts 404.
 func (m *Module) blogPost(w http.ResponseWriter, r *http.Request) {
-	post, ok := data.PostBySlug(chi.URLParam(r, "slug"))
+	post, ok := data.PublishedPostBySlug(chi.URLParam(r, "slug"))
 	if !ok {
 		view.NotFound(w)
 		return
@@ -560,7 +571,7 @@ func ldService(p data.Pest) map[string]any {
 		"name":        p.Name + " Control",
 		"serviceType": p.Name + " Control",
 		"description": p.Description,
-		"provider":    map[string]any{"@id": "https://patriotpest.pro/#business"},
+		"provider":    map[string]any{"@id": "https://www.patriotpest.pro/#business"},
 		"areaServed": []any{
 			map[string]string{"@type": "State", "name": "Washington"},
 			map[string]string{"@type": "State", "name": "Idaho"},
@@ -579,10 +590,10 @@ func ldArticle(p data.Post) map[string]any {
 		"headline":         p.Title,
 		"description":      p.Excerpt,
 		"author":           map[string]any{"@type": "Organization", "name": "Patriot Pest Control"},
-		"publisher":        map[string]any{"@id": "https://patriotpest.pro/#business"},
+		"publisher":        map[string]any{"@id": "https://www.patriotpest.pro/#business"},
 		"datePublished":    p.PublishedAt,
 		"dateModified":     p.PublishedAt,
-		"mainEntityOfPage": "https://patriotpest.pro/blogs/" + p.Slug,
+		"mainEntityOfPage": "https://www.patriotpest.pro/blogs/" + p.Slug,
 	}
 }
 
@@ -611,7 +622,7 @@ func relatedPests(p data.Pest) []data.Pest {
 // relatedPosts — same season or pest category, newest first, max 3.
 func relatedPosts(p data.Post) []data.Post {
 	var out []data.Post
-	for _, q := range data.AllPosts() { // catalog order is published_at DESC
+	for _, q := range data.PublishedPosts() { // catalog order is published_at DESC
 		if q.Slug == p.Slug {
 			continue
 		}
@@ -650,7 +661,7 @@ func (m *Module) rss(w http.ResponseWriter, r *http.Request) {
 		base = strings.TrimRight(v, "/")
 	}
 	var items []rssItem
-	for _, p := range data.AllPosts() {
+	for _, p := range data.PublishedPosts() {
 		items = append(items, rssItem{
 			Title:       p.Title,
 			Link:        base + "/blogs/" + p.Slug,

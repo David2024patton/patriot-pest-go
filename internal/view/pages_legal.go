@@ -12,16 +12,16 @@ const pageLegal = `<section class="block">
     <div class="prose" style="margin-top:1.6rem">
       <p>Patriot Pest Control Co. ("we," "us") respects your privacy. This policy explains what information we collect, how we use it, and your choices.</p>
       <h3>Information We Collect</h3>
-      <p>We collect information you provide directly, such as your name, contact details, address, and service information, when you request a quote, schedule service, or create an account. We also collect limited technical data (like browser type and pages visited) to improve our site.</p>
+      <p>We collect information you provide directly, such as your name, contact details, and service address, when you request a quote or contact us through this site. We also collect limited technical data (browser type, device type, and pages visited) through our own first-party analytics to improve the site. We do not store your raw IP address: it is hashed for aggregate analytics and then discarded. We respect Do Not Track browser signals.</p>
       <h3>How We Use Information</h3>
       <ul>
         <li>To provide, schedule, and manage pest control services</li>
-        <li>To communicate about appointments, billing, and service reminders</li>
+        <li>To communicate about appointments, estimates, and service reminders</li>
         <li>To respond to inquiries and provide customer support</li>
         <li>To improve our website and services</li>
       </ul>
       <h3>Sharing</h3>
-      <p>We do not sell your personal information. We may share data with trusted service providers (such as our scheduling and payment systems) solely to operate our business and serve you, and where required by law.</p>
+      <p>We do not sell your personal information. We may share data with service providers who help us operate this site and communicate with you, solely for those purposes, and where required by law.</p>
       <h3>Communications &amp; Opt-Out</h3>
       <p>You may opt out of non-essential communications at any time by contacting us or using the unsubscribe link in our emails. If you request no further contact, we will flag your account accordingly and honor that request.</p>
       <h3>Text Messaging / SMS</h3>
