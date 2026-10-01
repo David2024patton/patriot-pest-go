@@ -388,32 +388,40 @@ func (m *Module) sitemap(w http.ResponseWriter, r *http.Request) {
 
 // sitemapXML — machine-readable sitemap for search engines: static pages,
 // every pest threat file, every service-area city, every blog post.
+//
+// No <priority>: Google ignores it (cargo-cult). <lastmod> comes from the
+// generated SitemapLastmod map (see tools/sitemap-lastmod): the most recent
+// git commit touching each URL's content sources, never invented.
+//
+//go:generate go run ../../tools/sitemap-lastmod
 func (m *Module) sitemapXML(w http.ResponseWriter, r *http.Request) {
 	base := view.SiteBase(r)
 	type url struct {
 		Loc        string `xml:"loc"`
+		Lastmod    string `xml:"lastmod,omitempty"`
 		Changefreq string `xml:"changefreq,omitempty"`
-		Priority   string `xml:"priority,omitempty"`
 	}
 	var urls []url
-	add := func(path, freq, prio string) { urls = append(urls, url{base + path, freq, prio}) }
-	for _, p := range []string{"/", "/about", "/services", "/prices", "/service-areas", "/faqs", "/contact", "/signup", "/blogs", "/referral", "/socials", "/help", "/links"} {
-		prio, freq := "0.8", "weekly"
+	add := func(path, freq string) {
+		urls = append(urls, url{base + path, view.SitemapLastmod[path], freq})
+	}
+	for _, p := range []string{"/", "/about", "/services", "/prices", "/service-areas", "/faqs", "/contact", "/signup", "/blogs", "/referral", "/socials", "/help", "/links", "/privacy-policy", "/terms-of-use"} {
+		freq := "weekly"
 		if p == "/" {
-			prio, freq = "1.0", "daily"
+			freq = "daily"
 		}
-		add(p, freq, prio)
+		add(p, freq)
 	}
 	for _, pest := range data.AllPests() {
-		add("/pest/"+pest.Slug, "monthly", "0.9")
+		add("/pest/"+pest.Slug, "monthly")
 	}
 	for _, st := range data.States() {
 		for _, city := range st.Cities {
-			add("/areas/"+data.CitySlug(city), "monthly", "0.7")
+			add("/areas/"+data.CitySlug(city), "monthly")
 		}
 	}
 	for _, post := range data.PublishedPosts() {
-		add("/blogs/"+post.Slug, "monthly", "0.6")
+		add("/blogs/"+post.Slug, "monthly")
 	}
 	out := struct {
 		XMLName xml.Name `xml:"urlset"`
@@ -512,18 +520,51 @@ func (m *Module) pest(w http.ResponseWriter, r *http.Request) {
 		pest.ScientificName = o.ScientificName
 		pest.Description = o.Description
 	}
-	title := fmt.Sprintf("%s Control | Patriot Pest Control", pest.Name)
+	title := pestTitleFor(pest)
 	desc := pest.Description
 	if desc == "" {
 		desc = "Professional " + pest.Name + " control"
 	}
 	desc += " Veteran-owned, eco-friendly, 90-day warranty across WA, ID, OR, AZ."
+	crumb := [][2]string{{"Home", "/"}, {"Pest Library", "/services"}, {pest.Name, "/pest/" + pest.Slug}}
 	view.Page(w, r, "pest", title, desc, metaKeywords, m.base(map[string]any{
 		"Pest":    pest,
 		"Related": relatedPests(pest),
-		"Crumb":   [][2]string{{"Home", "/"}, {"Services", "/services"}, {pest.Name, "/pest/" + pest.Slug}},
-		"JSONLD":  []any{ldBusiness, ldService(pest)},
+		"Crumb":   crumb,
+		"OGImage": "https://www.patriotpest.pro/assets/img/og-pest.png",
+		"JSONLD":  []any{ldBusiness, ldService(pest), ldBreadcrumb(crumb)},
 	}))
+}
+
+// pestTitleFor — the <title> for a pest threat file. The wasps page is
+// wasp-specific (hornets have their own /pest/hornets page), so the catalog
+// name "Wasps & Hornets" would mislabel it; the title says Wasp Control.
+// Body copy still uses the catalog name (code-level, no DB writes).
+func pestTitleFor(p data.Pest) string {
+	name := p.Name
+	if p.Slug == "wasps" {
+		name = "Wasp"
+	}
+	return fmt.Sprintf("%s Control | Patriot Pest Control", name)
+}
+
+// ldBreadcrumb — BreadcrumbList JSON-LD from a Crumb trail of
+// [2]string{name, path} pairs, cross-linked to absolute URLs.
+func ldBreadcrumb(crumb [][2]string) map[string]any {
+	items := make([]any, 0, len(crumb))
+	for i, c := range crumb {
+		items = append(items, map[string]any{
+			"@type":    "ListItem",
+			"position": i + 1,
+			"name":     c[0],
+			"item":     "https://www.patriotpest.pro" + c[1],
+		})
+	}
+	return map[string]any{
+		"@context":        "https://schema.org",
+		"@type":           "BreadcrumbList",
+		"itemListElement": items,
+	}
 }
 
 // area — a single service-area city page. Phone line localized per state.
@@ -540,6 +581,7 @@ func (m *Module) area(w http.ResponseWriter, r *http.Request) {
 	areaCopy, hasAreaCopy := view.AreaCopyFor(slug)
 	title := fmt.Sprintf("Pest Control in %s, %s | Patriot Pest Control", city, code)
 	desc := fmt.Sprintf("Same-day pest control in %s, %s. Eco-friendly treatments, 90-day warranty, veteran-owned.", city, stateName)
+	crumb := [][2]string{{"Home", "/"}, {"Service Areas", "/service-areas"}, {city, "/areas/" + slug}}
 	view.Page(w, r, "area-detail", title, desc, metaKeywords, m.base(map[string]any{
 		"CityName":         city,
 		"CityStateCode":    code,
@@ -550,6 +592,10 @@ func (m *Module) area(w http.ResponseWriter, r *http.Request) {
 		"AreaPhoneHref": template.URL("tel:" + line.Tel),
 		"AreaCopy":      areaCopy,
 		"HasAreaCopy":   hasAreaCopy,
+		"Crumb":         crumb,
+		"OGImage":       "https://www.patriotpest.pro/assets/img/og-area.png",
+		"AreaPests":     view.AreaPestsFor(code),
+		"JSONLD":        []any{ldBusiness, ldBreadcrumb(crumb)},
 	}))
 }
 
@@ -572,10 +618,12 @@ func (m *Module) blogPost(w http.ResponseWriter, r *http.Request) {
 	applyPostBodyOverride(&post)
 	title := fmt.Sprintf("%s | Patriot Pest Control Blog", post.Title)
 	view.Page(w, r, "blog-post", title, post.Excerpt, metaKeywords, m.base(map[string]any{
-		"Post":    post,
-		"Related": relatedPosts(post),
-		"Crumb":   [][2]string{{"Home", "/"}, {"Blog", "/blogs"}, {post.Title, "/blogs/" + post.Slug}},
-		"JSONLD":  []any{ldBusiness, ldArticle(post)},
+		"Post":      post,
+		"Related":   relatedPosts(post),
+		"Crumb":     [][2]string{{"Home", "/"}, {"Blog", "/blogs"}, {post.Title, "/blogs/" + post.Slug}},
+		"OGImage":   "https://www.patriotpest.pro/assets/img/og-blog.png",
+		"BlogLinks": view.BlogRelatedLinks[post.Slug],
+		"JSONLD":    []any{ldBusiness, ldArticle(post)},
 	}))
 }
 

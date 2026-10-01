@@ -27,6 +27,15 @@ const pageBlogPost = `<article class="block">
       <a href="/pest/{{.Post.PestSlug}}" style="color:var(--orange)">View {{.Post.PestName}} Control ▸</a>
     </div>
     {{end}}
+
+    {{if .BlogLinks}}
+    <div class="panel" style="margin-top:1.4rem">
+      <div class="eyebrow">CONTINUE ▸</div>
+      <div style="display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.6rem">
+        {{range $l := .BlogLinks}}<a href="{{index $l 1}}" style="color:var(--orange)">{{index $l 0}} ▸</a>{{end}}
+      </div>
+    </div>
+    {{end}}
   </div>
 </article>
 

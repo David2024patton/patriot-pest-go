@@ -75,6 +75,26 @@ const pageAreaDetail = `<section class="block">
   </div>
 </section>
 
+{{if .AreaPests}}
+<section class="block">
+  <div class="wrap">
+    <div class="eyebrow">POPULAR SERVICES // {{upper .CityStateCode}}</div>
+    <h2 style="font-family:var(--display);color:var(--cream);font-size:clamp(1.4rem,4vw,2rem);margin:.4rem 0 1.2rem">Popular services <em>in {{.CityName}}.</em></h2>
+    <div class="grid g3">
+      {{range $p := .AreaPests}}
+      <a class="card" href="/pest/{{$p.Slug}}" style="text-decoration:none;color:inherit">
+        <h3 style="font-family:var(--display);color:var(--cream)">{{$p.Name}} Control ▸</h3>
+        <p style="color:var(--khaki);font-size:.88rem;line-height:1.6;margin-top:.5rem">Same-day {{lower $p.Name}} treatment in {{$.CityName}} with a 90-day warranty.</p>
+      </a>
+      {{end}}
+    </div>
+    <div class="hero-ctas" style="margin-top:1.4rem">
+      <a class="btn btn-ghost" href="/contact">Get a Free Quote ▸</a>
+    </div>
+  </div>
+</section>
+{{end}}
+
 <section class="block cta-band">
   <div class="wrap" style="text-align:center">
     <h2 style="font-family:var(--display);color:var(--cream)">Ready in {{.CityName}}? <em>Call now.</em></h2>
