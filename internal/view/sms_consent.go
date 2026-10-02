@@ -9,4 +9,4 @@ package view
 //
 // Used by the contact form and the signup form, the two public pages that
 // collect a phone number. Kept as one constant so they cannot drift apart.
-const smsConsent = `<p class="sms-consent" style="color:var(--khaki);font-size:.8rem;line-height:1.5;margin:.4rem 0 0">By providing your phone number you agree to receive text messages from Patriot Pest Control Co. about your appointments, estimates and service. Message frequency varies. Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help. See our <a href="/privacy-policy">Privacy Policy</a> and <a href="/terms-of-use">Terms</a>.</p>`
+const smsConsent = `<p class="sms-consent" style="color:var(--khaki);font-size:.8rem;line-height:1.5;margin:.4rem 0 0">By providing your phone number you agree to receive text messages from Patriot Pest Control CO about your appointments, estimates and service. Message frequency varies. Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help. See our <a href="/privacy-policy">Privacy Policy</a> and <a href="/terms-of-use">Terms</a>.</p>`

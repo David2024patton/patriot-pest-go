@@ -83,8 +83,8 @@ func TestLegalShortURLsRedirect(t *testing.T) {
 func TestLegalPagesServe(t *testing.T) {
 	r := seoRouter(t)
 	for path, needle := range map[string]string{
-		"/privacy-policy": "Patriot Pest Control Co.",
-		"/terms-of-use":   "Patriot Pest Control Co.",
+		"/privacy-policy": "Patriot Pest Control CO",
+		"/terms-of-use":   "Patriot Pest Control CO",
 	} {
 		req := httptest.NewRequest("GET", path, nil)
 		rec := httptest.NewRecorder()

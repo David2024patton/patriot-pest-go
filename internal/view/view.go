@@ -232,7 +232,7 @@ const layoutHTML = `<!DOCTYPE html>
       </div>
     </div>
     <div class="foot-bottom">
-      <span>© {{.Year}} PATRIOT PEST CONTROL CO. · ALL RIGHTS RESERVED</span>
+      <span>© {{.Year}} PATRIOT PEST CONTROL CO · ALL RIGHTS RESERVED</span>
       <span><a href="/privacy-policy">PRIVACY</a> · <a href="/terms-of-use">TERMS</a> · <a href="/sitemap">SITEMAP</a></span>
       <span>🇺🇸 VETERAN-OWNED AMERICAN COMPANY</span>
     </div>
