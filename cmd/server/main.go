@@ -26,6 +26,7 @@ import (
 	custommw "github.com/David2024patton/patriot-pest-go/internal/middleware"
 	"github.com/David2024patton/patriot-pest-go/internal/modules/health"
 	"github.com/David2024patton/patriot-pest-go/internal/modules/marketing"
+	"github.com/David2024patton/patriot-pest-go/internal/modules/report"
 	"github.com/David2024patton/patriot-pest-go/internal/view"
 )
 
@@ -86,6 +87,11 @@ func main() {
 	r.Use(custommw.Timeout(15 * time.Second))
 	r.Use(custommw.SecurityHeaders)
 	r.Use(custommw.CORS)
+
+	// Status dashboard: served only on the report.patriotpest.pro host,
+	// behind the report module's email-OTP login. Every other host falls
+	// through to the normal site untouched.
+	(&report.Module{DBPath: cfg.DBPath}).Register(r)
 
 	if (&health.Module{}).Register(r) {
 		logger.Info("module enabled", "module", "health")
