@@ -68,90 +68,12 @@ func TestEmailAllowed(t *testing.T) {
 	}
 }
 
-func TestGenCode(t *testing.T) {
-	seen := map[string]bool{}
-	for i := 0; i < 50; i++ {
-		c, err := genCode()
-		if err != nil {
-			t.Fatal(err)
-		}
-		if len(c) != 6 {
-			t.Fatalf("code %q is not 6 chars", c)
-		}
-		for _, ch := range c {
-			if ch < '0' || ch > '9' {
-				t.Fatalf("code %q is not all digits", c)
-			}
-		}
-		seen[c] = true
-	}
-	if len(seen) < 40 {
-		t.Errorf("codes look non-random: %d unique of 50", len(seen))
-	}
-}
-
 func testModule(t *testing.T) *Module {
 	t.Helper()
 	m := &Module{DBPath: t.TempDir() + "/report_test.db"}
 	m.ensureTables()
-	m.otpReqLimiter = newKeyLimiter(1000, time.Hour)
-	m.verifyLimiter = newKeyLimiter(1000, time.Hour)
+	m.loginLimiter = newKeyLimiter(1000, time.Hour)
 	return m
-}
-
-func TestOTPFlow(t *testing.T) {
-	m := testModule(t)
-	db, err := m.db()
-	if err != nil {
-		t.Fatal(err)
-	}
-	email := "skyler@patriotpest.pro"
-	code, err := genCode()
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := m.storeOTP(db, email, code); err != nil {
-		t.Fatal(err)
-	}
-	if !m.checkOTP(db, email, code) {
-		t.Fatal("valid code rejected")
-	}
-	if m.checkOTP(db, email, code) {
-		t.Fatal("single-use code validated twice")
-	}
-	// Wrong code burns attempts; after the cap the real code is dead.
-	code2, _ := genCode()
-	if err := m.storeOTP(db, email, code2); err != nil {
-		t.Fatal(err)
-	}
-	for i := 0; i < otpMaxAttempts; i++ {
-		if m.checkOTP(db, email, "000000") {
-			t.Fatal("wrong code accepted")
-		}
-	}
-	if m.checkOTP(db, email, code2) {
-		t.Fatal("code validated after attempt cap")
-	}
-	// Expired code never validates.
-	code3, _ := genCode()
-	if err := m.storeOTP(db, email, code3); err != nil {
-		t.Fatal(err)
-	}
-	if _, err := db.Exec(`UPDATE report_otps SET expires_at=? WHERE code_hash=?`,
-		time.Now().Add(-time.Minute).Unix(), sha256Hex(code3)); err != nil {
-		t.Fatal(err)
-	}
-	if m.checkOTP(db, email, code3) {
-		t.Fatal("expired code validated")
-	}
-	// Code bound to another email does not validate.
-	code4, _ := genCode()
-	if err := m.storeOTP(db, email, code4); err != nil {
-		t.Fatal(err)
-	}
-	if m.checkOTP(db, "other@patriotpest.pro", code4) {
-		t.Fatal("code validated for wrong email")
-	}
 }
 
 func TestSessionFlow(t *testing.T) {
@@ -161,7 +83,7 @@ func TestSessionFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest(http.MethodPost, "/verify", nil)
+	r := httptest.NewRequest(http.MethodPost, "/login", nil)
 	r.Header.Set("X-Forwarded-Proto", "https")
 	if err := m.createSession(db, w, r, "skyler@patriotpest.pro"); err != nil {
 		t.Fatal(err)
@@ -267,7 +189,7 @@ func TestMiddlewareHostGating(t *testing.T) {
 	if tag := w3.Header().Get("X-Robots-Tag"); tag != "noindex" {
 		t.Fatalf("login X-Robots-Tag = %q, want noindex", tag)
 	}
-	if !strings.Contains(w3.Body.String(), "SEND CODE") {
+	if !strings.Contains(w3.Body.String(), "SIGN IN") {
 		t.Fatal("login page missing email form")
 	}
 
@@ -290,7 +212,7 @@ func TestDashboardRenders(t *testing.T) {
 		t.Fatal(err)
 	}
 	w := httptest.NewRecorder()
-	r := httptest.NewRequest(http.MethodPost, "/verify", nil)
+	r := httptest.NewRequest(http.MethodPost, "/login", nil)
 	if err := m.createSession(db, w, r, "skyler@patriotpest.pro"); err != nil {
 		t.Fatal(err)
 	}
