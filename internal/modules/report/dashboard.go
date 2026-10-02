@@ -179,11 +179,13 @@ const REPORTS = {
         "Reported one fake 1-star review from 2019 to Google for removal. The reviewer was never a customer. Decision expected within about 3 business days.",
         "Left 2 old negative reviews alone on purpose: one from 2022 that replying would only wake up, and the reported fake one."
       ]},
-      {title:"Sameday AI phone agent", pill:"progress", cls:"", note:"Review request text campaign in progress.",
+      {title:"Sameday AI phone agent", pill:"progress", cls:"", note:"Review request text campaign launches this morning.",
        points:[
+        "Decision: keeping Sameday for the full year already paid for. No cancellation. We keep improving it: prompts, call routing, transfers, and matching callers to FieldRoutes.",
+        "Human transfers never go to David's personal number. The AI handles calls itself and books the job.",
         "Solved a mystery: Skyler heard the AI \u201Ctalking about insurance\u201D with a caller. Checked the call log. It was a State Farm salesman pitching business auto insurance, not a customer. The agent handled it exactly right.",
-        "Confirmed texting is fully approved and working in Sameday: two numbers ready, brand approved, active campaign. No carrier warnings.",
-        "Building now: an automatic text after every completed appointment asking happy customers for a Google review, plus a one-time send to customers from the last 30 days.",
+        "Confirmed texting is fully approved and working in Sameday: two numbers ready, brand approved. No carrier warnings.",
+        "Launching today: automatic review request texts to 34 customers from September's completed appointments. Texts land around 9 AM Phoenix time asking happy customers for a Google review.",
         "Note: Sameday cannot send customer emails, so review emails will need to come from another system later."
       ]},
       {title:"The $4,000 proposal", pill:"done", cls:"money", note:"",
