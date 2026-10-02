@@ -24,7 +24,7 @@ const pageHome = `<!-- ============ HERO ============ -->
     </div>
     <aside class="brief" aria-label="Mission brief"><div class="corner"></div>
       <h3>// Mission Brief</h3><div id="brief-lines"></div>
-      <div class="coords">GRID: DEER PARK HQ · EST. BY VETERAN SKYLER ROSE · 24/7 LINE OPEN</div>
+      <div class="coords">GRID: DEER PARK HQ · EST. BY VETERAN SKYLER ROSE · ONLINE SCHEDULING 24/7</div>
     </aside>
   </div>
   <div class="scroll-cue">Scroll to begin mission</div>
@@ -133,7 +133,7 @@ const pageHome = `<!-- ============ HERO ============ -->
     <div class="stat-grid">
       <div class="stat" data-reveal><span class="num" data-count="100">0</span><span class="unit">%</span><span class="cap">SATISFACTION GUARANTEED</span></div>
       <div class="stat" data-reveal><span class="num" data-count="90">90</span><span class="unit">-DAY</span><span class="cap">WARRANTY ON ALL TREATMENTS</span></div>
-      <div class="stat" data-reveal><span class="num">24/7</span><span class="cap">CUSTOMER SERVICE LINE</span></div>
+      <div class="stat" data-reveal><span class="num">24/7</span><span class="cap">APPOINTMENT SCHEDULING</span></div>
       <div class="stat" data-reveal><span class="num" data-count="4">4</span><span class="unit"> STATES</span><span class="cap">WA · ID · OR · AZ</span></div>
       <div class="stat" data-reveal><span class="num" data-count="10">10</span><span class="unit">+</span><span class="cap">YEARS OF EXPERIENCE</span></div>
     </div>

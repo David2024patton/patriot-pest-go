@@ -23,7 +23,7 @@ const pageContact = `<section class="block">
             <dt>Arizona</dt><dd><a href="tel:+16027558414" style="color:var(--orange)">(602) 755-8414</a></dd>
             <dt>Email</dt><dd><a href="mailto:info@patriotpest.pro" style="color:var(--orange)">info@patriotpest.pro</a></dd>
             <dt>HQ</dt><dd>Deer Park, WA 99006</dd>
-            <dt>Hours</dt><dd>Mon–Fri 9a–5p · Sat–Sun 10a–4p · 24/7 line</dd>
+            <dt>Hours</dt><dd>Mon–Sat 7a–7p · Sun closed · 24/7 online scheduling</dd>
           </dl>
         </div>
         <div class="panel">

@@ -78,8 +78,7 @@ var ldBusiness = map[string]any{
 		map[string]string{"@type": "State", "name": "Arizona"},
 	},
 	"openingHoursSpecification": []any{
-		map[string]any{"@type": "OpeningHoursSpecification", "dayOfWeek": []string{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"}, "opens": "09:00", "closes": "17:00"},
-		map[string]any{"@type": "OpeningHoursSpecification", "dayOfWeek": []string{"Saturday", "Sunday"}, "opens": "10:00", "closes": "16:00"},
+		map[string]any{"@type": "OpeningHoursSpecification", "dayOfWeek": []string{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"}, "opens": "07:00", "closes": "19:00"},
 	},
 	"founder": map[string]string{"@type": "Person", "name": "Skyler Rose", "jobTitle": "Founder & U.S. Military Veteran"},
 	"sameAs": []string{
@@ -308,7 +307,7 @@ const (
 	faqsT     = "Pest Control FAQs | Patriot Pest Control"
 	faqsD     = "Answers to common pest control questions: safety, pricing, guarantees, preparation, and what to expect."
 	contactT  = "Free Pest Control Quotes | Patriot Pest Control"
-	contactD  = "Call (509) 818-0993 (WA/ID/OR) or (602) 755-8414 (AZ). Free quotes, same-day pest control service, 24/7 line."
+	contactD  = "Call (509) 818-0993 (WA/ID/OR) or (602) 755-8414 (AZ). Free quotes, same-day pest control service, online scheduling 24/7."
 	referralT = "Referral Program - Earn $25 | Patriot Pest Control"
 	referralD = "Refer a neighbor, both get $25. Patriot Pest Control referral program."
 	socialsT  = "Social Media | Patriot Pest Control"
