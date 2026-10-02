@@ -237,7 +237,8 @@ func TestDashboardRenders(t *testing.T) {
 		"Patriot Pest Control", "AlphaFlux", "October 1, 2026",
 		"Week of October 8", "skyler@patriotpest.pro",
 		"Website rebuild", "Google Business Profiles", "Sameday AI phone agent",
-		"The $4,000 proposal", "Up next", "Everything done", "What is left",
+		"The $4,000 proposal", "Up next", "Business setup", "Console build", "What is left",
+		"Mimir", "What Mimir is", "Blocked on",
 	} {
 		if !strings.Contains(body, want) {
 			t.Errorf("dashboard missing %q", want)
