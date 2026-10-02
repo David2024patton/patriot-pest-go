@@ -54,6 +54,7 @@ body{background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"
 .tab:hover{color:var(--ink);border-color:var(--blue)}
 .tab.active{background:linear-gradient(135deg,var(--red) 0%,var(--red-dk) 100%);border-color:transparent;color:#fff;box-shadow:0 4px 14px rgba(230,57,70,.35)}
 .tab.active.blue{background:linear-gradient(135deg,var(--blue) 0%,var(--blue-dk) 100%);box-shadow:0 4px 14px rgba(59,130,246,.35)}
+.tab.active.green{background:linear-gradient(135deg,#2ea043 0%,#1a6b2e 100%);box-shadow:0 4px 14px rgba(46,160,67,.35)}
 .content{padding:2rem;max-width:1080px;width:100%;margin:0 auto}
 .report-head{margin:0 0 1.6rem}
 .report-head h1{margin:0;font-size:1.7rem;letter-spacing:.01em}
@@ -132,6 +133,7 @@ body{background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"
     <div class="tabs" role="tablist">
       <button class="tab active" data-tab="patriot" role="tab">Patriot Pest Control</button>
       <button class="tab blue" data-tab="alphaflux" role="tab">AlphaFlux</button>
+      <button class="tab green" data-tab="mimir" role="tab">Mimir</button>
     </div>
     <div class="content" id="content"></div>
     <p class="foot">Weekly status report for Skyler Rose. New entries are added after each weekly call.</p>
@@ -149,6 +151,7 @@ const REPORTS = {
       {v:"2", k:"Google Business Profiles cleaned up"},
       {v:"25", k:"pest pages rewritten"},
       {v:"15", k:"city pages expanded"},
+      {v:"34", k:"review request texts sent to September customers"},
       {v:"$4,000", k:"Keystone proposal avoided by doing the work in-house"}
     ],
     cards: [
@@ -156,7 +159,7 @@ const REPORTS = {
        points:[
         "Six updates shipped to patriotpest.pro, each verified live.",
         "Fixed the behind-the-scenes business data Google reads: valid structured data, real privacy policy and terms pages, removed a test page that was showing in search, bigger tap buttons on phones, cleaner page addresses.",
-        "Set the official phone numbers everywhere: (509) 818-0993 for WA/ID/OR and (602) 755-8414 for AZ. The old number is gone from the site.",
+        "Set the official phone numbers everywhere: (509) 818-0993 for Washington and (602) 755-8414 for Arizona. The old number is gone from the site.",
         "Rewrote all 25 pest pages with unique copy and correct local species. Added local-area write-ups to all 15 city pages. Expanded thin blog posts. Fixed small text and low contrast.",
         "SEO extras: real dates on the sitemap, custom preview images for pest, city, and blog pages, breadcrumb navigation data, better internal links, plus an automated test that crawls 63 pages so nothing breaks again.",
         "Hours standardized everywhere: Mon to Sat 7am to 7pm, Sunday closed, online scheduling 24/7.",
@@ -215,30 +218,61 @@ const REPORTS = {
       {v:"27", k:"Twilio phone API endpoints wired"}
     ],
     cards: [
-      {title:"Everything done", pill:"done", cls:"", note:"",
+      {title:"Business setup", pill:"progress", cls:"money", note:"",
        points:[
-        "Business: AlphaFlux LLC filed and approved in Kentucky (Sep 28, veteran fee waiver, $0). EIN issued by the IRS (Sep 30). Company logo created.",
-        "Console: split into an admin shell and a customer shell with audit logging and a help mode. Mobile navigation restyled. Dashboard restyled. Call flow builder redesigned with flow, kanban, and code views.",
+        "AlphaFlux LLC filed and approved in Kentucky (Sep 28, veteran fee waiver, $0). EIN issued by the IRS (Sep 30). Company logo created.",
+        "Bank: Relay business bank application in progress. It is at the owner identity check (ID photo plus selfie); the first selfie failed and a fresh retry link was sent. A final review click is still owed before anything submits. Mercury had declined earlier with no reason given.",
+        "Stripe: account created as AlphaFlux LLC. Activation in progress.",
+        "Twilio: the parent business profile was rejected on Oct 2. Twilio could not verify the business ID. Fix is to correct the legal name and EIN to match tax records exactly, or contact Twilio trust verification. The identity check link goes to david@itak.live by email.",
+        "Patriot stays as the client subaccount under the AlphaFlux parent."
+      ]},
+      {title:"Console build", pill:"done", cls:"", note:"",
+       points:[
+        "Split into an admin shell and a customer shell with audit logging and a help mode. Mobile navigation restyled. Dashboard restyled. Call flow builder redesigned with flow, kanban, and code views.",
         "Twilio coverage: 27 phone API endpoints wired into the Phone tab, including conferences, queues, SIP, Verify, Lookup, Studio flows, TrustHub, and usage alerts.",
         "Inventory module: full build with districts, warehouses, trucks, barcode scanning with offline retry, chemical sign in/out ledger, QR pages, low stock alerts, and purchase orders. Live in production.",
         "Social: 16-platform connector framework merged (OAuth, token refresh, scheduled publishing).",
         "Research: 8 competitor reports covering every console tab, each with top 10 competitors, pricing, and real customer complaints.",
-        "Bank: Relay business bank application started (Mercury had declined with no reason).",
-        "Stripe: account created as AlphaFlux LLC. Activation in progress.",
-        "Twilio: parent business profile filed and in manual review (Oct 1).",
         "Photos: Immich self-hosted photo platform live and updated.",
-        "Product: MowStrip weed barrier, 20+ product renders in the approved style."
+        "Product: MowStrip weed barrier, 20+ product renders in the approved style plus a promo video."
       ]},
       {title:"What is left", pill:"pending", cls:"", note:"",
        points:[
-        "Relay bank account: needs date of birth, a password set on the secure card, and the final review click.",
+        "Relay bank account: finish the identity check, then the final review click.",
         "Stripe activation: needs date of birth plus last 4 of SSN, then bank payout details and possible ID check.",
-        "Twilio: identity verification email (check david@itak.live), then the Patriot brand and campaign filing (needs Skyler\u2019s EIN), plus cleanup of 11 junk draft brands.",
+        "Twilio: fix the rejected parent business profile first, then the Patriot brand and campaign filing (needs Skyler\u2019s EIN), plus cleanup of 11 junk draft brands.",
         "Mail server: the real certificate fix is still pending (needs a DNS record or container logs).",
-        "Logins: OAuth app registrations stalled waiting on current passwords.",
         "Console: database scaling and backup, remaining tab build-out, Field Services photo app, Sales/Leads dashboard section.",
-        "Mimir coding harness: two patches built and tested, waiting on the go-ahead. The full harness spec is written and awaiting approval.",
         "The big goal: first dollar of revenue needs live Stripe charges plus one paying tenant."
+      ]}
+    ]
+  },
+  mimir: {
+    stats: [
+      {v:"10", k:"stages from plan to shipped code"},
+      {v:"2", k:"hard gates: verify and ship"},
+      {v:"2", k:"patches built and tested, waiting on the go-ahead"},
+      {v:"4", k:"code forges wired: GitHub, GitLab, Bitbucket, Gitea/Forgejo"}
+    ],
+    cards: [
+      {title:"What Mimir is", pill:"progress", cls:"", note:"Its own project, not part of AlphaFlux.",
+       points:[
+        "An autonomous coding harness: GitHub-integrated runs that go from plan to shipped code without anyone watching.",
+        "Ten stages: discover, contract, repo, research, architecture, build, verify, review, ship, handover.",
+        "Hard gates at verify and ship. Nothing moves past them without passing.",
+        "A typed knowledge mind map so uploads become part of the system instead of sitting static. Contradictions get resolved by the user.",
+        "Built for everyone, not just David."
+      ]},
+      {title:"Built and waiting", pill:"pending", cls:"", note:"",
+       points:[
+        "Two patches built, tested, and green, waiting on the go-ahead: a server AuthBackend test fix, and forge-linked OAuth sessions covering GitHub, GitLab, Bitbucket, and Gitea/Forgejo.",
+        "A full repo review is written up with findings and fixes.",
+        "The combined harness plus knowledge-graph specification is written and awaiting approval."
+      ]},
+      {title:"Blocked on", pill:"pending", cls:"", note:"",
+       points:[
+        "OAuth app registration is stalled: the saved GitHub password is stale and there are no saved Bitbucket or GitLab logins.",
+        "Resumes when current passwords are submitted through the secure card."
       ]}
     ]
   }
@@ -252,7 +286,7 @@ function render(){
   const rep = REPORTS[curDate];
   const tab = rep[curTab];
   const el = document.getElementById("content");
-  let h = '<div class="report-head"><h1>' + (curTab === "patriot" ? "Patriot Pest Control" : "AlphaFlux") + '</h1>' +
+  let h = '<div class="report-head"><h1>' + (curTab === "patriot" ? "Patriot Pest Control" : curTab === "alphaflux" ? "AlphaFlux" : "Mimir") + '</h1>' +
           '<div class="date-line">Week of <b>' + rep.label + '</b></div></div>';
   h += '<div class="stats">';
   tab.stats.forEach(function(s){
