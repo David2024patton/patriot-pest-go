@@ -182,17 +182,16 @@ const REPORTS = {
       {title:"Sameday AI phone agent", pill:"progress", cls:"", note:"Review request text campaign launched and active.",
        points:[
         "Decision: keeping Sameday for the full year already paid for. No cancellation. We keep improving it: prompts, call routing, transfers, and matching callers to FieldRoutes.",
-        "Human transfers never go to David's personal number. The AI handles calls itself and books the job.",
-        "Solved a mystery: Skyler heard the AI \u201Ctalking about insurance\u201D with a caller. Checked the call log. It was a State Farm salesman pitching business auto insurance, not a customer. The agent handled it exactly right.",
-        "Confirmed texting is fully approved and working in Sameday: two numbers ready, brand approved. No carrier warnings.",
+        "This is Skyler's company, so transfers were never routed to David. The AI handles calls itself and books the job; when a human is needed, it goes to Skyler's number.",
         "Launched Oct 2 at 9:36 AM EDT: the \u201CReview Request - Post Service\u201D campaign is active and sent review request texts to 34 customers from September's completed appointments. Texts land around 9:36 AM Phoenix time asking happy customers for a Google review.",
         "Campaign goal: collect Google reviews from recent service customers.",
         "Note: Sameday cannot send customer emails, so review emails will need to come from another system later."
       ]},
-      {title:"The $4,000 proposal", pill:"done", cls:"money", note:"",
+      {title:"The $4,000 proposal", pill:"done", cls:"money", note:"Reviewed and already handled in-house.",
        points:[
-        "Keystone, a marketing bot company, sent Skyler a $4,000 proposal for 8 weeks of work starting Oct 5.",
-        "Almost everything in their technical scope was already done in-house before their start date. Their plan finishes Nov 27, nearly a month after the Oct 29 goal of 40 new customers.",
+        "Skyler shared Keystone's $4,000 \u201CFoundation Package\u201D proposal documents.",
+        "Within an hour of getting the documents, their entire technical scope had been reviewed and confirmed: nearly everything they proposed was already built, fixed, and live in-house.",
+        "Website rebuild, Google profiles, phones, hours, review replies, and sitemap: done before their plan would have even started.",
         "Verdict: do not pay it. The work is done."
       ]},
       {title:"Up next", pill:"pending", cls:"", note:"",
