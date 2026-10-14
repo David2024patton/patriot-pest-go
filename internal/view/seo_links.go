@@ -25,7 +25,6 @@ var BlogRelatedLinks = map[string][][2]string{
 	},
 	"rodent-proof-your-home": {
 		{"Rodent Control", "/pest/rodents"},
-		{"Pest Control in Phoenix, AZ", "/areas/phoenix"},
 		{"Get a Free Quote", "/contact"},
 	},
 }
@@ -38,7 +37,6 @@ var AreaPestLinks = map[string][]string{
 	"WA": {"ants", "spiders", "rodents", "wasps"},
 	"ID": {"ants", "spiders", "rodents", "wasps"},
 	"OR": {"ants", "spiders", "rodents", "wasps"},
-	"AZ": {"scorpions", "ants", "spiders", "rodents"},
 }
 
 // AreaPestsFor resolves the featured pest slugs for a state code to catalog
