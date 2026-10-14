@@ -207,7 +207,7 @@ const layoutHTML = `<!DOCTYPE html>
     <div class="foot-grid">
       <div>
         <div class="foot-brand"><span style="color:var(--orange)">★</span> PATRIOT PEST CONTROL</div>
-        <p>Veteran-owned pest control for homes &amp; businesses across Washington, Idaho, Oregon &amp; Arizona. Founded by U.S. Military Veteran Skyler Rose. Eco-friendly, family &amp; pet safe, 100% satisfaction guaranteed.</p>
+        <p>Veteran-owned pest control for homes &amp; businesses across Washington, Idaho &amp; Oregon. Founded by U.S. Military Veteran Skyler Rose. Eco-friendly, family &amp; pet safe, 100% satisfaction guaranteed.</p>
       </div>
       <div>
         <h4>Quick Links</h4>
