@@ -5,7 +5,7 @@ const pageServices = `<section class="block">
   <div class="wrap">
     <div class="eyebrow">CAPABILITIES // SERVICES</div>
     <h1 style="font-family:var(--display);color:var(--cream);font-size:clamp(2rem,6vw,3rem);margin:.4rem 0 .8rem">Every pest. <em>One team.</em></h1>
-    <p class="lead">From ants to wildlife, we identify, treat, and prevent {{len .Pests}}+ pest categories across Washington, Idaho, Oregon &amp; Arizona, using eco-friendly, family- and pet-safe methods.</p>
+    <p class="lead">From ants to wildlife, we identify, treat, and prevent {{len .Pests}}+ pest categories across Washington, Idaho &amp; Oregon, using eco-friendly, family- and pet-safe methods.</p>
   </div>
 </section>
 
@@ -28,7 +28,7 @@ const pageServices = `<section class="block">
     <h2 style="font-family:var(--display);color:var(--cream)">Don't see your pest? <em>Call us anyway.</em></h2>
     <p class="lead">If it invades, we handle it. Free quotes, same-day service available.</p>
     <div class="hero-ctas" style="justify-content:center;margin-top:1.2rem">
-      <a class="btn btn-primary" href="tel:+15098180993">☎ (509) 818-0993</a>
+      <a class="btn btn-primary" href="tel:+15094715767">☎ (509) 471-5767</a>
       <a class="btn btn-ghost" href="/contact">Request Service ▸</a>
     </div>
   </div>
@@ -40,7 +40,7 @@ const pageAbout = `<section class="block">
   <div class="wrap">
     <div class="eyebrow">PERSONNEL FILE // ABOUT US</div>
     <h1 style="font-family:var(--display);color:var(--cream);font-size:clamp(2rem,6vw,3rem);margin:.4rem 0 .8rem">Veteran-owned. <em>Mission-driven.</em></h1>
-    <p class="lead">Patriot Pest Control was founded by U.S. Military Veteran Skyler Rose to bring military discipline, integrity, and uncompromising excellence to pest control across four states.</p>
+    <p class="lead">Patriot Pest Control was founded by U.S. Military Veteran Skyler Rose to bring military discipline, integrity, and uncompromising excellence to pest control across three states.</p>
   </div>
 </section>
 
@@ -49,7 +49,7 @@ const pageAbout = `<section class="block">
     <div class="split" style="align-items:start">
       <div>
         <h2 style="font-family:var(--display);color:var(--cream)">Our <em>story.</em></h2>
-        <p style="color:var(--khaki);line-height:1.8;margin-top:.8rem">After serving our country, our founder brought the same dedication and precision learned in the military to protecting American homes and businesses. What started as a one-operator mission has grown into a trusted, licensed, bonded, and insured team serving Washington, Idaho, Oregon, and Arizona.</p>
+        <p style="color:var(--khaki);line-height:1.8;margin-top:.8rem">After serving our country, our founder brought the same dedication and precision learned in the military to protecting American homes and businesses. What started as a one-operator mission has grown into a trusted, licensed, bonded, and insured team serving Washington, Idaho, and Oregon.</p>
         <p style="color:var(--khaki);line-height:1.8;margin-top:1rem">We're not just eliminating pests. We're protecting what matters most. Every treatment is backed by our 90-day warranty and our 100% satisfaction guarantee.</p>
       </div>
       <div class="dossier-file">
@@ -86,7 +86,7 @@ const pageAbout = `<section class="block">
   <div class="wrap" style="text-align:center">
     <h2 style="font-family:var(--display);color:var(--cream)">Join the families who <em>trust Patriot.</em></h2>
     <div class="hero-ctas" style="justify-content:center;margin-top:1.2rem">
-      <a class="btn btn-primary" href="tel:+15098180993">☎ (509) 818-0993</a>
+      <a class="btn btn-primary" href="tel:+15094715767">☎ (509) 471-5767</a>
       <a class="btn btn-ghost" href="/contact">Get a Free Quote ▸</a>
     </div>
   </div>
