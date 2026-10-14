@@ -8,7 +8,7 @@ const pageContact = `<section class="block">
   <div class="wrap">
     <div class="eyebrow">COMMS // CONTACT</div>
     <h1 style="font-family:var(--display);color:var(--cream);font-size:clamp(2rem,6vw,3rem);margin:.4rem 0 .8rem">Get your <em>free quote.</em></h1>
-    <p class="lead">Call the line or send the form. We respond within one business day (usually much faster). Same-day service available across all four states.</p>
+    <p class="lead">Call the line or send the form. We respond within one business day (usually much faster). Same-day service available across all three states.</p>
   </div>
 </section>
 
@@ -19,8 +19,7 @@ const pageContact = `<section class="block">
         <div class="panel">
           <h3 style="font-family:var(--display);color:var(--cream)">Direct Lines</h3>
           <dl class="kv" style="margin-top:.8rem">
-            <dt>WA · ID · OR</dt><dd><a href="tel:+15098180993" style="color:var(--orange)">(509) 818-0993</a></dd>
-            <dt>Arizona</dt><dd><a href="tel:+16027558414" style="color:var(--orange)">(602) 755-8414</a></dd>
+            <dt>WA · ID · OR</dt><dd><a href="tel:+15094715767" style="color:var(--orange)">(509) 471-5767</a></dd>
             <dt>Email</dt><dd><a href="mailto:info@patriotpest.pro" style="color:var(--orange)">info@patriotpest.pro</a></dd>
             <dt>HQ</dt><dd>Deer Park, WA 99006</dd>
             <dt>Hours</dt><dd>Mon–Sat 7a–7p · Sun closed · 24/7 online scheduling</dd>
