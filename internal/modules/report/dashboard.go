@@ -115,8 +115,9 @@ body{background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"
     </div>
     <p class="nav-label">REPORT DATES</p>
     <nav class="dates" id="dateNav">
-      <button class="date active" data-date="2026-10-01"><span>October 1, 2026</span><span class="dot"></span></button>
-      <button class="date upcoming" disabled><span>Week of October 8</span><span class="soon">SOON</span></button>
+      <button class="date active" data-date="2026-10-14"><span>October 14, 2026</span><span class="dot"></span></button>
+      <button class="date" data-date="2026-10-01"><span>October 1, 2026</span><span class="dot"></span></button>
+      <button class="date upcoming" disabled><span>Week of October 21</span><span class="soon">SOON</span></button>
     </nav>
     <div class="side-foot">
       <span class="who">Signed in as <!--USER_EMAIL--></span>
@@ -142,6 +143,100 @@ body{background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"
 
 <script>
 const REPORTS = {
+"2026-10-14": {
+  label: "October 14, 2026",
+  patriot: {
+    stats: [
+      {v:"15 of 20", k:"website health checks fully passed"},
+      {v:"57 of 57", k:"pages live, zero broken links found"},
+      {v:"1", k:"phone number on the whole site now: (509) 471-5767"},
+      {v:"0", k:"Arizona mentions left anywhere on the site"},
+      {v:"4 MB", k:"of photos on the homepage, the one fix still to make"}
+    ],
+    cards: [
+      {title:"Website health check", pill:"progress", cls:"", note:"The same 20 point check the pros use, run on patriotpest.pro on October 14. This entry covers the Week of October 8 and this week.",
+       points:[
+        "Here is the score at a glance:",
+        "<div style='margin:.35rem 0 .7rem'><div style='display:flex;justify-content:space-between;font-size:.85rem;color:#dbe2ff'><span>Passed</span><b>15 of 20</b></div><div style='background:rgba(255,255,255,.08);border-radius:6px;height:12px;margin-top:.25rem'><div style='width:75%;height:12px;border-radius:6px;background:#2ea043'></div></div></div>",
+        "<div style='margin:.35rem 0 .7rem'><div style='display:flex;justify-content:space-between;font-size:.85rem;color:#dbe2ff'><span>Almost there, small touch-up</span><b>3 of 20</b></div><div style='background:rgba(255,255,255,.08);border-radius:6px;height:12px;margin-top:.25rem'><div style='width:15%;height:12px;border-radius:6px;background:#d29922'></div></div></div>",
+        "<div style='margin:.35rem 0 .7rem'><div style='display:flex;justify-content:space-between;font-size:.85rem;color:#dbe2ff'><span>Missed, one real fix</span><b>1 of 20</b></div><div style='background:rgba(255,255,255,.08);border-radius:6px;height:12px;margin-top:.25rem'><div style='width:5%;height:12px;border-radius:6px;background:#e63946'></div></div></div>",
+        "<div style='margin:.35rem 0 .7rem'><div style='display:flex;justify-content:space-between;font-size:.85rem;color:#dbe2ff'><span>Could not check from outside</span><b>1 of 20</b></div><div style='background:rgba(255,255,255,.08);border-radius:6px;height:12px;margin-top:.25rem'><div style='width:5%;height:12px;border-radius:6px;background:#8b949e'></div></div></div>",
+        "Bottom line: the site is in great shape. One real fix (photo size) and three small touch-ups, all listed below."
+      ]},
+      {title:"Passed: the 15 checks", pill:"done", cls:"", note:"Each one in plain words.",
+       points:[
+        "Site map: Google gets a current list of all 57 pages, and every one of them loads.",
+        "Open doors: search engines and AI assistants like ChatGPT are welcomed in by name, not blocked.",
+        "One true address per page, so Google never gets confused by duplicates.",
+        "Every page has its own title, and the titles now name the right states.",
+        "Every page has a short description for search results, corrected the same way.",
+        "Exactly one main headline per page, the way Google likes it.",
+        "Every photo carries a text label, for Google and for visitors using screen readers.",
+        "Behind the scenes business card for Google: name, address, hours, phone, and service area, all current.",
+        "Pages link to each other, so customers and Google can reach everything.",
+        "Zero broken links on the whole site.",
+        "Phone friendly: the layout adjusts to small screens.",
+        "Secure: the site forces the locked connection, and the standard security headers are on.",
+        "Clean page addresses a person can read, like patriotpest.pro/pest/ants.",
+        "Sharing a page in a text or on Facebook shows the right picture and title.",
+        "A plain text guide written for AI assistants, and it already shows the new 5767 number."
+      ]},
+      {title:"Needs a small touch-up: 3 checks", pill:"progress", cls:"", note:"Small stuff. All three are on the fix list.",
+       points:[
+        "The customer login page still shows up in Google results. It should be hidden. Quick fix.",
+        "On some pages the headlines jump from big straight to small, skipping the middle size. Google prefers a steady staircase. Template fix.",
+        "Photos already load as you scroll, which is good. One extra speed setting is missing. Quick fix.",
+        "Plus one we could not check from outside: the Google Search Console verification. It may already be handled through the domain name. Worth a look on the next call."
+      ]},
+      {title:"The one real fix: heavy photos", pill:"progress", cls:"", note:"",
+       points:[
+        "The homepage loads about 4 MB of photos. The single biggest photo is 647 KB.",
+        "<div style='margin:.35rem 0 .7rem'><div style='display:flex;justify-content:space-between;font-size:.85rem;color:#dbe2ff'><span>Homepage photos today</span><b>about 4 MB</b></div><div style='background:rgba(255,255,255,.08);border-radius:6px;height:12px;margin-top:.25rem'><div style='width:100%;height:12px;border-radius:6px;background:#e63946'></div></div></div>",
+        "<div style='margin:.35rem 0 .7rem'><div style='display:flex;justify-content:space-between;font-size:.85rem;color:#dbe2ff'><span>After the fix</span><b>under 1 MB</b></div><div style='background:rgba(255,255,255,.08);border-radius:6px;height:12px;margin-top:.25rem'><div style='width:22%;height:12px;border-radius:6px;background:#2ea043'></div></div></div>",
+        "Heavy photos slow the page down on phones, and slow pages lose both customers and Google ranking.",
+        "The fix is simple: shrink the photos to web size. Same pictures, same look on screen, a quarter of the weight."
+      ]},
+      {title:"Fixed this week", pill:"done", cls:"", note:"",
+       points:[
+        "Arizona is off the website for good. The operation was sold, and the site now matches: no Arizona words, the Phoenix page is deleted, and it is out of Google's map of the site.",
+        "One phone number everywhere: (509) 471-5767. It is now the only number on any page of the site.",
+        "Page titles that used to say WA, ID, OR and AZ now say WA, ID and OR."
+      ]}
+    ]
+  },
+  alphaflux: {
+    stats: [
+      {v:"5", k:"real problems from an outside audit, fixed and shipped"},
+      {v:"1st", k:"automatic code checks now run on every change"},
+      {v:"3", k:"separate dashboards: owners, agencies, customers"}
+    ],
+    cards: [
+      {title:"Outside audit: checked and fixed", pill:"done", cls:"", note:"",
+       points:[
+        "An outside firm audited the AlphaFlux code and sent a report.",
+        "Every big claim was checked by hand against the code before anything changed. One claim turned out to be wrong, and we proved it.",
+        "The real problems were fixed and shipped the same morning: a rare data mix-up in testing, a safety switch that needed a second lock, and a general code cleanup.",
+        "Automatic checks now run on every code change, so this class of problem gets caught before it ships."
+      ]},
+      {title:"Dashboards split by role", pill:"done", cls:"", note:"",
+       points:[
+        "Owners, agencies, and customers each get their own console now, and each one looks different.",
+        "Customer business data stays private. Helping a customer means signing in as them through the help door, and that is logged."
+      ]}
+    ]
+  },
+  mimir: {
+    stats: [
+      {v:"0", k:"changes this week, focus was Patriot and AlphaFlux"}
+    ],
+    cards: [
+      {title:"Quiet this week", pill:"pending", cls:"", note:"",
+       points:[
+        "No Mimir work this week. The two finished patches are still built, tested, and waiting on the go-ahead, same as the last report."
+      ]}
+    ]
+  }
+},
 "2026-10-01": {
   label: "October 1, 2026",
   patriot: {
@@ -278,7 +373,7 @@ const REPORTS = {
   }
 }};
 
-let curDate = "2026-10-01";
+let curDate = "2026-10-14";
 let curTab = "patriot";
 const PILL = {done:"Done", progress:"In Progress", pending:"Pending"};
 
