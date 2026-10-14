@@ -257,18 +257,17 @@ func RelatedPosts(slug string, n int) []Post {
 
 // State — a service area (state + its cities).
 type State struct {
-	Code     string // WA / ID / OR / AZ
+	Code     string // WA / ID / OR
 	Name     string
 	Cities   []string
 }
 
-// States — the four-state service footprint, mirroring PageController::states().
+// States — the service footprint, mirroring PageController::states().
 func States() []State {
 	return []State{
 		{"WA", "Washington", []string{"Spokane", "Spokane Valley", "Cheney", "Liberty Lake", "Airway Heights", "Medical Lake", "Deer Park", "Mead"}},
 		{"ID", "Idaho", []string{"Coeur d'Alene", "Post Falls", "Hayden", "Rathdrum"}},
 		{"OR", "Oregon", []string{"Hermiston", "Milton-Freewater"}},
-		{"AZ", "Arizona", []string{"Phoenix"}},
 	}
 }
 
