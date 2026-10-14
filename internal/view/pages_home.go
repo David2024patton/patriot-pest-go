@@ -45,7 +45,7 @@ const pageHome = `<!-- ============ HERO ============ -->
       <span class="neutralized">Neutralized</span>
       <div class="file-no">Threat File #{{p3 (add $i 1)}} · {{upper $p.Category}}</div>
       <a href="/pest/{{$p.Slug}}" style="text-decoration:none;color:inherit">
-        <span class="pphoto s-lg"><img src="{{pestimg $p.Filename}}" alt="{{$p.Name}}" loading="lazy"><i class="ret" aria-hidden="true"></i></span>
+        <span class="pphoto s-lg"><img src="{{pestimg $p.Filename}}" alt="{{$p.Name}}" loading="lazy" decoding="async"><i class="ret" aria-hidden="true"></i></span>
       </a>
       <h3><a href="/pest/{{$p.Slug}}" style="color:inherit;text-decoration:none">{{$p.Name}}</a></h3>
       {{if $p.ScientificName}}<div class="sci">{{$p.ScientificName}}</div>{{end}}

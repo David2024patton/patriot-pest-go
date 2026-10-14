@@ -14,7 +14,7 @@ const pageServices = `<section class="block">
     <div class="grid g3">
       {{range $p := .Pests}}
       <a class="card" href="/pest/{{$p.Slug}}" style="text-decoration:none;color:inherit">
-        <span class="pphoto"><img src="{{pestimg $p.Filename}}" alt="{{$p.Name}}" loading="lazy"><i class="ret" aria-hidden="true"></i></span>
+        <span class="pphoto"><img src="{{pestimg $p.Filename}}" alt="{{$p.Name}}" loading="lazy" decoding="async"><i class="ret" aria-hidden="true"></i></span>
         <h3 style="font-family:var(--display);color:var(--cream);margin-top:.7rem">{{$p.Name}} ▸</h3>
         <span class="badge" style="margin-top:.4rem;color:var(--khaki)">{{ucfirst $p.Category}}</span>
       </a>

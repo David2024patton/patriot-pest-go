@@ -12,7 +12,7 @@ const pageBlogPost = `<article class="block">
     </div>
     <h1 style="font-family:var(--display);color:var(--cream);font-size:clamp(1.8rem,5vw,2.8rem);line-height:1.1;margin:.4rem 0 1rem">{{.Post.Title}}</h1>
 
-    {{if .Post.Photo}}<span class="pphoto s-lg" style="margin-bottom:1.6rem"><img src="{{pestimg .Post.Photo}}" alt="{{if .Post.PestName}}{{.Post.PestName}}{{else}}{{.Post.Title}}{{end}}" loading="eager"><i class="ret" aria-hidden="true"></i></span>{{end}}
+    {{if .Post.Photo}}<span class="pphoto s-lg" style="margin-bottom:1.6rem"><img src="{{pestimg .Post.Photo}}" alt="{{if .Post.PestName}}{{.Post.PestName}}{{else}}{{.Post.Title}}{{end}}" loading="eager" decoding="async"><i class="ret" aria-hidden="true"></i></span>{{end}}
 
     {{if .Post.Excerpt}}<p class="lead" style="margin-bottom:1.6rem">{{.Post.Excerpt}}</p>{{end}}
 

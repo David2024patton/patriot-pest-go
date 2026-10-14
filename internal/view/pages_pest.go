@@ -86,7 +86,7 @@ const pagePest = `<!-- ===== THREAT FILE HEADER ===== -->
         </div>
       </div>
       <div>
-        <span class="pphoto s-lg"><img src="{{pestimg .Pest.Filename}}" alt="{{.Pest.Name}}" loading="eager"><i class="ret" aria-hidden="true"></i></span>
+        <span class="pphoto s-lg"><img src="{{pestimg .Pest.Filename}}" alt="{{.Pest.Name}}" loading="eager" decoding="async"><i class="ret" aria-hidden="true"></i></span>
       </div>
     </div>
   </div>
@@ -128,7 +128,7 @@ const pagePest = `<!-- ===== THREAT FILE HEADER ===== -->
     <div class="grid g3">
       {{range $r := .Related}}
       <a class="card" href="/pest/{{$r.Slug}}" style="text-decoration:none;color:inherit">
-        <span class="pphoto"><img src="{{pestimg $r.Filename}}" alt="{{$r.Name}}" loading="lazy"><i class="ret" aria-hidden="true"></i></span>
+        <span class="pphoto"><img src="{{pestimg $r.Filename}}" alt="{{$r.Name}}" loading="lazy" decoding="async"><i class="ret" aria-hidden="true"></i></span>
         <h3 style="font-family:var(--display);color:var(--cream);margin-top:.7rem">{{$r.Name}} ▸</h3>
       </a>
       {{end}}

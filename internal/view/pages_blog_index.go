@@ -16,7 +16,7 @@ const pageBlogIndex = `<section class="block">
     <div class="blog-grid">
       {{range $p := .Posts}}
       <a class="card blog-card" href="/blogs/{{$p.Slug}}" style="text-decoration:none;color:inherit;display:flex;flex-direction:column">
-        {{if $p.Photo}}<span class="pphoto"><img src="{{pestimg $p.Photo}}" alt="{{if $p.PestName}}{{$p.PestName}}{{else}}{{$p.Title}}{{end}}" loading="lazy"><i class="ret" aria-hidden="true"></i></span>{{end}}
+        {{if $p.Photo}}<span class="pphoto"><img src="{{pestimg $p.Photo}}" alt="{{if $p.PestName}}{{$p.PestName}}{{else}}{{$p.Title}}{{end}}" loading="lazy" decoding="async"><i class="ret" aria-hidden="true"></i></span>{{end}}
         <div class="post-meta" style="margin-top:.8rem">
           {{if $p.Season}}<span>{{ucfirst $p.Season}}</span>{{end}}
           {{if $p.PublishedAt}}<span>{{dateMDY $p.PublishedAt}}</span>{{end}}
