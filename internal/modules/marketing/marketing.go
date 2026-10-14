@@ -46,7 +46,7 @@ type Module struct {
 
 // metaKeywords — shared <meta name="keywords"> value, mirrored from
 // PageController::meta().
-const metaKeywords = "pest control, Spokane, Washington, Idaho, Oregon, Arizona, veteran-owned"
+const metaKeywords = "pest control, Spokane, Washington, Idaho, Oregon, veteran-owned"
 
 // ldBusiness — LocalBusiness JSON-LD (PestControl subtype), the stable entity
 // block emitted on every page. Mirrors PageController::ldBusiness().
@@ -57,11 +57,11 @@ var ldBusiness = map[string]any{
 	"name":        "Patriot Pest Control",
 	"legalName":   "Patriot Pest Control CO",
 	"url":         "https://www.patriotpest.pro",
-	"telephone":   "+15098180993",
+	"telephone":   "+15094715767",
 	"email":       "info@patriotpest.pro",
 	"image":       "https://www.patriotpest.pro/assets/img/og.png",
 	"logo":        "https://www.patriotpest.pro/assets/img/og.png",
-	"description": "Veteran-owned pest control serving Washington, Idaho, Oregon & Arizona. Same-day service, eco-friendly family & pet safe treatments, 90-day warranty.",
+	"description": "Veteran-owned pest control serving Washington, Idaho & Oregon. Same-day service, eco-friendly family & pet safe treatments, 90-day warranty.",
 	"priceRange":  "$$",
 	"address": map[string]any{
 		"@type":           "PostalAddress",
@@ -75,7 +75,6 @@ var ldBusiness = map[string]any{
 		map[string]string{"@type": "State", "name": "Washington"},
 		map[string]string{"@type": "State", "name": "Idaho"},
 		map[string]string{"@type": "State", "name": "Oregon"},
-		map[string]string{"@type": "State", "name": "Arizona"},
 	},
 	"openingHoursSpecification": []any{
 		map[string]any{"@type": "OpeningHoursSpecification", "dayOfWeek": []string{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"}, "opens": "07:00", "closes": "19:00"},
@@ -294,20 +293,20 @@ func (m *Module) serviceWorker(w http.ResponseWriter, _ *http.Request) {
 // ---- Per-page SEO meta, mirrored from PageController::meta() call sites. ----
 
 const (
-	homeT     = "Pest Control WA, ID, OR & AZ | Patriot Pest Control"
-	homeD     = "Veteran-owned pest control across WA, ID, OR & AZ. Same-day service, eco-friendly family & pet safe treatments, 90-day warranty."
+	homeT     = "Pest Control WA, ID & OR | Patriot Pest Control"
+	homeD     = "Veteran-owned pest control across WA, ID & OR. Same-day service, eco-friendly family & pet safe treatments, 90-day warranty."
 	aboutT    = "About Us - Veteran-Owned | Patriot Pest Control"
-	aboutD    = "Founded by U.S. Military Veteran Skyler Rose. Military discipline, integrity, and eco-friendly pest control across Washington, Idaho, Oregon & Arizona."
+	aboutD    = "Founded by U.S. Military Veteran Skyler Rose. Military discipline, integrity, and eco-friendly pest control across Washington, Idaho & Oregon."
 	servicesT = "Pest Control Services | Patriot Pest Control"
-	servicesD = "Complete pest control: ants, spiders, rodents, bed bugs, termites, mosquitoes, wasps, roaches, scorpions, wildlife & more across WA, ID, OR, AZ."
+	servicesD = "Complete pest control: ants, spiders, rodents, bed bugs, termites, mosquitoes, wasps, roaches, scorpions, wildlife & more across WA, ID, OR."
 	pricesT   = "Pest Control Pricing & Plans | Patriot Pest Control"
 	pricesD   = "Transparent pest control pricing. Exterior-Only, Interior + Exterior, Priority, and Full Coverage plans. Free quotes, no hidden fees, 90-day warranty."
-	areasT    = "Service Areas - WA, ID, OR & AZ | Patriot Pest Control"
-	areasD    = "Pest control service areas across Spokane WA, Coeur d'Alene ID, Hermiston OR, Phoenix AZ and surrounding communities."
+	areasT    = "Service Areas - WA, ID & OR | Patriot Pest Control"
+	areasD    = "Pest control service areas across Spokane WA, Coeur d'Alene ID, Hermiston OR and surrounding communities."
 	faqsT     = "Pest Control FAQs | Patriot Pest Control"
 	faqsD     = "Answers to common pest control questions: safety, pricing, guarantees, preparation, and what to expect."
 	contactT  = "Free Pest Control Quotes | Patriot Pest Control"
-	contactD  = "Call (509) 818-0993 (WA/ID/OR) or (602) 755-8414 (AZ). Free quotes, same-day pest control service, online scheduling 24/7."
+	contactD  = "Call (509) 471-5767. Free quotes, same-day pest control service, online scheduling 24/7."
 	referralT = "Referral Program - Earn $25 | Patriot Pest Control"
 	referralD = "Refer a neighbor, both get $25. Patriot Pest Control referral program."
 	socialsT  = "Social Media | Patriot Pest Control"
@@ -323,7 +322,7 @@ const (
 	termsT    = "Terms of Use | Patriot Pest Control"
 	termsD    = "Terms of use for the Patriot Pest Control website and services."
 	blogT     = "Pest Control Blog & Tips | Patriot Pest Control"
-	blogD     = "Expert pest control tips, seasonal guides, and identification help for WA, ID, OR, AZ. Written by licensed technicians."
+	blogD     = "Expert pest control tips, seasonal guides, and identification help for WA, ID, OR. Written by licensed technicians."
 )
 
 // redirectPermanent issues a 301 to a fixed path (canonical URL aliases).
@@ -463,7 +462,7 @@ func (m *Module) llms(w http.ResponseWriter, r *http.Request) {
 		sb.WriteString("- " + st.Name + " (" + st.Code + "): " + strings.Join(st.Cities, ", ") + "\n")
 	}
 	sb.WriteString("\n## Contact\n\n")
-	sb.WriteString("- WA/ID/OR: (509) 818-0993\n- AZ: (602) 755-8414\n- Email: info@patriotpest.pro\n- Contact form: " + base + "/contact\n\n")
+	sb.WriteString("- Phone: (509) 471-5767\n- Email: info@patriotpest.pro\n- Contact form: " + base + "/contact\n\n")
 	sb.WriteString("## Services\n\n")
 	for _, pest := range data.AllPests() {
 		sb.WriteString("- " + pest.Name + ": " + base + "/pest/" + pest.Slug + "\n")
@@ -524,7 +523,7 @@ func (m *Module) pest(w http.ResponseWriter, r *http.Request) {
 	if desc == "" {
 		desc = "Professional " + pest.Name + " control"
 	}
-	desc += " Veteran-owned, eco-friendly, 90-day warranty across WA, ID, OR, AZ."
+	desc += " Veteran-owned, eco-friendly, 90-day warranty across WA, ID, OR."
 	crumb := [][2]string{{"Home", "/"}, {"Pest Library", "/services"}, {pest.Name, "/pest/" + pest.Slug}}
 	view.Page(w, r, "pest", title, desc, metaKeywords, m.base(map[string]any{
 		"Pest":    pest,
@@ -639,7 +638,6 @@ func ldService(p data.Pest) map[string]any {
 			map[string]string{"@type": "State", "name": "Washington"},
 			map[string]string{"@type": "State", "name": "Idaho"},
 			map[string]string{"@type": "State", "name": "Oregon"},
-			map[string]string{"@type": "State", "name": "Arizona"},
 		},
 	}
 }
@@ -741,7 +739,7 @@ func (m *Module) rss(w http.ResponseWriter, r *http.Request) {
 		Channel: rssChannel{
 			Title:       "Patriot Pest Control",
 			Link:        base,
-			Description: "Expert pest control tips, seasonal guides, and identification help for WA, ID, OR, AZ.",
+			Description: "Expert pest control tips, seasonal guides, and identification help for WA, ID, OR.",
 			Items:       items,
 		},
 	})
