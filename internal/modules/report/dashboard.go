@@ -195,6 +195,16 @@ const REPORTS = {
         "Heavy photos slow the page down on phones, and slow pages lose both customers and Google ranking.",
         "The fix is simple: shrink the photos to web size. Same pictures, same look on screen, a quarter of the weight."
       ]},
+      {title:"Google profile tune-up", pill:"progress", cls:"", note:"Done in Skyler's Google account on October 14. Most edits are in Google's review queue and go public as they clear.",
+       points:[
+        "Profile phone number changed to (509) 471-5767 to match the website. In review now.",
+        "Services cleaned up: 5 junk entries Google had added (like Lice) are gone, mosquito control is added, and 14 services got plain descriptions.",
+        "Business description rewritten: it used the wrong name (Patriot Pest Control Solutions) and only mentioned Spokane. The new one covers Coeur d'Alene and North Idaho too.",
+        "Service areas fixed: Google had dropped Hayden, Post Falls, Rathdrum, Cheney, Liberty Lake and Medical Lake. Google only allows 20 areas, so 6 tiny spots covered by bigger neighbors were swapped out to make room.",
+        "Search help: fresh indexing was requested for the homepage and service areas, so Google re-reads the cleaned-up site sooner.",
+        "Reviews are climbing: 104 reviews at 4.8 stars, up from 98 at 4.7 on October 1.",
+        "Photos are the thin spot: only 11 photos and 2 videos on the profile. The plan is 8 to 12 fresh job photos a month, posted a few at a time."
+      ]},
       {title:"Fixed this week", pill:"done", cls:"", note:"",
        points:[
         "Arizona is off the website for good. The operation was sold, and the site now matches: no Arizona words, the Phoenix page is deleted, and it is out of Google's map of the site.",
