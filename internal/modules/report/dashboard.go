@@ -147,7 +147,7 @@ const REPORTS = {
   label: "October 14, 2026",
   patriot: {
     stats: [
-      {v:"15 of 20", k:"website health checks fully passed"},
+      {v:"16 of 20", k:"website health checks fully passed"},
       {v:"57 of 57", k:"pages live, zero broken links found"},
       {v:"1", k:"phone number on the whole site now: (509) 471-5767"},
       {v:"0", k:"Arizona mentions left anywhere on the site"},
@@ -157,13 +157,12 @@ const REPORTS = {
       {title:"Website health check", pill:"progress", cls:"", note:"The same 20 point check the pros use, run on patriotpest.pro on October 14. This entry covers the Week of October 8 and this week.",
        points:[
         "Here is the score at a glance:",
-        "<div style='margin:.35rem 0 .7rem'><div style='display:flex;justify-content:space-between;font-size:.85rem;color:#dbe2ff'><span>Passed</span><b>15 of 20</b></div><div style='background:rgba(255,255,255,.08);border-radius:6px;height:12px;margin-top:.25rem'><div style='width:75%;height:12px;border-radius:6px;background:#2ea043'></div></div></div>",
+        "<div style='margin:.35rem 0 .7rem'><div style='display:flex;justify-content:space-between;font-size:.85rem;color:#dbe2ff'><span>Passed</span><b>16 of 20</b></div><div style='background:rgba(255,255,255,.08);border-radius:6px;height:12px;margin-top:.25rem'><div style='width:80%;height:12px;border-radius:6px;background:#2ea043'></div></div></div>",
         "<div style='margin:.35rem 0 .7rem'><div style='display:flex;justify-content:space-between;font-size:.85rem;color:#dbe2ff'><span>Almost there, small touch-up</span><b>3 of 20</b></div><div style='background:rgba(255,255,255,.08);border-radius:6px;height:12px;margin-top:.25rem'><div style='width:15%;height:12px;border-radius:6px;background:#d29922'></div></div></div>",
         "<div style='margin:.35rem 0 .7rem'><div style='display:flex;justify-content:space-between;font-size:.85rem;color:#dbe2ff'><span>Missed, one real fix</span><b>1 of 20</b></div><div style='background:rgba(255,255,255,.08);border-radius:6px;height:12px;margin-top:.25rem'><div style='width:5%;height:12px;border-radius:6px;background:#e63946'></div></div></div>",
-        "<div style='margin:.35rem 0 .7rem'><div style='display:flex;justify-content:space-between;font-size:.85rem;color:#dbe2ff'><span>Could not check from outside</span><b>1 of 20</b></div><div style='background:rgba(255,255,255,.08);border-radius:6px;height:12px;margin-top:.25rem'><div style='width:5%;height:12px;border-radius:6px;background:#8b949e'></div></div></div>",
-        "Bottom line: the site is in great shape. One real fix (photo size) and three small touch-ups, all listed below."
+        "Bottom line: the site is in great shape. One real fix (photo size) and three small touch-ups, all listed below. The one item we could not check from outside, the Google Search Console setup, has since been confirmed good."
       ]},
-      {title:"Passed: the 15 checks", pill:"done", cls:"", note:"Each one in plain words.",
+      {title:"Passed: the 16 checks", pill:"done", cls:"", note:"Each one in plain words.",
        points:[
         "Site map: Google gets a current list of all 57 pages, and every one of them loads.",
         "Open doors: search engines and AI assistants like ChatGPT are welcomed in by name, not blocked.",
@@ -179,14 +178,14 @@ const REPORTS = {
         "Secure: the site forces the locked connection, and the standard security headers are on.",
         "Clean page addresses a person can read, like patriotpest.pro/pest/ants.",
         "Sharing a page in a text or on Facebook shows the right picture and title.",
-        "A plain text guide written for AI assistants, and it already shows the new 5767 number."
+        "A plain text guide written for AI assistants, and it already shows the new 5767 number.",
+        "Google Search Console is set up and verified through the domain name, so the site is connected to Google reporting."
       ]},
       {title:"Needs a small touch-up: 3 checks", pill:"progress", cls:"", note:"Small stuff. All three are on the fix list.",
        points:[
         "The customer login page still shows up in Google results. It should be hidden. Quick fix.",
         "On some pages the headlines jump from big straight to small, skipping the middle size. Google prefers a steady staircase. Template fix.",
-        "Photos already load as you scroll, which is good. One extra speed setting is missing. Quick fix.",
-        "Plus one we could not check from outside: the Google Search Console verification. It may already be handled through the domain name. Worth a look on the next call."
+        "Photos already load as you scroll, which is good. One extra speed setting is missing. Quick fix."
       ]},
       {title:"The one real fix: heavy photos", pill:"progress", cls:"", note:"",
        points:[
