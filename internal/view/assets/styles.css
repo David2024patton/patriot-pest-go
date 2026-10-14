@@ -169,8 +169,8 @@ h2 em,h1 em{font-style:normal;color:var(--orange)}
 .prose b,.prose strong{color:var(--cream)}
 .block.paper .prose p{color:#4a4636}
 .block.paper .prose b,.block.paper .prose strong{color:var(--ink)}
-.prose h3{font-size:1.25rem;color:var(--cream);margin:1.8rem 0 .7rem;letter-spacing:.03em}
-.block.paper .prose h3{color:var(--ink)}
+.prose h3,.prose h2{font-size:1.25rem;color:var(--cream);margin:1.8rem 0 .7rem;letter-spacing:.03em}
+.block.paper .prose h3,.block.paper .prose h2{color:var(--ink)}
 .prose ul{margin:.4rem 0 1.2rem 1.2rem;color:var(--khaki)}
 .block.paper .prose ul{color:#4a4636}
 .prose li{margin-bottom:.45rem;line-height:1.6}
@@ -896,7 +896,7 @@ footer.site-footer{background:var(--olive-950);border-top:2px solid var(--olive-
 .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:2.5rem}
 @media(max-width:900px){.foot-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:560px){.foot-grid{grid-template-columns:1fr}}
-.foot-grid h4{font-family:var(--display);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:1rem}
+.foot-grid h4,.foot-grid h3{font-family:var(--display);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:1rem}
 .foot-grid a{display:block;color:var(--khaki);text-decoration:none;font-size:.85rem;padding:.27rem 0;transition:color .2s,transform .2s}
 .foot-grid a:hover{color:var(--orange);transform:translateX(5px)}
 .foot-grid p{color:var(--khaki);font-size:.85rem;line-height:1.62}
@@ -941,7 +941,7 @@ footer.site-footer{background:var(--olive-950);border-top:2px solid var(--olive-
 .brief::after{top:-2px;right:-2px;border-left:0;border-bottom:0}
 .brief .corner::before{bottom:-2px;left:-2px;border-right:0;border-top:0}
 .brief .corner::after{bottom:-2px;right:-2px;border-left:0;border-top:0}
-.brief h3{font-family:var(--display);font-size:.82rem;letter-spacing:.12em;color:var(--orange);margin-bottom:.9rem;text-transform:uppercase}
+.brief .brief-title{font-family:var(--display);font-size:.82rem;letter-spacing:.12em;color:var(--orange);margin-bottom:.9rem;text-transform:uppercase}
 .brief .line{font-size:.7rem;line-height:1.9;color:var(--khaki);letter-spacing:.04em;min-height:1.9em;white-space:pre-wrap}
 .brief .line b{color:var(--cream)}
 .brief .caret{display:inline-block;width:8px;height:13px;background:var(--orange);vertical-align:-2px;animation:blink 1s infinite}

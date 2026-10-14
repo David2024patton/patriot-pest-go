@@ -21,7 +21,7 @@ const pageBlogIndex = `<section class="block">
           {{if $p.Season}}<span>{{ucfirst $p.Season}}</span>{{end}}
           {{if $p.PublishedAt}}<span>{{dateMDY $p.PublishedAt}}</span>{{end}}
         </div>
-        <h3 style="font-family:var(--display);color:var(--cream);font-size:1.1rem;line-height:1.25;margin:.2rem 0 .5rem">{{$p.Title}}</h3>
+        <h2 style="font-family:var(--display);color:var(--cream);font-size:1.1rem;line-height:1.25;margin:.2rem 0 .5rem">{{$p.Title}}</h2>
         <p style="color:var(--khaki);font-size:.9rem;line-height:1.6;flex:1">{{$p.Excerpt}}</p>
         <span class="more" style="color:var(--orange);font-family:var(--mono);font-size:.8rem;margin-top:.8rem">READ REPORT ▸</span>
       </a>

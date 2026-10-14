@@ -17,7 +17,7 @@ const pageContact = `<section class="block">
     <div class="split" style="align-items:start">
       <div>
         <div class="panel">
-          <h3 style="font-family:var(--display);color:var(--cream)">Direct Lines</h3>
+          <h2 style="font-family:var(--display);color:var(--cream);font-size:1.17rem">Direct Lines</h2>
           <dl class="kv" style="margin-top:.8rem">
             <dt>WA · ID · OR</dt><dd><a href="tel:+15094715767" style="color:var(--orange)">(509) 471-5767</a></dd>
             <dt>Email</dt><dd><a href="mailto:info@patriotpest.pro" style="color:var(--orange)">info@patriotpest.pro</a></dd>
@@ -26,7 +26,7 @@ const pageContact = `<section class="block">
           </dl>
         </div>
         <div class="panel">
-          <h3 style="font-family:var(--display);color:var(--cream)">Why Patriot?</h3>
+          <h2 style="font-family:var(--display);color:var(--cream);font-size:1.17rem">Why Patriot?</h2>
           <ul style="margin:.6rem 0 0 1.1rem;color:var(--khaki);line-height:1.8">
             <li>Same-day service available</li>
             <li>Free quotes, no hidden fees</li>

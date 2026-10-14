@@ -98,17 +98,17 @@ const pagePest = `<!-- ===== THREAT FILE HEADER ===== -->
     <div class="grid g3">
       {{with pestcopy2 .Pest.Slug .Pest.Category}}
       <div class="card">
-        <h3 style="font-family:var(--display);color:var(--cream)">⚠ Signs of Activity</h3>
+        <h2 style="font-family:var(--display);color:var(--cream);font-size:1.17rem">⚠ Signs of Activity</h2>
         <ul style="margin:.6rem 0 0 1.1rem;color:var(--khaki);line-height:1.7">
           {{range .Signs}}<li>{{.}}</li>{{end}}
         </ul>
       </div>
       <div class="card">
-        <h3 style="font-family:var(--display);color:var(--cream)">🎯 Our Treatment</h3>
+        <h2 style="font-family:var(--display);color:var(--cream);font-size:1.17rem">🎯 Our Treatment</h2>
         <p style="color:var(--khaki);line-height:1.7;margin-top:.6rem">{{.Treat}}</p>
       </div>
       <div class="card">
-        <h3 style="font-family:var(--display);color:var(--cream)">🛡 Prevention</h3>
+        <h2 style="font-family:var(--display);color:var(--cream);font-size:1.17rem">🛡 Prevention</h2>
         <ul style="margin:.6rem 0 0 1.1rem;color:var(--khaki);line-height:1.7">
           {{range .Prev}}<li>{{.}}</li>{{end}}
         </ul>

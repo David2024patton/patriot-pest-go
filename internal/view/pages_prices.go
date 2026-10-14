@@ -16,7 +16,7 @@ const pagePrices = `<section class="block">
     <div class="plan-grid">
       <div class="plan">
         <span class="plan-tier" style="font-family:var(--mono);font-size:.64rem;letter-spacing:.2em;color:var(--olive-300)">BRONZE</span>
-        <h3 class="pname" style="margin:.4rem 0 0">Exterior-Only Protection</h3>
+        <h2 class="pname" style="margin:.4rem 0 0">Exterior-Only Protection</h2>
         <div class="price">$35.95<small> /MO</small></div>
         <p class="pdesc">Monthly exterior treatment keeps ants, spiders, wasps &amp; more away.</p>
         <ul>
@@ -32,7 +32,7 @@ const pagePrices = `<section class="block">
 
       <div class="plan">
         <span class="plan-tier" style="font-family:var(--mono);font-size:.64rem;letter-spacing:.2em;color:var(--olive-300)">SILVER</span>
-        <h3 class="pname" style="margin:.4rem 0 0">Interior + Exterior</h3>
+        <h2 class="pname" style="margin:.4rem 0 0">Interior + Exterior</h2>
         <div class="price">$59.99<small> /MO</small></div>
         <p class="pdesc">Complete indoor + outdoor coverage ideal for families &amp; pets.</p>
         <ul>
@@ -50,7 +50,7 @@ const pagePrices = `<section class="block">
       <div class="plan gold">
         <span class="pop">MOST POPULAR</span>
         <span class="plan-tier" style="font-family:var(--mono);font-size:.64rem;letter-spacing:.2em;color:var(--orange)">GOLD</span>
-        <h3 class="pname" style="margin:.4rem 0 0">Priority Interior &amp; Exterior</h3>
+        <h2 class="pname" style="margin:.4rem 0 0">Priority Interior &amp; Exterior</h2>
         <div class="price">$79.99<small> /MO</small></div>
         <p class="pdesc">Everything in Silver + fast response &amp; seasonal deep checks.</p>
         <ul>
@@ -70,7 +70,7 @@ const pagePrices = `<section class="block">
 
       <div class="plan">
         <span class="plan-tier" style="font-family:var(--mono);font-size:.64rem;letter-spacing:.2em;color:var(--olive-300)">PLATINUM</span>
-        <h3 class="pname" style="margin:.4rem 0 0">Full Coverage (Fleas+Ticks)</h3>
+        <h2 class="pname" style="margin:.4rem 0 0">Full Coverage (Fleas+Ticks)</h2>
         <div class="price">$95.94<small> /MO</small></div>
         <p class="pdesc">All-in-one: Gold + Flea &amp; Tick treatment, rodent stations &amp; monitoring.</p>
         <ul>

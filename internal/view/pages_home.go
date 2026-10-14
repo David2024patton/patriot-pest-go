@@ -23,7 +23,7 @@ const pageHome = `<!-- ============ HERO ============ -->
       <div class="hero-badges"><span>Same-Day Service</span><span>90-Day Warranty</span><span>Licensed &amp; Insured</span><span>100% Guaranteed</span></div>
     </div>
     <aside class="brief" aria-label="Mission brief"><div class="corner"></div>
-      <h3>// Mission Brief</h3><div id="brief-lines"></div>
+      <p class="brief-title">// Mission Brief</p><div id="brief-lines"></div>
       <div class="coords">GRID: DEER PARK HQ · EST. BY VETERAN SKYLER ROSE · ONLINE SCHEDULING 24/7</div>
     </aside>
   </div>

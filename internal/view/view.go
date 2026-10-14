@@ -210,20 +210,20 @@ const layoutHTML = `<!DOCTYPE html>
         <p>Veteran-owned pest control for homes &amp; businesses across Washington, Idaho &amp; Oregon. Founded by U.S. Military Veteran Skyler Rose. Eco-friendly, family &amp; pet safe, 100% satisfaction guaranteed.</p>
       </div>
       <div>
-        <h4>Quick Links</h4>
+        <h3>Quick Links</h3>
         <a href="/about">About Us</a><a href="/services">Services</a>
         <a href="/prices">Pricing</a><a href="/blogs">Blog</a>
         <a href="/faqs">FAQs</a><a href="/referral">Referral Program</a>
         <a href="/help">Help Center</a>
       </div>
       <div>
-        <h4>Top Services</h4>
+        <h3>Top Services</h3>
         <a href="/pest/ants">Ant Control</a><a href="/pest/termites">Termite Control</a>
         <a href="/pest/bed-bugs">Bed Bug Treatment</a><a href="/pest/rodents">Rodent Control</a>
         <a href="/pest/mosquitoes">Mosquito Control</a><a href="/pest/wasps">Wasp Removal</a>
       </div>
       <div>
-        <h4>Contact</h4>
+        <h3>Contact</h3>
         <a href="{{.PhoneHref}}">{{.PhoneDisplay}} - {{.PhoneLabel}}</a>
         <a href="{{.OtherTel}}">{{.OtherDisplay}} - {{.OtherLabel}}</a>
         <a href="mailto:info@patriotpest.pro">info@patriotpest.pro</a>

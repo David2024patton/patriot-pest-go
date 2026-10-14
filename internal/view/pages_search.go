@@ -21,7 +21,7 @@ const pageSearch = `<section class="block">
         {{range .Pests}}<a class="card" href="/pest/{{.Slug}}" style="text-decoration:none;color:inherit;display:flex;gap:.9rem;align-items:center">
           <span class="pphoto" style="width:70px;height:52px"><img src="{{pestimg .Filename}}" alt="{{.Name}}" loading="lazy" decoding="async"></span>
           <div>
-            <h3 style="font-family:var(--display);color:var(--cream);font-size:.95rem">{{.Name}}</h3>
+            <h2 style="font-family:var(--display);color:var(--cream);font-size:.95rem">{{.Name}}</h2>
             <p style="color:var(--khaki);font-size:.8rem;line-height:1.4">{{.Desc}}</p>
           </div>
         </a>{{end}}
@@ -31,7 +31,7 @@ const pageSearch = `<section class="block">
       <div class="eyebrow">BLOG GUIDES</div>
       <div class="grid g3" style="margin:1rem 0 2rem">
         {{range .Posts}}<a class="card" href="/blogs/{{.Slug}}" style="text-decoration:none;color:inherit">
-          <h3 style="font-family:var(--display);color:var(--cream);font-size:1rem;line-height:1.3">{{.Title}}</h3>
+          <h2 style="font-family:var(--display);color:var(--cream);font-size:1rem;line-height:1.3">{{.Title}}</h2>
           <p style="color:var(--khaki);font-size:.85rem;line-height:1.55;margin-top:.4rem">{{.Excerpt}}</p>
         </a>{{end}}
       </div>
