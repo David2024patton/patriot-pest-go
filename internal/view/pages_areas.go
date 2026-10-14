@@ -5,8 +5,8 @@ package view
 const pageAreas = `<section class="block">
   <div class="wrap">
     <div class="eyebrow">AREA OF OPERATIONS</div>
-    <h1 style="font-family:var(--display);color:var(--cream);font-size:clamp(2rem,6vw,3rem);margin:.4rem 0 .8rem">Four states. <em>One call.</em></h1>
-    <p class="lead">Same-day pest control across Washington, Idaho, Oregon &amp; Arizona. Find your community below. If we're not listed, call us; we likely still cover you.</p>
+    <h1 style="font-family:var(--display);color:var(--cream);font-size:clamp(2rem,6vw,3rem);margin:.4rem 0 .8rem">Three states. <em>One call.</em></h1>
+    <p class="lead">Same-day pest control across Washington, Idaho &amp; Oregon. Find your community below. If we're not listed, call us; we likely still cover you.</p>
   </div>
 </section>
 
@@ -32,7 +32,7 @@ const pageAreas = `<section class="block">
   <div class="wrap" style="text-align:center">
     <h2 style="font-family:var(--display);color:var(--cream)">In the region? <em>Let's talk.</em></h2>
     <div class="hero-ctas" style="justify-content:center;margin-top:1.2rem">
-      <a class="btn btn-primary" href="tel:+15098180993">☎ (509) 818-0993</a>
+      <a class="btn btn-primary" href="tel:+15094715767">☎ (509) 471-5767</a>
       <a class="btn btn-ghost" href="/contact">Get a Free Quote ▸</a>
     </div>
   </div>
