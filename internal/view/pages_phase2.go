@@ -66,7 +66,7 @@ const pageDashHeatmap = `
   <div class="app-head">
     <div>
       <h1>Customer Density Heatmap</h1>
-      <p class="sub">USA drill-down — zoom from national view to Spokane / Phoenix neighborhoods.</p>
+      <p class="sub">USA drill-down — zoom from national view to Spokane neighborhoods.</p>
     </div>
     <div class="actions"><a class="btn btn-ghost" href="/admin">◂ Admin Console</a></div>
   </div>
