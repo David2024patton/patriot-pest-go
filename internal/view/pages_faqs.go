@@ -53,13 +53,13 @@ const pageFaqs = `<section class="block">
         <summary class="faq-q" style="cursor:pointer;color:var(--cream);font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:1rem">
           <span>Do you offer same-day service?</span><span style="color:var(--orange)">+</span>
         </summary>
-        <p class="faq-a" style="color:var(--khaki);line-height:1.7;margin-top:.8rem">Yes. When pests cannot wait, like a wasp nest by the front door or mice in the pantry, we offer same-day visits across Washington, Idaho, Oregon, and Arizona. Scheduling depends on technician availability and routing, so call as early in the day as you can to get a slot. If the day is fully booked, we will set the next available visit and tell you what to do in the meantime.</p>
+        <p class="faq-a" style="color:var(--khaki);line-height:1.7;margin-top:.8rem">Yes. When pests cannot wait, like a wasp nest by the front door or mice in the pantry, we offer same-day visits across Washington, Idaho, and Oregon. Scheduling depends on technician availability and routing, so call as early in the day as you can to get a slot. If the day is fully booked, we will set the next available visit and tell you what to do in the meantime.</p>
       </details>
       <details class="faq-item" style="border:1px solid var(--olive-700);background:var(--olive-800);margin-bottom:.7rem;padding:1rem 1.2rem">
         <summary class="faq-q" style="cursor:pointer;color:var(--cream);font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:1rem">
           <span>What areas do you serve?</span><span style="color:var(--orange)">+</span>
         </summary>
-        <p class="faq-a" style="color:var(--khaki);line-height:1.7;margin-top:.8rem">We cover four states. In Washington: Spokane, Spokane Valley, Cheney, Liberty Lake, Airway Heights, Medical Lake, Deer Park, and Mead. In Idaho: Coeur d'Alene, Post Falls, Hayden, and Rathdrum. In Oregon: Hermiston and Milton-Freewater. In Arizona: Phoenix. See our service areas page for the full list, and if you are just outside these areas, call and ask.</p>
+        <p class="faq-a" style="color:var(--khaki);line-height:1.7;margin-top:.8rem">We cover three states. In Washington: Spokane, Spokane Valley, Cheney, Liberty Lake, Airway Heights, Medical Lake, Deer Park, and Mead. In Idaho: Coeur d'Alene, Post Falls, Hayden, and Rathdrum. In Oregon: Hermiston and Milton-Freewater. See our service areas page for the full list, and if you are just outside these areas, call and ask.</p>
       </details>
       <details class="faq-item" style="border:1px solid var(--olive-700);background:var(--olive-800);margin-bottom:.7rem;padding:1rem 1.2rem">
         <summary class="faq-q" style="cursor:pointer;color:var(--cream);font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:1rem">
@@ -74,7 +74,7 @@ const pageFaqs = `<section class="block">
         <summary class="faq-q" style="cursor:pointer;color:var(--cream);font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:1rem">
           <span>How do I get started?</span><span style="color:var(--orange)">+</span>
         </summary>
-        <p class="faq-a" style="color:var(--khaki);line-height:1.7;margin-top:.8rem">Call us at (509) 818-0993 or request a free quote through the contact page. We will ask what you are seeing, where, and how long it has been going on, then recommend a plan and a price before any work happens. Many jobs can be scheduled the same day you call. There is no obligation and no pressure; if all you need is advice, we will say so.</p>
+        <p class="faq-a" style="color:var(--khaki);line-height:1.7;margin-top:.8rem">Call us at (509) 471-5767 or request a free quote through the contact page. We will ask what you are seeing, where, and how long it has been going on, then recommend a plan and a price before any work happens. Many jobs can be scheduled the same day you call. There is no obligation and no pressure; if all you need is advice, we will say so.</p>
       </details>
       <details class="faq-item" style="border:1px solid var(--olive-700);background:var(--olive-800);margin-bottom:.7rem;padding:1rem 1.2rem">
         <summary class="faq-q" style="cursor:pointer;color:var(--cream);font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:1rem">
@@ -90,7 +90,7 @@ const pageFaqs = `<section class="block">
   <div class="wrap" style="text-align:center">
     <h2 style="font-family:var(--display);color:var(--cream)">Ready when <em>you are.</em></h2>
     <div class="hero-ctas" style="justify-content:center;margin-top:1.2rem">
-      <a class="btn btn-primary" href="tel:+15098180993">☎ (509) 818-0993</a>
+      <a class="btn btn-primary" href="tel:+15094715767">☎ (509) 471-5767</a>
       <a class="btn btn-ghost" href="/contact">Get a Free Quote ▸</a>
     </div>
   </div>
