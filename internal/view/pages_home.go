@@ -14,7 +14,7 @@ const pageHome = `<!-- ============ HERO ============ -->
     <div>
       <div class="kicker"><span>🇺🇸</span> A PROUD VETERAN-OWNED AMERICAN COMPANY</div>
       <h1>Hostile pests?<br><span class="strike">Neutralized.</span></h1>
-      <p class="hero-sub">Military-precision pest control for homes and businesses across <b>Washington, Idaho, Oregon &amp; Arizona</b>. Eco-friendly treatments safe for your family and pets, with <b>same-day service</b> when it can't wait.</p>
+      <p class="hero-sub">Military-precision pest control for homes and businesses across <b>Washington, Idaho &amp; Oregon</b>. Eco-friendly treatments safe for your family and pets, with <b>same-day service</b> when it can't wait.</p>
       <div class="hero-ctas">
         <a class="btn btn-primary" href="{{.PhoneHref}}">☎ Call {{.PhoneDisplay}} <small>{{.PhoneLabel}}</small></a>
         <a class="btn btn-ghost" href="/prices">View Plans ▸</a>
@@ -71,14 +71,14 @@ const pageHome = `<!-- ============ HERO ============ -->
           <div class="drow"><dt>Name</dt><dd>SKYLER ROSE</dd></div>
           <div class="drow"><dt>Role</dt><dd>FOUNDER &amp; OPERATOR</dd></div>
           <div class="drow"><dt>Service</dt><dd>U.S. MILITARY VETERAN</dd></div>
-          <div class="drow"><dt>Theater</dt><dd>WA · ID · OR · AZ</dd></div>
+          <div class="drow"><dt>Theater</dt><dd>WA · ID · OR</dd></div>
           <div class="drow"><dt>Clearance</dt><dd>LICENSED · BONDED · INSURED</dd></div>
           <div class="drow"><dt>Status</dt><dd>ACTIVE - SAME-DAY RESPONSE</dd></div>
         </dl>
       </div>
       <div>
         <h2 data-reveal>The operator behind <em>the operation.</em></h2>
-        <p class="lead" data-reveal>Patriot Pest Control was founded by <b>U.S. Military Veteran Skyler Rose</b>, bringing military discipline, integrity, and uncompromising excellence to pest control across four states. Over a decade of field experience. Thousands of homes and businesses protected.</p>
+        <p class="lead" data-reveal>Patriot Pest Control was founded by <b>U.S. Military Veteran Skyler Rose</b>, bringing military discipline, integrity, and uncompromising excellence to pest control across three states. Over a decade of field experience. Thousands of homes and businesses protected.</p>
         <blockquote class="quote" data-reveal>
           <p>After serving our country, I founded Patriot Pest Control to continue serving American families and businesses with the same dedication, precision, and integrity I learned in the military. We're not just eliminating pests. We're protecting what matters most.</p>
           <div class="quote-foot"><span class="medal">🎖️</span><div><b>Skyler Rose</b><small>FOUNDER &amp; VETERAN · PATRIOT PEST CONTROL</small></div></div>
@@ -92,7 +92,7 @@ const pageHome = `<!-- ============ HERO ============ -->
 <section id="areas" class="block">
   <div class="wrap">
     <div class="eyebrow">SEC. 03 // AREA OF OPERATIONS</div>
-    <h2 data-reveal>Four states. <em>One call.</em></h2>
+    <h2 data-reveal>Three states. <em>One call.</em></h2>
     <div class="area-grid" data-reveal>
       <div class="area-col"><h3>WA</h3><div class="area-cities">
         <a href="/areas/spokane">Spokane</a><a href="/areas/spokane-valley">Spokane Valley</a><a href="/areas/cheney">Cheney</a><a href="/areas/liberty-lake">Liberty Lake</a><a href="/areas/airway-heights">Airway Heights</a><a href="/areas/medical-lake">Medical Lake</a><a href="/areas/deer-park">Deer Park</a><a href="/areas/mead">Mead</a>
@@ -103,9 +103,6 @@ const pageHome = `<!-- ============ HERO ============ -->
       <div class="area-col"><h3>OR</h3><div class="area-cities">
         <a href="/areas/hermiston">Hermiston</a><a href="/areas/milton-freewater">Milton-Freewater</a>
       </div><span class="area-note">● 2 ZONES · SAME-DAY AVAILABLE</span></div>
-      <div class="area-col"><h3>AZ</h3><div class="area-cities">
-        <a href="/areas/phoenix">Phoenix</a>
-      </div><span class="area-note">● 1 ZONE · SAME-DAY AVAILABLE</span></div>
     </div>
   </div>
 </section>
@@ -134,7 +131,7 @@ const pageHome = `<!-- ============ HERO ============ -->
       <div class="stat" data-reveal><span class="num" data-count="100">0</span><span class="unit">%</span><span class="cap">SATISFACTION GUARANTEED</span></div>
       <div class="stat" data-reveal><span class="num" data-count="90">90</span><span class="unit">-DAY</span><span class="cap">WARRANTY ON ALL TREATMENTS</span></div>
       <div class="stat" data-reveal><span class="num">24/7</span><span class="cap">APPOINTMENT SCHEDULING</span></div>
-      <div class="stat" data-reveal><span class="num" data-count="4">4</span><span class="unit"> STATES</span><span class="cap">WA · ID · OR · AZ</span></div>
+      <div class="stat" data-reveal><span class="num" data-count="3">3</span><span class="unit"> STATES</span><span class="cap">WA · ID · OR</span></div>
       <div class="stat" data-reveal><span class="num" data-count="10">10</span><span class="unit">+</span><span class="cap">YEARS OF EXPERIENCE</span></div>
     </div>
     <div class="promise" data-reveal><b>🛡️ Our promise:</b> if pests return between scheduled visits, we re-treat at no additional cost. No hassles, no excuses. Licensed, bonded, and insured, with eco-friendly, low-toxicity products safe for kids, pets, and the environment.</div>
@@ -180,7 +177,7 @@ const pageHome = `<!-- ============ HERO ============ -->
   <div class="wrap" style="text-align:center">
     <div class="eyebrow">FINAL ORDERS</div>
     <h2 data-reveal>Ready to go <em>pest-free?</em></h2>
-    <p class="lead" data-reveal>Book online in minutes or call the line. Same-day service available across all four states. Free quotes, transparent pricing, zero hidden fees.</p>
+    <p class="lead" data-reveal>Book online in minutes or call the line. Same-day service available across all three states. Free quotes, transparent pricing, zero hidden fees.</p>
     <div class="hero-ctas" style="justify-content:center">
       <a class="btn btn-primary" href="{{.PhoneHref}}">☎ {{.PhoneDisplay}} <small>{{.PhoneLabel}}</small></a>
       <a class="btn btn-ghost" href="/contact" data-track="quote_request">Free Quote ▸</a>
