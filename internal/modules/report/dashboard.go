@@ -147,7 +147,7 @@ const REPORTS = {
   label: "October 14, 2026",
   patriot: {
     stats: [
-      {v:"19 of 20", k:"website health checks fully passed"},
+      {v:"20 of 20", k:"website health checks fully passed"},
       {v:"57 of 57", k:"pages live, zero broken links found"},
       {v:"1", k:"phone number on the whole site now: (509) 471-5767"},
       {v:"0", k:"Arizona mentions left anywhere on the site"},
@@ -157,11 +157,10 @@ const REPORTS = {
       {title:"Website health check", pill:"progress", cls:"", note:"The same 20 point check the pros use, run on patriotpest.pro on October 14. This entry covers the Week of October 8 and this week.",
        points:[
         "Here is the score at a glance:",
-        "<div style='margin:.35rem 0 .7rem'><div style='display:flex;justify-content:space-between;font-size:.85rem;color:#dbe2ff'><span>Passed</span><b>19 of 20</b></div><div style='background:rgba(255,255,255,.08);border-radius:6px;height:12px;margin-top:.25rem'><div style='width:95%;height:12px;border-radius:6px;background:#2ea043'></div></div></div>",
-        "<div style='margin:.35rem 0 .7rem'><div style='display:flex;justify-content:space-between;font-size:.85rem;color:#dbe2ff'><span>Almost there, small touch-up</span><b>1 of 20</b></div><div style='background:rgba(255,255,255,.08);border-radius:6px;height:12px;margin-top:.25rem'><div style='width:5%;height:12px;border-radius:6px;background:#d29922'></div></div></div>",
-        "Bottom line: the site is in great shape. The photo fix and the small touch-ups below are done. One tidy-up is left, headline sizes on a few pages, and it is cosmetic. The one item we could not check from outside, the Google Search Console setup, has since been confirmed good."
+        "<div style='margin:.35rem 0 .7rem'><div style='display:flex;justify-content:space-between;font-size:.85rem;color:#dbe2ff'><span>Passed</span><b>20 of 20</b></div><div style='background:rgba(255,255,255,.08);border-radius:6px;height:12px;margin-top:.25rem'><div style='width:100%;height:12px;border-radius:6px;background:#2ea043'></div></div></div>",
+        "Bottom line: the site passes all 20 checks. The one item we could not check from outside, the Google Search Console setup, has since been confirmed good too."
       ]},
-      {title:"Passed: the 19 checks", pill:"done", cls:"", note:"Each one in plain words.",
+      {title:"Passed: all 20 checks", pill:"done", cls:"", note:"Each one in plain words.",
        points:[
         "Site map: Google gets a current list of all 57 pages, and every one of them loads.",
         "Open doors: search engines and AI assistants like ChatGPT are welcomed in by name, not blocked.",
@@ -183,9 +182,9 @@ const REPORTS = {
         "Photos load the fast way: as you scroll, with the extra speed setting switched on.",
         "Photo weight fixed: the biggest photo on the site went from 647 KB to 139 KB."
       ]},
-      {title:"Needs a small touch-up: 1 check", pill:"progress", cls:"", note:"The last small thing on the list.",
+      {title:"The last touch-up: headline order (fixed)", pill:"done", cls:"", note:"Done on October 14. The checklist is now a clean sweep.",
        points:[
-        "On some pages the headlines jump from big straight to small, skipping the middle size. Google prefers a steady staircase. Template fix."
+        "Headlines jumped from big straight to small on some pages, skipping the middle size. They now step down in order on every page, the way Google and screen readers prefer."
       ]},
       {title:"The one real fix: heavy photos (fixed)", pill:"done", cls:"", note:"Done on October 14.",
        points:[
