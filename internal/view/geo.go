@@ -6,8 +6,9 @@ import (
 	"strings"
 )
 
-// Region lines, mirroring Core\Geo. Patriot runs two phone lines: the main
-// WA/ID/OR line and a dedicated Arizona line.
+// Region lines, mirroring Core\Geo. Patriot has ONE phone line,
+// (509) 471-5767, shown to every visitor. The Arizona operation was sold
+// in 2026-10, so there is no Arizona line or region anymore.
 type regionLine struct {
 	Display string
 	Tel     string
@@ -15,8 +16,7 @@ type regionLine struct {
 }
 
 var regions = map[string]regionLine{
-	"wa": {"(509) 818-0993", "+15098180993", "WA, ID, OR"},
-	"az": {"(602) 755-8414", "+16027558414", "ARIZONA"},
+	"wa": {"(509) 471-5767", "+15094715767", "WA, ID, OR"},
 }
 
 const geoCookie = "ppc_geo"
@@ -25,12 +25,12 @@ const geoCookie = "ppc_geo"
 // else the default main line. Fail-open — never blocks a page.
 func resolveRegion(r *http.Request) string {
 	if c, err := r.Cookie(geoCookie); err == nil {
-		if strings.ToLower(c.Value) == "az" || strings.ToLower(c.Value) == "wa" {
-			return strings.ToLower(c.Value)
+		if strings.ToLower(c.Value) == "wa" {
+			return "wa"
 		}
 	}
-	if f := os.Getenv("GEO_FORCE_REGION"); strings.ToLower(f) == "az" || strings.ToLower(f) == "wa" {
-		return strings.ToLower(f)
+	if f := os.Getenv("GEO_FORCE_REGION"); strings.ToLower(f) == "wa" {
+		return "wa"
 	}
 	return "wa"
 }
@@ -44,12 +44,9 @@ type Phone struct {
 	Other    regionLine // the other line, for footers showing both
 }
 
-// LineFor returns the regional line for a state code (AZ gets the Arizona
-// line; everything else the WA/ID/OR main line). Used by /areas/{slug} pages.
+// LineFor returns the line for a state code. There is only one line now,
+// so every state gets it. Used by /areas/{slug} pages.
 func LineFor(stateCode string) regionLine {
-	if strings.EqualFold(stateCode, "AZ") {
-		return regions["az"]
-	}
 	return regions["wa"]
 }
 
@@ -58,8 +55,5 @@ func PhoneFor(r *http.Request) Phone {
 	reg := resolveRegion(r)
 	p := regions[reg]
 	other := regions["wa"]
-	if reg == "wa" {
-		other = regions["az"]
-	}
-	return Phone{Display: p.Display, Tel: "tel:" + p.Tel, Label: p.Label, IsAZ: reg == "az", Other: other}
+	return Phone{Display: p.Display, Tel: "tel:" + p.Tel, Label: p.Label, IsAZ: false, Other: other}
 }
