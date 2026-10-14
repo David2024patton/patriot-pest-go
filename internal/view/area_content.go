@@ -148,22 +148,6 @@ func init() {
 			"as regional regulars across the Walla Walla Valley.",
 	})
 
-	RegisterAreaCopy("phoenix", AreaCopy{
-		Intro: "Phoenix is divided into 15 urban villages, each with its own character. Arcadia, at the " +
-			"south foot of Camelback Mountain, grew out of citrus groves and still shows the ranch homes " +
-			"and irrigated landscaping of that era. Ahwatukee borders South Mountain on the city's south " +
-			"edge, and South Mountain Park itself is one of the largest city parks in the United States. " +
-			"Camelback East Village sits between Camelback Mountain and Piestewa Peak.",
-		LocalNote: "Stucco and block wall construction defines most Valley neighborhoods, and citrus trees " +
-			"still dot yards across Arcadia as a reminder of the old groves. New development keeps pushing " +
-			"the city outward into the desert on every side.",
-		PestNote: "Arizona bark scorpions are the most venomous scorpion in the United States and are " +
-			"common around low desert buildings, hiding in hollow block walls and climbing textured stucco. " +
-			"Desert subterranean termites build mud tubes up stem walls to reach framing, and American and " +
-			"Turkestan cockroaches come out of sewer lines and irrigation boxes. Monsoon season adds " +
-			"mosquitoes and flies, while pack rats pile middens against walls along the desert preserves.",
-	})
-
 	RegisterAreaCopy("post-falls", AreaCopy{
 		Intro: "Post Falls is named for Frederick Post, the German immigrant who built a lumber mill on the " +
 			"Spokane River in 1871, on land purchased from Chief Andrew Seltice of the Coeur d'Alene Tribe. " +
