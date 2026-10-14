@@ -147,7 +147,7 @@ const REPORTS = {
   label: "October 14, 2026",
   patriot: {
     stats: [
-      {v:"16 of 20", k:"website health checks fully passed"},
+      {v:"19 of 20", k:"website health checks fully passed"},
       {v:"57 of 57", k:"pages live, zero broken links found"},
       {v:"1", k:"phone number on the whole site now: (509) 471-5767"},
       {v:"0", k:"Arizona mentions left anywhere on the site"},
@@ -157,12 +157,11 @@ const REPORTS = {
       {title:"Website health check", pill:"progress", cls:"", note:"The same 20 point check the pros use, run on patriotpest.pro on October 14. This entry covers the Week of October 8 and this week.",
        points:[
         "Here is the score at a glance:",
-        "<div style='margin:.35rem 0 .7rem'><div style='display:flex;justify-content:space-between;font-size:.85rem;color:#dbe2ff'><span>Passed</span><b>16 of 20</b></div><div style='background:rgba(255,255,255,.08);border-radius:6px;height:12px;margin-top:.25rem'><div style='width:80%;height:12px;border-radius:6px;background:#2ea043'></div></div></div>",
-        "<div style='margin:.35rem 0 .7rem'><div style='display:flex;justify-content:space-between;font-size:.85rem;color:#dbe2ff'><span>Almost there, small touch-up</span><b>3 of 20</b></div><div style='background:rgba(255,255,255,.08);border-radius:6px;height:12px;margin-top:.25rem'><div style='width:15%;height:12px;border-radius:6px;background:#d29922'></div></div></div>",
-        "<div style='margin:.35rem 0 .7rem'><div style='display:flex;justify-content:space-between;font-size:.85rem;color:#dbe2ff'><span>Missed, one real fix</span><b>1 of 20</b></div><div style='background:rgba(255,255,255,.08);border-radius:6px;height:12px;margin-top:.25rem'><div style='width:5%;height:12px;border-radius:6px;background:#e63946'></div></div></div>",
-        "Bottom line: the site is in great shape. One real fix (photo size) and three small touch-ups, all listed below. The one item we could not check from outside, the Google Search Console setup, has since been confirmed good."
+        "<div style='margin:.35rem 0 .7rem'><div style='display:flex;justify-content:space-between;font-size:.85rem;color:#dbe2ff'><span>Passed</span><b>19 of 20</b></div><div style='background:rgba(255,255,255,.08);border-radius:6px;height:12px;margin-top:.25rem'><div style='width:95%;height:12px;border-radius:6px;background:#2ea043'></div></div></div>",
+        "<div style='margin:.35rem 0 .7rem'><div style='display:flex;justify-content:space-between;font-size:.85rem;color:#dbe2ff'><span>Almost there, small touch-up</span><b>1 of 20</b></div><div style='background:rgba(255,255,255,.08);border-radius:6px;height:12px;margin-top:.25rem'><div style='width:5%;height:12px;border-radius:6px;background:#d29922'></div></div></div>",
+        "Bottom line: the site is in great shape. The photo fix and the small touch-ups below are done. One tidy-up is left, headline sizes on a few pages, and it is cosmetic. The one item we could not check from outside, the Google Search Console setup, has since been confirmed good."
       ]},
-      {title:"Passed: the 16 checks", pill:"done", cls:"", note:"Each one in plain words.",
+      {title:"Passed: the 19 checks", pill:"done", cls:"", note:"Each one in plain words.",
        points:[
         "Site map: Google gets a current list of all 57 pages, and every one of them loads.",
         "Open doors: search engines and AI assistants like ChatGPT are welcomed in by name, not blocked.",
@@ -179,21 +178,22 @@ const REPORTS = {
         "Clean page addresses a person can read, like patriotpest.pro/pest/ants.",
         "Sharing a page in a text or on Facebook shows the right picture and title.",
         "A plain text guide written for AI assistants, and it already shows the new 5767 number.",
-        "Google Search Console is set up and verified through the domain name, so the site is connected to Google reporting."
+        "Google Search Console is set up and verified through the domain name, so the site is connected to Google reporting.",
+        "No login page for Google to find: the old login address just sends people to the homepage.",
+        "Photos load the fast way: as you scroll, with the extra speed setting switched on.",
+        "Photo weight fixed: the biggest photo on the site went from 647 KB to 139 KB."
       ]},
-      {title:"Needs a small touch-up: 3 checks", pill:"progress", cls:"", note:"Small stuff. All three are on the fix list.",
+      {title:"Needs a small touch-up: 1 check", pill:"progress", cls:"", note:"The last small thing on the list.",
        points:[
-        "The customer login page still shows up in Google results. It should be hidden. Quick fix.",
-        "On some pages the headlines jump from big straight to small, skipping the middle size. Google prefers a steady staircase. Template fix.",
-        "Photos already load as you scroll, which is good. One extra speed setting is missing. Quick fix."
+        "On some pages the headlines jump from big straight to small, skipping the middle size. Google prefers a steady staircase. Template fix."
       ]},
-      {title:"The one real fix: heavy photos", pill:"progress", cls:"", note:"",
+      {title:"The one real fix: heavy photos (fixed)", pill:"done", cls:"", note:"Done on October 14.",
        points:[
-        "The homepage loads about 4 MB of photos. The single biggest photo is 647 KB.",
-        "<div style='margin:.35rem 0 .7rem'><div style='display:flex;justify-content:space-between;font-size:.85rem;color:#dbe2ff'><span>Homepage photos today</span><b>about 4 MB</b></div><div style='background:rgba(255,255,255,.08);border-radius:6px;height:12px;margin-top:.25rem'><div style='width:100%;height:12px;border-radius:6px;background:#e63946'></div></div></div>",
-        "<div style='margin:.35rem 0 .7rem'><div style='display:flex;justify-content:space-between;font-size:.85rem;color:#dbe2ff'><span>After the fix</span><b>under 1 MB</b></div><div style='background:rgba(255,255,255,.08);border-radius:6px;height:12px;margin-top:.25rem'><div style='width:22%;height:12px;border-radius:6px;background:#2ea043'></div></div></div>",
+        "The homepage was loading about 4 MB of photos in the first sample we took. The single biggest photo was 647 KB. It is now 139 KB, and every pest photo shrank by about two thirds.",
+        "<div style='margin:.35rem 0 .7rem'><div style='display:flex;justify-content:space-between;font-size:.85rem;color:#dbe2ff'><span>Biggest photo before</span><b>647 KB</b></div><div style='background:rgba(255,255,255,.08);border-radius:6px;height:12px;margin-top:.25rem'><div style='width:100%;height:12px;border-radius:6px;background:#e63946'></div></div></div>",
+        "<div style='margin:.35rem 0 .7rem'><div style='display:flex;justify-content:space-between;font-size:.85rem;color:#dbe2ff'><span>Biggest photo now</span><b>139 KB</b></div><div style='background:rgba(255,255,255,.08);border-radius:6px;height:12px;margin-top:.25rem'><div style='width:21%;height:12px;border-radius:6px;background:#2ea043'></div></div></div>",
         "Heavy photos slow the page down on phones, and slow pages lose both customers and Google ranking.",
-        "The fix is simple: shrink the photos to web size. Same pictures, same look on screen, a quarter of the weight."
+        "Same pictures, same look on screen, a fraction of the weight. Photos below the fold only load as a visitor scrolls to them, so phones stay fast."
       ]},
       {title:"Google profile tune-up", pill:"progress", cls:"", note:"Done in Skyler's Google account on October 14. Most edits are in Google's review queue and go public as they clear.",
        points:[
