@@ -17,7 +17,6 @@ var SitemapLastmod = map[string]string{
 	"/areas/mead":                      "2026-10-01",
 	"/areas/medical-lake":              "2026-10-01",
 	"/areas/milton-freewater":          "2026-10-01",
-	"/areas/phoenix":                   "2026-10-01",
 	"/areas/post-falls":                "2026-10-01",
 	"/areas/rathdrum":                  "2026-10-01",
 	"/areas/spokane":                   "2026-10-01",
