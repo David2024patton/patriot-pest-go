@@ -31,7 +31,7 @@ const pageSignup = `<section class="block">
         <ul>{{range .Errors}}<li>{{.}}</li>{{end}}</ul>
       </div>{{end}}
 
-      <form method="post" action="/signup" class="form-stack" novalidate>
+      <form method="post" action="/signup" class="form-stack">
         {{raw .Csrf}}
         <div class="field">
           <label for="name">Full name</label>
@@ -42,8 +42,8 @@ const pageSignup = `<section class="block">
           <input type="email" id="email" name="email" required autocomplete="email" value="{{.OldEmail}}">
         </div>
         <div class="field">
-          <label for="phone">Phone <span style="color:var(--khaki)">(optional)</span></label>
-          <input type="tel" id="phone" name="phone" autocomplete="tel" value="{{.OldPhone}}">
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" name="phone" required autocomplete="tel" value="{{.OldPhone}}">
         </div>
         <div class="split" style="gap:.8rem">
           <div class="field">
@@ -58,6 +58,10 @@ const pageSignup = `<section class="block">
         <div class="field">
           <label for="zip">ZIP <span style="color:var(--khaki)">(optional)</span></label>
           <input type="text" id="zip" name="zip" maxlength="10" autocomplete="postal-code" value="{{.OldZip}}">
+        </div>
+        <div class="field">
+          <label for="pest">What pest is bugging you?</label>
+          <select id="pest" name="pest">{{raw .PestOptions}}</select>
         </div>` + smsConsent + `
         <button type="submit" style="min-height:48px;background:var(--orange);color:var(--ink);border:0;padding:0 1.6rem;font-family:var(--display);text-transform:uppercase;cursor:pointer">Sign Up</button>
         <p style="color:var(--khaki);font-size:.8rem">Online accounts are coming soon. For now, call or message us and a real human will take care of you.</p>
