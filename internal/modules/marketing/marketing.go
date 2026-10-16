@@ -37,6 +37,11 @@ type Module struct {
 	// DBPath is the configured SQLite catalog path (signups + analytics
 	// events write here).
 	DBPath string
+	// AlphaFluxURL / AlphaFluxKey configure lead capture into the
+	// AlphaFlux CRM (leads.go). Key empty = capture disabled and the
+	// forms fall back to the local store.
+	AlphaFluxURL string
+	AlphaFluxKey string
 	// adminEmails / adminHash gate the /admin analytics console. Populated
 	// by initAdmin from ADMIN_EMAILS / ADMIN_PASSWORD_HASH; empty means the
 	// console is disabled and its routes are not registered.
