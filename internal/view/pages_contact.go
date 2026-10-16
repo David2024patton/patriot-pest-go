@@ -2,8 +2,9 @@ package view
 
 // pageContact — templates/pages/contact.php. Contact + free-quote form.
 // Data: .Success (string), .Errors ([]string), .OldName/.OldEmail/.OldPhone/
-// .OldMessage (prior input for re-population), .Csrf (template.HTML hidden
-// input), .AnalyticsEvent ("generate_lead" fires the gtag conversion event).
+// .OldMessage/.OldZip/.OldPest (prior input for re-population), .Csrf
+// (template.HTML hidden input), .PestOptions (template.HTML picker options),
+// .AnalyticsEvent ("generate_lead" fires the gtag conversion event).
 const pageContact = `<section class="block">
   <div class="wrap">
     <div class="eyebrow">COMMS // CONTACT</div>
@@ -54,7 +55,7 @@ const pageContact = `<section class="block">
           <ul>{{range .Errors}}<li>{{.}}</li>{{end}}</ul>
         </div>{{end}}
 
-        <form method="post" action="/contact" class="form-stack" novalidate>
+        <form method="post" action="/contact" class="form-stack">
           {{raw .Csrf}}
           <div class="field">
             <label for="name">Name</label>
@@ -67,7 +68,17 @@ const pageContact = `<section class="block">
             </div>
             <div class="field">
               <label for="phone">Phone</label>
-              <input type="tel" id="phone" name="phone" autocomplete="tel" value="{{.OldPhone}}">
+              <input type="tel" id="phone" name="phone" required autocomplete="tel" value="{{.OldPhone}}">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="pest">What pest is bugging you?</label>
+              <select id="pest" name="pest">{{raw .PestOptions}}</select>
+            </div>
+            <div class="field">
+              <label for="zip">ZIP</label>
+              <input type="text" id="zip" name="zip" maxlength="10" autocomplete="postal-code" value="{{.OldZip}}">
             </div>
           </div>
           <div class="field">
