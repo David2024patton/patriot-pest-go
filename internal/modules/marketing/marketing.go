@@ -828,7 +828,8 @@ func csrfOK(got, expected string) bool {
 // contactGet — the contact + free-quote form page.
 func (m *Module) contactGet(w http.ResponseWriter, r *http.Request) {
 	view.Page(w, r, "contact", contactT, contactD, metaKeywords, m.base(map[string]any{
-		"Csrf": m.csrfField(r, w),
+		"Csrf":        m.csrfField(r, w),
+		"PestOptions": pestOptionsHTML(""),
 	}))
 }
 
@@ -837,8 +838,9 @@ func (m *Module) contactPost(w http.ResponseWriter, r *http.Request) {
 	if err := r.ParseForm(); err != nil {
 		slog.Warn("contact form parse failed", "err", err.Error())
 		view.PageStatus(w, r, 400, "contact", contactT, contactD, metaKeywords, m.base(map[string]any{
-			"Errors": []string{"Could not read the form. Please try again."},
-			"Csrf":   m.csrfField(r, w),
+			"Errors":      []string{"Could not read the form. Please try again."},
+			"Csrf":        m.csrfField(r, w),
+			"PestOptions": pestOptionsHTML(""),
 		}))
 		return
 	}
@@ -858,10 +860,12 @@ func (m *Module) contactPost(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	name := r.FormValue("name")
-	email := r.FormValue("email")
-	phone := r.FormValue("phone")
-	message := r.FormValue("message")
+	name := strings.TrimSpace(r.FormValue("name"))
+	email := strings.TrimSpace(r.FormValue("email"))
+	phone := strings.TrimSpace(r.FormValue("phone"))
+	message := strings.TrimSpace(r.FormValue("message"))
+	zip := strings.TrimSpace(r.FormValue("zip"))
+	pest := strings.TrimSpace(r.FormValue("pest"))
 
 	var errs []string
 	if name == "" {
@@ -876,8 +880,16 @@ func (m *Module) contactPost(w http.ResponseWriter, r *http.Request) {
 	} else if runeLen(email) > 254 {
 		errs = append(errs, "Email must be at most 254 characters.")
 	}
-	if phone != "" && (phoneDigits(phone) < 7 || phoneDigits(phone) > 15) {
+	if phone == "" {
+		errs = append(errs, "Phone is required.")
+	} else if phoneDigits(phone) < 7 || phoneDigits(phone) > 15 {
 		errs = append(errs, "Phone must be a valid phone number.")
+	}
+	if zip != "" && (runeLen(zip) > 10 || !isZipSafe(zip)) {
+		errs = append(errs, "ZIP must be a valid ZIP code.")
+	}
+	if !validPest(pest) {
+		errs = append(errs, "Please choose a pest from the list.")
 	}
 	if message == "" {
 		errs = append(errs, "Message is required.")
@@ -889,17 +901,33 @@ func (m *Module) contactPost(w http.ResponseWriter, r *http.Request) {
 		view.Page(w, r, "contact", contactT, contactD, metaKeywords, m.base(map[string]any{
 			"Errors":  errs,
 			"OldName": name, "OldEmail": email, "OldPhone": phone, "OldMessage": message,
-			"Csrf": m.csrfField(r, w),
+			"OldZip": zip, "OldPest": pest,
+			"Csrf": m.csrfField(r, w), "PestOptions": pestOptionsHTML(pest),
 		}))
 		return
 	}
 
+	// Option C: the lead becomes a CRM contact in AlphaFlux with
+	// website_form attribution, and the console texts the alert
+	// number. If the CRM is unreachable the lead still lands in the
+	// local store (source='website'), so it is never discarded.
+	lead := leadForm{
+		Name: name, Phone: phone, Email: email,
+		Detail: leadDetail("Contact form", pest, zip),
+		Notes:  message,
+	}
+	if err := m.captureLead(lead); err != nil {
+		slog.Error("contact lead capture failed, saving locally", "err", err, "email", email, "phone", phone)
+		if res := data.CreateSignup(m.DBPath, name, email, phone, "", "", zip); !res.OK {
+			slog.Error("contact lead local save failed", "err", res.Err, "email", email, "phone", phone, "message", message)
+		}
+	}
 	slog.Info("Contact form submitted", "email", email)
 	view.Page(w, r, "contact", contactT, contactD, metaKeywords, m.base(map[string]any{
-		// TODO (integrations phase): persist + notify + auto-reply via mailer.
 		"Success":        "Thanks. We received your message and will respond within one business day.",
 		"AnalyticsEvent": "generate_lead",
 		"Csrf":           m.csrfField(r, w),
+		"PestOptions":    pestOptionsHTML(""),
 	}))
 }
 
