@@ -98,7 +98,7 @@ func main() {
 	}
 
 	// Marketing — the public site. Flag-gated like every module.
-	if mkt := (&marketing.Module{Enabled: cfg.MarketingEnabled, DBPath: cfg.DBPath}); mkt.Register(r) {
+	if mkt := (&marketing.Module{Enabled: cfg.MarketingEnabled, DBPath: cfg.DBPath, AlphaFluxURL: cfg.AlphaFluxAPIURL, AlphaFluxKey: cfg.AlphaFluxAPIKey}); mkt.Register(r) {
 		logger.Info("module enabled", "module", "marketing")
 	}
 
