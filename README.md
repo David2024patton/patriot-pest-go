@@ -1,49 +1,88 @@
-# patriot-pest-go
+<div align="center">
 
-The public landing site for **patriotpest.pro**: marketing pages, the content
-catalog (pest library, service areas, blog), lead capture, and the PWA shell.
+# Patriot Pest Control
 
-## What is NOT here
+The public website for Patriot Pest Control: local service content, lead capture, and a fast front door into AlphaFlux.
 
-Customer, staff and admin dashboards — and every FieldRoutes / Twilio
-integration — live in the **AlphaFlux platform** (`alphaflux.net`, repo
-`David2024patton/alphaflux-console`), which serves many companies, not just
-Patriot Pest. This site does not authenticate anyone: every sign-in link, and
-every URL that used to serve a dashboard, redirects to the platform
+![Go 1.27.1](https://img.shields.io/badge/Go-1.27.1-00ADD8)
+![Docker](https://img.shields.io/badge/Deployment-Docker-2496ED)
+![Live site](https://img.shields.io/badge/Live-patriotpest.pro-2ea44f)
 
-- `/login`, `/logout`, `/account`, `/dashboard`, `/customer-dashboard`,
-  `/customer-portal`, `/staff-dashboard`, `/staff`, `/su` → `ALPHAFLUX_LOGIN_URL`
-- `/admin`, `/admin/*` → same
-- `/api/*` → `410 Gone` (the platform owns the API)
+<img src="internal/view/assets/img/og.png" alt="Patriot Pest Control" width="720">
 
-## Layout
-- `cmd/server` — entrypoint: routes, redirects, graceful shutdown
-- `internal/modules/marketing` — every public page, `/search`, sitemap, RSS, signup, contact, first-party beacon sink
-- `internal/modules/health` — `/health`, `/ready`, `/metrics`
-- `internal/view` — page templates + `internal/view/assets` (embedded, 7 MB)
-- `internal/data` — SQLite content catalog loader
-- `Dockerfile` — production image (**no database baked in**; the SQLite catalog is bind-mounted)
+</div>
 
-## Configuration
-| Env | Default | Purpose |
-| --- | --- | --- |
-| `ADDR` | `:3000` | listen address |
-| `DB_PATH` | `database/patriot.db` | SQLite content catalog |
-| `APP_URL` | `https://patriotpest.pro` | canonical origin |
-| `ALPHAFLUX_LOGIN_URL` | `https://alphaflux.net/login` | where sign-in links go |
-| `MARKETING_ENABLED` | `true` | gates the public pages module |
+**Plan:** [PLAN.md](PLAN.md) · **Tasks:** [TODO.md](TODO.md) · **Ideas:** [IDEA.md](IDEA.md) · **Build rules:** [docs/RULES.md](docs/RULES.md)
 
-## Run / build
+## What it is
+
+This Go service serves patriotpest.pro for Patriot Pest Control in Eastern Washington and North Idaho. It owns the public pages, pest library, service areas, blog, FAQs, prices, search, contact and signup forms, sitemap, RSS, PWA shell, health endpoints, and first-party analytics intake.
+
+The only public website number is **(509) 471-5767**.
+
+## The AlphaFlux boundary
+
+Customer, staff, and admin dashboards live in AlphaFlux, along with the CRM, FieldRoutes integrations, Twilio integrations, and private APIs. This site does not authenticate customers or staff.
+
+- `/login`, `/logout`, `/account`, `/dashboard`, `/customer-dashboard`, `/customer-portal`, `/staff-dashboard`, `/staff`, and `/su` redirect to `ALPHAFLUX_LOGIN_URL`.
+- `/admin` and `/admin/*` redirect to the same platform login.
+- Legacy `/api/*` paths return `410 Gone` because AlphaFlux owns the API.
+
+Website forms post valid leads to the AlphaFlux CRM capture endpoint with website form attribution. If capture is unavailable or no key is configured, the site falls back to its local store so a lead is not discarded.
+
+## Quickstart
+
 ```bash
 go build -o /tmp/patriot-landing ./cmd/server
 DB_PATH=database/patriot.db ADDR=:3120 APP_ENV=local /tmp/patriot-landing
 ```
 
-## Production
-Deployed by Dokploy (project **PPC** → app **Patriot**, service `ppc-patriot-qyfetu`)
-from this repo, Dockerfile path `Dockerfile`. **Push to `main` auto-deploys.**
-Runtime mounts:
-- `/home/server/go-patriot/data/patriot.db` → `/app/database/patriot.db`
-- `/home/server/go-patriot/data/settings.json` → `/app/storage/settings.json`
+Run the package tests with:
 
-Domains: `patriotpest.pro`, `www.patriotpest.pro` (Let's Encrypt via the Dokploy Traefik).
+```bash
+go test ./...
+```
+
+## The grid: module map
+
+| Module | What it owns |
+| :--- | :--- |
+| `cmd/server` | Entrypoint, route composition, platform redirects, API retirement, graceful shutdown |
+| `internal/config` | Environment driven configuration and feature defaults |
+| `internal/modules/marketing` | Public pages, search, sitemap, RSS, signup, contact, lead capture, beacon sink |
+| `internal/modules/health` | `/health`, `/ready`, and `/metrics` |
+| `internal/view` | Page modules, templates, embedded assets, PWA shell, SEO, pest and area copy |
+| `internal/data` | SQLite content catalog, analytics, drafts, and local signup fallback |
+| `internal/middleware` | Shared HTTP middleware |
+| `pkg/crypto` | Cryptographic helpers |
+| `tools/sitemap-lastmod` | Sitemap timestamp generation |
+
+## Configuration
+
+| Env | Default | Purpose |
+| :--- | :--- | :--- |
+| `ADDR` | `:3000` | Listen address |
+| `DB_PATH` | `database/patriot.db` | SQLite content catalog |
+| `APP_URL` | `https://patriotpest.pro` | Canonical origin |
+| `ALPHAFLUX_LOGIN_URL` | `https://alphaflux.net/login` | Where sign-in links go |
+| `MARKETING_ENABLED` | `true` | Gates the public pages module |
+| `ALPHAFLUX_API_KEY` | none | Deployment secret for CRM lead capture; never commit it |
+
+## Production
+
+Dokploy deploys this repo from the root `Dockerfile`. **Push to `main` auto-deploys.**
+
+Runtime mounts:
+
+- `/home/server/go-patriot/data/patriot.db` to `/app/database/patriot.db`
+- `/home/server/go-patriot/data/settings.json` to `/app/storage/settings.json`
+
+Domains are `patriotpest.pro` and `www.patriotpest.pro`, with Let's Encrypt through Dokploy Traefik.
+
+## Status
+
+The public site and CRM lead leg are live and were verified on 2026-10-16. Two alert items stay open in TODO Phase 3: SMS delivery is blocked until Patriot A2P registration is approved, and the email alert leg waits for Skyler's confirmed alert address.
+
+## License and credits
+
+No LICENSE file is present in this repository, so public visibility is not a reuse license. Patriot Pest Control website content belongs to its owner. The connected business platform is AlphaFlux.
