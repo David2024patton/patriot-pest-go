@@ -47,6 +47,9 @@ const pageContact = `<section class="block">
                 'event_label': 'Contact Form'
               });
             }
+            if (window.fbq) {
+              fbq('track', 'Lead', { 'content_name': 'Contact Form' });
+            }
           </script>
           {{end}}
         {{end}}
