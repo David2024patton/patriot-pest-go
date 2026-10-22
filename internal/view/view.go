@@ -369,7 +369,15 @@ const namedTemplates = `
   {{if .GAds}}gtag('config', "{{.GAds}}");{{end}}
   document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('a[href^="tel:"]').forEach(function (link) {
-      link.addEventListener('click', function () { gtag('event', 'phone_call', { 'event_category': 'engagement', 'event_label': 'Phone Click' }); });
+      link.addEventListener('click', function () {
+        gtag('event', 'phone_call', { 'event_category': 'engagement', 'event_label': 'Phone Click' });
+        if (window.fbq) { fbq('track', 'Contact', { 'contact_method': 'phone' }); }
+      });
+    });
+    document.querySelectorAll('a[href^="mailto:"]').forEach(function (link) {
+      link.addEventListener('click', function () {
+        if (window.fbq) { fbq('track', 'Contact', { 'contact_method': 'email' }); }
+      });
     });
     document.querySelectorAll('[data-track]').forEach(function (el) {
       el.addEventListener('click', function () { gtag('event', el.dataset.track, { 'event_category': 'engagement' }); });
