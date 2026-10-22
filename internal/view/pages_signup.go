@@ -23,6 +23,9 @@ const pageSignup = `<section class="block">
               'event_label': 'Account Signup'
             });
           }
+          if (window.fbq) {
+            fbq('track', 'Lead', { 'content_name': 'Account Signup' });
+          }
         </script>
         {{end}}
       {{end}}
