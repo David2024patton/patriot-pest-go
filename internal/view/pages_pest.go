@@ -81,7 +81,7 @@ const pagePest = `<!-- ===== THREAT FILE HEADER ===== -->
           <div class="bar"><div class="fill" data-lvl="{{.Pest.ThreatLevel}}"></div></div>
         </div>
         <div class="hero-ctas" style="margin-top:1.6rem">
-          <a class="btn btn-primary" href="tel:+15094715767">☎ Get a Free Quote</a>
+          <a class="btn btn-primary" href="tel:+15094715767"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Get a Free Quote</a>
           <a class="btn btn-ghost" href="/contact">Book Service ▸</a>
         </div>
       </div>
@@ -98,24 +98,24 @@ const pagePest = `<!-- ===== THREAT FILE HEADER ===== -->
     <div class="grid g3">
       {{with pestcopy2 .Pest.Slug .Pest.Category}}
       <div class="card">
-        <h2 style="font-family:var(--display);color:var(--cream);font-size:1.17rem">⚠ Signs of Activity</h2>
+        <h2 style="font-family:var(--display);color:var(--cream);font-size:1.17rem"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m10.3 3.9-8.5 14.1A2 2 0 0 0 3.5 21h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4M12 17h.01"/></svg> Signs of Activity</h2>
         <ul style="margin:.6rem 0 0 1.1rem;color:var(--khaki);line-height:1.7">
           {{range .Signs}}<li>{{.}}</li>{{end}}
         </ul>
       </div>
       <div class="card">
-        <h2 style="font-family:var(--display);color:var(--cream);font-size:1.17rem">🎯 Our Treatment</h2>
+        <h2 style="font-family:var(--display);color:var(--cream);font-size:1.17rem"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> Our Treatment</h2>
         <p style="color:var(--khaki);line-height:1.7;margin-top:.6rem">{{.Treat}}</p>
       </div>
       <div class="card">
-        <h2 style="font-family:var(--display);color:var(--cream);font-size:1.17rem">🛡 Prevention</h2>
+        <h2 style="font-family:var(--display);color:var(--cream);font-size:1.17rem"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1 1 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg> Prevention</h2>
         <ul style="margin:.6rem 0 0 1.1rem;color:var(--khaki);line-height:1.7">
           {{range .Prev}}<li>{{.}}</li>{{end}}
         </ul>
       </div>
       {{end}}
     </div>
-    <div class="promise" style="margin-top:1.6rem"><b>🛡️ 90-Day Warranty:</b> if {{lower .Pest.Name}} return between scheduled visits, we re-treat at no additional cost. Licensed, bonded, and insured across Washington, Idaho &amp; Oregon.</div>
+    <div class="promise" style="margin-top:1.6rem"><b><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1 1 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg> 90-Day Warranty:</b> if {{lower .Pest.Name}} return between scheduled visits, we re-treat at no additional cost. Licensed, bonded, and insured across Washington, Idaho &amp; Oregon.</div>
   </div>
 </section>
 
@@ -144,7 +144,7 @@ const pagePest = `<!-- ===== THREAT FILE HEADER ===== -->
     <h2 style="font-family:var(--display);color:var(--cream);margin:.4rem 0 1rem">Seeing {{lower .Pest.Name}}? <em>Let's end it.</em></h2>
     <p class="lead">Same-day service available. Free quotes, transparent pricing, 90-day warranty.</p>
     <div class="hero-ctas" style="justify-content:center;margin-top:1.4rem">
-      <a class="btn btn-primary" href="tel:+15094715767">☎ (509) 471-5767 <small>WA, ID, OR</small></a>
+      <a class="btn btn-primary" href="tel:+15094715767"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> (509) 471-5767 <small>WA, ID, OR</small></a>
     </div>
   </div>
 </section>`

@@ -37,8 +37,8 @@ const pageCustomer360 = `
       <dt>FieldRoutes ID</dt><dd class="mono">{{ .Customer.FRID }}</dd>
     </dl>
     <div style="margin-top:1rem;display:flex;gap:.6rem;flex-wrap:wrap">
-      <a class="btn btn-ghost" href="/customer/messages">💬 Message Thread</a>
-      <a class="btn btn-ghost" href="/admin/fieldroutes">🛰 Sync Health</a>
+      <a class="btn btn-ghost" href="/customer/messages"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Message Thread</a>
+      <a class="btn btn-ghost" href="/admin/fieldroutes"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15.4-6.4L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.4 6.4L3 16"/><path d="M3 21v-5h5"/></svg> Sync Health</a>
     </div>
   </div>
 

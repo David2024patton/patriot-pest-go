@@ -139,7 +139,7 @@ const layoutHTML = `<!DOCTYPE html>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Barlow:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/styles.css?v=20261028-nav4">
+  <link rel="stylesheet" href="/assets/styles.css?v=20261028-nav5">
   {{if .AppUI}}<link rel="stylesheet" href="/assets/admin.css">{{end}}
   <link rel="stylesheet" href="/assets/beacon.css">
   <link rel="stylesheet" href="/assets/pwa-install.css">
@@ -160,11 +160,11 @@ const layoutHTML = `<!DOCTYPE html>
     <a class="nl" href="/blogs"><span class="nl-name">Blog</span><span class="nl-desc">Pest tips &amp; field guides</span></a>
     <a class="nl" href="/faqs"><span class="nl-name">FAQs</span><span class="nl-desc">Common questions, answered</span></a>
     <a class="nl" href="/contact"><span class="nl-name">Contact</span><span class="nl-desc">Get your free quote</span></a>
-    <a class="nl" href="/#bugblaster-sec"><span class="nl-name">🎮 Bug Blaster</span><span class="nl-desc">Play the bug bomb game</span></a>
-    <a class="nl" href="/links"><span class="nl-name">🔗 All Links</span><span class="nl-desc">Every page in one list</span></a>
+    <a class="nl" href="/#bugblaster-sec"><span class="nl-name"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4M8 10v4"/><path d="M15 13h.01M18 11h.01"/></svg> Bug Blaster</span><span class="nl-desc">Play the bug bomb game</span></a>
+    <a class="nl" href="/links"><span class="nl-name"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg> All Links</span><span class="nl-desc">Every page in one list</span></a>
     {{/* Sign In is intentionally inert until the AlphaFlux platform is ready. */}}
     <span class="nl signin-soon" aria-disabled="true" title="Online accounts are coming soon"><span class="nl-name">Sign In</span><span class="nl-desc">Accounts coming soon</span></span>
-    <a class="nav-cta" href="{{.PhoneHref}}">☎ {{.PhoneDisplay}}</a>
+    <a class="nav-cta" href="{{.PhoneHref}}"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> {{.PhoneDisplay}}</a>
 </div>
 <div class="nav-scrim" aria-hidden="true"></div>
 
@@ -240,7 +240,7 @@ const layoutHTML = `<!DOCTYPE html>
     <div class="foot-bottom">
       <span>© {{.Year}} PATRIOT PEST CONTROL CO · ALL RIGHTS RESERVED</span>
       <span><a href="/privacy-policy">PRIVACY</a> · <a href="/terms-of-use">TERMS</a> · <a href="/sitemap">SITEMAP</a></span>
-      <span>🇺🇸 VETERAN-OWNED AMERICAN COMPANY</span>
+      <span><svg width="1.2em" height="1.2em" viewBox="0 0 24 24" style="vertical-align:-.22em" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="1.5" fill="#b31942"/><path d="M2 5.85h20M2 8.3h20M2 10.76h20M2 13.2h20M2 15.66h20M2 18.1h20" stroke="#fff" stroke-width="1.23"/><rect x="2" y="4" width="9" height="8.6" fill="#0a3161"/></svg> VETERAN-OWNED AMERICAN COMPANY</span>
     </div>
   </div>
 </footer>

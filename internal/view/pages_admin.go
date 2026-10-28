@@ -36,10 +36,10 @@ const pageDashAdmin = `
     </div>
 
     <div class="tile-grid" style="margin-bottom:2rem">
-      <a class="tile" href="/admin/people"><span class="ico">👥</span><h3>People</h3><p>Add staff, set titles &amp; permissions.</p></a>
-      <a class="tile" href="/admin/keys"><span class="ico">🔑</span><h3>District Keys</h3><p>Twilio + FieldRoutes keys per district.</p></a>
-      <a class="tile" href="/admin/api-keys"><span class="ico">🧩</span><h3>API Keys</h3><p>Issue &amp; revoke live API access.</p></a>
-      <a class="tile" href="/admin/posts"><span class="ico">📝</span><h3>Posts</h3><p>Blog &amp; knowledge base content.</p></a>
+      <a class="tile" href="/admin/people"><span class="ico"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.4 3.4-5.2 6.5-5.2s5.7 1.8 6.5 5.2"/><path d="M16 5.2a3.5 3.5 0 0 1 0 5.9M17.8 15.3c2 .6 3.3 2.1 3.8 4.7"/></svg></span><h3>People</h3><p>Add staff, set titles &amp; permissions.</p></a>
+      <a class="tile" href="/admin/keys"><span class="ico"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="7.5" cy="15.5" r="4.5"/><path d="m10.8 12.2 9.7-9.7M15 7l3 3"/></svg></span><h3>District Keys</h3><p>Twilio + FieldRoutes keys per district.</p></a>
+      <a class="tile" href="/admin/api-keys"><span class="ico"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg></span><h3>API Keys</h3><p>Issue &amp; revoke live API access.</p></a>
+      <a class="tile" href="/admin/posts"><span class="ico"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg></span><h3>Posts</h3><p>Blog &amp; knowledge base content.</p></a>
     </div>
 
     <h3 style="font-family:var(--display);color:var(--cream);margin-bottom:1rem">Recent Customers</h3>

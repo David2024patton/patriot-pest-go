@@ -12,11 +12,11 @@ const pageHome = `<!-- ============ HERO ============ -->
   </div>
   <div class="wrap hero-grid">
     <div>
-      <div class="kicker"><span>🇺🇸</span> A PROUD VETERAN-OWNED AMERICAN COMPANY</div>
+      <div class="kicker"><span><svg width="1.2em" height="1.2em" viewBox="0 0 24 24" style="vertical-align:-.22em" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="1.5" fill="#b31942"/><path d="M2 5.85h20M2 8.3h20M2 10.76h20M2 13.2h20M2 15.66h20M2 18.1h20" stroke="#fff" stroke-width="1.23"/><rect x="2" y="4" width="9" height="8.6" fill="#0a3161"/></svg></span> A PROUD VETERAN-OWNED AMERICAN COMPANY</div>
       <h1>Hostile pests?<br><span class="strike">Neutralized.</span></h1>
       <p class="hero-sub">Military-precision pest control for homes and businesses across <b>Washington, Idaho &amp; Oregon</b>. Eco-friendly treatments safe for your family and pets, with <b>same-day service</b> when it can't wait.</p>
       <div class="hero-ctas">
-        <a class="btn btn-primary" href="{{.PhoneHref}}">☎ Call {{.PhoneDisplay}} <small>{{.PhoneLabel}}</small></a>
+        <a class="btn btn-primary" href="{{.PhoneHref}}"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call {{.PhoneDisplay}} <small>{{.PhoneLabel}}</small></a>
         <a class="btn btn-ghost" href="/prices">View Plans ▸</a>
         <a class="btn btn-ghost" href="/contact" data-track="quote_request">Free Quote ▸</a>
       </div>
@@ -81,7 +81,7 @@ const pageHome = `<!-- ============ HERO ============ -->
         <p class="lead" data-reveal>Patriot Pest Control was founded by <b>U.S. Military Veteran Skyler Rose</b>, bringing military discipline, integrity, and uncompromising excellence to pest control across three states. Over a decade of field experience. Thousands of homes and businesses protected.</p>
         <blockquote class="quote" data-reveal>
           <p>After serving our country, I founded Patriot Pest Control to continue serving American families and businesses with the same dedication, precision, and integrity I learned in the military. We're not just eliminating pests. We're protecting what matters most.</p>
-          <div class="quote-foot"><span class="medal">🎖️</span><div><b>Skyler Rose</b><small>FOUNDER &amp; VETERAN · PATRIOT PEST CONTROL</small></div></div>
+          <div class="quote-foot"><span class="medal"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="15" r="5"/><path d="M8.9 10.9 6.2 3h4L12 7.2 13.8 3h4l-2.7 7.9"/></svg></span><div><b>Skyler Rose</b><small>FOUNDER &amp; VETERAN · PATRIOT PEST CONTROL</small></div></div>
         </blockquote>
       </div>
     </div>
@@ -134,7 +134,7 @@ const pageHome = `<!-- ============ HERO ============ -->
       <div class="stat" data-reveal><span class="num" data-count="3">3</span><span class="unit"> STATES</span><span class="cap">WA · ID · OR</span></div>
       <div class="stat" data-reveal><span class="num" data-count="10">10</span><span class="unit">+</span><span class="cap">YEARS OF EXPERIENCE</span></div>
     </div>
-    <div class="promise" data-reveal><b>🛡️ Our promise:</b> if pests return between scheduled visits, we re-treat at no additional cost. No hassles, no excuses. Licensed, bonded, and insured, with eco-friendly, low-toxicity products safe for kids, pets, and the environment.</div>
+    <div class="promise" data-reveal><b><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1 1 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg> Our promise:</b> if pests return between scheduled visits, we re-treat at no additional cost. No hassles, no excuses. Licensed, bonded, and insured, with eco-friendly, low-toxicity products safe for kids, pets, and the environment.</div>
   </div>
 </section>
 
@@ -179,7 +179,7 @@ const pageHome = `<!-- ============ HERO ============ -->
     <h2 data-reveal>Ready to go <em>pest-free?</em></h2>
     <p class="lead" data-reveal>Book online in minutes or call the line. Same-day service available across all three states. Free quotes, transparent pricing, zero hidden fees.</p>
     <div class="hero-ctas" style="justify-content:center">
-      <a class="btn btn-primary" href="{{.PhoneHref}}">☎ {{.PhoneDisplay}} <small>{{.PhoneLabel}}</small></a>
+      <a class="btn btn-primary" href="{{.PhoneHref}}"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> {{.PhoneDisplay}} <small>{{.PhoneLabel}}</small></a>
       <a class="btn btn-ghost" href="/contact" data-track="quote_request">Free Quote ▸</a>
       <a class="btn btn-ghost" href="/prices">View Plans ▸</a>
     </div>
