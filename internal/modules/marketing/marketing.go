@@ -292,6 +292,7 @@ func (m *Module) serviceWorker(w http.ResponseWriter, _ *http.Request) {
 		return
 	}
 	w.Header().Set("Content-Type", "text/javascript; charset=utf-8")
+	w.Header().Set("Cache-Control", "no-cache")
 	w.Write(b)
 }
 

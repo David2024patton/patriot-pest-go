@@ -139,7 +139,7 @@ const layoutHTML = `<!DOCTYPE html>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Barlow:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/styles.css">
+  <link rel="stylesheet" href="/assets/styles.css?v=20261028-nav2">
   {{if .AppUI}}<link rel="stylesheet" href="/assets/admin.css">{{end}}
   <link rel="stylesheet" href="/assets/beacon.css">
   <link rel="stylesheet" href="/assets/pwa-install.css">
@@ -150,13 +150,13 @@ const layoutHTML = `<!DOCTYPE html>
 <nav class="top-nav" aria-label="Main navigation">
   <button id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="navlinks">☰</button>
   <a class="brand" href="/"><span class="star">★</span> PATRIOT PEST CONTROL</a>
-  <div class="navlinks" id="navlinks">
+</nav>
+<div class="navlinks" id="navlinks">
     <a class="nl{{if eq .Page "home"}} active{{end}}" href="/">Home</a><a class="nl" href="/about">About</a><a class="nl" href="/services">Services</a><a class="nl" href="/prices">Prices</a><a class="nl" href="/service-areas">Areas</a><a class="nl" href="/blogs">Blog</a><a class="nl" href="/faqs">FAQs</a><a class="nl" href="/contact">Contact</a><a class="nl" href="/links">🔗 All Links</a>
     {{/* Sign In is intentionally inert until the AlphaFlux platform is ready. */}}
     <span class="nl signin-soon" aria-disabled="true" title="Online accounts are coming soon">Sign In</span>
     <a class="nav-cta" href="{{.PhoneHref}}">☎ {{.PhoneDisplay}}</a>
-  </div>
-</nav>
+</div>
 <div class="nav-scrim" aria-hidden="true"></div>
 
 <main>
@@ -238,7 +238,7 @@ const layoutHTML = `<!DOCTYPE html>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="/assets/main.js"></script>
+<script src="/assets/main.js?v=20261028-nav2"></script>
 {{if .Track}}<script src="/assets/js/tracker.js" defer></script>{{end}}
 {{template "install-banner" .}}
 <script src="/assets/pwa-install.js"></script>

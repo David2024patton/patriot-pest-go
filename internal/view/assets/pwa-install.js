@@ -23,7 +23,7 @@
        location.hostname === "localhost" ||
        location.hostname === "127.0.0.1")) {
     window.addEventListener("load", function () {
-      navigator.serviceWorker.register("/sw.js").catch(function () {
+      navigator.serviceWorker.register("/sw.js", { updateViaCache: "none" }).catch(function () {
         /* Offline support is progressive; never break the page. */
       });
     });
