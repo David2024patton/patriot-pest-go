@@ -148,15 +148,16 @@ const layoutHTML = `<!DOCTYPE html>
 <body{{if .BodyClass}} class="{{.BodyClass}}"{{end}}>
 
 <nav class="top-nav" aria-label="Main navigation">
+  <button id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="navlinks">☰</button>
   <a class="brand" href="/"><span class="star">★</span> PATRIOT PEST CONTROL</a>
-  <button id="menu-btn" aria-label="Toggle menu">☰ Menu</button>
-  <div class="navlinks">
+  <div class="navlinks" id="navlinks">
     <a class="nl{{if eq .Page "home"}} active{{end}}" href="/">Home</a><a class="nl" href="/about">About</a><a class="nl" href="/services">Services</a><a class="nl" href="/prices">Prices</a><a class="nl" href="/service-areas">Areas</a><a class="nl" href="/blogs">Blog</a><a class="nl" href="/faqs">FAQs</a><a class="nl" href="/contact">Contact</a><a class="nl" href="/links">🔗 All Links</a>
     {{/* Sign In is intentionally inert until the AlphaFlux platform is ready. */}}
     <span class="nl signin-soon" aria-disabled="true" title="Online accounts are coming soon">Sign In</span>
     <a class="nav-cta" href="{{.PhoneHref}}">☎ {{.PhoneDisplay}}</a>
   </div>
 </nav>
+<div class="nav-scrim" aria-hidden="true"></div>
 
 <main>
 {{if and .Crumb (gt (len .Crumb) 1)}}
@@ -178,10 +179,6 @@ const layoutHTML = `<!DOCTYPE html>
   <a href="/" aria-label="Home">
     <svg width="22" height="22" viewBox="0 0 16 16" fill="currentColor"><path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z"/></svg>
     <span class="label">Home</span>
-  </a>
-  <a href="/search" aria-label="Search">
-    <svg width="22" height="22" viewBox="0 0 16 16" fill="currentColor"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/></svg>
-    <span class="label">Search</span>
   </a>
   <a href="{{.PhoneHref}}" aria-label="Call">
     <svg width="22" height="22" viewBox="0 0 16 16" fill="currentColor"><path d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/></svg>
