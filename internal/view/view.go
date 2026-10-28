@@ -139,7 +139,7 @@ const layoutHTML = `<!DOCTYPE html>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Barlow:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/styles.css?v=20261028-nav2">
+  <link rel="stylesheet" href="/assets/styles.css?v=20261028-nav3">
   {{if .AppUI}}<link rel="stylesheet" href="/assets/admin.css">{{end}}
   <link rel="stylesheet" href="/assets/beacon.css">
   <link rel="stylesheet" href="/assets/pwa-install.css">
@@ -152,9 +152,18 @@ const layoutHTML = `<!DOCTYPE html>
   <a class="brand" href="/"><span class="star">★</span> PATRIOT PEST CONTROL</a>
 </nav>
 <div class="navlinks" id="navlinks">
-    <a class="nl{{if eq .Page "home"}} active{{end}}" href="/">Home</a><a class="nl" href="/about">About</a><a class="nl" href="/services">Services</a><a class="nl" href="/prices">Prices</a><a class="nl" href="/service-areas">Areas</a><a class="nl" href="/blogs">Blog</a><a class="nl" href="/faqs">FAQs</a><a class="nl" href="/contact">Contact</a><a class="nl" href="/links">🔗 All Links</a>
+    <a class="nl{{if eq .Page "home"}} active{{end}}" href="/"><span class="nl-name">Home</span><span class="nl-desc">Front page &amp; highlights</span></a>
+    <a class="nl" href="/about"><span class="nl-name">About</span><span class="nl-desc">Our veteran-owned story</span></a>
+    <a class="nl" href="/services"><span class="nl-name">Services</span><span class="nl-desc">Every pest we treat</span></a>
+    <a class="nl" href="/prices"><span class="nl-name">Prices</span><span class="nl-desc">Plans &amp; honest pricing</span></a>
+    <a class="nl" href="/service-areas"><span class="nl-name">Areas</span><span class="nl-desc">Towns &amp; cities we cover</span></a>
+    <a class="nl" href="/blogs"><span class="nl-name">Blog</span><span class="nl-desc">Pest tips &amp; field guides</span></a>
+    <a class="nl" href="/faqs"><span class="nl-name">FAQs</span><span class="nl-desc">Common questions, answered</span></a>
+    <a class="nl" href="/contact"><span class="nl-name">Contact</span><span class="nl-desc">Get your free quote</span></a>
+    <a class="nl" href="/#bugblaster-sec"><span class="nl-name">🎮 Bug Blaster</span><span class="nl-desc">Play the bug bomb game</span></a>
+    <a class="nl" href="/links"><span class="nl-name">🔗 All Links</span><span class="nl-desc">Every page in one list</span></a>
     {{/* Sign In is intentionally inert until the AlphaFlux platform is ready. */}}
-    <span class="nl signin-soon" aria-disabled="true" title="Online accounts are coming soon">Sign In</span>
+    <span class="nl signin-soon" aria-disabled="true" title="Online accounts are coming soon"><span class="nl-name">Sign In</span><span class="nl-desc">Accounts coming soon</span></span>
     <a class="nav-cta" href="{{.PhoneHref}}">☎ {{.PhoneDisplay}}</a>
 </div>
 <div class="nav-scrim" aria-hidden="true"></div>
