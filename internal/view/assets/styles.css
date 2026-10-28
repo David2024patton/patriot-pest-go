@@ -120,6 +120,9 @@ nav .brand .star{color:var(--orange);font-size:1.15rem;display:inline-block;anim
     z-index:1201;box-shadow:24px 0 48px rgba(0,0,0,.45);
   }
   .navlinks.open{transform:translateX(0);visibility:visible;transition-delay:0s,0s}
+  /* Cards never shrink: if they compress in the column, the text inside
+     gets its glyph bottoms clipped. The drawer scrolls instead. */
+  .navlinks > *{flex-shrink:0}
   /* Menu items are colored cards: bold name on top, one tiny line under it.
      Each card carries its own accent color via --acc / --accbg. */
   .navlinks > :nth-child(1){--acc:#ff7a1a;--accbg:rgba(255,122,26,.13)}
