@@ -14,12 +14,12 @@
  */
 "use strict";
 
-var CACHE = "ppc-shell-v5";
+var CACHE = "ppc-shell-v6";
 
 var SHELL = [
   "/",
   "/manifest.webmanifest",
-  "/assets/styles.css?v=20261028-nav3",
+  "/assets/styles.css?v=20261028-nav4",
   "/assets/main.js?v=20261028-nav2",
   "/assets/pwa-install.css",
   "/assets/pwa-install.js",

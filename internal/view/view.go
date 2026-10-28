@@ -139,7 +139,7 @@ const layoutHTML = `<!DOCTYPE html>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Barlow:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/styles.css?v=20261028-nav3">
+  <link rel="stylesheet" href="/assets/styles.css?v=20261028-nav4">
   {{if .AppUI}}<link rel="stylesheet" href="/assets/admin.css">{{end}}
   <link rel="stylesheet" href="/assets/beacon.css">
   <link rel="stylesheet" href="/assets/pwa-install.css">
