@@ -90,7 +90,7 @@ nav .brand .star{color:var(--orange);font-size:1.15rem;display:inline-block;anim
     position:fixed;top:0;left:0;bottom:0;height:100dvh;width:min(330px,86vw);
     flex-direction:column;flex-wrap:nowrap;align-items:stretch;justify-content:flex-start;
     background:var(--olive-900);border-right:2px solid var(--olive-700);
-    padding:5.4rem 1.4rem 1.6rem;gap:.3rem;overflow-y:auto;
+    padding:5.4rem 1.4rem 6.5rem;gap:.3rem;overflow-y:auto;
     transform:translateX(-106%);transition:transform .38s cubic-bezier(.32,.72,.28,1);
     z-index:93;box-shadow:24px 0 48px rgba(0,0,0,.45);
   }
