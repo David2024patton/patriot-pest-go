@@ -78,6 +78,9 @@ nav .brand .star{color:var(--orange);font-size:1.15rem;display:inline-block;anim
 .nav-cta:hover{background:var(--orange-hot);transform:translateY(-2px)}
 #menu-btn{display:none;background:none;border:1px solid var(--olive-500);color:var(--orange);font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;padding:.5rem .8rem;cursor:pointer;text-transform:uppercase}
 @media(max-width:960px){
+  /* the bar's backdrop-filter makes it a containing block that clips the
+     fixed drawer to the bar's own height, so drop the blur on mobile */
+  .top-nav{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(14,19,10,.97)}
   /* hamburger sits top-left, brand next to it, bar stays above the drawer */
   #menu-btn{display:flex;align-items:center;justify-content:center;font-size:1.35rem;line-height:1;padding:.45rem .7rem}
   body.nav-open .top-nav{z-index:97}
