@@ -78,15 +78,34 @@ nav .brand .star{color:var(--orange);font-size:1.15rem;display:inline-block;anim
 .nav-cta:hover{background:var(--orange-hot);transform:translateY(-2px)}
 #menu-btn{display:none;background:none;border:1px solid var(--olive-500);color:var(--orange);font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;padding:.5rem .8rem;cursor:pointer;text-transform:uppercase}
 @media(max-width:960px){
-  #menu-btn{display:block}
+  /* hamburger sits top-left, brand next to it, bar stays above the drawer */
+  #menu-btn{display:flex;align-items:center;justify-content:center;font-size:1.35rem;line-height:1;padding:.45rem .7rem}
+  body.nav-open .top-nav{z-index:97}
+  body.nav-open{overflow:hidden}
+  /* off-canvas drawer sliding in from the left */
   .navlinks{
-    position:fixed;top:58px;left:0;right:0;flex-direction:column;align-items:flex-start;
-    background:var(--olive-900);border-bottom:2px solid var(--olive-700);
-    padding:1.2rem clamp(1rem,4vw,2.5rem) 1.6rem;gap:.9rem;
-    transform:translateY(-130%);transition:transform .3s ease;z-index:89;
+    position:fixed;top:0;left:0;bottom:0;height:100dvh;width:min(330px,86vw);
+    flex-direction:column;flex-wrap:nowrap;align-items:stretch;justify-content:flex-start;
+    background:var(--olive-900);border-right:2px solid var(--olive-700);
+    padding:5.4rem 1.4rem 1.6rem;gap:.3rem;overflow-y:auto;
+    transform:translateX(-106%);transition:transform .38s cubic-bezier(.32,.72,.28,1);
+    z-index:93;box-shadow:24px 0 48px rgba(0,0,0,.45);
   }
-  .navlinks.open{transform:translateY(0)}
-  .navlinks a.nl{font-size:.8rem;width:100%}
+  .navlinks.open{transform:translateX(0)}
+  .navlinks a.nl{font-size:.92rem;width:100%;padding:.85rem .4rem;border-bottom:1px solid var(--olive-700)}
+  .navlinks a.nl::after{display:none}
+  .navlinks span.nl.signin-soon{font-size:.92rem;padding:.85rem .4rem;border-bottom:1px solid var(--olive-700)}
+  .navlinks .nav-cta{margin-top:1.15rem;text-align:center;padding:.95rem .8rem;font-size:.85rem}
+  /* dimmed scrim behind the drawer, tap to close */
+  .nav-scrim{
+    position:fixed;inset:0;background:rgba(8,11,5,.62);backdrop-filter:blur(2px);
+    opacity:0;pointer-events:none;transition:opacity .32s ease;z-index:92;
+  }
+  body.nav-open .nav-scrim{opacity:1;pointer-events:auto}
+}
+@media(prefers-reduced-motion: reduce){
+  .navlinks{transition:none}
+  .nav-scrim{transition:none}
 }
 
 /* ---------- shared ---------- */
@@ -522,11 +541,6 @@ h2 em,h1 em{font-style:normal;color:var(--orange)}
     font-size: 1.5rem;
     padding: .5rem;
   }
-}
-
-/* ---------- Mobile: hide top nav, keep bottom sticky nav ---------- */
-@media (max-width: 960px) {
-  .top-nav { display: none; }
 }
 
 /* Medium-width nav: prevent links overflowing/overlapping before the 960px dropdown kicks in */
