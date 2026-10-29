@@ -3,7 +3,7 @@ module github.com/David2024patton/patriot-pest-go
 go 1.27.1
 
 require (
-	github.com/go-chi/chi/v5 v5.3.2
+	github.com/go-chi/chi/v5 v5.4.0
 	github.com/microcosm-cc/bluemonday v1.0.27
 	github.com/oschwald/maxminddb-golang v1.13.1
 	golang.org/x/crypto v0.57.0
