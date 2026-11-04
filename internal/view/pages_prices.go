@@ -1,8 +1,8 @@
 package view
 
-// pagePrices — templates/pages/prices.php. Four locked tiers (ORDER B).
+// pagePrices — templates/pages/prices.php. Three locked tiers (ORDER B).
 // The PHP source is truncated mid compare-table; the final row is completed
-// here to match the other rows' pattern (Bronze/Silver no, Gold/Platinum yes).
+// here to match the other rows' pattern (Bronze/Silver no, Gold yes).
 const pagePrices = `<section class="block">
   <div class="wrap">
     <div class="eyebrow">SUPPLY MANIFEST // PRICING</div>
@@ -17,7 +17,7 @@ const pagePrices = `<section class="block">
       <div class="plan">
         <span class="plan-tier" style="font-family:var(--mono);font-size:.64rem;letter-spacing:.2em;color:var(--olive-300)">BRONZE</span>
         <h2 class="pname" style="margin:.4rem 0 0">Exterior-Only Protection</h2>
-        <div class="price">$35.95<small> /MO</small></div>
+        <div class="price">$49<small> /MO</small></div>
         <p class="pdesc">Monthly exterior treatment keeps ants, spiders, wasps &amp; more away.</p>
         <ul>
           <li>Spiders</li>
@@ -33,7 +33,7 @@ const pagePrices = `<section class="block">
       <div class="plan">
         <span class="plan-tier" style="font-family:var(--mono);font-size:.64rem;letter-spacing:.2em;color:var(--olive-300)">SILVER</span>
         <h2 class="pname" style="margin:.4rem 0 0">Interior + Exterior</h2>
-        <div class="price">$59.99<small> /MO</small></div>
+        <div class="price">$59<small> /MO</small></div>
         <p class="pdesc">Complete indoor + outdoor coverage ideal for families &amp; pets.</p>
         <ul>
           <li>Spiders</li>
@@ -51,7 +51,7 @@ const pagePrices = `<section class="block">
         <span class="pop">MOST POPULAR</span>
         <span class="plan-tier" style="font-family:var(--mono);font-size:.64rem;letter-spacing:.2em;color:var(--orange)">GOLD</span>
         <h2 class="pname" style="margin:.4rem 0 0">Priority Interior &amp; Exterior</h2>
-        <div class="price">$79.99<small> /MO</small></div>
+        <div class="price">$79<small> /MO</small></div>
         <p class="pdesc">Everything in Silver + fast response &amp; seasonal deep checks.</p>
         <ul>
           <li>Spiders</li>
@@ -68,28 +68,6 @@ const pagePrices = `<section class="block">
         </ul>
       </div>
 
-      <div class="plan">
-        <span class="plan-tier" style="font-family:var(--mono);font-size:.64rem;letter-spacing:.2em;color:var(--olive-300)">PLATINUM</span>
-        <h2 class="pname" style="margin:.4rem 0 0">Full Coverage (Fleas+Ticks)</h2>
-        <div class="price">$95.94<small> /MO</small></div>
-        <p class="pdesc">All-in-one: Gold + Flea &amp; Tick treatment, rodent stations &amp; monitoring.</p>
-        <ul>
-          <li>Spiders</li>
-          <li>Ants</li>
-          <li>Cockroaches</li>
-          <li>Flies</li>
-          <li>Mice</li>
-          <li>Box Elder Bugs</li>
-          <li>Wasps</li>
-          <li>Stink Bugs</li>
-          <li>Earwigs</li>
-          <li>Fleas</li>
-          <li>Ticks</li>
-          <li>Everything Else</li>
-          <li class="bonus">Free rodent stations</li>
-          <li class="bonus">Free rodent monitoring</li>
-        </ul>
-      </div>
     </div>
 
     <div class="promise" style="margin-top:1.6rem">
@@ -111,16 +89,15 @@ const pagePrices = `<section class="block">
             <th style="padding:.8rem 1rem;color:var(--cream)">Bronze</th>
             <th style="padding:.8rem 1rem;color:var(--cream)">Silver</th>
             <th style="padding:.8rem 1rem;color:var(--orange);background:var(--olive-700)">Gold</th>
-            <th style="padding:.8rem 1rem;color:var(--cream)">Platinum</th>
           </tr>
         </thead>
         <tbody style="font-size:.84rem;color:var(--khaki)">
-          <tr><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700)">Monthly Price</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center">$35.95</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center">$59.99</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center;background:var(--olive-700)">$79.99</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center">$95.94</td></tr>
-          <tr><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700)">Exterior Treatment</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center">yes</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center">yes</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center;background:var(--olive-700)">yes</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center">yes</td></tr>
-          <tr><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700)">Interior Treatment</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center">no</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center">yes</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center;background:var(--olive-700)">yes</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center">yes</td></tr>
-          <tr><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700)">Cockroaches &amp; Mice</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center">no</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center">no</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center;background:var(--olive-700)">yes</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center">yes</td></tr>
-          <tr><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700)">Seasonal Deep-Dives</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center">no</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center">no</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center;background:var(--olive-700)">yes</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center">yes</td></tr>
-          <tr><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700)">24-hr Callbacks</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center">no</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center">no</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center;background:var(--olive-700)">yes</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center">yes</td></tr>
+          <tr><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700)">Monthly Price</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center">$49</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center">$59</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center;background:var(--olive-700)">$79</td></tr>
+          <tr><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700)">Exterior Treatment</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center">yes</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center">yes</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center;background:var(--olive-700)">yes</td></tr>
+          <tr><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700)">Interior Treatment</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center">no</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center">yes</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center;background:var(--olive-700)">yes</td></tr>
+          <tr><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700)">Cockroaches &amp; Mice</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center">no</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center">no</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center;background:var(--olive-700)">yes</td></tr>
+          <tr><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700)">Seasonal Deep-Dives</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center">no</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center">no</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center;background:var(--olive-700)">yes</td></tr>
+          <tr><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700)">24-hr Callbacks</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center">no</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center">no</td><td style="padding:.6rem 1rem;border-top:1px dashed var(--olive-700);text-align:center;background:var(--olive-700)">yes</td></tr>
         </tbody>
       </table>
     </div>
