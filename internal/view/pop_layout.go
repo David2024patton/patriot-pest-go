@@ -40,14 +40,17 @@ const layoutPopHTML = `<!DOCTYPE html>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Barlow:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/pop.css?v=20261104-pop2">
+  <link rel="stylesheet" href="/assets/pop.css?v=20261104-pop3">
   <link rel="stylesheet" href="/assets/beacon.css">
   <link rel="icon" href="/assets/img/pests/ants.jpg" type="image/jpeg">
 </head>
 <body class="pop{{if .BodyClass}} {{.BodyClass}}{{end}}">
 
 <header class="pop-head">
-  <a class="pop-brand" href="/"><span class="pop-star">★</span> PATRIOT PEST <span class="pop-brand-accent">CONTROL</span></a>
+  <div class="pop-head-row">
+    <a class="pop-brand" href="/"><span class="pop-star">★</span> PATRIOT PEST <span class="pop-brand-accent">CONTROL</span></a>
+    <a class="pop-pill pop-call" href="{{.PhoneHref}}">Call or Text {{.PhoneDisplay}}</a>
+  </div>
   <nav class="pop-nav" aria-label="Main navigation">
     <a class="pop-pill{{if or (eq .Page "home-pop") (eq .Page "home")}} active{{end}}" href="/">Home</a>
     <a class="pop-pill{{if eq .Page "services"}} active{{end}}" href="/services">Services</a>
@@ -56,7 +59,8 @@ const layoutPopHTML = `<!DOCTYPE html>
     <a class="pop-pill{{if or (eq .Page "blog-index") (eq .Page "blog-post")}} active{{end}}" href="/blogs">Blog</a>
     <a class="pop-pill{{if eq .Page "faqs"}} active{{end}}" href="/faqs">FAQs</a>
     <a class="pop-pill{{if eq .Page "contact"}} active{{end}}" href="/contact">Contact</a>
-    <a class="pop-pill pop-call" href="{{.PhoneHref}}">Call or Text {{.PhoneDisplay}}</a>
+    <a class="pop-pill" href="/about">About</a>
+    <a class="pop-pill" href="/signup">Sign Up</a>
   </nav>
 </header>
 
@@ -109,11 +113,11 @@ const layoutPopHTML = `<!DOCTYPE html>
 <div class="pop-bottom-spacer"></div>
 
 <nav class="pop-bottombar" aria-label="Mobile quick navigation">
-  <a href="/">Home</a>
-  <a href="/prices">Prices</a>
-  <a class="pop-bottom-call" href="{{.PhoneHref}}">Call</a>
-  <a href="/services">Pests</a>
-  <a href="/contact">Quote</a>
+  <a href="/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg>Home</a>
+  <a href="/prices"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 6.5c-.8-1.2-2.6-2-5-2-3 0-5 1.3-5 3.2 0 4.6 10 2.4 10 6.6 0 1.9-2 3.2-5 3.2-2.4 0-4.2-.8-5-2"/></svg>Prices</a>
+  <a class="pop-bottom-call" href="{{.PhoneHref}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call</a>
+  <a href="/services"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="5"/><path d="M12 8V4M8.5 9.5 5 6M15.5 9.5 19 6M7 13H3M21 13h-4M9 17l-3 4M15 17l3 4"/></svg>Pests</a>
+  <a href="/contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>Quote</a>
 </nav>
 
 <script src="/assets/js/pop.js?v=20261104-pop1" defer></script>
