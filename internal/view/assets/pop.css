@@ -94,7 +94,7 @@ a.pop-tile{text-decoration:none;color:#fff}
 .pop-btn.outline{background:transparent;color:#fff;box-shadow:inset 0 0 0 2px #fff}
 .pop-scene .pop-btn.outline{color:#fff}
 
-.pop-rail .pop-card.review{flex:0 0 320px}
+.pop-rail .pop-card.review{flex:0 0 320px;height:308px;display:flex;flex-direction:column}
 
 /* ---------- Inner page tiles: nothing laid out, tap for info ---------- */
 .pop-scene.slim{min-height:0}
@@ -157,7 +157,8 @@ a.pop-tile{text-decoration:none;color:#fff}
 .pop-card.promise p{margin:0;font-size:17px;font-weight:600}
 .pop-grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .pop-stars{color:var(--orange);font-size:17px;letter-spacing:3px}
-.pop-card.review p{font-size:16.5px;font-weight:600}
+.pop-card.review p{font-size:16.5px;font-weight:600;display:-webkit-box;-webkit-line-clamp:8;-webkit-box-orient:vertical;overflow:hidden}
+.pop-card.review .pop-who{margin-top:auto}
 .pop-who b{display:block}
 .pop-who small{font-size:11px;font-weight:800;letter-spacing:1.2px;color:#5A543E}
 .pop-ph.wide{border-radius:14px;overflow:hidden;margin-bottom:14px;box-shadow:var(--shadow-s)}
