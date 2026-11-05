@@ -121,6 +121,7 @@ func (m *Module) Register(r chi.Router) bool {
 	r.Get("/blogs/{slug}", m.blogPost)
 	// FR-001 extras — real pages now (legacy JSON stubs shadowed).
 	r.Get("/referral", m.page("referral", referralT, referralD, nil))
+	r.Get("/veterans", m.page("veterans", veteransT, veteransD, nil))
 	r.Get("/socials", m.page("socials", socialsT, socialsD, nil))
 	r.Get("/help", m.page("help", helpT, helpD, nil))
 	r.Get("/links", m.page("links", linksT, linksD, nil))
@@ -314,6 +315,8 @@ const (
 	contactT  = "Free Pest Control Quotes | Patriot Pest Control"
 	contactD  = "Call (509) 471-5767. Free quotes, same-day pest control service, online scheduling 24/7."
 	referralT = "Referral Program - Earn $25 | Patriot Pest Control"
+	veteransT = "Veterans: First Month Free on Annual Plans | Patriot Pest Control"
+	veteransD = "Veterans Day offer from veteran-owned Patriot Pest Control: veterans get their first month free on any annual plan. Book by Nov 11, 2026. Call (509) 471-5767, code VETSDAY."
 	referralD = "Refer a neighbor, both get $25. Patriot Pest Control referral program."
 	socialsT  = "Social Media | Patriot Pest Control"
 	socialsD  = "Follow Patriot Pest Control on Facebook and Instagram."
@@ -493,7 +496,7 @@ func (m *Module) sitemapXML(w http.ResponseWriter, r *http.Request) {
 	add := func(path, freq string) {
 		urls = append(urls, url{base + path, view.SitemapLastmod[path], freq})
 	}
-	for _, p := range []string{"/", "/about", "/services", "/prices", "/service-areas", "/faqs", "/contact", "/signup", "/blogs", "/referral", "/socials", "/help", "/links", "/privacy-policy", "/terms-of-use"} {
+	for _, p := range []string{"/", "/about", "/services", "/prices", "/service-areas", "/faqs", "/contact", "/signup", "/blogs", "/referral", "/veterans", "/socials", "/help", "/links", "/privacy-policy", "/terms-of-use"} {
 		freq := "weekly"
 		if p == "/" {
 			freq = "daily"
