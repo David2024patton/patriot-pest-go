@@ -40,17 +40,15 @@ const layoutPopHTML = `<!DOCTYPE html>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Barlow:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/pop.css?v=20261104-pop16">
+  <link rel="stylesheet" href="/assets/pop.css?v=20261105-pop17">
   <link rel="stylesheet" href="/assets/beacon.css">
   <link rel="icon" href="/assets/img/pests/ants.jpg" type="image/jpeg">
 </head>
 <body class="pop{{if .BodyClass}} {{.BodyClass}}{{end}}">
 
 <header class="pop-head">
-  <div class="pop-head-row">
+  <div class="pop-head-in">
     <a class="pop-brand" href="/"><span class="pop-star">★</span> PATRIOT PEST <span class="pop-brand-accent">CONTROL</span></a>
-    <a class="pop-pill pop-call" href="{{.PhoneHref}}"><span class="call-long">Call or Text </span>{{.PhoneDisplay}}</a>
-  </div>
   <nav class="pop-nav" aria-label="Main navigation">
     <a class="pop-pill" href="/#plans" data-scroll="plans"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.6 2.9 21.1 11.4a2 2 0 0 1 0 2.8l-6.9 6.9a2 2 0 0 1-2.8 0L2.9 12.6A2 2 0 0 1 2.3 11.2V4a1.7 1.7 0 0 1 1.7-1.7h7.2a2 2 0 0 1 1.4.6z"/><circle cx="7.5" cy="7.5" r="1.4"/></svg>Prices</a>
     <a class="pop-pill" href="/#services" data-scroll="services"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="5"/><path d="M12 8V4M8.5 9.5 5 6M15.5 9.5 19 6M7 13H3M21 13h-4M9 17l-3 4M15 17l3 4"/></svg>Services</a>
@@ -59,6 +57,7 @@ const layoutPopHTML = `<!DOCTYPE html>
     <a class="pop-pill" href="/#blog" data-scroll="blog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="15" height="16" rx="2"/><path d="M18 9h1a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2"/><path d="M7 9h7M7 13h7M7 17h5"/></svg>Blog</a>
     <a class="pop-pill" href="/#contact" data-scroll="contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>Contact</a>
   </nav>
+  </div>
 </header>
 
 <main>
