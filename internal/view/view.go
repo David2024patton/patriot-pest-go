@@ -427,10 +427,16 @@ func RegisterPageTemplate(name, content string) {
 }
 
 // compile builds the shared template set (layout + all pages + named parts).
-func compile() (*template.Template, error) {
+// With pop=true it swaps the layout for the Pop UI layout (pop.patriotpest.pro).
+func compile(popFlags ...bool) (*template.Template, error) {
+	pop := len(popFlags) > 0 && popFlags[0]
 	var b strings.Builder
 	b.WriteString(namedTemplates)
-	b.WriteString(layoutHTML)
+	if pop {
+		b.WriteString(layoutPopHTML)
+	} else {
+		b.WriteString(layoutHTML)
+	}
 	for _, t := range pageTemplates {
 		b.WriteString("\n")
 		b.WriteString(t)
@@ -441,12 +447,19 @@ func compile() (*template.Template, error) {
 // withBase merges base SEO/nav fields + phone into a data map for a page.
 func withBase(r *http.Request, page, title, description, keywords string) map[string]any {
 	ph := PhoneFor(r)
+	robots := "index, follow, max-snippet:-1"
+	if IsPopHost(r.Host) {
+		// The Pop UI twin is a preview surface: keep it out of search indexes
+		// so it never competes with the canonical site.
+		robots = "noindex, nofollow"
+	}
 	d := map[string]any{
 		"Page":         page,
 		"Title":        title,
 		"Description":  description,
 		"Keywords":     keywords,
-		"Robots":       "index, follow, max-snippet:-1",
+		"Robots":       robots,
+		"Pop":          IsPopHost(r.Host),
 		"Canonical":    canonical(r),
 		"OGImage":      "https://www.patriotpest.pro/assets/img/og.png",
 		"JSONLD":       []any{},
@@ -511,7 +524,7 @@ func SiteBase(r *http.Request) string {
 // the page body is rendered first via ExecuteTemplate and embedded as raw HTML.
 func render(w http.ResponseWriter, r *http.Request, d map[string]any, status int) {
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	tpl, err := compile()
+	tpl, err := compile(IsPopHost(r.Host))
 	if err != nil {
 		slog.Error("template compile failed", "err", err.Error(), "request_id", requestIDOf(r))
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
