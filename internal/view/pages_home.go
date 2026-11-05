@@ -113,11 +113,10 @@ const pageHome = `<!-- ============ HERO ============ -->
     <div class="eyebrow">SEC. 04 // SUPPLY MANIFEST</div>
     <h2 data-reveal>Choose your <em>coverage.</em></h2>
     <p class="lead" data-reveal>Transparent online pricing. No hidden fees. Free quotes, free re-treatments between visits, and a 90-day warranty on every plan.</p>
-    <div class="grid g4">
+    <div class="grid g3">
       <div class="card plan" data-reveal><span class="plan-tier">BRONZE</span><h3>Exterior-Only Protection</h3><p>Monthly exterior treatment keeps ants, spiders, wasps &amp; more away.</p><a class="more" href="/prices">View Pricing ▸</a></div>
       <div class="card plan" data-reveal><span class="plan-tier">SILVER</span><h3>Interior + Exterior</h3><p>Complete indoor + outdoor coverage ideal for families &amp; pets.</p><a class="more" href="/prices">View Pricing ▸</a></div>
       <div class="card plan featured" data-reveal><span class="rec">MOST POPULAR</span><span class="plan-tier">GOLD</span><h3>Priority Interior &amp; Exterior</h3><p>Everything in Silver + fast response &amp; seasonal deep checks.</p><a class="more" href="/prices">View Pricing ▸</a></div>
-      <div class="card plan" data-reveal><span class="plan-tier">PLATINUM</span><h3>Full Coverage (Fleas+Ticks)</h3><p>All-in-one: Gold + Flea &amp; Tick treatment, rodent stations &amp; monitoring.</p><a class="more" href="/prices">View Pricing ▸</a></div>
     </div>
   </div>
 </section>
