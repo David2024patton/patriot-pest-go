@@ -98,7 +98,35 @@ func ReplaceGoogleReviews(dbPath string, profile GoogleReviewsProfile, reviews [
 	if err := tx.Commit(); err != nil {
 		return fmt.Errorf("reviews replace commit: %w", err)
 	}
+	// Durability: the database file is bind-mounted into the container as
+	// a single file, so the WAL sidecar lives in the container's own
+	// filesystem and dies with it. Without a checkpoint, a container
+	// restart silently takes the snapshot with it (proven live
+	// 2026-11-05: the first seed vanished on the next deploy). Flush the
+	// WAL into the main file before calling the sync done.
+	if err := checkpointWAL(db); err != nil {
+		return fmt.Errorf("reviews replace checkpoint: %w", err)
+	}
 	return nil
+}
+
+// checkpointWAL flushes the write-ahead log into the main database file
+// (PRAGMA wal_checkpoint(TRUNCATE)), retrying briefly while readers hold
+// the log open. It fails when the checkpoint stays busy: the data is
+// readable by this process but not yet durable, and the caller must know.
+func checkpointWAL(db *sql.DB) error {
+	for attempt := 0; attempt < 5; attempt++ {
+		var busy, logPages, checkpointed int
+		err := db.QueryRow(`PRAGMA wal_checkpoint(TRUNCATE)`).Scan(&busy, &logPages, &checkpointed)
+		if err != nil {
+			return err
+		}
+		if busy == 0 {
+			return nil
+		}
+		time.Sleep(250 * time.Millisecond)
+	}
+	return fmt.Errorf("wal checkpoint stayed busy after retries")
 }
 
 // LatestGoogleReviews returns up to limit stored reviews at or above
