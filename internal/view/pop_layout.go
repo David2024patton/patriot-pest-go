@@ -40,7 +40,7 @@ const layoutPopHTML = `<!DOCTYPE html>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Barlow:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/pop.css?v=20261104-pop4">
+  <link rel="stylesheet" href="/assets/pop.css?v=20261104-pop5">
   <link rel="stylesheet" href="/assets/beacon.css">
   <link rel="icon" href="/assets/img/pests/ants.jpg" type="image/jpeg">
 </head>
@@ -49,7 +49,7 @@ const layoutPopHTML = `<!DOCTYPE html>
 <header class="pop-head">
   <div class="pop-head-row">
     <a class="pop-brand" href="/"><span class="pop-star">★</span> PATRIOT PEST <span class="pop-brand-accent">CONTROL</span></a>
-    <a class="pop-pill pop-call" href="{{.PhoneHref}}">Call or Text {{.PhoneDisplay}}</a>
+    <a class="pop-pill pop-call" href="{{.PhoneHref}}"><span class="call-long">Call or Text </span>{{.PhoneDisplay}}</a>
   </div>
   <nav class="pop-nav" aria-label="Main navigation">
     <a class="pop-pill{{if or (eq .Page "home-pop") (eq .Page "home")}} active{{end}}" href="/">Home</a>
