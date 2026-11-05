@@ -13,19 +13,19 @@ func init() {
 const pageHomePop = `<!-- ============ POP HERO ============ -->
 <section class="pop-sec">
   <div class="wrap">
-    <div class="pop-hero">
-      <div>
-        <div class="pop-kicker">A PROUD VETERAN-OWNED AMERICAN COMPANY</div>
-        <h1 class="pop-h1">Hostile pests?<br><span>Neutralized.</span></h1>
-        <p class="pop-lead">Military-precision pest control for homes and businesses across <b>Washington, Idaho &amp; Oregon</b>. Eco-friendly treatments safe for your family and pets, with <b>same-day service</b> when it can't wait.</p>
+    <div class="pop-scene">
+      <img class="pop-scene-bg" src="{{pestimg "rodents.jpg"}}" alt="">
+      <div class="pop-scene-shade"></div>
+      <div class="pop-scene-in">
+        <div class="pop-tagpill">A PROUD VETERAN-OWNED AMERICAN COMPANY</div>
+        <h1 class="pop-scene-h">Hostile pests?<br><span>Neutralized.</span></h1>
+        <p class="pop-scene-sub">Military-precision pest control for homes and businesses across <b>Washington, Idaho &amp; Oregon</b>. Eco-friendly treatments safe for your family and pets, with <b>same-day service</b> when it can't wait.</p>
         <div class="pop-cta-row">
-          <a class="pop-btn primary" href="{{.PhoneHref}}">Call or Text {{.PhoneDisplay}}</a>
-          <button type="button" class="pop-btn" data-pop-open="quote">Free Quote</button>
-          <a class="pop-btn" href="/prices">View Plans</a>
+          <button type="button" class="pop-btn primary" data-pop-open="quote">Get a Free Quote</button>
+          <a class="pop-btn outline" href="/prices">See the Plans</a>
+          <a class="pop-btn light" href="{{.PhoneHref}}">Call or Text {{.PhoneDisplay}}</a>
         </div>
-        <div class="pop-badges"><span>Same-Day Service</span><span>90-Day Warranty</span><span>Licensed &amp; Insured</span><span>100% Guaranteed</span></div>
       </div>
-      <div class="pop-hero-art"><img src="{{pestimg "rodents.jpg"}}" alt="Rodent control by Patriot Pest Control"></div>
     </div>
     <div class="pop-stats">
       <div class="pop-stat"><div class="pop-stat-n">4.8</div><div class="pop-stat-l">Google Rating</div></div>
@@ -42,27 +42,27 @@ const pageHomePop = `<!-- ============ POP HERO ============ -->
     <div class="pop-rail-head"><div><h2 class="pop-h2">Our Plans</h2><p class="pop-sub">Transparent pricing. No hidden fees. Tap a plan for the quick view.</p></div>
     <div class="pop-arrows"><button type="button" class="pop-arrow" data-rail-prev="rail-plans" aria-label="Scroll plans back">&#8249;</button><button type="button" class="pop-arrow" data-rail-next="rail-plans" aria-label="Scroll plans forward">&#8250;</button></div></div>
     <div class="pop-rail" id="rail-plans">
-      <div class="pop-tile plan">
-        <div class="pop-lab">Bronze</div><h3>Exterior-Only Protection</h3>
-        <div class="pop-price">$49<small> /MO</small></div>
-        <p>Monthly exterior treatment keeps ants, spiders, wasps and more away.</p>
-        <button type="button" class="pop-mini-btn" data-qv="qv-plan-bronze">Quick View</button>
-        <a class="pop-mini-link" href="/prices">Full pricing</a>
-      </div>
-      <div class="pop-tile plan">
-        <div class="pop-lab">Silver</div><h3>Interior + Exterior</h3>
-        <div class="pop-price">$59<small> /MO</small></div>
-        <p>Complete indoor and outdoor coverage, ideal for families and pets.</p>
-        <button type="button" class="pop-mini-btn" data-qv="qv-plan-silver">Quick View</button>
-        <a class="pop-mini-link" href="/prices">Full pricing</a>
-      </div>
-      <div class="pop-tile plan gold">
-        <span class="pop-tag">Most Popular</span><h3>Gold: Priority Interior &amp; Exterior</h3>
-        <div class="pop-price">$79<small> /MO</small></div>
-        <p>Everything in Silver plus fast response and seasonal deep checks.</p>
-        <button type="button" class="pop-mini-btn orange" data-qv="qv-plan-gold">Quick View</button>
-        <a class="pop-mini-link" href="/prices">Full pricing</a>
-      </div>
+      <button type="button" class="pop-tile planp tone-bronze" data-qv="qv-plan-bronze">
+        <span class="pop-plan-name">Bronze</span>
+        <span class="pop-plan-price">$49<small> /MO</small></span>
+        <span class="pop-plan-line">Exterior-Only Protection</span>
+      </button>
+      <button type="button" class="pop-tile planp tone-silver" data-qv="qv-plan-silver">
+        <span class="pop-plan-name">Silver</span>
+        <span class="pop-plan-price">$59<small> /MO</small></span>
+        <span class="pop-plan-line">Interior + Exterior</span>
+      </button>
+      <button type="button" class="pop-tile planp tone-gold" data-qv="qv-plan-gold">
+        <span class="pop-plan-tag">Most Popular</span>
+        <span class="pop-plan-name">Gold</span>
+        <span class="pop-plan-price">$79<small> /MO</small></span>
+        <span class="pop-plan-line">Priority Interior &amp; Exterior</span>
+      </button>
+      <a class="pop-tile planp tone-more" href="/prices">
+        <span class="pop-plan-name">All Plans</span>
+        <span class="pop-plan-price">Compare</span>
+        <span class="pop-plan-line">Full pricing, side by side</span>
+      </a>
     </div>
   </div>
 </section>
@@ -74,17 +74,10 @@ const pageHomePop = `<!-- ============ POP HERO ============ -->
     <div class="pop-arrows"><button type="button" class="pop-arrow" data-rail-prev="rail-pests" aria-label="Scroll pests back">&#8249;</button><button type="button" class="pop-arrow" data-rail-next="rail-pests" aria-label="Scroll pests forward">&#8250;</button></div></div>
     <div class="pop-rail" id="rail-pests">
       {{range $p := .Pests}}
-      <div class="pop-tile pest">
-        <div class="pop-ph"><img src="{{pestimg $p.Filename}}" alt="{{$p.Name}}" loading="lazy" decoding="async"></div>
-        <div class="pop-tile-in">
-          <h3>{{$p.Name}}</h3>
-          {{if $p.ScientificName}}<div class="pop-sci">{{$p.ScientificName}}</div>{{end}}
-          <div class="pop-meter"><span>Threat Level</span><b>{{$p.ThreatLevel}}%</b></div>
-          <div class="pop-bar"><div class="pop-fill" style="width:{{$p.ThreatLevel}}%"></div></div>
-          <button type="button" class="pop-mini-btn" data-qv="qv-pest-{{$p.Slug}}">Quick View</button>
-          <a class="pop-mini-link" href="/pest/{{$p.Slug}}">Full file</a>
-        </div>
-      </div>
+      <button type="button" class="pop-tile poster" data-qv="qv-pest-{{$p.Slug}}">
+        <img class="ph" src="{{pestimg $p.Filename}}" alt="{{$p.Name}}" loading="lazy" decoding="async">
+        <span class="pop-cap"><b>{{$p.Name}}</b><small>{{if $p.ScientificName}}{{$p.ScientificName}} · {{end}}Threat {{$p.ThreatLevel}}%</small></span>
+      </button>
       {{end}}
     </div>
   </div>
@@ -169,17 +162,16 @@ const pageHomePop = `<!-- ============ POP HERO ============ -->
     <div class="pop-arrows"><button type="button" class="pop-arrow" data-rail-prev="rail-blog" aria-label="Scroll articles back">&#8249;</button><button type="button" class="pop-arrow" data-rail-next="rail-blog" aria-label="Scroll articles forward">&#8250;</button></div></div>
     <div class="pop-rail" id="rail-blog">
       {{range $post := .Posts}}
-      <div class="pop-tile blog">
-        {{if $post.Photo}}<div class="pop-ph"><img src="{{pestimg $post.Photo}}" alt="{{$post.Title}}" loading="lazy" decoding="async"></div>{{end}}
-        <div class="pop-tile-in">
-          <div class="pop-lab">{{$post.PestCategory}}</div>
-          <h3>{{$post.Title}}</h3>
-          <p>{{$post.Excerpt}}</p>
-          <a class="pop-mini-btn link" href="/blogs/{{$post.Slug}}">Read It</a>
-        </div>
-      </div>
+      <a class="pop-tile poster" href="/blogs/{{$post.Slug}}">
+        {{if $post.Photo}}<img class="ph" src="{{pestimg $post.Photo}}" alt="{{$post.Title}}" loading="lazy" decoding="async">{{end}}
+        <span class="pop-cap"><b class="clamp">{{$post.Title}}</b><small>{{upper $post.PestCategory}}</small></span>
+      </a>
       {{end}}
-      <div class="pop-tile blog more"><div class="pop-tile-in"><h3>Every field guide</h3><p>The full Patriot Pest Control blog, all topics.</p><a class="pop-mini-btn link" href="/blogs">Open the Blog</a></div></div>
+      <a class="pop-tile planp tone-more" href="/blogs">
+        <span class="pop-plan-name">The Blog</span>
+        <span class="pop-plan-price">Every field guide</span>
+        <span class="pop-plan-line">All topics, all pests</span>
+      </a>
     </div>
   </div>
 </section>
@@ -210,7 +202,7 @@ const pageHomePop = `<!-- ============ POP HERO ============ -->
 <!-- ============ FINAL CTA ============ -->
 <section class="pop-sec">
   <div class="wrap">
-    <div class="pop-hero center">
+    <div class="pop-hero final center">
       <div>
         <h2 class="pop-h1">Ready to go <span>pest-free?</span></h2>
         <p class="pop-lead">Book online in minutes or call the line. Same-day service available across all three states. Free quotes, transparent pricing, zero hidden fees.</p>
