@@ -361,6 +361,24 @@ func (m *Module) base(extra map[string]any) map[string]any {
 // library, ordered for display (sort_order).
 func (m *Module) home(w http.ResponseWriter, r *http.Request) {
 	pests := data.AllPests()
+	if view.IsPopHost(r.Host) {
+		// Pop UI homepage (pop.patriotpest.pro): same real data, plus the
+		// latest posts, the service states, and the quote form's CSRF +
+		// pest picker so the popup form posts to /contact like the real one.
+		posts := data.PublishedPosts()
+		if len(posts) > 6 {
+			posts = posts[:6]
+		}
+		view.Page(w, r, "home-pop", homeT, homeD, metaKeywords, m.base(map[string]any{
+			"Pests":       pests,
+			"PestCount":   len(pests),
+			"Posts":       posts,
+			"States":      data.States(),
+			"Csrf":        m.csrfField(r, w),
+			"PestOptions": pestOptionsHTML(""),
+		}))
+		return
+	}
 	view.Page(w, r, "home", homeT, homeD, metaKeywords, m.base(map[string]any{
 		"Pests":     pests,
 		"PestCount": len(pests),
