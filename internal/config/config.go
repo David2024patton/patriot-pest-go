@@ -30,6 +30,11 @@ type Config struct {
 	// (scope crm:write). Empty disables capture; form handlers then fall
 	// back to the local signup store so a lead is never discarded.
 	AlphaFluxAPIKey string
+
+	// ReviewsSyncToken gates POST /api/reviews/sync, the feed that keeps
+	// the pop Field Reports rail on the newest real Google reviews.
+	// Empty disables the endpoint entirely (fail closed).
+	ReviewsSyncToken string
 }
 
 // Load reads env vars with defaults.
@@ -43,6 +48,7 @@ func Load() Config {
 		MarketingEnabled: envBool("MARKETING_ENABLED", true),
 		AlphaFluxAPIURL:  env("ALPHAFLUX_API_URL", "https://alphaflux.net"),
 		AlphaFluxAPIKey:  env("ALPHAFLUX_API_KEY", ""),
+		ReviewsSyncToken: env("REVIEWS_SYNC_TOKEN", ""),
 	}
 }
 

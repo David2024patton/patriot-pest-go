@@ -42,6 +42,10 @@ type Module struct {
 	// forms fall back to the local store.
 	AlphaFluxURL string
 	AlphaFluxKey string
+	// ReviewsSyncToken gates POST /api/reviews/sync, the feed that keeps
+	// the pop Field Reports rail on the newest real Google reviews
+	// (reviews.go). Empty means the route is not registered (fail closed).
+	ReviewsSyncToken string
 	// adminEmails / adminHash gate the /admin analytics console. Populated
 	// by initAdmin from ADMIN_EMAILS / ADMIN_PASSWORD_HASH; empty means the
 	// console is disabled and its routes are not registered.
@@ -145,6 +149,11 @@ func (m *Module) Register(r chi.Router) bool {
 	r.With(postLimiter.Middleware).Post("/api/track/view", m.trackEndpoint("pageview"))
 	r.With(postLimiter.Middleware).Post("/api/track/event", m.trackEndpoint("event"))
 	r.With(postLimiter.Middleware).Post("/api/track/session_end", m.trackEndpoint("session_end"))
+	// Google reviews sync — only when REVIEWS_SYNC_TOKEN is set; otherwise
+	// the route does not exist (404, fail closed like the admin console).
+	if m.ReviewsSyncToken != "" {
+		r.With(postLimiter.Middleware).Post("/api/reviews/sync", m.reviewsSync)
+	}
 	// Admin analytics console — only when ADMIN_EMAILS + ADMIN_PASSWORD_HASH
 	// are set; otherwise these routes do not exist (404, fail closed).
 	m.initAdmin()
@@ -394,14 +403,18 @@ func (m *Module) home(w http.ResponseWriter, r *http.Request) {
 		if len(top) > 5 {
 			top = top[:5]
 		}
+		reviews, reviewsProfile := m.reviewCards(6)
 		view.Page(w, r, "home-pop", homeT, homeD, metaKeywords, m.base(map[string]any{
-			"Pests":       pests,
-			"TopPests":    top,
-			"PestCount":   len(pests),
-			"Posts":       posts,
-			"States":      data.States(),
-			"Csrf":        m.csrfField(r, w),
-			"PestOptions": pestOptionsHTML(""),
+			"Pests":          pests,
+			"TopPests":       top,
+			"PestCount":      len(pests),
+			"Posts":          posts,
+			"States":         data.States(),
+			"Csrf":           m.csrfField(r, w),
+			"PestOptions":    pestOptionsHTML(""),
+			"Reviews":        reviews,
+			"ReviewsTotal":   reviewsProfile.Total,
+			"ReviewsAverage": reviewsProfile.Average,
 		}))
 		return
 	}

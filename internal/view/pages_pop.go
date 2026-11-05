@@ -88,18 +88,20 @@ const pageHomePop = `<!-- ============ POP HERO ============ -->
   </div>
 </section>
 
-<!-- ============ FIELD REPORTS ============ -->
+<!-- ============ FIELD REPORTS (real Google reviews, newest first) ============ -->
+{{if .Reviews}}
 <section class="pop-sec">
   <div class="wrap">
-    <div class="pop-rail-head"><div><h2 class="pop-h2">Field Reports</h2></div>
+    <div class="pop-rail-head"><div><h2 class="pop-h2">Field Reports</h2>{{if .ReviewsTotal}}<p class="pop-sub">{{.ReviewsAverage}} stars &middot; {{.ReviewsTotal}} Google reviews &middot; newest first</p>{{end}}</div>
     <div class="pop-arrows"><button type="button" class="pop-arrow" data-rail-prev="rail-reviews" aria-label="Scroll reviews back">&#8249;</button><button type="button" class="pop-arrow" data-rail-next="rail-reviews" aria-label="Scroll reviews forward">&#8250;</button></div></div>
     <div class="pop-rail" id="rail-reviews">
-      <div class="pop-card review"><div class="pop-stars">★★★★★</div><p>"Patriot Pest Control saved our home from a serious ant infestation. Professional, thorough, and the results were immediate."</p><div class="pop-who"><b>Sarah M.</b><small>WASHINGTON</small></div></div>
-      <div class="pop-card review"><div class="pop-stars">★★★★★</div><p>"We've used Patriot for our restaurant for 2 years. Reliable, discreet, always on time. Our health inspections have never been better."</p><div class="pop-who"><b>James T.</b><small>LIBERTY LAKE, WA</small></div></div>
-      <div class="pop-card review"><div class="pop-stars">★★★★★</div><p>"Fast response and eco-friendly products safe for my kids and pets. The technician was knowledgeable and explained everything."</p><div class="pop-who"><b>Lisa R.</b><small>COEUR D'ALENE, ID</small></div></div>
+      {{range .Reviews}}
+      <div class="pop-card review"><div class="pop-stars">{{.Stars}}</div>{{if .Text}}<p>&ldquo;{{.Text}}&rdquo;</p>{{end}}<div class="pop-who"><b>{{.Reviewer}}</b><small>{{if .DateLabel}}{{upper .DateLabel}} &middot; {{end}}GOOGLE REVIEW</small></div></div>
+      {{end}}
     </div>
   </div>
 </section>
+{{end}}
 
 <!-- ============ FROM THE FIELD (blog rail) ============ -->
 <section class="pop-sec" id="blog">
