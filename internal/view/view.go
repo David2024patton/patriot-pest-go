@@ -142,13 +142,14 @@ const layoutHTML = `<!DOCTYPE html>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Barlow:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/styles.css?v=20261104-price1">
+  <link rel="stylesheet" href="/assets/styles.css?v=20261105-vet1">
   {{if .AppUI}}<link rel="stylesheet" href="/assets/admin.css">{{end}}
   <link rel="stylesheet" href="/assets/beacon.css">
   <link rel="stylesheet" href="/assets/pwa-install.css">
   <link rel="icon" href="/assets/img/pests/ants.jpg" type="image/jpeg">
 </head>
 <body{{if .BodyClass}} class="{{.BodyClass}}"{{end}}>
+{{if .VetPromo}}<div class="vet-banner"><p><b>Veterans Day:</b> Veterans get their <b>first month FREE</b> on any annual plan. Thank you for your service.</p><a class="vet-banner-btn" href="/signup">Claim the Offer</a></div>{{end}}
 
 <nav class="top-nav" aria-label="Main navigation">
   <button id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="navlinks">☰</button>
@@ -448,6 +449,16 @@ func compile(popFlags ...bool) (*template.Template, error) {
 }
 
 // withBase merges base SEO/nav fields + phone into a data map for a page.
+// vetPromoActive gates the Veterans Day banner: veterans get their first
+// month free on an annual plan (Skyler's offer, 2026-11-05). The banner
+// carries its own expiry so it never lingers past the holiday window.
+func vetPromoActive() bool {
+	now := time.Now()
+	start := time.Date(2026, 11, 5, 0, 0, 0, 0, time.UTC)
+	end := time.Date(2026, 11, 13, 5, 0, 0, 0, time.UTC)
+	return !now.Before(start) && now.Before(end)
+}
+
 func withBase(r *http.Request, page, title, description, keywords string) map[string]any {
 	ph := PhoneFor(r)
 	robots := "index, follow, max-snippet:-1"
@@ -475,6 +486,7 @@ func withBase(r *http.Request, page, title, description, keywords string) map[st
 		"OtherTel":     template.URL("tel:" + ph.Other.Tel),
 		"OtherLabel":   ph.Other.Label,
 		"IsAZ":         ph.IsAZ,
+		"VetPromo":     vetPromoActive(),
 		"Year":         time.Now().Year(),
 		"IsAdmin":      false,
 		"AppUI":        false,

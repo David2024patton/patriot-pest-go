@@ -13,6 +13,7 @@ func init() {
     <span class="pop-tagpill">Capabilities // Services</span>
     <h1 class="pop-scene-h">Every pest. <span>One team.</span></h1>
     <p class="pop-scene-sub">The full catalog, grouped like a movie library. Tap any service for the briefing.</p>
+    <div class="pop-scene-cta"><a class="pop-btn primary" href="{{.PhoneHref}}">Call or Text {{.PhoneDisplay}}</a><button type="button" class="pop-btn" data-pop-open="quote">Book Now</button></div>
   </div>
 </section>
 {{range $cat := .Categories}}
@@ -26,7 +27,7 @@ func init() {
 {{end}}
 {{template "part-pest-sources" .Pests}}
 {{template "part-plans-rail" .}}
-{{template "part-cta" .}}`)
+`)
 
 	// ---------- Prices: plans rail only (compare removed 2026-11-05) ----------
 	RegisterPageTemplate("prices-pop", `
@@ -35,10 +36,11 @@ func init() {
     <span class="pop-tagpill">Supply Manifest // Pricing</span>
     <h1 class="pop-scene-h">Protect your <span>home.</span></h1>
     <p class="pop-scene-sub">Tap a plan for what it covers.</p>
+    <div class="pop-scene-cta"><a class="pop-btn primary" href="{{.PhoneHref}}">Call or Text {{.PhoneDisplay}}</a><button type="button" class="pop-btn" data-pop-open="quote">Book Now</button></div>
   </div>
 </section>
 {{template "part-plans-rail" .}}
-{{template "part-cta" .}}`)
+`)
 
 	// ---------- Service areas index: state tiles in a grid ----------
 	RegisterPageTemplate("areas-pop", `
@@ -47,6 +49,7 @@ func init() {
     <span class="pop-tagpill">Theater of Operations</span>
     <h1 class="pop-scene-h">Where we <span>operate.</span></h1>
     <p class="pop-scene-sub">Tap a state for its towns.</p>
+    <div class="pop-scene-cta"><a class="pop-btn primary" href="{{.PhoneHref}}">Call or Text {{.PhoneDisplay}}</a><button type="button" class="pop-btn" data-pop-open="quote">Book Now</button></div>
   </div>
 </section>
 <section class="pop-sec">
@@ -55,7 +58,7 @@ func init() {
     <div class="pop-grid">{{template "part-state-tiles" .States}}</div>
   </div>
 </section>
-{{template "part-cta" .}}`)
+`)
 
 	// ---------- FAQs: question tiles, answers in the popup ----------
 	RegisterPageTemplate("faqs-pop", `
@@ -64,6 +67,7 @@ func init() {
     <span class="pop-tagpill">Intel // FAQ</span>
     <h1 class="pop-scene-h">Questions, <span>answered.</span></h1>
     <p class="pop-scene-sub">Tap a question for the answer.</p>
+    <div class="pop-scene-cta"><a class="pop-btn primary" href="{{.PhoneHref}}">Call or Text {{.PhoneDisplay}}</a><button type="button" class="pop-btn" data-pop-open="quote">Book Now</button></div>
   </div>
 </section>
 <section class="pop-sec">
@@ -116,7 +120,7 @@ func init() {
     <div id="qv-faq-commercial"><div class="pop-lab">Getting Started</div><h3>Do you handle commercial properties?</h3><p>Yes. We treat restaurants, offices, retail spaces, warehouses, and multi-unit housing as well as homes. Visits are scheduled around your operating hours so customers and staff are not disrupted. We also provide the service records that health inspections and audits ask for, so compliance stays simple.</p></div>
   </div>
 </section>
-{{template "part-cta" .}}`)
+`)
 }
 
 func init() {
@@ -127,6 +131,7 @@ func init() {
     <span class="pop-tagpill">Personnel File // About Us</span>
     <h1 class="pop-scene-h">Veteran-owned. <span>Mission-driven.</span></h1>
     <p class="pop-scene-sub">Tap a file for the details.</p>
+    <div class="pop-scene-cta"><a class="pop-btn primary" href="{{.PhoneHref}}">Call or Text {{.PhoneDisplay}}</a><button type="button" class="pop-btn" data-pop-open="quote">Book Now</button></div>
   </div>
 </section>
 <section class="pop-sec">
@@ -185,7 +190,7 @@ func init() {
     <div id="qv-val-service"><div class="pop-lab">Core Values</div><h3>Service</h3><p>We continue serving American families with the same dedication we showed in uniform.</p></div>
   </div>
 </section>
-{{template "part-cta" .}}`)
+`)
 
 	// ---------- Contact: action tiles; the form is the quote popup ----------
 	RegisterPageTemplate("contact-pop", `
@@ -194,6 +199,7 @@ func init() {
     <span class="pop-tagpill">Comms // Contact</span>
     <h1 class="pop-scene-h">Reach the <span>team.</span></h1>
     <p class="pop-scene-sub">Pick a channel. We respond within one business day, usually much faster.</p>
+    <div class="pop-scene-cta"><a class="pop-btn primary" href="{{.PhoneHref}}">Call or Text {{.PhoneDisplay}}</a><button type="button" class="pop-btn" data-pop-open="quote">Book Now</button></div>
   </div>
 </section>
 <section class="pop-sec">
@@ -250,6 +256,7 @@ func init() {
     <span class="pop-tagpill">From the Field // Blog</span>
     <h1 class="pop-scene-h">Field <span>guides.</span></h1>
     <p class="pop-scene-sub">Tap a guide for the briefing.</p>
+    <div class="pop-scene-cta"><a class="pop-btn primary" href="{{.PhoneHref}}">Call or Text {{.PhoneDisplay}}</a><button type="button" class="pop-btn" data-pop-open="quote">Book Now</button></div>
   </div>
 </section>
 <section class="pop-sec">
@@ -259,7 +266,7 @@ func init() {
   </div>
 </section>
 {{template "part-blog-sources" .Posts}}
-{{template "part-cta" .}}`)
+`)
 
 	// ---------- Pest file: scene header, section tiles, related rail ----------
 	RegisterPageTemplate("pest-pop", `
@@ -270,7 +277,7 @@ func init() {
     {{if .Pest.ScientificName}}<p class="pop-scene-sub"><i>{{.Pest.ScientificName}}</i> &middot; Regional threat level {{.Pest.ThreatLevel}}%</p>{{end}}
     <div class="pop-cta-row">
       <a class="pop-btn primary" href="{{.PhoneHref}}">Call or Text {{.PhoneDisplay}}</a>
-      <button type="button" class="pop-btn" data-pop-open="quote">Free Quote</button>
+      <button type="button" class="pop-btn" data-pop-open="quote">Book Now</button>
     </div>
   </div>
 </section>
@@ -311,18 +318,18 @@ func init() {
 {{template "part-pest-sources" .Related}}
 {{end}}
 {{template "part-plans-rail" .}}
-{{template "part-cta" .}}`)
+`)
 
 	// ---------- Town page: scene, local briefing tile, local pests ----------
 	RegisterPageTemplate("area-detail-pop", `
-<section class="pop-scene slim"><img class="pop-scene-art" src="/assets/img/illus/state-wa.jpg" alt="">
+<section class="pop-scene slim"><img class="pop-scene-art" src="{{if eq .CityStateCode "WA"}}/assets/img/illus/state-wa.jpg{{else if eq .CityStateCode "ID"}}/assets/img/illus/state-id.jpg{{else}}/assets/img/illus/state-or.jpg{{end}}" alt="">
   <div class="pop-scene-in">
     <span class="pop-tagpill">Service Area // {{.CityStateName}}</span>
     <h1 class="pop-scene-h">Pest control in <span>{{.CityName}}, {{.CityStateCode}}</span></h1>
     <p class="pop-scene-sub">Same-day service, 90-day warranty, veteran-owned.</p>
     <div class="pop-cta-row">
       <a class="pop-btn primary" href="{{.AreaPhoneHref}}">Call or Text {{.AreaPhoneDisplay}}</a>
-      <button type="button" class="pop-btn" data-pop-open="quote">Free Quote</button>
+      <button type="button" class="pop-btn" data-pop-open="quote">Book Now</button>
     </div>
   </div>
 </section>
@@ -360,7 +367,7 @@ func init() {
 {{template "part-pest-sources" .AreaPests}}
 {{end}}
 {{template "part-plans-rail" .}}
-{{template "part-cta" .}}`)
+`)
 }
 
 func init() {
@@ -414,6 +421,6 @@ func init() {
 </div>
 {{end}}
 {{template "part-plans-rail" .}}
-{{template "part-cta" .}}`
+`
 	RegisterPageTemplate("signup-pop", signupPop)
 }

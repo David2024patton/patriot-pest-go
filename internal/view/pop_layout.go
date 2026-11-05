@@ -40,7 +40,7 @@ const layoutPopHTML = `<!DOCTYPE html>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Barlow:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/pop.css?v=20261105-pop19">
+  <link rel="stylesheet" href="/assets/pop.css?v=20261105-pop20">
   <link rel="stylesheet" href="/assets/beacon.css">
   <link rel="icon" href="/assets/img/pests/ants.jpg" type="image/jpeg">
 </head>
@@ -95,6 +95,7 @@ const layoutPopHTML = `<!DOCTYPE html>
     <div class="pop-lab">Free Quote</div>
     <h3>Get your free quote</h3>
     <p class="pop-form-note">We respond within one business day, usually much faster. Same-day service available across all three states.</p>
+    <div class="pop-promo-line" id="pop-promo-line" hidden></div>
     <form method="post" action="/contact" class="form-stack">
       {{.Csrf}}
       <div class="field"><label for="q-name">Full Name *</label><input type="text" id="q-name" name="name" required autocomplete="name"></div>
@@ -129,7 +130,46 @@ const layoutPopHTML = `<!DOCTYPE html>
   <a href="/contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>Quote</a>
 </nav>
 
-<script src="/assets/js/pop.js?v=20261104-pop5" defer></script>
+
+<button type="button" class="pop-fab gear" id="pop-gear" aria-label="Display settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
+
+<button type="button" class="pop-fab ask" id="pop-ask" aria-label="Ask Emily"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg><span>Ask Emily</span></button>
+
+<div class="pop-scrim" id="pop-settings" hidden>
+  <div class="pop-popup settings-card" role="dialog" aria-modal="true" aria-label="Display settings">
+    <button type="button" class="pop-x" data-pop-close aria-label="Close">&#10005;</button>
+    <div class="pop-lab">Settings</div>
+    <h3>Make it yours</h3>
+    <div class="set-row"><span class="set-lab">Text size</span><div class="set-seg" id="set-text"><button type="button" data-fs="">Normal</button><button type="button" data-fs="lg">Large</button><button type="button" data-fs="xl">Extra large</button></div></div>
+    <div class="set-row"><span class="set-lab">Tile size</span><div class="set-seg" id="set-tiles"><button type="button" data-ts="">Normal</button><button type="button" data-ts="lg">Large</button></div></div>
+    <div class="set-row"><span class="set-lab">Jump</span><button type="button" class="pop-btn" id="set-top">Back to top</button></div>
+    <p class="pop-form-note">Settings stay on this device.</p>
+  </div>
+</div>
+
+<div class="em-panel" id="em-panel" hidden>
+  <div class="em-head"><div class="em-id"><span class="em-ava">E</span><div><b>Emily</b><small>Patriot Pest Control assistant</small></div></div><button type="button" class="em-x" id="em-close" aria-label="Close">&#10005;</button></div>
+  <div class="em-body" id="em-body"></div>
+  <div class="em-chips" id="em-chips"></div>
+  <form class="em-input" id="em-form"><input type="text" id="em-text" placeholder="Ask about pests, prices, booking..." autocomplete="off"><button type="submit" class="pop-btn primary">Send</button></form>
+</div>
+
+<div class="pop-scrim" id="pop-promo" hidden>
+  <div class="pop-popup promo-card" role="dialog" aria-modal="true" aria-label="Special offer">
+    <button type="button" class="pop-x" data-pop-close aria-label="Close">&#10005;</button>
+    <img class="promo-art" src="/assets/img/illus/hero.jpg" alt="">
+    <div class="pop-lab" id="promo-lab">Special Offer</div>
+    <h3 id="promo-title"></h3>
+    <p class="promo-text" id="promo-text"></p>
+    <div class="promo-flex">
+      <div class="promo-codebox"><small>Your code</small><b id="promo-code"></b></div>
+      <div class="promo-qr"><img id="promo-qr" src="" alt="QR code: scan to book with this code applied"><small>SCAN ME to book with the code applied</small></div>
+    </div>
+    <div class="pop-cta-row"><button type="button" class="pop-btn primary" id="promo-book">Book Now</button><button type="button" class="pop-btn" data-pop-close>Maybe Later</button></div>
+  </div>
+</div>
+
+<script src="/assets/js/pop.js?v=20261105-pop20" defer></script>
 {{if .Track}}<script src="/assets/js/tracker.js" defer></script>{{end}}
 </body>
 </html>

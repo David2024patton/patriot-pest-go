@@ -21,7 +21,7 @@ const pageHomePop = `<!-- ============ POP HERO ============ -->
         <h1 class="pop-scene-h">Hostile pests.<br><span>Neutralized.</span></h1>
         <p class="pop-scene-sub">Military-precision pest control across <b>Washington, Idaho &amp; Oregon</b>, with <b>same-day service</b> when it can't wait.</p>
         <div class="pop-cta-row">
-          <button type="button" class="pop-btn primary" data-pop-open="quote">Get a Free Quote</button>
+          <button type="button" class="pop-btn primary" data-pop-open="quote">Book Now</button>
           <a class="pop-btn outline" href="/#plans" data-scroll="plans">See the Plans</a>
           <a class="pop-btn light" href="{{.PhoneHref}}">Call or Text {{.PhoneDisplay}}</a>
         </div>
@@ -57,10 +57,14 @@ const pageHomePop = `<!-- ============ POP HERO ============ -->
 <section class="pop-sec" id="about">
   <div class="wrap">
     <div class="pop-rail-head"><div><h2 class="pop-h2">The Operator</h2></div></div>
-    <button type="button" class="pop-tile poster wide" data-qv="qv-operator">
-      <img class="ph" src="/assets/img/illus/operator.jpg" alt="Skyler Rose, founder and operator" loading="lazy" decoding="async">
-      <span class="pop-cap"><b>Skyler Rose</b><small>Founder &amp; Operator &middot; U.S. Military Veteran</small></span>
-    </button>
+    <div class="pop-feature">
+      <img class="pop-feature-art" src="/assets/img/illus/operator.jpg" alt="Skyler Rose, founder and operator">
+      <div class="pop-feature-in">
+        <h3 class="pop-feature-h">Skyler Rose</h3>
+        <p class="pop-feature-p">Founder &amp; Operator &middot; U.S. Military Veteran. The man who answers for every job Patriot runs.</p>
+        <div class="pop-scene-cta"><button type="button" class="pop-btn" data-qv="qv-operator">Meet Skyler</button><a class="pop-btn primary" href="{{.PhoneHref}}">Call or Text {{.PhoneDisplay}}</a></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -121,10 +125,10 @@ const pageHomePop = `<!-- ============ POP HERO ============ -->
 <!-- ============ BUG BLASTER (tile; the game lives in its popup) ============ -->
 <section class="pop-sec" id="bugblaster-sec">
   <div class="wrap">
-    <div class="pop-rail-head"><div><h2 class="pop-h2">Field Exercise</h2></div></div>
+    <div class="pop-rail-head"><div><h2 class="pop-h2">Play Our Game</h2></div></div>
     <button type="button" class="pop-tile poster wide" data-pop-open="game">
       <img class="ph" src="/assets/img/illus/game-art.jpg" alt="Bug Blaster game" loading="lazy" decoding="async">
-      <span class="pop-cap"><b>Bug Blaster</b><small>Tap to play the field exercise</small></span>
+      <span class="pop-cap"><b>Bug Blaster</b><small>Tap to play Bug Blaster</small></span>
     </button>
   </div>
 </section>
@@ -133,7 +137,7 @@ const pageHomePop = `<!-- ============ POP HERO ============ -->
   <div class="pop-popup wide-pop" role="dialog" aria-modal="true" aria-label="Bug Blaster game">
     <button type="button" class="pop-x" data-pop-close aria-label="Close">&#10005;</button>
 <div class="pop-card game">
-      <div class="pop-lab">Field Exercise // Bug Blaster</div>
+      <div class="pop-lab">Play Our Game // Bug Blaster</div>
       <h2 class="pop-h2 dark">Take a break. Blow up some bugs.</h2>
       <p class="pop-lead dark">Hostiles crawl in from the treeline, you click (or tap) to drop a pest bomb, and everything in the blast radius goes down. This is the fun version. The real one involves our technicians.</p>
       <div class="bb-arena">
@@ -151,23 +155,6 @@ const pageHomePop = `<!-- ============ POP HERO ============ -->
   </div>
 </div>
 <script src="/assets/js/bugblaster.js" defer></script>
-
-<!-- ============ FINAL CTA ============ -->
-<section class="pop-sec" id="contact">
-  <div class="wrap">
-    <div class="pop-hero final center">
-      <div>
-        <h2 class="pop-h1">Ready to go <span>pest-free?</span></h2>
-        <p class="pop-lead">Get started online in minutes or call the line. Same-day service available across all three states. Free quotes, transparent pricing, zero hidden fees.</p>
-        <div class="pop-cta-row center">
-          <a class="pop-btn primary" href="{{.PhoneHref}}">Call or Text {{.PhoneDisplay}}</a>
-          <button type="button" class="pop-btn" data-pop-open="quote">Free Quote</button>
-          <a class="pop-btn" href="/#plans" data-scroll="plans">View Plans</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ============ QUICK VIEW SOURCES (hidden; pop.js clones these) ============ -->
 <div class="pop-qv-sources" hidden>
