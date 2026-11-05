@@ -41,12 +41,12 @@ const pageHomePop = `<!-- ============ POP HERO ============ -->
     <div class="pop-rail" id="rail-pests">
       {{range $p := .TopPests}}
       <button type="button" class="pop-tile poster" data-qv="qv-pest-{{$p.Slug}}">
-        <img class="ph" src="{{pestillus $p.Filename}}" alt="{{$p.Name}}" loading="lazy" decoding="async">
+        <img class="ph" src="{{pestillus $p.Filename}}" alt="{{$p.Name}}" width="2048" height="1152" loading="lazy" decoding="async">
         <span class="pop-cap"><b>{{$p.Name}}</b><small>{{if $p.ScientificName}}{{$p.ScientificName}} · {{end}}Threat {{$p.ThreatLevel}}%</small></span>
       </button>
       {{end}}
       <a class="pop-tile poster" href="/services">
-        <img class="ph" src="{{pestillus "crickets.jpg"}}" alt="View all pests" loading="lazy" decoding="async">
+        <img class="ph" src="{{pestillus "crickets.jpg"}}" alt="View all pests" width="2096" height="1184" loading="lazy" decoding="async">
         <span class="pop-cap"><b>View All Pests</b><small>{{.PestCount}} services &middot; Full catalog</small></span>
       </a>
     </div>
@@ -58,7 +58,7 @@ const pageHomePop = `<!-- ============ POP HERO ============ -->
   <div class="wrap">
     <div class="pop-rail-head"><div><h2 class="pop-h2">The Operator</h2></div></div>
     <div class="pop-feature">
-      <img class="pop-feature-art" src="/assets/img/illus/operator.jpg" alt="Skyler Rose, founder and operator">
+      <img class="pop-feature-art" src="/assets/img/illus/operator.jpg?v=20261105-op2" alt="Skyler Rose, founder and operator">
       <div class="pop-feature-in">
         <h3 class="pop-feature-h">Skyler Rose</h3>
         <p class="pop-feature-p">Founder &amp; Operator &middot; U.S. Military Veteran. The man who answers for every job Patriot runs.</p>
@@ -82,7 +82,7 @@ const pageHomePop = `<!-- ============ POP HERO ============ -->
   <div class="wrap">
     <div class="pop-rail-head"><div><h2 class="pop-h2">The Guarantee</h2></div></div>
     <button type="button" class="pop-tile poster wide" data-qv="qv-guarantee">
-      <img class="ph" src="/assets/img/illus/guarantee.jpg" alt="The Patriot guarantee" loading="lazy" decoding="async">
+      <img class="ph" src="/assets/img/illus/guarantee.jpg" alt="The Patriot guarantee" width="2048" height="1152" loading="lazy" decoding="async">
       <span class="pop-cap"><b>90-Day Mission Guarantee</b><small>We stand behind every mission</small></span>
     </button>
   </div>
@@ -127,7 +127,7 @@ const pageHomePop = `<!-- ============ POP HERO ============ -->
   <div class="wrap">
     <div class="pop-rail-head"><div><h2 class="pop-h2">Play Our Game</h2></div></div>
     <button type="button" class="pop-tile poster wide" data-pop-open="game">
-      <img class="ph" src="/assets/img/illus/game-art.jpg" alt="Bug Blaster game" loading="lazy" decoding="async">
+      <img class="ph" src="/assets/img/illus/game-art.jpg" alt="Bug Blaster game" width="2048" height="1152" loading="lazy" decoding="async">
       <span class="pop-cap"><b>Bug Blaster</b><small>Tap to play Bug Blaster</small></span>
     </button>
   </div>
@@ -154,12 +154,12 @@ const pageHomePop = `<!-- ============ POP HERO ============ -->
     </div>
   </div>
 </div>
-<script src="/assets/js/bugblaster.js" defer></script>
+<script src="/assets/js/bugblaster.js?v=20261105-bb2" defer></script>
 
 <!-- ============ QUICK VIEW SOURCES (hidden; pop.js clones these) ============ -->
 <div class="pop-qv-sources" hidden>
   <div id="qv-operator">
-    <div class="pop-qv-art"><img src="/assets/img/illus/operator.jpg" alt=""></div>
+    <div class="pop-qv-art"><img src="/assets/img/illus/operator.jpg?v=20261105-op2" alt=""></div>
     <div class="pop-lab">Personnel File 001</div>
     <h3>Skyler Rose</h3>
     <p>Patriot Pest Control was founded by U.S. Military Veteran Skyler Rose, bringing military discipline, integrity, and uncompromising excellence to pest control across three states. Over a decade of field experience. Thousands of homes and businesses protected.</p>

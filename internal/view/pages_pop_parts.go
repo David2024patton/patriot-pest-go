@@ -17,16 +17,16 @@ func init() {
     <div class="pop-arrows"><button type="button" class="pop-arrow" data-rail-prev="rail-plans" aria-label="Scroll plans back">&#8249;</button><button type="button" class="pop-arrow" data-rail-next="rail-plans" aria-label="Scroll plans forward">&#8250;</button></div></div>
     <div class="pop-rail" id="rail-plans">
       <button type="button" class="pop-tile poster" data-qv="qv-plan-bronze">
-        <img class="ph" src="/assets/img/illus/plan-bronze.jpg" alt="Bronze plan" loading="lazy" decoding="async">
+        <img class="ph" src="/assets/img/illus/plan-bronze.jpg" alt="Bronze plan" width="2048" height="1152" loading="lazy" decoding="async">
         <span class="pop-cap"><b>Bronze &middot; $49/mo</b><small>Exterior-Only Protection</small></span>
       </button>
       <button type="button" class="pop-tile poster" data-qv="qv-plan-silver">
-        <img class="ph" src="/assets/img/illus/plan-silver.jpg" alt="Silver plan" loading="lazy" decoding="async">
+        <img class="ph" src="/assets/img/illus/plan-silver.jpg" alt="Silver plan" width="2048" height="1152" loading="lazy" decoding="async">
         <span class="pop-cap"><b>Silver &middot; $59/mo</b><small>Interior + Exterior</small></span>
       </button>
       <button type="button" class="pop-tile poster" data-qv="qv-plan-gold">
         <span class="pop-plan-tag">Most Popular</span>
-        <img class="ph" src="/assets/img/illus/plan-gold.jpg" alt="Gold plan" loading="lazy" decoding="async">
+        <img class="ph" src="/assets/img/illus/plan-gold.jpg" alt="Gold plan" width="2048" height="1152" loading="lazy" decoding="async">
         <span class="pop-cap"><b>Gold &middot; $79/mo</b><small>Priority Interior &amp; Exterior</small></span>
       </button>
     </div>
@@ -72,7 +72,7 @@ func init() {
 	RegisterPageTemplate("part-pest-tiles", `
 {{range $p := .}}
 <button type="button" class="pop-tile poster" data-qv="qv-pest-{{$p.Slug}}">
-  <img class="ph" src="{{pestillus $p.Filename}}" alt="{{$p.Name}}" loading="lazy" decoding="async">
+  <img class="ph" src="{{pestillus $p.Filename}}" alt="{{$p.Name}}" width="2048" height="1152" loading="lazy" decoding="async">
   <span class="pop-cap"><b>{{$p.Name}}</b><small>{{if $p.ScientificName}}{{$p.ScientificName}} · {{end}}Threat {{$p.ThreatLevel}}%</small></span>
 </button>
 {{end}}`)
@@ -98,7 +98,7 @@ func init() {
 	RegisterPageTemplate("part-state-tiles", `
 {{range $st := .}}
 <button type="button" class="pop-tile poster" data-qv="qv-state-{{$st.Code}}">
-  <img class="ph" src="{{if eq $st.Code "WA"}}/assets/img/illus/state-wa.jpg{{else if eq $st.Code "ID"}}/assets/img/illus/state-id.jpg{{else}}/assets/img/illus/state-or.jpg{{end}}" alt="{{$st.Name}}" loading="lazy" decoding="async">
+  <img class="ph" src="{{if eq $st.Code "WA"}}/assets/img/illus/state-wa.jpg{{else if eq $st.Code "ID"}}/assets/img/illus/state-id.jpg{{else}}/assets/img/illus/state-or.jpg{{end}}" alt="{{$st.Name}}" width="2048" height="1152" loading="lazy" decoding="async">
   <span class="pop-cap"><b>{{$st.Name}}</b><small>{{len $st.Cities}} zones &middot; Same-day available</small></span>
 </button>
 {{end}}
