@@ -64,10 +64,10 @@ a.pop-tile{text-decoration:none;color:#fff}
 
 /* Plan posters: solid tone tiles, price is the art */
 .pop-tile.planp{position:relative;height:148px;overflow:hidden;box-shadow:var(--shadow-s);display:flex;flex-direction:column;justify-content:flex-end;padding:16px;gap:0}
-.tone-bronze{background:linear-gradient(150deg,#7A6742,#4C3F27)}
-.tone-silver{background:linear-gradient(150deg,#7C8464,#49512F)}
-.tone-gold{background:linear-gradient(150deg,#F0742C,#C24E02)}
-.tone-more{background:linear-gradient(150deg,#39451F,#232B10)}
+.pop-tile.tone-bronze{background:linear-gradient(150deg,#7A6742,#4C3F27)}
+.pop-tile.tone-silver{background:linear-gradient(150deg,#7C8464,#49512F)}
+.pop-tile.tone-gold{background:linear-gradient(150deg,#F0742C,#C24E02)}
+.pop-tile.tone-more{background:linear-gradient(150deg,#39451F,#232B10)}
 .pop-plan-name{font-size:13px;font-weight:900;letter-spacing:2px;text-transform:uppercase;opacity:.95}
 .pop-plan-price{font-size:34px;font-weight:900;line-height:1.05}
 .pop-plan-price small{font-size:13px;font-weight:800}
@@ -175,8 +175,8 @@ a.pop-tile{text-decoration:none;color:#fff}
 .pop-bottombar{display:none}
 @media (max-width:760px){
   .pop-head{padding-top:12px}
-  .pop-brand{font-size:19px}
-  .pop-head-row .pop-pill.pop-call{font-size:13.5px;padding:10px 15px;min-height:40px}
+  .pop-brand{font-size:16.5px;letter-spacing:0}
+  .pop-head-row .pop-pill.pop-call{font-size:12.5px;padding:9px 13px;min-height:38px}
   .pop-scene-in{padding:24px 20px 26px}
   main{padding-bottom:110px}
   .pop-stats{grid-template-columns:repeat(2,1fr)}
