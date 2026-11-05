@@ -13,7 +13,7 @@ const pageHome = `<!-- ============ HERO ============ -->
   <div class="wrap hero-grid">
     <div>
       <div class="kicker"><span><svg width="1.2em" height="1.2em" viewBox="0 0 24 24" style="vertical-align:-.22em" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="1.5" fill="#b31942"/><path d="M2 5.85h20M2 8.3h20M2 10.76h20M2 13.2h20M2 15.66h20M2 18.1h20" stroke="#fff" stroke-width="1.23"/><rect x="2" y="4" width="9" height="8.6" fill="#0a3161"/></svg></span> A PROUD VETERAN-OWNED AMERICAN COMPANY</div>
-      <h1>Hostile pests?<br><span class="strike">Neutralized.</span></h1>
+      <h1>Hostile pests.<br><span class="strike">Neutralized.</span></h1>
       <p class="hero-sub">Military-precision pest control for homes and businesses across <b>Washington, Idaho &amp; Oregon</b>. Eco-friendly treatments safe for your family and pets, with <b>same-day service</b> when it can't wait.</p>
       <div class="hero-ctas">
         <a class="btn btn-primary" href="{{.PhoneHref}}"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call {{.PhoneDisplay}} <small>{{.PhoneLabel}}</small></a>
@@ -176,7 +176,7 @@ const pageHome = `<!-- ============ HERO ============ -->
   <div class="wrap" style="text-align:center">
     <div class="eyebrow">FINAL ORDERS</div>
     <h2 data-reveal>Ready to go <em>pest-free?</em></h2>
-    <p class="lead" data-reveal>Book online in minutes or call the line. Same-day service available across all three states. Free quotes, transparent pricing, zero hidden fees.</p>
+    <p class="lead" data-reveal>Get started online in minutes or call the line. Same-day service available across all three states. Free quotes, transparent pricing, zero hidden fees.</p>
     <div class="hero-ctas" style="justify-content:center">
       <a class="btn btn-primary" href="{{.PhoneHref}}"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> {{.PhoneDisplay}} <small>{{.PhoneLabel}}</small></a>
       <a class="btn btn-ghost" href="/contact" data-track="quote_request">Free Quote ▸</a>

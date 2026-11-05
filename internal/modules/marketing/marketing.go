@@ -341,8 +341,26 @@ func redirectPermanent(to string) http.HandlerFunc {
 // page renders a static marketing page (no extra data beyond SEO + JSON-LD).
 func (m *Module) page(pageName, title, description string, extra map[string]any) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		view.Page(w, r, pageName, title, description, metaKeywords, m.base(extra))
+		view.Page(w, r, pageName, title, description, metaKeywords, m.base(m.popExtras(r, w, extra)))
 	}
+}
+
+// popExtras adds the quote popup's form fields (CSRF + pest picker) when
+// rendering for the Pop UI host: its layout carries the popup on every page,
+// so every pop render needs them, exactly like the pop home handler does.
+func (m *Module) popExtras(r *http.Request, w http.ResponseWriter, extra map[string]any) map[string]any {
+	if extra == nil {
+		extra = map[string]any{}
+	}
+	if view.IsPopHost(r.Host) {
+		if _, ok := extra["Csrf"]; !ok {
+			extra["Csrf"] = m.csrfField(r, w)
+		}
+		if _, ok := extra["PestOptions"]; !ok {
+			extra["PestOptions"] = pestOptionsHTML("")
+		}
+	}
+	return extra
 }
 
 // base merges the default per-page extras: LocalBusiness JSON-LD plus any
@@ -369,8 +387,13 @@ func (m *Module) home(w http.ResponseWriter, r *http.Request) {
 		if len(posts) > 6 {
 			posts = posts[:6]
 		}
+		top := pests
+		if len(top) > 5 {
+			top = top[:5]
+		}
 		view.Page(w, r, "home-pop", homeT, homeD, metaKeywords, m.base(map[string]any{
 			"Pests":       pests,
+			"TopPests":    top,
 			"PestCount":   len(pests),
 			"Posts":       posts,
 			"States":      data.States(),
@@ -386,19 +409,62 @@ func (m *Module) home(w http.ResponseWriter, r *http.Request) {
 }
 
 // services — full pest catalog, alphabetical (PHP ORDER BY name).
+// pestCategory groups the catalog for the pop Services catalog page:
+// one illustrated rail per category, like a movie catalog.
+type pestCategory struct {
+	Name  string
+	Pests []data.Pest
+}
+
+var pestCategoryLabels = map[string]string{"insect": "Insects", "rodent": "Rodents", "wildlife": "Wildlife"}
+var pestCategoryRank = map[string]int{"insect": 0, "rodent": 1, "wildlife": 2}
+
+func groupPestsByCategory(pests []data.Pest) []pestCategory {
+	byKey := map[string][]data.Pest{}
+	var keys []string
+	for _, p := range pests {
+		if _, ok := byKey[p.Category]; !ok {
+			keys = append(keys, p.Category)
+		}
+		byKey[p.Category] = append(byKey[p.Category], p)
+	}
+	sort.SliceStable(keys, func(i, j int) bool {
+		ri, okI := pestCategoryRank[keys[i]]
+		rj, okJ := pestCategoryRank[keys[j]]
+		if !okI {
+			ri = 99
+		}
+		if !okJ {
+			rj = 99
+		}
+		return ri < rj
+	})
+	out := make([]pestCategory, 0, len(keys))
+	for _, k := range keys {
+		label, ok := pestCategoryLabels[k]
+		if !ok {
+			label = strings.Title(k)
+		}
+		out = append(out, pestCategory{Name: label, Pests: byKey[k]})
+	}
+	return out
+}
+
 func (m *Module) services(w http.ResponseWriter, r *http.Request) {
 	pests := append([]data.Pest(nil), data.AllPests()...)
 	sort.SliceStable(pests, func(i, j int) bool { return pests[i].Name < pests[j].Name })
-	view.Page(w, r, "services", servicesT, servicesD, metaKeywords, m.base(map[string]any{
-		"Pests": pests,
-	}))
+	extra := map[string]any{"Pests": pests}
+	if view.IsPopHost(r.Host) {
+		extra["Categories"] = groupPestsByCategory(pests)
+	}
+	view.Page(w, r, "services", servicesT, servicesD, metaKeywords, m.base(m.popExtras(r, w, extra)))
 }
 
 // areas — service-area overview (states + cities).
 func (m *Module) areas(w http.ResponseWriter, r *http.Request) {
-	view.Page(w, r, "areas", areasT, areasD, metaKeywords, m.base(map[string]any{
+	view.Page(w, r, "areas", areasT, areasD, metaKeywords, m.base(m.popExtras(r, w, map[string]any{
 		"States": data.States(),
-	}))
+	})))
 }
 
 // sitemap — every page, with city links.
@@ -519,11 +585,11 @@ func (m *Module) terms(w http.ResponseWriter, r *http.Request) {
 }
 
 func (m *Module) legal(w http.ResponseWriter, r *http.Request, kind string, title, description string) {
-	view.Page(w, r, "legal", title, description, metaKeywords, m.base(map[string]any{
+	view.Page(w, r, "legal", title, description, metaKeywords, m.base(m.popExtras(r, w, map[string]any{
 		"LegalKind": kind,
 		// PHP renders date('F j, Y') from the current date.
 		"LegalDate": time.Now().Format("2006-01-02"),
-	}))
+	})))
 }
 
 // ---- Dynamic pages (DB-driven) ----
@@ -549,13 +615,13 @@ func (m *Module) pest(w http.ResponseWriter, r *http.Request) {
 	}
 	desc += " Veteran-owned, eco-friendly, 90-day warranty across WA, ID, OR."
 	crumb := [][2]string{{"Home", "/"}, {"Pest Library", "/services"}, {pest.Name, "/pest/" + pest.Slug}}
-	view.Page(w, r, "pest", title, desc, metaKeywords, m.base(map[string]any{
+	view.Page(w, r, "pest", title, desc, metaKeywords, m.base(m.popExtras(r, w, map[string]any{
 		"Pest":    pest,
 		"Related": relatedPests(pest),
 		"Crumb":   crumb,
 		"OGImage": "https://www.patriotpest.pro/assets/img/og-pest.png",
 		"JSONLD":  []any{ldBusiness, ldService(pest), ldBreadcrumb(crumb)},
-	}))
+	})))
 }
 
 // pestTitleFor — the <title> for a pest threat file. The wasps page is
@@ -604,7 +670,7 @@ func (m *Module) area(w http.ResponseWriter, r *http.Request) {
 	title := fmt.Sprintf("Pest Control in %s, %s | Patriot Pest Control", city, code)
 	desc := fmt.Sprintf("Same-day pest control in %s, %s. Eco-friendly treatments, 90-day warranty, veteran-owned.", city, stateName)
 	crumb := [][2]string{{"Home", "/"}, {"Service Areas", "/service-areas"}, {city, "/areas/" + slug}}
-	view.Page(w, r, "area-detail", title, desc, metaKeywords, m.base(map[string]any{
+	view.Page(w, r, "area-detail", title, desc, metaKeywords, m.base(m.popExtras(r, w, map[string]any{
 		"CityName":         city,
 		"CityStateCode":    code,
 		"CityStateName":    stateName,
@@ -618,15 +684,15 @@ func (m *Module) area(w http.ResponseWriter, r *http.Request) {
 		"OGImage":       "https://www.patriotpest.pro/assets/img/og-area.png",
 		"AreaPests":     view.AreaPestsFor(code),
 		"JSONLD":        []any{ldBusiness, ldBreadcrumb(crumb)},
-	}))
+	})))
 }
 
 // blogIndex — published posts only (drafts excluded), newest first.
 func (m *Module) blogIndex(w http.ResponseWriter, r *http.Request) {
-	view.Page(w, r, "blog-index", blogT, blogD, metaKeywords, m.base(map[string]any{
+	view.Page(w, r, "blog-index", blogT, blogD, metaKeywords, m.base(m.popExtras(r, w, map[string]any{
 		"Posts": data.PublishedPosts(),
 		"Crumb": [][2]string{{"Home", "/"}, {"Blog", "/blogs"}},
-	}))
+	})))
 }
 
 // blogPost — a single post through the unified template. Drafts 404.
@@ -639,14 +705,14 @@ func (m *Module) blogPost(w http.ResponseWriter, r *http.Request) {
 	// Expanded long-form copy (audit: posts were 55-131 words).
 	applyPostBodyOverride(&post)
 	title := fmt.Sprintf("%s | Patriot Pest Control Blog", post.Title)
-	view.Page(w, r, "blog-post", title, post.Excerpt, metaKeywords, m.base(map[string]any{
+	view.Page(w, r, "blog-post", title, post.Excerpt, metaKeywords, m.base(m.popExtras(r, w, map[string]any{
 		"Post":      post,
 		"Related":   relatedPosts(post),
 		"Crumb":     [][2]string{{"Home", "/"}, {"Blog", "/blogs"}, {post.Title, "/blogs/" + post.Slug}},
 		"OGImage":   "https://www.patriotpest.pro/assets/img/og-blog.png",
 		"BlogLinks": view.BlogRelatedLinks[post.Slug],
 		"JSONLD":    []any{ldBusiness, ldArticle(post)},
-	}))
+	})))
 }
 
 // ldService — Service JSON-LD for a pest page (areaServed + provider).

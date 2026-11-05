@@ -25,7 +25,7 @@ const layoutPopHTML = `<!DOCTYPE html>
 <head>
   {{template "analytics" .}}
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content">
   <title>{{.Title}}</title>
   {{if .Description}}<meta name="description" content="{{.Description}}">{{end}}
   <meta name="robots" content="{{.Robots}}">
@@ -40,7 +40,7 @@ const layoutPopHTML = `<!DOCTYPE html>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Barlow:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/pop.css?v=20261104-pop5">
+  <link rel="stylesheet" href="/assets/pop.css?v=20261104-pop16">
   <link rel="stylesheet" href="/assets/beacon.css">
   <link rel="icon" href="/assets/img/pests/ants.jpg" type="image/jpeg">
 </head>
@@ -52,62 +52,72 @@ const layoutPopHTML = `<!DOCTYPE html>
     <a class="pop-pill pop-call" href="{{.PhoneHref}}"><span class="call-long">Call or Text </span>{{.PhoneDisplay}}</a>
   </div>
   <nav class="pop-nav" aria-label="Main navigation">
-    <a class="pop-pill{{if or (eq .Page "home-pop") (eq .Page "home")}} active{{end}}" href="/">Home</a>
-    <a class="pop-pill{{if eq .Page "services"}} active{{end}}" href="/services">Services</a>
-    <a class="pop-pill{{if eq .Page "prices"}} active{{end}}" href="/prices">Prices</a>
-    <a class="pop-pill{{if or (eq .Page "areas") (eq .Page "area-detail")}} active{{end}}" href="/service-areas">Areas</a>
-    <a class="pop-pill{{if or (eq .Page "blog-index") (eq .Page "blog-post")}} active{{end}}" href="/blogs">Blog</a>
-    <a class="pop-pill{{if eq .Page "faqs"}} active{{end}}" href="/faqs">FAQs</a>
-    <a class="pop-pill{{if eq .Page "contact"}} active{{end}}" href="/contact">Contact</a>
-    <a class="pop-pill" href="/about">About</a>
-    <a class="pop-pill" href="/signup">Sign Up</a>
+    <a class="pop-pill" href="/#plans" data-scroll="plans"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.6 2.9 21.1 11.4a2 2 0 0 1 0 2.8l-6.9 6.9a2 2 0 0 1-2.8 0L2.9 12.6A2 2 0 0 1 2.3 11.2V4a1.7 1.7 0 0 1 1.7-1.7h7.2a2 2 0 0 1 1.4.6z"/><circle cx="7.5" cy="7.5" r="1.4"/></svg>Prices</a>
+    <a class="pop-pill" href="/#services" data-scroll="services"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="5"/><path d="M12 8V4M8.5 9.5 5 6M15.5 9.5 19 6M7 13H3M21 13h-4M9 17l-3 4M15 17l3 4"/></svg>Services</a>
+    <a class="pop-pill" href="/#about" data-scroll="about"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.6-3 8.1-7 10-4-1.9-7-5.4-7-10V6z"/><path d="m9.3 11.8 2 2 3.6-4"/></svg>About</a>
+    <a class="pop-pill" href="/#areas" data-scroll="areas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.6-7-11a7 7 0 0 1 14 0c0 5.4-7 11-7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>Areas</a>
+    <a class="pop-pill" href="/#blog" data-scroll="blog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="15" height="16" rx="2"/><path d="M18 9h1a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2"/><path d="M7 9h7M7 13h7M7 17h5"/></svg>Blog</a>
+    <a class="pop-pill" href="/#contact" data-scroll="contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>Contact</a>
   </nav>
 </header>
 
 <main>
-{{if and .Crumb (gt (len .Crumb) 1)}}
-  <div class="wrap" style="padding-top:1.1rem">
-    <nav class="crumb" aria-label="Breadcrumb">
-      {{range $i, $c := .Crumb}}{{if $i}}<span class="sep">/</span> {{end}}{{if lt $i (sub (len $.Crumb) 1)}}<a href="{{index $c 1}}">{{index $c 0}}</a>{{else}}<span>{{index $c 0}}</span>{{end}}{{end}}
-    </nav>
-  </div>
-{{end}}
+
 {{.PageBody}}
 </main>
 
+<!-- ============ POPUP LAYER 1: QUICK VIEW ============ -->
+<div class="pop-scrim" id="pop-qv" hidden>
+  <div class="pop-popup" role="dialog" aria-modal="true" aria-label="Quick view">
+    <button type="button" class="pop-x" data-pop-close aria-label="Close">&#10005;</button>
+    <div class="pop-qv-body"></div>
+    <div class="pop-popup-row">
+      <a class="pop-btn primary" href="{{.PhoneHref}}">Call or Text {{.PhoneDisplay}}</a>
+      <button type="button" class="pop-btn dark pop-qv-more">More Info</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ POPUP LAYER 2: MORE INFO ============ -->
+<div class="pop-scrim" id="pop-more" hidden>
+  <div class="pop-popup" role="dialog" aria-modal="true" aria-label="More info">
+    <button type="button" class="pop-x" data-pop-close aria-label="Close">&#10005;</button>
+    <div class="pop-more-body"></div>
+    <div class="pop-popup-row">
+      <a class="pop-btn primary" href="{{.PhoneHref}}">Call or Text {{.PhoneDisplay}}</a>
+    </div>
+  </div>
+</div>
+
+<!-- ============ POPUP: FREE QUOTE (the real /contact form) ============ -->
+<div class="pop-scrim" id="pop-quote" {{if .Errors}}data-autopen{{end}} hidden>
+  <div class="pop-popup" role="dialog" aria-modal="true" aria-label="Free quote">
+    <button type="button" class="pop-x" data-pop-close aria-label="Close">&#10005;</button>
+    <div class="pop-lab">Free Quote</div>
+    <h3>Get your free quote</h3>
+    <p class="pop-form-note">We respond within one business day, usually much faster. Same-day service available across all three states.</p>
+    <form method="post" action="/contact" class="form-stack">
+      {{.Csrf}}
+      <div class="field"><label for="q-name">Full Name *</label><input type="text" id="q-name" name="name" required autocomplete="name"></div>
+      <div class="form-row">
+        <div class="field"><label for="q-email">Email Address *</label><input type="email" id="q-email" name="email" required autocomplete="email"></div>
+        <div class="field"><label for="q-phone">Phone Number *</label><input type="tel" id="q-phone" name="phone" required autocomplete="tel"></div>
+      </div>
+      <div class="form-row">
+        <div class="field"><label for="q-pest">Pest Problem</label><select id="q-pest" name="pest">{{raw .PestOptions}}</select></div>
+        <div class="field"><label for="q-zip">ZIP Code</label><input type="text" id="q-zip" name="zip" maxlength="10" autocomplete="postal-code"></div>
+      </div>
+      <div class="field"><label for="q-message">Message *</label><textarea id="q-message" name="message" required placeholder="Tell us about the pest, your location, and preferred timing..."></textarea></div>
+      ` + smsConsent + `
+      <div class="form-actions"><button type="submit" class="pop-btn primary">Send Message</button></div>
+    </form>
+  </div>
+</div>
+
+
 <footer class="pop-foot">
   <div class="wrap">
-    <div class="pop-foot-grid">
-      <div>
-        <div class="pop-foot-brand"><span class="pop-star">★</span> PATRIOT PEST CONTROL</div>
-        <p>Veteran-owned pest control for homes &amp; businesses across Washington, Idaho &amp; Oregon. Founded by U.S. Military Veteran Skyler Rose. Eco-friendly, family &amp; pet safe, 100% satisfaction guaranteed.</p>
-      </div>
-      <div>
-        <h3>Quick Links</h3>
-        <a href="/about">About Us</a><a href="/services">Services</a>
-        <a href="/prices">Pricing</a><a href="/blogs">Blog</a>
-        <a href="/faqs">FAQs</a><a href="/referral">Referral Program</a>
-        <a href="/help">Help Center</a><a href="/links">All Links</a>
-      </div>
-      <div>
-        <h3>Top Services</h3>
-        <a href="/pest/ants">Ant Control</a><a href="/pest/termites">Termite Control</a>
-        <a href="/pest/bed-bugs">Bed Bug Treatment</a><a href="/pest/rodents">Rodent Control</a>
-        <a href="/pest/mosquitoes">Mosquito Control</a><a href="/pest/wasps">Wasp Removal</a>
-      </div>
-      <div>
-        <h3>Contact</h3>
-        <a href="{{.PhoneHref}}">{{.PhoneDisplay}} - {{.PhoneLabel}}</a>
-        <a href="mailto:info@patriotpest.pro">info@patriotpest.pro</a>
-        <a href="/contact">Deer Park, WA 99006, United States</a>
-        <a href="/socials">Social Media</a>
-      </div>
-    </div>
-    <div class="pop-foot-bottom">
-      <span>© {{.Year}} PATRIOT PEST CONTROL CO · ALL RIGHTS RESERVED</span>
-      <span><a href="/privacy-policy">PRIVACY</a> · <a href="/terms-of-use">TERMS</a> · <a href="/sitemap">SITEMAP</a></span>
-      <span>VETERAN-OWNED AMERICAN COMPANY</span>
-    </div>
+    <p class="pop-copy">&copy; {{.Year}} Patriot Pest Control Co. All rights reserved. &middot; <a href="/privacy-policy">Privacy</a> &middot; <a href="/terms-of-use">Terms</a> &middot; <a href="/sitemap">Sitemap</a><br><span>Veteran-Owned American Company</span></p>
   </div>
 </footer>
 <div class="pop-bottom-spacer"></div>
@@ -120,7 +130,7 @@ const layoutPopHTML = `<!DOCTYPE html>
   <a href="/contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>Quote</a>
 </nav>
 
-<script src="/assets/js/pop.js?v=20261104-pop1" defer></script>
+<script src="/assets/js/pop.js?v=20261104-pop5" defer></script>
 {{if .Track}}<script src="/assets/js/tracker.js" defer></script>{{end}}
 </body>
 </html>

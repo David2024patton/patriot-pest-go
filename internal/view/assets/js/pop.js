@@ -16,6 +16,47 @@
     });
   });
 
+  // ---- Top pills: scroll, never navigate (streaming pattern) -------------
+  // On the home page a pill smooth-scrolls to its section. From any other
+  // page the pill links home with the hash, and the load handler below
+  // finishes the scroll. There is no Home pill: the brand is the way home.
+  function scrollToSection(id) {
+    var el = document.getElementById(id);
+    if (!el) return false;
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+    return true;
+  }
+  document.querySelectorAll("[data-scroll]").forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      var id = a.getAttribute("data-scroll");
+      if (window.location.pathname === "/" && scrollToSection(id)) {
+        e.preventDefault();
+        history.replaceState(null, "", "#" + id);
+      }
+    });
+  });
+  if (window.location.pathname === "/" && window.location.hash.length > 1) {
+    var hashTarget = document.getElementById(window.location.hash.slice(1));
+    if (hashTarget) {
+      // Images and fonts shift the layout after first paint, so one early
+      // scroll lands short. Re-scroll on load and once more shortly after,
+      // unless the visitor starts scrolling on their own.
+      var hashDone = false;
+      var cancelHash = function () { hashDone = true; };
+      window.addEventListener("wheel", cancelHash, { passive: true });
+      window.addEventListener("touchstart", cancelHash, { passive: true });
+      var applyHash = function () {
+        if (hashDone) return;
+        hashTarget.scrollIntoView();
+      };
+      setTimeout(applyHash, 80);
+      window.addEventListener("load", function () {
+        applyHash();
+        setTimeout(applyHash, 500);
+      });
+    }
+  }
+
   // ---- Popup stack --------------------------------------------------------
   var stack = [];
 
@@ -44,23 +85,47 @@
   }
 
   // Quick view: fill the shared popup from a hidden source block.
+  // More Info opens layer 2 (the bigger window) filled from the source's
+  // .qv-more block, like alphaflux.net. If a source has no .qv-more, the
+  // button falls back to the source's data-more page.
   var qv = document.getElementById("pop-qv");
+  var moreLayer = document.getElementById("pop-more");
+  var currentSrc = null;
   document.querySelectorAll("[data-qv]").forEach(function (btn) {
     btn.addEventListener("click", function () {
       var src = document.getElementById(btn.getAttribute("data-qv"));
       if (!src || !qv) return;
-      qv.querySelector(".pop-qv-body").innerHTML = src.innerHTML;
+      currentSrc = src;
+      var body = qv.querySelector(".pop-qv-body");
+      body.innerHTML = src.innerHTML;
+      var embedded = body.querySelector(".qv-more");
+      if (embedded) embedded.remove();
+      qv.querySelector(".pop-popup").classList.toggle("has-art", !!src.querySelector(".pop-qv-art"));
       var more = qv.querySelector(".pop-qv-more");
-      var href = src.getAttribute("data-more");
-      if (href) {
-        more.setAttribute("href", href);
-        more.style.display = "";
-      } else {
-        more.style.display = "none";
-      }
+      var hasMore = !!src.querySelector(".qv-more") || !!src.getAttribute("data-more");
+      more.style.display = hasMore ? "" : "none";
       openPopup(qv);
     });
   });
+
+  var moreBtn = qv ? qv.querySelector(".pop-qv-more") : null;
+  if (moreBtn) {
+    moreBtn.addEventListener("click", function () {
+      if (!currentSrc) return;
+      var block = currentSrc.querySelector(".qv-more");
+      if (block && moreLayer) {
+        var head = "";
+        var lab = currentSrc.querySelector(".pop-lab");
+        var h3 = currentSrc.querySelector("h3");
+        if (lab) head += '<div class="pop-lab">' + lab.innerHTML + "</div>";
+        if (h3) head += "<h3>" + h3.innerHTML + "</h3>";
+        moreLayer.querySelector(".pop-more-body").innerHTML = head + block.innerHTML;
+        openPopup(moreLayer);
+      } else if (currentSrc.getAttribute("data-more")) {
+        window.location.href = currentSrc.getAttribute("data-more");
+      }
+    });
+  }
 
   // Named popups (quote form).
   document.querySelectorAll("[data-pop-open]").forEach(function (btn) {
@@ -87,5 +152,11 @@
   // Escape peels one layer at a time, top first.
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape") closeTop();
+  });
+
+  // A page can ask for a popup to arrive open (a form that came back with
+  // errors stays in its popup, per the failure-stays-in-popup law).
+  document.querySelectorAll(".pop-scrim[data-autopen]").forEach(function (el) {
+    openPopup(el);
   });
 })();

@@ -89,6 +89,9 @@ var funcMap = template.FuncMap{
 	"add":  func(a, b int) int { return a + b },
 	"cityslug": data.CitySlug,
 	"pestimg":  func(f string) string { return "/assets/img/pests/" + f },
+	// Illustrated counterpart for the pop (streaming) surface: same pest
+	// photo filename in, generated illustration path out.
+	"pestillus": func(f string) string { return "/assets/img/illus/pest-" + strings.TrimSuffix(f, ".jpg") + ".jpg" },
 	// Category-specific copy for the pest threat file (see pages_pest.go).
 	"pestcopy": PestCopyFor,
 	// Slug-specific copy (audit F5/F6); falls back to the category copy.
@@ -531,6 +534,15 @@ func render(w http.ResponseWriter, r *http.Request, d map[string]any, status int
 		return
 	}
 	page, _ := d["Page"].(string)
+	// Pop UI twin: when a "-pop" variant of the page body is registered, the
+	// pop host renders it instead (tile-first streaming layout; all detail
+	// behind tile taps). The main host never sees the variant.
+	if IsPopHost(r.Host) {
+		if _, ok := pageTemplates[page+"-pop"]; ok {
+			page += "-pop"
+			d["Page"] = page
+		}
+	}
 	var buf bytes.Buffer
 	if err := tpl.ExecuteTemplate(&buf, page, d); err != nil {
 		slog.Error("template execute failed", "page", page, "err", err.Error(), "request_id", requestIDOf(r))
