@@ -1,0 +1,123 @@
+package view
+
+import "strings"
+
+// Pop UI host: pop.patriotpest.pro serves the same site, same data, same
+// handlers, wearing the Pop UI build (tile rails, chunky cards, popup-first)
+// in Patriot's own olive and orange. The main hosts never see this layout.
+
+// IsPopHost reports whether the request arrived on the Pop UI host.
+// Exact match, case-insensitive, port stripped (mirrors the report host).
+func IsPopHost(host string) bool {
+	h := strings.ToLower(strings.TrimSpace(host))
+	if i := strings.LastIndex(h, ":"); i > -1 {
+		h = h[:i]
+	}
+	return h == "pop.patriotpest.pro"
+}
+
+// layoutPopHTML is the Pop UI shell: pill header on the olive ground,
+// chunky footer card, white phone bottom bar. Page bodies render inside
+// <main> exactly as in the main layout; pop.css styles both the shell and
+// the shared body classes.
+const layoutPopHTML = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  {{template "analytics" .}}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content">
+  <title>{{.Title}}</title>
+  {{if .Description}}<meta name="description" content="{{.Description}}">{{end}}
+  <meta name="robots" content="{{.Robots}}">
+  <link rel="canonical" href="{{.Canonical}}">
+  <meta name="theme-color" content="#262f14">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Patriot Pest Control">
+  <meta property="og:title" content="{{.Title}}">
+  <meta property="og:description" content="{{.Description}}">
+  <meta property="og:url" content="{{.Canonical}}">
+  <meta property="og:image" content="{{.OGImage}}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Barlow:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/pop.css?v=20261104-pop1">
+  <link rel="stylesheet" href="/assets/beacon.css">
+  <link rel="icon" href="/assets/img/pests/ants.jpg" type="image/jpeg">
+</head>
+<body class="pop{{if .BodyClass}} {{.BodyClass}}{{end}}">
+
+<header class="pop-head">
+  <a class="pop-brand" href="/"><span class="pop-star">★</span> PATRIOT PEST <span class="pop-brand-accent">CONTROL</span></a>
+  <nav class="pop-nav" aria-label="Main navigation">
+    <a class="pop-pill{{if or (eq .Page "home-pop") (eq .Page "home")}} active{{end}}" href="/">Home</a>
+    <a class="pop-pill{{if eq .Page "services"}} active{{end}}" href="/services">Services</a>
+    <a class="pop-pill{{if eq .Page "prices"}} active{{end}}" href="/prices">Prices</a>
+    <a class="pop-pill{{if or (eq .Page "areas") (eq .Page "area-detail")}} active{{end}}" href="/service-areas">Areas</a>
+    <a class="pop-pill{{if or (eq .Page "blog-index") (eq .Page "blog-post")}} active{{end}}" href="/blogs">Blog</a>
+    <a class="pop-pill{{if eq .Page "faqs"}} active{{end}}" href="/faqs">FAQs</a>
+    <a class="pop-pill{{if eq .Page "contact"}} active{{end}}" href="/contact">Contact</a>
+    <a class="pop-pill pop-call" href="{{.PhoneHref}}">Call or Text {{.PhoneDisplay}}</a>
+  </nav>
+</header>
+
+<main>
+{{if and .Crumb (gt (len .Crumb) 1)}}
+  <div class="wrap" style="padding-top:1.1rem">
+    <nav class="crumb" aria-label="Breadcrumb">
+      {{range $i, $c := .Crumb}}{{if $i}}<span class="sep">/</span> {{end}}{{if lt $i (sub (len $.Crumb) 1)}}<a href="{{index $c 1}}">{{index $c 0}}</a>{{else}}<span>{{index $c 0}}</span>{{end}}{{end}}
+    </nav>
+  </div>
+{{end}}
+{{.PageBody}}
+</main>
+
+<footer class="pop-foot">
+  <div class="wrap">
+    <div class="pop-foot-grid">
+      <div>
+        <div class="pop-foot-brand"><span class="pop-star">★</span> PATRIOT PEST CONTROL</div>
+        <p>Veteran-owned pest control for homes &amp; businesses across Washington, Idaho &amp; Oregon. Founded by U.S. Military Veteran Skyler Rose. Eco-friendly, family &amp; pet safe, 100% satisfaction guaranteed.</p>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <a href="/about">About Us</a><a href="/services">Services</a>
+        <a href="/prices">Pricing</a><a href="/blogs">Blog</a>
+        <a href="/faqs">FAQs</a><a href="/referral">Referral Program</a>
+        <a href="/help">Help Center</a><a href="/links">All Links</a>
+      </div>
+      <div>
+        <h3>Top Services</h3>
+        <a href="/pest/ants">Ant Control</a><a href="/pest/termites">Termite Control</a>
+        <a href="/pest/bed-bugs">Bed Bug Treatment</a><a href="/pest/rodents">Rodent Control</a>
+        <a href="/pest/mosquitoes">Mosquito Control</a><a href="/pest/wasps">Wasp Removal</a>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <a href="{{.PhoneHref}}">{{.PhoneDisplay}} - {{.PhoneLabel}}</a>
+        <a href="mailto:info@patriotpest.pro">info@patriotpest.pro</a>
+        <a href="/contact">Deer Park, WA 99006, United States</a>
+        <a href="/socials">Social Media</a>
+      </div>
+    </div>
+    <div class="pop-foot-bottom">
+      <span>© {{.Year}} PATRIOT PEST CONTROL CO · ALL RIGHTS RESERVED</span>
+      <span><a href="/privacy-policy">PRIVACY</a> · <a href="/terms-of-use">TERMS</a> · <a href="/sitemap">SITEMAP</a></span>
+      <span>VETERAN-OWNED AMERICAN COMPANY</span>
+    </div>
+  </div>
+</footer>
+<div class="pop-bottom-spacer"></div>
+
+<nav class="pop-bottombar" aria-label="Mobile quick navigation">
+  <a href="/">Home</a>
+  <a href="/prices">Prices</a>
+  <a class="pop-bottom-call" href="{{.PhoneHref}}">Call</a>
+  <a href="/services">Pests</a>
+  <a href="/contact">Quote</a>
+</nav>
+
+<script src="/assets/js/pop.js?v=20261104-pop1" defer></script>
+{{if .Track}}<script src="/assets/js/tracker.js" defer></script>{{end}}
+</body>
+</html>
+`
