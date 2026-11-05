@@ -4,8 +4,7 @@ package view
 // replaces the duplicated category-generic Signs/Treat/Prev blocks and the
 // wrong-region scientific names flagged by the Keystone audit (moles named
 // Scapanus latimanus, a California species; rodents named only Rattus
-// norvegicus; pack rats described as desert woodrats; squirrels named as the
-// introduced eastern gray). Species below were sourced from WDFW, USFWS,
+// norvegicus; pack rats described as desert woodrats). Species below were sourced from WDFW, USFWS,
 // Animal Diversity Web, Idaho Fish and Game, and WSU Extension.
 
 func init() {
@@ -81,24 +80,6 @@ func init() {
 		},
 	})
 
-	RegisterPestOverride("raccoons", PestOverride{
-		ScientificName: "Procyon lotor",
-		Description:    `The raccoon needs no introduction to anyone with a garbage can in Spokane or Post Falls. Raccoons live statewide in Washington, and the suburbs hand them the perfect package: storm drains for travel corridors, uncapped chimneys and attics for dens, and a steady supply of pet food, grills, and trash. Breeding runs January through March, and by April females are hunting for a dark, warm den to raise three to five kits, which is exactly when chimney and attic calls spike. A denning mother shreds insulation for nesting material, and the shared latrines they leave on roofs and decks carry roundworm eggs that survive in soil for years, making droppings a genuine sanitation problem. They do not hibernate, so winter calls still happen, just on the warmer nights. Smart, strong, nocturnal, and already inside your perimeter.`,
-		Signs: []string{
-			"Heavy thumping and chattering in the attic or chimney at night, especially April through June",
-			"Torn soffits, pried roof vents, or a chimney cap knocked loose",
-			"Overturned garbage cans with lids removed and contents sorted with surgical precision",
-			"Large blunt droppings in a shared latrine spot on the roof, deck, or at the base of a tree",
-		},
-		Treat: `We use humane live traps or one-way doors on the den entry, with a full check for dependent kits before any exclusion so no young are sealed inside. Then we repair the entry with sheet metal and hardware cloth and sanitize any latrine areas.`,
-		Prev: []string{
-			"Secure garbage cans with locking lids and bring pet food in at night",
-			"Cap the chimney with a wildlife-proof stainless steel cap",
-			"Trim tree limbs back at least 6 feet from the roofline to cut off roof access",
-			"Close denning sites under porches and sheds with buried 1/4 inch hardware cloth",
-		},
-	})
-
 	RegisterPestOverride("rodents", PestOverride{
 		ScientificName: "Mus musculus, Rattus norvegicus",
 		Description:    `The old page named only the Norway rat, but Spokane homes fight a two-front war. The house mouse slips through a gap the width of a pencil and can live its entire life inside your walls, breeding year-round with five to ten litters a year, so a couple of mice becomes an infantry company in months. The Norway rat is the heavy burrower: it tunnels under foundations, favors crawlspaces and ground-level runs, gnaws wiring and framing, and contaminates stored food. Fall is the invasion season for both, as cold weather pushes field populations indoors. Roof rats show up in the region too, but the house mouse and the Norway rat are the two doing the real damage inside Inland Northwest homes. Droppings tell them apart at a glance: rice-grain mouse pellets versus the blunt capsules of a rat. Two different enemies, two different doctrines: identify yours before you pick your weapon.`,
@@ -117,21 +98,4 @@ func init() {
 		},
 	})
 
-	RegisterPestOverride("squirrels", PestOverride{
-		ScientificName: "Tamiasciurus hudsonicus",
-		Description:    `The native tree squirrel of the Inland Northwest is the American red squirrel, a rust-red, white-bellied pine squirrel that Washington's own wildlife agency places squarely in the conifer forests and semi-open woods of the northeast corner. The eastern gray squirrel named on the old page is an introduced species here; the red squirrel is the regional native doing the attic damage. Red squirrels are extremely territorial and loud, chattering and tail-flicking at anything that crosses their turf. In late summer and fall they cut green pinecones and cache them in middens, sometimes in gutters and downspouts, which clogs drainage. They reach the attic through any gap the size of a golf ball, nesting in insulation and gnawing wood and wiring, and spring litters from February through May make that the prime attic-invasion season. Tiny, loud, and extremely territorial: the neighborhood watch with teeth.`,
-		Signs: []string{
-			"Loud daytime chattering and rapid scurrying in the attic, loudest in the morning (squirrels are diurnal; night noise points to rats)",
-			"Chewed entry holes at eaves, gable vents, or fascia, often with gnawed wood around a golf-ball-sized opening",
-			"Pinecone scales and debris piles, the squirrel's midden, in gutters or near the den",
-			"Nests of shredded insulation and leaves in the attic, with gnawed wiring nearby",
-		},
-		Treat: `We install one-way doors on attic entries after confirming no dependent young are inside, then seal the chewed entries with metal flashing and hardware cloth. Squirrels chew straight through wood and plastic patches but give up on steel.`,
-		Prev: []string{
-			"Trim branches at least 8 to 10 feet from the roof so squirrels cannot bridge the gap",
-			"Cover gable and roof vents with 1/2 inch hardware cloth",
-			"Repair fascia and soffit damage promptly before it becomes a doorway",
-			"Keep bird feeders away from the house or use squirrel-proof feeders to stop luring them to the eaves",
-		},
-	})
 }
