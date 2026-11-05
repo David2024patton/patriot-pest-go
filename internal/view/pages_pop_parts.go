@@ -88,7 +88,7 @@ func init() {
   {{if $p.ScientificName}}<div class="pop-sci">{{$p.ScientificName}}</div>{{end}}
   <p>{{$p.Description}}</p>
   {{$c := pestcopy2 $p.Slug $p.Category}}
-  {{if $c.Signs}}<div class="qv-more" hidden><div class="pop-lab">Signs of activity</div><ul>{{range $c.Signs}}<li>{{.}}</li>{{end}}</ul><p>The full threat file, treatment plan, and pricing live on this pest's page.</p></div>{{end}}
+  {{if $c.Signs}}<div class="qv-more" hidden><div class="pop-lab">Signs of activity</div><ul>{{range $c.Signs}}<li>{{.}}</li>{{end}}</ul><p>The full service briefing, treatment plan, and pricing live on this pest's page.</p></div>{{end}}
 </div>
 {{end}}
 </div>`)

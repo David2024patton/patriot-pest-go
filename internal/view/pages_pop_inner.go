@@ -8,11 +8,11 @@ package view
 func init() {
 	// ---------- Services: mini scene + the full pest rail + plans ----------
 	RegisterPageTemplate("services-pop", `
-<section class="pop-scene slim" style="background-image:url('{{pestillus "ants.jpg"}}')">
+<section class="pop-scene slim"><img class="pop-scene-art" src="{{pestillus "ants.jpg"}}" alt="">
   <div class="pop-scene-in">
     <span class="pop-tagpill">Capabilities // Services</span>
     <h1 class="pop-scene-h">Every pest. <span>One team.</span></h1>
-    <p class="pop-scene-sub">The full catalog, grouped like a movie library. Tap any threat file for the briefing.</p>
+    <p class="pop-scene-sub">The full catalog, grouped like a movie library. Tap any service for the briefing.</p>
   </div>
 </section>
 {{range $cat := .Categories}}
@@ -30,7 +30,7 @@ func init() {
 
 	// ---------- Prices: plans rail only (compare removed 2026-11-05) ----------
 	RegisterPageTemplate("prices-pop", `
-<section class="pop-scene slim" style="background-image:url('{{pestillus "wasps.jpg"}}')">
+<section class="pop-scene slim"><img class="pop-scene-art" src="{{pestillus "wasps.jpg"}}" alt="">
   <div class="pop-scene-in">
     <span class="pop-tagpill">Supply Manifest // Pricing</span>
     <h1 class="pop-scene-h">Protect your <span>home.</span></h1>
@@ -42,7 +42,7 @@ func init() {
 
 	// ---------- Service areas index: state tiles in a grid ----------
 	RegisterPageTemplate("areas-pop", `
-<section class="pop-scene slim" style="background-image:url('/assets/img/illus/state-wa.jpg')">
+<section class="pop-scene slim"><img class="pop-scene-art" src="/assets/img/illus/state-wa.jpg" alt="">
   <div class="pop-scene-in">
     <span class="pop-tagpill">Theater of Operations</span>
     <h1 class="pop-scene-h">Where we <span>operate.</span></h1>
@@ -59,7 +59,7 @@ func init() {
 
 	// ---------- FAQs: question tiles, answers in the popup ----------
 	RegisterPageTemplate("faqs-pop", `
-<section class="pop-scene slim" style="background-image:url('{{pestillus "bees.jpg"}}')">
+<section class="pop-scene slim"><img class="pop-scene-art" src="{{pestillus "bees.jpg"}}" alt="">
   <div class="pop-scene-in">
     <span class="pop-tagpill">Intel // FAQ</span>
     <h1 class="pop-scene-h">Questions, <span>answered.</span></h1>
@@ -122,7 +122,7 @@ func init() {
 func init() {
 	// ---------- About: story, dossier, and values as tiles ----------
 	RegisterPageTemplate("about-pop", `
-<section class="pop-scene slim" style="background-image:url('/assets/img/illus/state-wa.jpg')">
+<section class="pop-scene slim"><img class="pop-scene-art" src="/assets/img/illus/state-wa.jpg" alt="">
   <div class="pop-scene-in">
     <span class="pop-tagpill">Personnel File // About Us</span>
     <h1 class="pop-scene-h">Veteran-owned. <span>Mission-driven.</span></h1>
@@ -189,7 +189,7 @@ func init() {
 
 	// ---------- Contact: action tiles; the form is the quote popup ----------
 	RegisterPageTemplate("contact-pop", `
-<section class="pop-scene slim" style="background-image:url('{{pestillus "mosquitoes.jpg"}}')">
+<section class="pop-scene slim"><img class="pop-scene-art" src="{{pestillus "mosquitoes.jpg"}}" alt="">
   <div class="pop-scene-in">
     <span class="pop-tagpill">Comms // Contact</span>
     <h1 class="pop-scene-h">Reach the <span>team.</span></h1>
@@ -245,7 +245,7 @@ func init() {
 
 	// ---------- Blog index: every post as a poster tile ----------
 	RegisterPageTemplate("blog-index-pop", `
-<section class="pop-scene slim" style="background-image:url('{{pestillus "fruit-flies.jpg"}}')">
+<section class="pop-scene slim"><img class="pop-scene-art" src="{{pestillus "fruit-flies.jpg"}}" alt="">
   <div class="pop-scene-in">
     <span class="pop-tagpill">From the Field // Blog</span>
     <h1 class="pop-scene-h">Field <span>guides.</span></h1>
@@ -263,9 +263,9 @@ func init() {
 
 	// ---------- Pest file: scene header, section tiles, related rail ----------
 	RegisterPageTemplate("pest-pop", `
-<section class="pop-scene" style="background-image:url('{{pestillus .Pest.Filename}}')">
+<section class="pop-scene"><img class="pop-scene-art" src="{{pestillus .Pest.Filename}}" alt="">
   <div class="pop-scene-in">
-    <span class="pop-tagpill">Threat File // {{upper .Pest.Category}}</span>
+    <span class="pop-tagpill">Service // {{upper .Pest.Category}}</span>
     <h1 class="pop-scene-h">{{.Pest.Name}} <span>Control</span></h1>
     {{if .Pest.ScientificName}}<p class="pop-scene-sub"><i>{{.Pest.ScientificName}}</i> &middot; Regional threat level {{.Pest.ThreatLevel}}%</p>{{end}}
     <div class="pop-cta-row">
@@ -279,7 +279,7 @@ func init() {
   <div class="wrap">
     <div class="pop-rail-head"><div><h2 class="pop-h2">The Briefing</h2></div></div>
     <div class="pop-grid">
-      <button type="button" class="pop-tile poster" data-qv="qv-pest-brief"><img class="ph" src="{{pestillus .Pest.Filename}}" alt="" loading="lazy" decoding="async"><span class="pop-cap"><b>What you're up against</b><small>Threat File</small></span></button>
+      <button type="button" class="pop-tile poster" data-qv="qv-pest-brief"><img class="ph" src="{{pestillus .Pest.Filename}}" alt="" loading="lazy" decoding="async"><span class="pop-cap"><b>What you're up against</b><small>Services</small></span></button>
       {{if $c.Signs}}<button type="button" class="pop-tile poster" data-qv="qv-pest-signs"><img class="ph" src="/assets/img/illus/pb-signs.jpg" alt="" loading="lazy" decoding="async"><span class="pop-cap"><b>Signs of Activity</b><small>Field Signs</small></span></button>{{end}}
       {{if $c.Treat}}<button type="button" class="pop-tile poster" data-qv="qv-pest-treat"><img class="ph" src="/assets/img/illus/pb-treat.jpg" alt="" loading="lazy" decoding="async"><span class="pop-cap"><b>How we treat it</b><small>Our Treatment</small></span></button>{{end}}
       {{if $c.Prev}}<button type="button" class="pop-tile poster" data-qv="qv-pest-prev"><img class="ph" src="/assets/img/illus/pb-prev.jpg" alt="" loading="lazy" decoding="async"><span class="pop-cap"><b>Keep them out</b><small>Prevention</small></span></button>{{end}}
@@ -315,7 +315,7 @@ func init() {
 
 	// ---------- Town page: scene, local briefing tile, local pests ----------
 	RegisterPageTemplate("area-detail-pop", `
-<section class="pop-scene slim" style="background-image:url('/assets/img/illus/state-wa.jpg')">
+<section class="pop-scene slim"><img class="pop-scene-art" src="/assets/img/illus/state-wa.jpg" alt="">
   <div class="pop-scene-in">
     <span class="pop-tagpill">Service Area // {{.CityStateName}}</span>
     <h1 class="pop-scene-h">Pest control in <span>{{.CityName}}, {{.CityStateCode}}</span></h1>
@@ -366,7 +366,7 @@ func init() {
 func init() {
 	// ---------- Sign up: the account form lives in its popup ----------
 	signupPop := `
-<section class="pop-scene slim" style="background-image:url('{{pestillus "silverfish.jpg"}}')">
+<section class="pop-scene slim"><img class="pop-scene-art" src="{{pestillus "silverfish.jpg"}}" alt="">
   <div class="pop-scene-in">
     <span class="pop-tagpill">Account // Sign Up</span>
     <h1 class="pop-scene-h">Create your <span>account.</span></h1>

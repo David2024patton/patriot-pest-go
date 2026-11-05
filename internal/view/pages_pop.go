@@ -36,7 +36,7 @@ const pageHomePop = `<!-- ============ POP HERO ============ -->
 <!-- ============ THREAT FILES RAIL (DB-driven, every pest) ============ -->
 <section class="pop-sec" id="services">
   <div class="wrap">
-    <div class="pop-rail-head"><div><h2 class="pop-h2">Threat Files</h2></div>
+    <div class="pop-rail-head"><div><h2 class="pop-h2">Services</h2></div>
     <div class="pop-arrows"><button type="button" class="pop-arrow" data-rail-prev="rail-pests" aria-label="Scroll pests back">&#8249;</button><button type="button" class="pop-arrow" data-rail-next="rail-pests" aria-label="Scroll pests forward">&#8250;</button></div></div>
     <div class="pop-rail" id="rail-pests">
       {{range $p := .TopPests}}
@@ -47,7 +47,7 @@ const pageHomePop = `<!-- ============ POP HERO ============ -->
       {{end}}
       <a class="pop-tile poster" href="/services">
         <img class="ph" src="{{pestillus "crickets.jpg"}}" alt="View all pests" loading="lazy" decoding="async">
-        <span class="pop-cap"><b>View All Pests</b><small>{{.PestCount}} threat files &middot; Full catalog</small></span>
+        <span class="pop-cap"><b>View All Pests</b><small>{{.PestCount}} services &middot; Full catalog</small></span>
       </a>
     </div>
   </div>
@@ -216,7 +216,7 @@ const pageHomePop = `<!-- ============ POP HERO ============ -->
     {{if $p.ScientificName}}<div class="pop-sci">{{$p.ScientificName}}</div>{{end}}
     <p>{{$p.Description}}</p>
     {{$c := pestcopy2 $p.Slug $p.Category}}
-    {{if $c.Signs}}<div class="qv-more" hidden><div class="pop-lab">Signs of activity</div><ul>{{range $c.Signs}}<li>{{.}}</li>{{end}}</ul><p>The full threat file, treatment plan, and pricing live on this pest's page.</p></div>{{end}}
+    {{if $c.Signs}}<div class="qv-more" hidden><div class="pop-lab">Signs of activity</div><ul>{{range $c.Signs}}<li>{{.}}</li>{{end}}</ul><p>The full service briefing, treatment plan, and pricing live on this pest's page.</p></div>{{end}}
   </div>
   {{end}}
   {{range $post := .Posts}}
