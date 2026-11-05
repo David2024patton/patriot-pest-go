@@ -72,7 +72,7 @@ func init() {
 	RegisterPageTemplate("part-pest-tiles", `
 {{range $p := .}}
 <button type="button" class="pop-tile poster" data-qv="qv-pest-{{$p.Slug}}">
-  <img class="ph" src="{{pestillus $p.Filename}}" alt="{{$p.Name}}" width="2048" height="1152" loading="lazy" decoding="async">
+  <img class="ph" src="{{pestillus $p.Filename}}" alt="Illustration of {{$p.Name}} ({{$p.ScientificName}}), a pest treated by Patriot Pest Control in Spokane, WA" width="2048" height="1152" loading="lazy" decoding="async">
   <span class="pop-cap"><b>{{$p.Name}}</b><small>{{if $p.ScientificName}}{{$p.ScientificName}} · {{end}}Threat {{$p.ThreatLevel}}%</small></span>
 </button>
 {{end}}`)

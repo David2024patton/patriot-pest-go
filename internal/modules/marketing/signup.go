@@ -50,6 +50,28 @@ func (m *Module) signupPost(w http.ResponseWriter, r *http.Request) {
 	state := strings.ToUpper(strings.TrimSpace(r.FormValue("state")))
 	zip := strings.TrimSpace(r.FormValue("zip"))
 	pest := strings.TrimSpace(r.FormValue("pest"))
+	// Booking popup extras (optional, whitelisted): the chosen plan, how
+	// they pay, any promo code, the service address, and a preferred start.
+	plan := strings.TrimSpace(r.FormValue("plan"))
+	if plan != "Bronze" && plan != "Silver" && plan != "Gold" {
+		plan = ""
+	}
+	billing := strings.TrimSpace(r.FormValue("billing"))
+	if billing != "monthly" && billing != "yearly" {
+		billing = ""
+	}
+	promo := strings.ToUpper(strings.TrimSpace(r.FormValue("promo")))
+	if len(promo) > 24 {
+		promo = promo[:24]
+	}
+	address := strings.TrimSpace(r.FormValue("address"))
+	if runeLen(address) > 200 {
+		address = address[:200]
+	}
+	start := strings.TrimSpace(r.FormValue("start"))
+	if len(start) > 10 {
+		start = start[:10]
+	}
 
 	var errs []string
 	if name == "" {
@@ -110,6 +132,19 @@ func (m *Module) signupPost(w http.ResponseWriter, r *http.Request) {
 	if city != "" || state != "" {
 		notes = "From " + strings.TrimSpace(city+" "+state)
 	}
+	if plan != "" {
+		notes += " | Plan booking: " + plan + " (" + billing + ")"
+	}
+	if promo != "" {
+		notes += " | Promo: " + promo
+	}
+	if address != "" {
+		notes += " | Service address: " + address
+	}
+	if start != "" {
+		notes += " | Preferred start: " + start
+	}
+	notes = strings.Trim(notes, " |")
 	if err := m.captureLead(leadForm{
 		Name: name, Phone: phone, Email: email,
 		Detail: leadDetail("Signup form", pest, zip),

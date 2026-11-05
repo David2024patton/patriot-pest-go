@@ -14,14 +14,14 @@ const pageHomePop = `<!-- ============ POP HERO ============ -->
 <section class="pop-sec">
   <div class="wrap">
     <div class="pop-scene">
-      <img class="pop-scene-bg" src="/assets/img/illus/hero.jpg" alt="">
+      <img class="pop-scene-bg" src="/assets/img/illus/hero.jpg" alt="Illustrated neighborhood of homes protected by Patriot Pest Control, veteran-owned pest control in Spokane, WA">
       <div class="pop-scene-shade"></div>
       <div class="pop-scene-in">
         <div class="pop-tagpill">A PROUD VETERAN-OWNED AMERICAN COMPANY</div>
         <h1 class="pop-scene-h">Hostile pests.<br><span>Neutralized.</span></h1>
         <p class="pop-scene-sub">Military-precision pest control across <b>Washington, Idaho &amp; Oregon</b>, with <b>same-day service</b> when it can't wait.</p>
         <div class="pop-cta-row">
-          <button type="button" class="pop-btn primary" data-pop-open="quote">Book Now</button>
+          <button type="button" class="pop-btn primary" data-pop-open="booking">Book Now</button>
           <a class="pop-btn outline" href="/#plans" data-scroll="plans">See the Plans</a>
           <a class="pop-btn light" href="{{.PhoneHref}}">Call or Text {{.PhoneDisplay}}</a>
         </div>
@@ -41,12 +41,12 @@ const pageHomePop = `<!-- ============ POP HERO ============ -->
     <div class="pop-rail" id="rail-pests">
       {{range $p := .TopPests}}
       <button type="button" class="pop-tile poster" data-qv="qv-pest-{{$p.Slug}}">
-        <img class="ph" src="{{pestillus $p.Filename}}" alt="{{$p.Name}}" width="2048" height="1152" loading="lazy" decoding="async">
+        <img class="ph" src="{{pestillus $p.Filename}}" alt="Illustration of {{$p.Name}} ({{$p.ScientificName}}), a pest treated by Patriot Pest Control in Spokane, WA" width="2048" height="1152" loading="lazy" decoding="async">
         <span class="pop-cap"><b>{{$p.Name}}</b><small>{{if $p.ScientificName}}{{$p.ScientificName}} · {{end}}Threat {{$p.ThreatLevel}}%</small></span>
       </button>
       {{end}}
       <a class="pop-tile poster" href="/services">
-        <img class="ph" src="{{pestillus "crickets.jpg"}}" alt="View all pests" width="2096" height="1184" loading="lazy" decoding="async">
+        <img class="ph" src="{{pestillus "crickets.jpg"}}" alt="Illustration of a field cricket, view all Patriot Pest Control services" width="2096" height="1184" loading="lazy" decoding="async">
         <span class="pop-cap"><b>View All Pests</b><small>{{.PestCount}} services &middot; Full catalog</small></span>
       </a>
     </div>
@@ -82,7 +82,7 @@ const pageHomePop = `<!-- ============ POP HERO ============ -->
   <div class="wrap">
     <div class="pop-rail-head"><div><h2 class="pop-h2">The Guarantee</h2></div></div>
     <button type="button" class="pop-tile poster wide" data-qv="qv-guarantee">
-      <img class="ph" src="/assets/img/illus/guarantee.jpg" alt="The Patriot guarantee" width="2048" height="1152" loading="lazy" decoding="async">
+      <img class="ph" src="/assets/img/illus/guarantee.jpg" alt="Illustration of a protected neighborhood, the Patriot Pest Control 90-day guarantee" width="2048" height="1152" loading="lazy" decoding="async">
       <span class="pop-cap"><b>90-Day Mission Guarantee</b><small>We stand behind every mission</small></span>
     </button>
   </div>
@@ -127,7 +127,7 @@ const pageHomePop = `<!-- ============ POP HERO ============ -->
   <div class="wrap">
     <div class="pop-rail-head"><div><h2 class="pop-h2">Play Our Game</h2></div></div>
     <button type="button" class="pop-tile poster wide" data-pop-open="game">
-      <img class="ph" src="/assets/img/illus/game-art.jpg" alt="Bug Blaster game" width="2048" height="1152" loading="lazy" decoding="async">
+      <img class="ph" src="/assets/img/illus/game-art.jpg" alt="Bug Blaster, the Patriot Pest Control pest game, play free" width="2048" height="1152" loading="lazy" decoding="async">
       <span class="pop-cap"><b>Bug Blaster</b><small>Tap to play Bug Blaster</small></span>
     </button>
   </div>

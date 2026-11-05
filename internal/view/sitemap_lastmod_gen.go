@@ -62,4 +62,5 @@ var SitemapLastmod = map[string]string{
 	"/signup":                          "2026-10-01",
 	"/socials":                         "2026-10-01",
 	"/terms-of-use":                    "2026-10-01",
+	"/veterans":                        "2026-11-05",
 }

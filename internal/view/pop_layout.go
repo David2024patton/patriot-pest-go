@@ -40,7 +40,7 @@ const layoutPopHTML = `<!DOCTYPE html>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Barlow:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/pop.css?v=20261105-pop20">
+  <link rel="stylesheet" href="/assets/pop.css?v=20261105-pop21">
   <link rel="stylesheet" href="/assets/beacon.css">
   <link rel="icon" href="/assets/img/pests/ants.jpg" type="image/jpeg">
 </head>
@@ -147,6 +147,7 @@ const layoutPopHTML = `<!DOCTYPE html>
   </div>
 </div>
 
+<div class="em-backdrop" id="em-backdrop" hidden></div>
 <div class="em-panel" id="em-panel" hidden>
   <div class="em-head"><div class="em-id"><span class="em-ava">E</span><div><b>Emily</b><small>Patriot Pest Control assistant</small></div></div><button type="button" class="em-x" id="em-close" aria-label="Close">&#10005;</button></div>
   <div class="em-body" id="em-body"></div>
@@ -157,7 +158,8 @@ const layoutPopHTML = `<!DOCTYPE html>
 <div class="pop-scrim" id="pop-promo" hidden>
   <div class="pop-popup promo-card" role="dialog" aria-modal="true" aria-label="Special offer">
     <button type="button" class="pop-x" data-pop-close aria-label="Close">&#10005;</button>
-    <img class="promo-art" src="/assets/img/illus/hero.jpg" alt="">
+    <div class="pop-scroll">
+    <img class="promo-art" src="/assets/img/illus/hero.jpg" alt="Illustrated neighborhood of homes protected by Patriot Pest Control">
     <div class="pop-lab" id="promo-lab">Special Offer</div>
     <h3 id="promo-title"></h3>
     <p class="promo-text" id="promo-text"></p>
@@ -165,11 +167,74 @@ const layoutPopHTML = `<!DOCTYPE html>
       <div class="promo-codebox"><small>Your code</small><b id="promo-code"></b></div>
       <div class="promo-qr"><img id="promo-qr" src="" alt="QR code: scan to book with this code applied"><small>SCAN ME to book with the code applied</small></div>
     </div>
-    <div class="pop-cta-row"><button type="button" class="pop-btn primary" id="promo-book">Book Now</button><button type="button" class="pop-btn" data-pop-close>Maybe Later</button></div>
+    </div>
+    <div class="pop-popup-row"><button type="button" class="pop-btn primary" id="promo-book">Book Now</button><button type="button" class="pop-btn dark" data-pop-close>Maybe Later</button></div>
   </div>
 </div>
 
-<script src="/assets/js/pop.js?v=20261105-pop20" defer></script>
+<div class="pop-scrim" id="pop-page" hidden>
+  <div class="pop-popup page-card" role="dialog" aria-modal="true" aria-label="Page viewer">
+    <button type="button" class="pop-x big" data-pop-close aria-label="Close">&#10005;</button>
+    <div class="pop-page-body"></div>
+  </div>
+</div>
+
+<div class="pop-scrim" id="pop-booking" hidden>
+  <div class="pop-popup booking-card" role="dialog" aria-modal="true" aria-label="Book your plan">
+    <button type="button" class="pop-x" data-pop-close aria-label="Close">&#10005;</button>
+    <div class="pop-scroll">
+    <div class="bk-main">
+    <div class="pop-lab" id="bk-lab">Book Your Plan</div>
+    <h3>Pick your plan. Lock in the year.</h3>
+    <div class="pop-promo-line" id="bk-offer-line" hidden></div>
+    <form id="bk-form" method="post" action="/signup" novalidate>
+      {{.Csrf}}
+      <input type="hidden" name="plan" id="bk-plan-input" value="Gold">
+      <input type="hidden" name="billing" id="bk-billing-input" value="yearly">
+      <input type="hidden" name="promo" id="bk-promo-input" value="">
+      <div class="bk-plans" id="bk-plans">
+        <label class="bk-plan"><input type="radio" name="bk-plan-radio" value="Bronze"><span><b>Bronze</b><small>Exterior-Only Protection</small></span><span class="bk-price">$49/mo</span></label>
+        <label class="bk-plan"><input type="radio" name="bk-plan-radio" value="Silver"><span><b>Silver</b><small>Interior + Exterior</small></span><span class="bk-price">$59/mo</span></label>
+        <label class="bk-plan on"><input type="radio" name="bk-plan-radio" value="Gold" checked><span><b>Gold</b><small>Priority Interior &amp; Exterior</small></span><span class="bk-price">$79/mo</span></label>
+      </div>
+      <div class="bk-bills">
+        <button type="button" class="bk-bill on" data-billing="yearly"><b>Pay for the year</b><span class="bk-big" id="bk-yearly-big"></span><small class="bk-note" id="bk-yearly-note"></small></button>
+        <button type="button" class="bk-bill" data-billing="monthly"><b>Pay monthly</b><span class="bk-big" id="bk-monthly-big"></span><small class="bk-note" id="bk-monthly-note"></small></button>
+      </div>
+      <p class="bk-note">Every plan is a 12-month plan with the 90-day guarantee. No hidden fees, ever.</p>
+      <div class="bk-errors" id="bk-errors" hidden></div>
+      <div class="field"><label for="bk-name">Full Name *</label><input type="text" id="bk-name" name="name" required autocomplete="name"></div>
+      <div class="form-row">
+        <div class="field"><label for="bk-email">Email Address *</label><input type="email" id="bk-email" name="email" required autocomplete="email"></div>
+        <div class="field"><label for="bk-phone">Phone Number *</label><input type="tel" id="bk-phone" name="phone" required autocomplete="tel"></div>
+      </div>
+      <div class="field"><label for="bk-address">Service Address</label><input type="text" id="bk-address" name="address" autocomplete="street-address"></div>
+      <div class="form-row">
+        <div class="field"><label for="bk-city">City</label><input type="text" id="bk-city" name="city" autocomplete="address-level2"></div>
+        <div class="field"><label for="bk-state">State</label><input type="text" id="bk-state" name="state" maxlength="2" placeholder="WA" autocomplete="address-level1"></div>
+        <div class="field"><label for="bk-zip">ZIP Code</label><input type="text" id="bk-zip" name="zip" maxlength="10" autocomplete="postal-code"></div>
+      </div>
+      <div class="form-row">
+        <div class="field"><label for="bk-pest">Main Pest Concern</label><select id="bk-pest" name="pest">{{raw .PestOptions}}</select></div>
+        <div class="field"><label for="bk-start">Preferred Start Date</label><input type="date" id="bk-start" name="start"></div>
+      </div>
+      ` + smsConsent + `
+      <div class="form-actions"><button type="submit" class="pop-btn primary" id="bk-submit">Book My Plan</button></div>
+      <p class="bk-note">Booking sends your plan straight to the Patriot team. They confirm your first visit and set up payment with you. Nothing is charged on this page.</p>
+    </form>
+    </div>
+    <div class="bk-done" id="bk-done" hidden>
+      <div class="bk-check">&#10003;</div>
+      <h3>You are booked in.</h3>
+      <p id="bk-done-text">Your plan is with the Patriot team.</p>
+      <p class="bk-note">Questions right now? Call or text (509) 471-5767.</p>
+      <div class="pop-cta-row" style="justify-content:center"><button type="button" class="pop-btn primary" data-pop-close>Done</button></div>
+    </div>
+    </div>
+  </div>
+</div>
+
+<script src="/assets/js/pop.js?v=20261105-pop21" defer></script>
 {{if .Track}}<script src="/assets/js/tracker.js" defer></script>{{end}}
 </body>
 </html>

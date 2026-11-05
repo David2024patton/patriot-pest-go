@@ -38,22 +38,22 @@ func init() {
 
 	// Pop UI twin (pop.patriotpest.pro): scene + detail tiles.
 	RegisterPageTemplate("veterans-pop", `
-<section class="pop-scene slim"><img class="pop-scene-art" src="/assets/img/illus/val-medal.jpg" alt="">
+<section class="pop-scene slim"><img class="pop-scene-art" src="/assets/img/illus/val-medal.jpg" alt="Gold medal illustration for the Patriot Pest Control Veterans Day offer, first month free for veterans">
   <div class="pop-scene-in">
     <span class="pop-tagpill">Veterans Day // Offer</span>
     <h1 class="pop-scene-h">Veterans: your first month is <span>free.</span></h1>
     <p class="pop-scene-sub">Veteran-owned and proud of it. First month free on any annual plan. Book by Nov 11, 2026.</p>
-    <div class="pop-scene-cta"><a class="pop-btn primary" href="{{.PhoneHref}}">Call or Text {{.PhoneDisplay}}</a><button type="button" class="pop-btn" data-pop-open="quote">Book Now</button></div>
+    <div class="pop-scene-cta"><a class="pop-btn primary" href="{{.PhoneHref}}">Call or Text {{.PhoneDisplay}}</a><button type="button" class="pop-btn" data-pop-open="booking" data-offer="veterans">Book Now</button></div>
   </div>
 </section>
 <section class="pop-sec">
   <div class="wrap">
     <div class="pop-rail-head"><div><h2 class="pop-h2">The Details</h2></div></div>
     <div class="pop-grid">
-      <button type="button" class="pop-tile poster" data-qv="qv-vet-offer"><img class="ph" src="/assets/img/illus/val-medal.jpg" alt="" width="2048" height="1152" loading="lazy" decoding="async"><span class="pop-cap"><b>The Offer</b><small>First month free</small></span></button>
-      <button type="button" class="pop-tile poster" data-qv="qv-vet-qualify"><img class="ph" src="/assets/img/illus/operator.jpg" alt="" width="2048" height="1152" loading="lazy" decoding="async"><span class="pop-cap"><b>Who Qualifies</b><small>U.S. military veterans</small></span></button>
-      <button type="button" class="pop-tile poster" data-qv="qv-vet-redeem"><img class="ph" src="/assets/img/illus/hero.jpg" alt="" width="2048" height="1152" loading="lazy" decoding="async"><span class="pop-cap"><b>How to Redeem</b><small>Code VETSDAY</small></span></button>
-      <button type="button" class="pop-tile poster" data-qv="qv-vet-area"><img class="ph" src="/assets/img/illus/state-wa.jpg" alt="" width="2048" height="1152" loading="lazy" decoding="async"><span class="pop-cap"><b>Service Area</b><small>WA and North ID</small></span></button>
+      <button type="button" class="pop-tile poster" data-qv="qv-vet-offer"><img class="ph" src="/assets/img/illus/val-medal.jpg" alt="Gold medal, the Patriot Pest Control veterans offer" width="2048" height="1152" loading="lazy" decoding="async"><span class="pop-cap"><b>The Offer</b><small>First month free</small></span></button>
+      <button type="button" class="pop-tile poster" data-qv="qv-vet-qualify"><img class="ph" src="/assets/img/illus/operator.jpg" alt="Skyler Rose, U.S. Military Veteran and founder of Patriot Pest Control" width="2048" height="1152" loading="lazy" decoding="async"><span class="pop-cap"><b>Who Qualifies</b><small>U.S. military veterans</small></span></button>
+      <button type="button" class="pop-tile poster" data-qv="qv-vet-redeem"><img class="ph" src="/assets/img/illus/hero.jpg" alt="Illustrated neighborhood served by Patriot Pest Control" width="2048" height="1152" loading="lazy" decoding="async"><span class="pop-cap"><b>How to Redeem</b><small>Code VETSDAY</small></span></button>
+      <button type="button" class="pop-tile poster" data-qv="qv-vet-area"><img class="ph" src="/assets/img/illus/state-wa.jpg" alt="Illustrated Washington landscape, Patriot Pest Control service area" width="2048" height="1152" loading="lazy" decoding="async"><span class="pop-cap"><b>Service Area</b><small>WA and North ID</small></span></button>
     </div>
   </div>
   <div class="pop-qv-sources" hidden>

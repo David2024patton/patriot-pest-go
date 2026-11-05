@@ -487,14 +487,46 @@ func (m *Module) sitemap(w http.ResponseWriter, r *http.Request) {
 //go:generate go run ../../tools/sitemap-lastmod
 func (m *Module) sitemapXML(w http.ResponseWriter, r *http.Request) {
 	base := view.SiteBase(r)
+	type imgEntry struct {
+		Loc     string `xml:"image:loc"`
+		Title   string `xml:"image:title,omitempty"`
+		Caption string `xml:"image:caption,omitempty"`
+	}
 	type url struct {
-		Loc        string `xml:"loc"`
-		Lastmod    string `xml:"lastmod,omitempty"`
-		Changefreq string `xml:"changefreq,omitempty"`
+		Loc        string     `xml:"loc"`
+		Lastmod    string     `xml:"lastmod,omitempty"`
+		Changefreq string     `xml:"changefreq,omitempty"`
+		Images     []imgEntry `xml:"image:image"`
+	}
+	img := func(path, title, caption string) imgEntry {
+		return imgEntry{Loc: base + path, Title: title, Caption: caption}
+	}
+	pageImgs := map[string][]imgEntry{
+		"/": {
+			img("/assets/img/illus/hero.jpg", "Patriot Pest Control, veteran-owned pest control in Spokane, WA", "Illustrated neighborhood protected by Patriot Pest Control"),
+			img("/assets/img/illus/operator.jpg", "Skyler Rose, founder of Patriot Pest Control", "Skyler Rose, U.S. Military Veteran, founder and operator"),
+			img("/assets/img/illus/plan-bronze.jpg", "Bronze plan, $49 per month", "Bronze exterior-only protection plan"),
+			img("/assets/img/illus/plan-silver.jpg", "Silver plan, $59 per month", "Silver interior plus exterior plan"),
+			img("/assets/img/illus/plan-gold.jpg", "Gold plan, $79 per month", "Gold priority interior and exterior plan"),
+			img("/assets/img/illus/game-art.jpg", "Bug Blaster game", "Bug Blaster, the free Patriot Pest Control pest game"),
+		},
+		"/prices": {
+			img("/assets/img/illus/plan-bronze.jpg", "Bronze plan, $49 per month", "Bronze exterior-only protection plan"),
+			img("/assets/img/illus/plan-silver.jpg", "Silver plan, $59 per month", "Silver interior plus exterior plan"),
+			img("/assets/img/illus/plan-gold.jpg", "Gold plan, $79 per month", "Gold priority interior and exterior plan"),
+		},
+		"/veterans": {
+			img("/assets/img/illus/val-medal.jpg", "Veterans Day offer, first month free for veterans", "Veterans get their first month free on any annual plan, book by Nov 11, 2026"),
+		},
+		"/service-areas": {
+			img("/assets/img/illus/state-wa.jpg", "Washington service areas", "Spokane, Spokane Valley, Cheney, Liberty Lake, Airway Heights, Medical Lake, Deer Park, Mead"),
+			img("/assets/img/illus/state-id.jpg", "Idaho service areas", "Coeur d'Alene, Post Falls, Hayden, Rathdrum"),
+			img("/assets/img/illus/state-or.jpg", "Oregon service areas", "Hermiston, Milton-Freewater"),
+		},
 	}
 	var urls []url
 	add := func(path, freq string) {
-		urls = append(urls, url{base + path, view.SitemapLastmod[path], freq})
+		urls = append(urls, url{Loc: base + path, Lastmod: view.SitemapLastmod[path], Changefreq: freq, Images: pageImgs[path]})
 	}
 	for _, p := range []string{"/", "/about", "/services", "/prices", "/service-areas", "/faqs", "/contact", "/signup", "/blogs", "/referral", "/veterans", "/socials", "/help", "/links", "/privacy-policy", "/terms-of-use"} {
 		freq := "weekly"
@@ -504,7 +536,24 @@ func (m *Module) sitemapXML(w http.ResponseWriter, r *http.Request) {
 		add(p, freq)
 	}
 	for _, pest := range data.AllPests() {
-		add("/pest/"+pest.Slug, "monthly")
+		illus := "/assets/img/illus/pest-" + strings.TrimSuffix(pest.Filename, ".jpg") + ".jpg"
+		pageImgs["/pest/"+pest.Slug] = []imgEntry{
+			img(illus, pest.Name+" pest control, Patriot Pest Control", pest.Name+" ("+pest.ScientificName+") treatment and prevention in Spokane, WA"),
+			img("/assets/img/pests/"+pest.Filename, pest.Name+" photo", pest.Name+" ("+pest.ScientificName+")"),
+		}
+		if _, ok := pageImgs["/services"]; !ok {
+			pageImgs["/services"] = []imgEntry{}
+		}
+		pageImgs["/services"] = append(pageImgs["/services"],
+			img(illus, pest.Name+" pest control service", pest.Name+" ("+pest.ScientificName+"), treated by Patriot Pest Control"))
+		add("/pest/" + pest.Slug, "monthly")
+	}
+	// The static page loop above ran before pest images were known; attach
+	// the services catalog images now.
+	for i := range urls {
+		if urls[i].Loc == base+"/services" {
+			urls[i].Images = pageImgs["/services"]
+		}
 	}
 	for _, st := range data.States() {
 		for _, city := range st.Cities {
@@ -515,10 +564,11 @@ func (m *Module) sitemapXML(w http.ResponseWriter, r *http.Request) {
 		add("/blogs/"+post.Slug, "monthly")
 	}
 	out := struct {
-		XMLName xml.Name `xml:"urlset"`
-		Xmlns   string   `xml:"xmlns,attr"`
-		URLs    []url    `xml:"url"`
-	}{Xmlns: "http://www.sitemaps.org/schemas/sitemap/0.9", URLs: urls}
+		XMLName    xml.Name `xml:"urlset"`
+		Xmlns      string   `xml:"xmlns,attr"`
+		XmlnsImage string   `xml:"xmlns:image,attr"`
+		URLs       []url    `xml:"url"`
+	}{Xmlns: "http://www.sitemaps.org/schemas/sitemap/0.9", XmlnsImage: "http://www.google.com/schemas/sitemap-image/1.1", URLs: urls}
 	w.Header().Set("Content-Type", "application/xml; charset=utf-8")
 	w.Header().Set("Cache-Control", "public, max-age=3600")
 	_, _ = w.Write([]byte(xml.Header))
@@ -560,12 +610,19 @@ func (m *Module) llms(w http.ResponseWriter, r *http.Request) {
 	for _, pest := range data.AllPests() {
 		sb.WriteString("- " + pest.Name + ": " + base + "/pest/" + pest.Slug + "\n")
 	}
+	sb.WriteString("\n## Plans\n\n")
+	sb.WriteString("- Bronze: $49/month, exterior-only protection.\n")
+	sb.WriteString("- Silver: $59/month, interior + exterior.\n")
+	sb.WriteString("- Gold: $79/month, priority interior + exterior.\n")
+	sb.WriteString("- All plans are 12-month plans backed by a 90-day guarantee. Prices: " + base + "/prices\n")
+	sb.WriteString("- Veterans Day offer: veterans get their first month free on any annual plan when they book by November 11, 2026, code VETSDAY: " + base + "/veterans\n")
 	sb.WriteString("\n## Key pages\n\n")
 	for _, p := range [][2]string{
 		{"Home", "/"}, {"About", "/about"}, {"Services", "/services"},
 		{"Prices", "/prices"}, {"Service areas", "/service-areas"},
 		{"Blog", "/blogs"}, {"FAQs", "/faqs"}, {"Contact", "/contact"},
 		{"Sign up", "/signup"}, {"Referral program", "/referral"},
+		{"Veterans Day offer", "/veterans"},
 	} {
 		sb.WriteString("- " + p[0] + ": " + base + p[1] + "\n")
 	}

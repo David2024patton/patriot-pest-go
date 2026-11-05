@@ -8,12 +8,12 @@ package view
 func init() {
 	// ---------- Services: mini scene + the full pest rail + plans ----------
 	RegisterPageTemplate("services-pop", `
-<section class="pop-scene slim"><img class="pop-scene-art" src="{{pestillus "ants.jpg"}}" alt="">
+<section class="pop-scene slim"><img class="pop-scene-art" src="{{pestillus "ants.jpg"}}" alt="Illustration of a carpenter ant, Patriot Pest Control services in Spokane, WA">
   <div class="pop-scene-in">
     <span class="pop-tagpill">Capabilities // Services</span>
     <h1 class="pop-scene-h">Every pest. <span>One team.</span></h1>
     <p class="pop-scene-sub">The full catalog, grouped like a movie library. Tap any service for the briefing.</p>
-    <div class="pop-scene-cta"><a class="pop-btn primary" href="{{.PhoneHref}}">Call or Text {{.PhoneDisplay}}</a><button type="button" class="pop-btn" data-pop-open="quote">Book Now</button></div>
+    <div class="pop-scene-cta"><a class="pop-btn primary" href="{{.PhoneHref}}">Call or Text {{.PhoneDisplay}}</a><button type="button" class="pop-btn" data-pop-open="booking">Book Now</button></div>
   </div>
 </section>
 {{range $cat := .Categories}}
@@ -31,12 +31,12 @@ func init() {
 
 	// ---------- Prices: plans rail only (compare removed 2026-11-05) ----------
 	RegisterPageTemplate("prices-pop", `
-<section class="pop-scene slim"><img class="pop-scene-art" src="{{pestillus "wasps.jpg"}}" alt="">
+<section class="pop-scene slim"><img class="pop-scene-art" src="{{pestillus "wasps.jpg"}}" alt="Illustration of a wasp, Patriot Pest Control plan pricing">
   <div class="pop-scene-in">
     <span class="pop-tagpill">Supply Manifest // Pricing</span>
     <h1 class="pop-scene-h">Protect your <span>home.</span></h1>
     <p class="pop-scene-sub">Tap a plan for what it covers.</p>
-    <div class="pop-scene-cta"><a class="pop-btn primary" href="{{.PhoneHref}}">Call or Text {{.PhoneDisplay}}</a><button type="button" class="pop-btn" data-pop-open="quote">Book Now</button></div>
+    <div class="pop-scene-cta"><a class="pop-btn primary" href="{{.PhoneHref}}">Call or Text {{.PhoneDisplay}}</a><button type="button" class="pop-btn" data-pop-open="booking">Book Now</button></div>
   </div>
 </section>
 {{template "part-plans-rail" .}}
@@ -44,12 +44,12 @@ func init() {
 
 	// ---------- Service areas index: state tiles in a grid ----------
 	RegisterPageTemplate("areas-pop", `
-<section class="pop-scene slim"><img class="pop-scene-art" src="/assets/img/illus/state-wa.jpg" alt="">
+<section class="pop-scene slim"><img class="pop-scene-art" src="/assets/img/illus/state-wa.jpg" alt="Illustrated scene of Washington, Patriot Pest Control service areas">
   <div class="pop-scene-in">
     <span class="pop-tagpill">Theater of Operations</span>
     <h1 class="pop-scene-h">Where we <span>operate.</span></h1>
     <p class="pop-scene-sub">Tap a state for its towns.</p>
-    <div class="pop-scene-cta"><a class="pop-btn primary" href="{{.PhoneHref}}">Call or Text {{.PhoneDisplay}}</a><button type="button" class="pop-btn" data-pop-open="quote">Book Now</button></div>
+    <div class="pop-scene-cta"><a class="pop-btn primary" href="{{.PhoneHref}}">Call or Text {{.PhoneDisplay}}</a><button type="button" class="pop-btn" data-pop-open="booking">Book Now</button></div>
   </div>
 </section>
 <section class="pop-sec">
@@ -62,20 +62,20 @@ func init() {
 
 	// ---------- FAQs: question tiles, answers in the popup ----------
 	RegisterPageTemplate("faqs-pop", `
-<section class="pop-scene slim"><img class="pop-scene-art" src="{{pestillus "bees.jpg"}}" alt="">
+<section class="pop-scene slim"><img class="pop-scene-art" src="{{pestillus "bees.jpg"}}" alt="Illustration of a honey bee, Patriot Pest Control frequently asked questions">
   <div class="pop-scene-in">
     <span class="pop-tagpill">Intel // FAQ</span>
     <h1 class="pop-scene-h">Questions, <span>answered.</span></h1>
     <p class="pop-scene-sub">Tap a question for the answer.</p>
-    <div class="pop-scene-cta"><a class="pop-btn primary" href="{{.PhoneHref}}">Call or Text {{.PhoneDisplay}}</a><button type="button" class="pop-btn" data-pop-open="quote">Book Now</button></div>
+    <div class="pop-scene-cta"><a class="pop-btn primary" href="{{.PhoneHref}}">Call or Text {{.PhoneDisplay}}</a><button type="button" class="pop-btn" data-pop-open="booking">Book Now</button></div>
   </div>
 </section>
 <section class="pop-sec">
   <div class="wrap">
     <div class="pop-rail-head"><div><h2 class="pop-h2">Safety &amp; Methods</h2></div></div>
     <div class="pop-grid">
-      <button type="button" class="pop-tile poster" data-qv="qv-faq-kids"><img class="ph" src="/assets/img/illus/faq-safety.jpg" alt="" loading="lazy" decoding="async"><span class="pop-cap"><b class="clamp">Are your treatments safe for kids and pets?</b><small>Safety &amp; Methods</small></span></button>
-      <button type="button" class="pop-tile poster" data-qv="qv-faq-eco"><img class="ph" src="/assets/img/illus/faq-safety.jpg" alt="" loading="lazy" decoding="async"><span class="pop-cap"><b class="clamp">Are your products eco-friendly?</b><small>Safety &amp; Methods</small></span></button>
+      <button type="button" class="pop-tile poster" data-qv="qv-faq-kids"><img class="ph" src="/assets/img/illus/faq-safety.jpg" alt="Illustration: Are your treatments safe for kids and pets?, Patriot Pest Control" loading="lazy" decoding="async"><span class="pop-cap"><b class="clamp">Are your treatments safe for kids and pets?</b><small>Safety &amp; Methods</small></span></button>
+      <button type="button" class="pop-tile poster" data-qv="qv-faq-eco"><img class="ph" src="/assets/img/illus/faq-safety.jpg" alt="Illustration: Are your products eco-friendly?, Patriot Pest Control" loading="lazy" decoding="async"><span class="pop-cap"><b class="clamp">Are your products eco-friendly?</b><small>Safety &amp; Methods</small></span></button>
     </div>
   </div>
 </section>
@@ -83,9 +83,9 @@ func init() {
   <div class="wrap">
     <div class="pop-rail-head"><div><h2 class="pop-h2">Pricing &amp; Guarantees</h2></div></div>
     <div class="pop-grid">
-      <button type="button" class="pop-tile poster" data-qv="qv-faq-cost"><img class="ph" src="/assets/img/illus/faq-price.jpg" alt="" loading="lazy" decoding="async"><span class="pop-cap"><b class="clamp">How much does pest control cost?</b><small>Pricing &amp; Guarantees</small></span></button>
-      <button type="button" class="pop-tile poster" data-qv="qv-faq-guarantee"><img class="ph" src="/assets/img/illus/faq-price.jpg" alt="" loading="lazy" decoding="async"><span class="pop-cap"><b class="clamp">Do you offer a guarantee?</b><small>Pricing &amp; Guarantees</small></span></button>
-      <button type="button" class="pop-tile poster" data-qv="qv-faq-fees"><img class="ph" src="/assets/img/illus/faq-price.jpg" alt="" loading="lazy" decoding="async"><span class="pop-cap"><b class="clamp">Are there any hidden fees?</b><small>Pricing &amp; Guarantees</small></span></button>
+      <button type="button" class="pop-tile poster" data-qv="qv-faq-cost"><img class="ph" src="/assets/img/illus/faq-price.jpg" alt="Illustration: How much does pest control cost?, Patriot Pest Control" loading="lazy" decoding="async"><span class="pop-cap"><b class="clamp">How much does pest control cost?</b><small>Pricing &amp; Guarantees</small></span></button>
+      <button type="button" class="pop-tile poster" data-qv="qv-faq-guarantee"><img class="ph" src="/assets/img/illus/faq-price.jpg" alt="Illustration: Do you offer a guarantee?, Patriot Pest Control" loading="lazy" decoding="async"><span class="pop-cap"><b class="clamp">Do you offer a guarantee?</b><small>Pricing &amp; Guarantees</small></span></button>
+      <button type="button" class="pop-tile poster" data-qv="qv-faq-fees"><img class="ph" src="/assets/img/illus/faq-price.jpg" alt="Illustration: Are there any hidden fees?, Patriot Pest Control" loading="lazy" decoding="async"><span class="pop-cap"><b class="clamp">Are there any hidden fees?</b><small>Pricing &amp; Guarantees</small></span></button>
     </div>
   </div>
 </section>
@@ -93,9 +93,9 @@ func init() {
   <div class="wrap">
     <div class="pop-rail-head"><div><h2 class="pop-h2">Service &amp; Scheduling</h2></div></div>
     <div class="pop-grid">
-      <button type="button" class="pop-tile poster" data-qv="qv-faq-sameday"><img class="ph" src="/assets/img/illus/faq-sched.jpg" alt="" loading="lazy" decoding="async"><span class="pop-cap"><b class="clamp">Do you offer same-day service?</b><small>Service &amp; Scheduling</small></span></button>
-      <button type="button" class="pop-tile poster" data-qv="qv-faq-areas"><img class="ph" src="/assets/img/illus/faq-sched.jpg" alt="" loading="lazy" decoding="async"><span class="pop-cap"><b class="clamp">What areas do you serve?</b><small>Service &amp; Scheduling</small></span></button>
-      <button type="button" class="pop-tile poster" data-qv="qv-faq-prep"><img class="ph" src="/assets/img/illus/faq-sched.jpg" alt="" loading="lazy" decoding="async"><span class="pop-cap"><b class="clamp">Do I need to prepare my home before treatment?</b><small>Service &amp; Scheduling</small></span></button>
+      <button type="button" class="pop-tile poster" data-qv="qv-faq-sameday"><img class="ph" src="/assets/img/illus/faq-sched.jpg" alt="Illustration: Do you offer same-day service?, Patriot Pest Control" loading="lazy" decoding="async"><span class="pop-cap"><b class="clamp">Do you offer same-day service?</b><small>Service &amp; Scheduling</small></span></button>
+      <button type="button" class="pop-tile poster" data-qv="qv-faq-areas"><img class="ph" src="/assets/img/illus/faq-sched.jpg" alt="Illustration: What areas do you serve?, Patriot Pest Control" loading="lazy" decoding="async"><span class="pop-cap"><b class="clamp">What areas do you serve?</b><small>Service &amp; Scheduling</small></span></button>
+      <button type="button" class="pop-tile poster" data-qv="qv-faq-prep"><img class="ph" src="/assets/img/illus/faq-sched.jpg" alt="Illustration: Do I need to prepare my home before treatment?, Patriot Pest Control" loading="lazy" decoding="async"><span class="pop-cap"><b class="clamp">Do I need to prepare my home before treatment?</b><small>Service &amp; Scheduling</small></span></button>
     </div>
   </div>
 </section>
@@ -103,8 +103,8 @@ func init() {
   <div class="wrap">
     <div class="pop-rail-head"><div><h2 class="pop-h2">Getting Started</h2></div></div>
     <div class="pop-grid">
-      <button type="button" class="pop-tile poster" data-qv="qv-faq-start"><img class="ph" src="/assets/img/illus/faq-start.jpg" alt="" loading="lazy" decoding="async"><span class="pop-cap"><b class="clamp">How do I get started?</b><small>Getting Started</small></span></button>
-      <button type="button" class="pop-tile poster" data-qv="qv-faq-commercial"><img class="ph" src="/assets/img/illus/faq-start.jpg" alt="" loading="lazy" decoding="async"><span class="pop-cap"><b class="clamp">Do you handle commercial properties?</b><small>Getting Started</small></span></button>
+      <button type="button" class="pop-tile poster" data-qv="qv-faq-start"><img class="ph" src="/assets/img/illus/faq-start.jpg" alt="Illustration: How do I get started?, Patriot Pest Control" loading="lazy" decoding="async"><span class="pop-cap"><b class="clamp">How do I get started?</b><small>Getting Started</small></span></button>
+      <button type="button" class="pop-tile poster" data-qv="qv-faq-commercial"><img class="ph" src="/assets/img/illus/faq-start.jpg" alt="Illustration: Do you handle commercial properties?, Patriot Pest Control" loading="lazy" decoding="async"><span class="pop-cap"><b class="clamp">Do you handle commercial properties?</b><small>Getting Started</small></span></button>
     </div>
   </div>
   <div class="pop-qv-sources" hidden>
@@ -126,12 +126,12 @@ func init() {
 func init() {
 	// ---------- About: story, dossier, and values as tiles ----------
 	RegisterPageTemplate("about-pop", `
-<section class="pop-scene slim"><img class="pop-scene-art" src="/assets/img/illus/state-wa.jpg" alt="">
+<section class="pop-scene slim"><img class="pop-scene-art" src="/assets/img/illus/state-wa.jpg" alt="Illustrated scene of Washington, Patriot Pest Control service areas">
   <div class="pop-scene-in">
     <span class="pop-tagpill">Personnel File // About Us</span>
     <h1 class="pop-scene-h">Veteran-owned. <span>Mission-driven.</span></h1>
     <p class="pop-scene-sub">Tap a file for the details.</p>
-    <div class="pop-scene-cta"><a class="pop-btn primary" href="{{.PhoneHref}}">Call or Text {{.PhoneDisplay}}</a><button type="button" class="pop-btn" data-pop-open="quote">Book Now</button></div>
+    <div class="pop-scene-cta"><a class="pop-btn primary" href="{{.PhoneHref}}">Call or Text {{.PhoneDisplay}}</a><button type="button" class="pop-btn" data-pop-open="booking">Book Now</button></div>
   </div>
 </section>
 <section class="pop-sec">
@@ -153,12 +153,12 @@ func init() {
   <div class="wrap">
     <div class="pop-rail-head"><div><h2 class="pop-h2">Core Values</h2></div></div>
     <div class="pop-grid">
-      <button type="button" class="pop-tile poster" data-qv="qv-val-integrity"><img class="ph" src="/assets/img/illus/val-medal.jpg" alt="" loading="lazy" decoding="async"><span class="pop-cap"><b>Integrity</b><small>Core Values</small></span></button>
-      <button type="button" class="pop-tile poster" data-qv="qv-val-precision"><img class="ph" src="/assets/img/illus/val-medal.jpg" alt="" loading="lazy" decoding="async"><span class="pop-cap"><b>Precision</b><small>Core Values</small></span></button>
-      <button type="button" class="pop-tile poster" data-qv="qv-val-safety"><img class="ph" src="/assets/img/illus/val-medal.jpg" alt="" loading="lazy" decoding="async"><span class="pop-cap"><b>Safety</b><small>Core Values</small></span></button>
-      <button type="button" class="pop-tile poster" data-qv="qv-val-response"><img class="ph" src="/assets/img/illus/val-medal.jpg" alt="" loading="lazy" decoding="async"><span class="pop-cap"><b>Responsiveness</b><small>Core Values</small></span></button>
-      <button type="button" class="pop-tile poster" data-qv="qv-val-account"><img class="ph" src="/assets/img/illus/val-medal.jpg" alt="" loading="lazy" decoding="async"><span class="pop-cap"><b>Accountability</b><small>Core Values</small></span></button>
-      <button type="button" class="pop-tile poster" data-qv="qv-val-service"><img class="ph" src="/assets/img/illus/val-medal.jpg" alt="" loading="lazy" decoding="async"><span class="pop-cap"><b>Service</b><small>Core Values</small></span></button>
+      <button type="button" class="pop-tile poster" data-qv="qv-val-integrity"><img class="ph" src="/assets/img/illus/val-medal.jpg" alt="Illustration: Integrity, Patriot Pest Control" loading="lazy" decoding="async"><span class="pop-cap"><b>Integrity</b><small>Core Values</small></span></button>
+      <button type="button" class="pop-tile poster" data-qv="qv-val-precision"><img class="ph" src="/assets/img/illus/val-medal.jpg" alt="Illustration: Precision, Patriot Pest Control" loading="lazy" decoding="async"><span class="pop-cap"><b>Precision</b><small>Core Values</small></span></button>
+      <button type="button" class="pop-tile poster" data-qv="qv-val-safety"><img class="ph" src="/assets/img/illus/val-medal.jpg" alt="Illustration: Safety, Patriot Pest Control" loading="lazy" decoding="async"><span class="pop-cap"><b>Safety</b><small>Core Values</small></span></button>
+      <button type="button" class="pop-tile poster" data-qv="qv-val-response"><img class="ph" src="/assets/img/illus/val-medal.jpg" alt="Illustration: Responsiveness, Patriot Pest Control" loading="lazy" decoding="async"><span class="pop-cap"><b>Responsiveness</b><small>Core Values</small></span></button>
+      <button type="button" class="pop-tile poster" data-qv="qv-val-account"><img class="ph" src="/assets/img/illus/val-medal.jpg" alt="Illustration: Accountability, Patriot Pest Control" loading="lazy" decoding="async"><span class="pop-cap"><b>Accountability</b><small>Core Values</small></span></button>
+      <button type="button" class="pop-tile poster" data-qv="qv-val-service"><img class="ph" src="/assets/img/illus/val-medal.jpg" alt="Illustration: Service, Patriot Pest Control" loading="lazy" decoding="async"><span class="pop-cap"><b>Service</b><small>Core Values</small></span></button>
     </div>
   </div>
   <div class="pop-qv-sources" hidden>
@@ -199,7 +199,7 @@ func init() {
     <span class="pop-tagpill">Comms // Contact</span>
     <h1 class="pop-scene-h">Reach the <span>team.</span></h1>
     <p class="pop-scene-sub">Pick a channel. We respond within one business day, usually much faster.</p>
-    <div class="pop-scene-cta"><a class="pop-btn primary" href="{{.PhoneHref}}">Call or Text {{.PhoneDisplay}}</a><button type="button" class="pop-btn" data-pop-open="quote">Book Now</button></div>
+    <div class="pop-scene-cta"><a class="pop-btn primary" href="{{.PhoneHref}}">Call or Text {{.PhoneDisplay}}</a><button type="button" class="pop-btn" data-pop-open="booking">Book Now</button></div>
   </div>
 </section>
 <section class="pop-sec">
@@ -256,7 +256,7 @@ func init() {
     <span class="pop-tagpill">From the Field // Blog</span>
     <h1 class="pop-scene-h">Field <span>guides.</span></h1>
     <p class="pop-scene-sub">Tap a guide for the briefing.</p>
-    <div class="pop-scene-cta"><a class="pop-btn primary" href="{{.PhoneHref}}">Call or Text {{.PhoneDisplay}}</a><button type="button" class="pop-btn" data-pop-open="quote">Book Now</button></div>
+    <div class="pop-scene-cta"><a class="pop-btn primary" href="{{.PhoneHref}}">Call or Text {{.PhoneDisplay}}</a><button type="button" class="pop-btn" data-pop-open="booking">Book Now</button></div>
   </div>
 </section>
 <section class="pop-sec">
@@ -277,7 +277,7 @@ func init() {
     {{if .Pest.ScientificName}}<p class="pop-scene-sub"><i>{{.Pest.ScientificName}}</i> &middot; Regional threat level {{.Pest.ThreatLevel}}%</p>{{end}}
     <div class="pop-cta-row">
       <a class="pop-btn primary" href="{{.PhoneHref}}">Call or Text {{.PhoneDisplay}}</a>
-      <button type="button" class="pop-btn" data-pop-open="quote">Book Now</button>
+      <button type="button" class="pop-btn" data-pop-open="booking">Book Now</button>
     </div>
   </div>
 </section>
@@ -286,11 +286,11 @@ func init() {
   <div class="wrap">
     <div class="pop-rail-head"><div><h2 class="pop-h2">The Briefing</h2></div></div>
     <div class="pop-grid">
-      <button type="button" class="pop-tile poster" data-qv="qv-pest-brief"><img class="ph" src="{{pestillus .Pest.Filename}}" alt="" loading="lazy" decoding="async"><span class="pop-cap"><b>What you're up against</b><small>Services</small></span></button>
-      {{if $c.Signs}}<button type="button" class="pop-tile poster" data-qv="qv-pest-signs"><img class="ph" src="/assets/img/illus/pb-signs.jpg" alt="" loading="lazy" decoding="async"><span class="pop-cap"><b>Signs of Activity</b><small>Field Signs</small></span></button>{{end}}
-      {{if $c.Treat}}<button type="button" class="pop-tile poster" data-qv="qv-pest-treat"><img class="ph" src="/assets/img/illus/pb-treat.jpg" alt="" loading="lazy" decoding="async"><span class="pop-cap"><b>How we treat it</b><small>Our Treatment</small></span></button>{{end}}
-      {{if $c.Prev}}<button type="button" class="pop-tile poster" data-qv="qv-pest-prev"><img class="ph" src="/assets/img/illus/pb-prev.jpg" alt="" loading="lazy" decoding="async"><span class="pop-cap"><b>Keep them out</b><small>Prevention</small></span></button>{{end}}
-      <button type="button" class="pop-tile poster" data-qv="qv-pest-warranty"><img class="ph" src="/assets/img/illus/pb-warranty.jpg" alt="" loading="lazy" decoding="async"><span class="pop-cap"><b>90-Day Warranty</b><small>Coverage</small></span></button>
+      <button type="button" class="pop-tile poster" data-qv="qv-pest-brief"><img class="ph" src="{{pestillus .Pest.Filename}}" alt="Illustration: What you're up against, Patriot Pest Control" loading="lazy" decoding="async"><span class="pop-cap"><b>What you're up against</b><small>Services</small></span></button>
+      {{if $c.Signs}}<button type="button" class="pop-tile poster" data-qv="qv-pest-signs"><img class="ph" src="/assets/img/illus/pb-signs.jpg" alt="Illustration: Signs of Activity, Patriot Pest Control" loading="lazy" decoding="async"><span class="pop-cap"><b>Signs of Activity</b><small>Field Signs</small></span></button>{{end}}
+      {{if $c.Treat}}<button type="button" class="pop-tile poster" data-qv="qv-pest-treat"><img class="ph" src="/assets/img/illus/pb-treat.jpg" alt="Illustration: How we treat it, Patriot Pest Control" loading="lazy" decoding="async"><span class="pop-cap"><b>How we treat it</b><small>Our Treatment</small></span></button>{{end}}
+      {{if $c.Prev}}<button type="button" class="pop-tile poster" data-qv="qv-pest-prev"><img class="ph" src="/assets/img/illus/pb-prev.jpg" alt="Illustration: Keep them out, Patriot Pest Control" loading="lazy" decoding="async"><span class="pop-cap"><b>Keep them out</b><small>Prevention</small></span></button>{{end}}
+      <button type="button" class="pop-tile poster" data-qv="qv-pest-warranty"><img class="ph" src="/assets/img/illus/pb-warranty.jpg" alt="Illustration: 90-Day Warranty, Patriot Pest Control" loading="lazy" decoding="async"><span class="pop-cap"><b>90-Day Warranty</b><small>Coverage</small></span></button>
     </div>
   </div>
   <div class="pop-qv-sources" hidden>
@@ -329,7 +329,7 @@ func init() {
     <p class="pop-scene-sub">Same-day service, 90-day warranty, veteran-owned.</p>
     <div class="pop-cta-row">
       <a class="pop-btn primary" href="{{.AreaPhoneHref}}">Call or Text {{.AreaPhoneDisplay}}</a>
-      <button type="button" class="pop-btn" data-pop-open="quote">Book Now</button>
+      <button type="button" class="pop-btn" data-pop-open="booking">Book Now</button>
     </div>
   </div>
 </section>
