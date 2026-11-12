@@ -129,6 +129,8 @@ func (m *Module) Register(r chi.Router) bool {
 	r.Get("/socials", m.page("socials", socialsT, socialsD, nil))
 	r.Get("/help", m.page("help", helpT, helpD, nil))
 	r.Get("/links", m.page("links", linksT, linksD, nil))
+	r.Get("/sms-opt-in", m.smsOptInGet)
+	r.With(postLimiter.Middleware).Post("/sms-opt-in", m.smsOptInPost)
 	r.Get("/search", m.search)
 	r.Get("/sitemap", m.sitemap)
 	r.Get("/sitemap.xml", m.sitemapXML)
@@ -541,7 +543,7 @@ func (m *Module) sitemapXML(w http.ResponseWriter, r *http.Request) {
 	add := func(path, freq string) {
 		urls = append(urls, url{Loc: base + path, Lastmod: view.SitemapLastmod[path], Changefreq: freq, Images: pageImgs[path]})
 	}
-	for _, p := range []string{"/", "/about", "/services", "/prices", "/service-areas", "/faqs", "/contact", "/signup", "/blogs", "/referral", "/veterans", "/socials", "/help", "/links", "/privacy-policy", "/terms-of-use"} {
+	for _, p := range []string{"/", "/about", "/services", "/prices", "/service-areas", "/faqs", "/contact", "/signup", "/blogs", "/referral", "/veterans", "/socials", "/help", "/links", "/privacy-policy", "/terms-of-use", "/sms-opt-in"} {
 		freq := "weekly"
 		if p == "/" {
 			freq = "daily"

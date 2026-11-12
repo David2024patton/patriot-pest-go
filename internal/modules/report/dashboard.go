@@ -150,7 +150,7 @@ const REPORTS = {
       {v:"20 of 20", k:"website health checks fully passed"},
       {v:"57 of 57", k:"pages live, zero broken links found"},
       {v:"1", k:"phone number on the whole site now: (509) 471-5767"},
-      {v:"0", k:"Arizona mentions left anywhere on the site"},
+      {v:"0", k:"sold-territory mentions left anywhere on the site"},
       {v:"4 MB", k:"of photos on the homepage, the one fix still to make"}
     ],
     cards: [
@@ -206,9 +206,9 @@ const REPORTS = {
       ]},
       {title:"Fixed this week", pill:"done", cls:"", note:"",
        points:[
-        "Arizona is off the website for good. The operation was sold, and the site now matches: no Arizona words, the Phoenix page is deleted, and it is out of Google's map of the site.",
+        "The sold territory is off the website for good. The operation was sold, and the site now matches: none of its words remain, its city page is deleted, and it is out of Google's map of the site.",
         "One phone number everywhere: (509) 471-5767. It is now the only number on any page of the site.",
-        "Page titles that used to say WA, ID, OR and AZ now say WA, ID and OR."
+        "Page titles that used to list four states now say WA, ID and OR."
       ]}
     ]
   },
@@ -262,7 +262,7 @@ const REPORTS = {
        points:[
         "Six updates shipped to patriotpest.pro, each verified live.",
         "Fixed the behind-the-scenes business data Google reads: valid structured data, real privacy policy and terms pages, removed a test page that was showing in search, bigger tap buttons on phones, cleaner page addresses.",
-        "Set the official phone numbers everywhere: (509) 818-0993 for Washington and (602) 755-8414 for Arizona. The old number is gone from the site.",
+        "Set the official phone numbers everywhere for both territories. The old number is gone from the site.",
         "Rewrote all 25 pest pages with unique copy and correct local species. Added local-area write-ups to all 15 city pages. Expanded thin blog posts. Fixed small text and low contrast.",
         "SEO extras: real dates on the sitemap, custom preview images for pest, city, and blog pages, breadcrumb navigation data, better internal links, plus an automated test that crawls 63 pages so nothing breaks again.",
         "Hours standardized everywhere: Mon to Sat 7am to 7pm, Sunday closed, online scheduling 24/7.",
@@ -270,14 +270,14 @@ const REPORTS = {
       ]},
       {title:"Google Business Profiles", pill:"done", cls:"", note:"A few items are still in Google review.",
        points:[
-        "Two profiles: Washington/Idaho (98 reviews, 4.7 stars) and Arizona (Mesa/Tempe, 0 reviews).",
+        "Two profiles: Washington/Idaho (98 reviews, 4.7 stars) and the sold territory's (0 reviews).",
         "Audited both profiles end to end against the live Google data.",
         "Killed a bad pending edit that was trying to switch the WA phone back to the old number.",
         "Fixed the website link to the secure https address.",
         "Added the veteran-owned attribute to the WA profile.",
-        "Rewrote the Arizona description. It was talking about Spokane and Northwest pests. Now it covers Mesa, Tempe, and desert pests.",
-        "Fixed Arizona Saturday hours. Was 9 to 5, now 7am to 7pm like the rest of the week.",
-        "Renamed the Arizona profile to \u201CPatriot Pest Control CO\u201D to match everywhere else.",
+        "Rewrote the sold territory's profile description. It was talking about Spokane and Northwest pests. Now it covers its own cities and pests.",
+        "Fixed the sold territory's Saturday hours. Was 9 to 5, now 7am to 7pm like the rest of the week.",
+        "Renamed the sold territory's profile to \u201CPatriot Pest Control CO\u201D to match everywhere else.",
         "Corrected the opening date to 2016.",
         "Turned on chat messaging on both profiles.",
         "Replied to 86 positive reviews in a warm, plain-spoken style, each one personalized.",
@@ -289,7 +289,7 @@ const REPORTS = {
        points:[
         "Decision: keeping Sameday for the full year already paid for. No cancellation. We keep improving it: prompts, call routing, transfers, and matching callers to FieldRoutes.",
         "This is Skyler's company, so transfers were never routed to David. The AI handles calls itself and books the job; when a human is needed, it goes to Skyler's number.",
-        "Launched Oct 2 at 9:36 AM EDT: the \u201CReview Request - Post Service\u201D campaign is active and sent review request texts to 34 customers from September's completed appointments. Texts land around 9:36 AM Phoenix time asking happy customers for a Google review.",
+        "Launched Oct 2 at 9:36 AM EDT: the \u201CReview Request - Post Service\u201D campaign is active and sent review request texts to 34 customers from September's completed appointments. Texts land around 9:36 AM local time asking happy customers for a Google review.",
         "Campaign goal: collect Google reviews from recent service customers.",
         "Note: Sameday cannot send customer emails, so review emails will need to come from another system later."
       ]},
@@ -302,7 +302,7 @@ const REPORTS = {
       ]},
       {title:"Up next", pill:"pending", cls:"", note:"",
        points:[
-        "Get the Arizona profile its first reviews.",
+        "Get the sold territory's profile its first reviews.",
         "Fresh photos for both profiles (some old graphics still show the old phone number).",
         "Clean up the Washington services list (Google added junk entries like Lice).",
         "Publish fall posts (yellow jacket and rodent season).",

@@ -1028,7 +1028,6 @@ footer.site-footer{background:var(--olive-950);border-top:2px solid var(--olive-
 #xh-ring::before,#xh-ring::after{content:"";position:absolute;background:rgba(244,119,46,.7)}
 #xh-ring::before{left:50%;top:-8px;bottom:-8px;width:1px}
 #xh-ring::after{top:50%;left:-8px;right:-8px;height:1px}
-html.has-crosshair #xh-v,html.has-crosshair #xh-h,html.has-crosshair #xh-ring{opacity:1}
 .scroll-cue{position:absolute;bottom:64px;right:clamp(1rem,4vw,2.5rem);font-family:var(--mono);font-size:.6rem;letter-spacing:.28em;color:var(--olive-300);text-transform:uppercase;writing-mode:vertical-rl;display:flex;align-items:center;gap:.7rem}
 .scroll-cue::after{content:"";width:1px;height:52px;background:var(--orange);animation:drip 1.6s ease-in-out infinite}
 @keyframes drip{0%{transform:scaleY(0);transform-origin:top}55%{transform:scaleY(1);transform-origin:top}56%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
@@ -1204,6 +1203,13 @@ html.js.no-gsap [data-reveal]{opacity:1;transform:none}
 }
 
 /* Veterans Day banner (auto-expires via vetPromoActive in view.go) */
+/* The header bar is position:fixed, so in-flow content starts underneath
+   it. While the banner runs, drop the whole page flow by the header's
+   height (64px desktop, 52px at <=960px) so the banner starts below the
+   bar instead of sliding under it. The class is only emitted while
+   vetPromoActive is true, so layout returns to normal at expiry. */
+body.has-vet-banner{padding-top:64px}
+@media(max-width:960px){body.has-vet-banner{padding-top:52px}}
 .vet-banner{background:#E8590C;color:#fff;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;padding:10px 16px;text-align:center}
 .vet-banner p{margin:0;font-size:.95rem}
 .vet-banner-btn{background:#fff;color:#B3401E;font-weight:800;padding:7px 16px;border-radius:999px;text-decoration:none;white-space:nowrap}

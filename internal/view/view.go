@@ -142,14 +142,14 @@ const layoutHTML = `<!DOCTYPE html>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Barlow:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/styles.css?v=20261105-vet1">
+  <link rel="stylesheet" href="/assets/styles.css?v=20261106-vet3">
   {{if .AppUI}}<link rel="stylesheet" href="/assets/admin.css">{{end}}
   <link rel="stylesheet" href="/assets/beacon.css">
   <link rel="stylesheet" href="/assets/pwa-install.css">
   <link rel="icon" href="/assets/img/pests/ants.jpg" type="image/jpeg">
 </head>
-<body{{if .BodyClass}} class="{{.BodyClass}}"{{end}}>
-{{if .VetPromo}}<div class="vet-banner"><p><b>Veterans Day:</b> Veterans get their <b>first month FREE</b> on any annual plan. Thank you for your service.</p><a class="vet-banner-btn" href="/signup">Claim the Offer</a></div>{{end}}
+<body{{if or .BodyClass .VetPromo}} class="{{.BodyClass}}{{if .VetPromo}}{{if .BodyClass}} {{end}}has-vet-banner{{end}}"{{end}}>
+{{if .VetPromo}}<div class="vet-banner"><p><b>Veterans Day:</b> Veterans get their <b>first month FREE</b> on any annual plan. Thank you for your service.</p><a class="vet-banner-btn" href="/veterans">Claim the Offer</a></div>{{end}}
 
 <nav class="top-nav" aria-label="Main navigation">
   <button id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="navlinks">☰</button>
@@ -251,7 +251,7 @@ const layoutHTML = `<!DOCTYPE html>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="/assets/main.js?v=20261028-nav2"></script>
+<script src="/assets/main.js?v=20261106-xh1"></script>
 {{if .Track}}<script src="/assets/js/tracker.js" defer></script>{{end}}
 {{template "install-banner" .}}
 <script src="/assets/pwa-install.js"></script>
@@ -485,7 +485,6 @@ func withBase(r *http.Request, page, title, description, keywords string) map[st
 		"OtherDisplay": ph.Other.Display,
 		"OtherTel":     template.URL("tel:" + ph.Other.Tel),
 		"OtherLabel":   ph.Other.Label,
-		"IsAZ":         ph.IsAZ,
 		"VetPromo":     vetPromoActive(),
 		"Year":         time.Now().Year(),
 		"IsAdmin":      false,

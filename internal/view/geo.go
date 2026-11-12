@@ -7,8 +7,8 @@ import (
 )
 
 // Region lines, mirroring Core\Geo. Patriot has ONE phone line,
-// (509) 471-5767, shown to every visitor. The Arizona operation was sold
-// in 2026-10, so there is no Arizona line or region anymore.
+// (509) 471-5767, shown to every visitor. The second operation was sold
+// in 2026-10, so there is no second line or region anymore.
 type regionLine struct {
 	Display string
 	Tel     string
@@ -35,12 +35,11 @@ func resolveRegion(r *http.Request) string {
 	return "wa"
 }
 
-// Phone is the localized line for this visitor (display, tel, label, isAZ).
+// Phone is the localized line for this visitor (display, tel, label).
 type Phone struct {
 	Display  string
 	Tel      string // "tel:+1..."
 	Label    string
-	IsAZ     bool
 	Other    regionLine // the other line, for footers showing both
 }
 
@@ -55,5 +54,5 @@ func PhoneFor(r *http.Request) Phone {
 	reg := resolveRegion(r)
 	p := regions[reg]
 	other := regions["wa"]
-	return Phone{Display: p.Display, Tel: "tel:" + p.Tel, Label: p.Label, IsAZ: false, Other: other}
+	return Phone{Display: p.Display, Tel: "tel:" + p.Tel, Label: p.Label, Other: other}
 }

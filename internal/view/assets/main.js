@@ -92,7 +92,10 @@ if (hero && window.matchMedia("(pointer:fine)").matches){
   var xhv=document.getElementById("xh-v"), xhh=document.getElementById("xh-h"), xhr=document.getElementById("xh-ring");
   if (xhv){
     hero.addEventListener("mousemove", function(e){
-      var r=hero.getBoundingClientRect(), x=e.clientX-r.left, y=e.clientY-r.top;
+      /* #xh-v/#xh-h/#xh-ring are position:fixed, so they take viewport
+         coordinates: feed the raw clientX/clientY. Hero-relative math here
+         rendered the target offset up-and-left by the hero's viewport offset. */
+      var x=e.clientX, y=e.clientY;
       xhv.style.left=x+"px"; xhh.style.top=y+"px"; xhr.style.left=x+"px"; xhr.style.top=y+"px";
       hero.classList.add("aim");
     });

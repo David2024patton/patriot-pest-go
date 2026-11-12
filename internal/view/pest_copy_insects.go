@@ -218,7 +218,7 @@ func init() {
 			"Move firewood, lumber, and rock piles away from the foundation",
 			"Seal gaps under doors and around ground-level utility entries",
 			"Wear gloves and shake out shoes when working around woodpiles",
-			"In desert country, run UV flashlight checks of patios and pool areas at night",
+			"Run UV flashlight checks around rock landscaping, woodpiles, and patios at night",
 		},
 	})
 
