@@ -183,7 +183,7 @@ func TestServiceSchemaKeepsProviderID(t *testing.T) {
 // TestInternalLinkTargetsResolve — every entry in the code-level link tables
 // must point at a route that exists: no invented slugs.
 func TestInternalLinkTargetsResolve(t *testing.T) {
-	staticOK := map[string]bool{"/contact": true, "/services": true}
+	staticOK := map[string]bool{"/contact": true, "/services": true, "/free-quote": true}
 	for postSlug, links := range view.BlogRelatedLinks {
 		if _, ok := data.PublishedPostBySlug(postSlug); !ok {
 			t.Errorf("BlogRelatedLinks: unknown post slug %q", postSlug)

@@ -18,7 +18,7 @@ const pageHome = `<!-- ============ HERO ============ -->
       <div class="hero-ctas">
         <a class="btn btn-primary" href="{{.PhoneHref}}"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call {{.PhoneDisplay}} <small>{{.PhoneLabel}}</small></a>
         <a class="btn btn-ghost" href="/prices">View Plans ▸</a>
-        <a class="btn btn-ghost" href="/contact" data-track="quote_request">Free Quote ▸</a>
+        <a class="btn btn-ghost" href="/free-quote" data-track="quote_request">Free Quote ▸</a>
       </div>
       <div class="hero-badges"><span>Same-Day Service</span><span>90-Day Warranty</span><span>Licensed &amp; Insured</span><span>100% Guaranteed</span></div>
     </div>
@@ -179,7 +179,7 @@ const pageHome = `<!-- ============ HERO ============ -->
     <p class="lead" data-reveal>Get started online in minutes or call the line. Same-day service available across all three states. Free quotes, transparent pricing, zero hidden fees.</p>
     <div class="hero-ctas" style="justify-content:center">
       <a class="btn btn-primary" href="{{.PhoneHref}}"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> {{.PhoneDisplay}} <small>{{.PhoneLabel}}</small></a>
-      <a class="btn btn-ghost" href="/contact" data-track="quote_request">Free Quote ▸</a>
+      <a class="btn btn-ghost" href="/free-quote" data-track="quote_request">Free Quote ▸</a>
       <a class="btn btn-ghost" href="/prices">View Plans ▸</a>
     </div>
   </div>
