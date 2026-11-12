@@ -16,16 +16,16 @@ var BlogRelatedLinks = map[string][][2]string{
 	"why-ants-invade-in-spring": {
 		{"Ant Control", "/pest/ants"},
 		{"Pest Control in Spokane, WA", "/areas/spokane"},
-		{"Get a Free Quote", "/contact"},
+		{"Get a Free Quote", "/free-quote"},
 	},
 	"spiders-fall-guide": {
 		{"Spider Control", "/pest/spiders"},
 		{"Pest Control in Coeur d'Alene, ID", "/areas/coeur-d-alene"},
-		{"Get a Free Quote", "/contact"},
+		{"Get a Free Quote", "/free-quote"},
 	},
 	"rodent-proof-your-home": {
 		{"Rodent Control", "/pest/rodents"},
-		{"Get a Free Quote", "/contact"},
+		{"Get a Free Quote", "/free-quote"},
 	},
 }
 

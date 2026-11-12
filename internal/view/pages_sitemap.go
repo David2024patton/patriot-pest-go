@@ -24,6 +24,7 @@ const pageSitemap = `<section class="block">
           <a href="/blogs" style="color:var(--cream);text-decoration:none">Blog ▸</a>
           <a href="/faqs" style="color:var(--cream);text-decoration:none">FAQs ▸</a>
           <a href="/contact" style="color:var(--cream);text-decoration:none">Contact ▸</a>
+          <a href="/free-quote" style="color:var(--cream);text-decoration:none">Free Quote ▸</a>
           <a href="/referral" style="color:var(--cream);text-decoration:none">Referral Program ▸</a>
           <a href="/socials" style="color:var(--cream);text-decoration:none">Social Media ▸</a>
           <a href="/help" style="color:var(--cream);text-decoration:none">Help Center ▸</a>

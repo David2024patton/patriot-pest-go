@@ -27,6 +27,7 @@ var SitemapLastmod = map[string]string{
 	"/blogs/why-ants-invade-in-spring": "2026-10-01",
 	"/contact":                         "2026-10-01",
 	"/faqs":                            "2026-10-01",
+	"/free-quote":                      "2026-11-12",
 	"/help":                            "2026-10-01",
 	"/links":                           "2026-10-01",
 	"/pest/ants":                       "2026-10-01",

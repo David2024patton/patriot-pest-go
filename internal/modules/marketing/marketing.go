@@ -124,6 +124,8 @@ func (m *Module) Register(r chi.Router) bool {
 	r.Get("/socials", m.page("socials", socialsT, socialsD, nil))
 	r.Get("/help", m.page("help", helpT, helpD, nil))
 	r.Get("/links", m.page("links", linksT, linksD, nil))
+	r.Get("/free-quote", m.freeQuoteGet)
+	r.With(postLimiter.Middleware).Post("/free-quote", m.freeQuotePost)
 	r.Get("/search", m.search)
 	r.Get("/sitemap", m.sitemap)
 	r.Get("/sitemap.xml", m.sitemapXML)
@@ -427,7 +429,7 @@ func (m *Module) sitemapXML(w http.ResponseWriter, r *http.Request) {
 	add := func(path, freq string) {
 		urls = append(urls, url{base + path, view.SitemapLastmod[path], freq})
 	}
-	for _, p := range []string{"/", "/about", "/services", "/prices", "/service-areas", "/faqs", "/contact", "/signup", "/blogs", "/referral", "/socials", "/help", "/links", "/privacy-policy", "/terms-of-use"} {
+	for _, p := range []string{"/", "/about", "/services", "/prices", "/service-areas", "/faqs", "/contact", "/signup", "/blogs", "/referral", "/socials", "/help", "/links", "/privacy-policy", "/terms-of-use", "/free-quote"} {
 		freq := "weekly"
 		if p == "/" {
 			freq = "daily"
@@ -496,6 +498,7 @@ func (m *Module) llms(w http.ResponseWriter, r *http.Request) {
 		{"Home", "/"}, {"About", "/about"}, {"Services", "/services"},
 		{"Prices", "/prices"}, {"Service areas", "/service-areas"},
 		{"Blog", "/blogs"}, {"FAQs", "/faqs"}, {"Contact", "/contact"},
+		{"Free quote", "/free-quote"},
 		{"Sign up", "/signup"}, {"Referral program", "/referral"},
 	} {
 		sb.WriteString("- " + p[0] + ": " + base + p[1] + "\n")

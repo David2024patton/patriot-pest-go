@@ -33,7 +33,7 @@ const pageAreas = `<section class="block">
     <h2 style="font-family:var(--display);color:var(--cream)">In the region? <em>Let's talk.</em></h2>
     <div class="hero-ctas" style="justify-content:center;margin-top:1.2rem">
       <a class="btn btn-primary" href="tel:+15094715767"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> (509) 471-5767</a>
-      <a class="btn btn-ghost" href="/contact">Get a Free Quote ▸</a>
+      <a class="btn btn-ghost" href="/free-quote">Get a Free Quote ▸</a>
     </div>
   </div>
 </section>`
@@ -49,7 +49,7 @@ const pageAreaDetail = `<section class="block">
     <p class="lead">Same-day, eco-friendly pest control for {{.CityName}} homes and businesses. Veteran-owned, licensed and insured, backed by a 90-day warranty.</p>
     <div class="hero-ctas" style="margin-top:1.4rem">
       <a class="btn btn-primary" href="{{.AreaPhoneHref}}"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call {{.AreaPhoneDisplay}}</a>
-      <a class="btn btn-ghost" href="/contact">Get a Free Quote ▸</a>
+      <a class="btn btn-ghost" href="/free-quote">Get a Free Quote ▸</a>
     </div>
   </div>
 </section>
@@ -89,7 +89,7 @@ const pageAreaDetail = `<section class="block">
       {{end}}
     </div>
     <div class="hero-ctas" style="margin-top:1.4rem">
-      <a class="btn btn-ghost" href="/contact">Get a Free Quote ▸</a>
+      <a class="btn btn-ghost" href="/free-quote">Get a Free Quote ▸</a>
     </div>
   </div>
 </section>
