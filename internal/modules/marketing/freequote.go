@@ -105,7 +105,7 @@ func (m *Module) freeQuotePost(w http.ResponseWriter, r *http.Request) {
 
 	if len(errs) > 0 {
 		render(map[string]any{
-			"Errors": errs,
+			"Errors":  errs,
 			"OldName": name, "OldEmail": email, "OldPhone": phone,
 			"OldAddress": address, "OldCity": city, "OldZip": zip,
 			"OldMessage":  message,
@@ -146,7 +146,7 @@ func (m *Module) freeQuotePost(w http.ResponseWriter, r *http.Request) {
 		if !res.OK {
 			slog.Error("free quote lead local save failed", "err", res.Err, "phone", phone)
 			render(map[string]any{
-				"Errors": []string{"We could not save your request just now. Please call (509) 471-5767 and we will price it on the spot."},
+				"Errors":  []string{"We could not save your request just now. Please call (509) 471-5767 and we will price it on the spot."},
 				"OldName": name, "OldEmail": email, "OldPhone": phone,
 				"OldAddress": address, "OldCity": city, "OldZip": zip,
 				"OldMessage":  message,
