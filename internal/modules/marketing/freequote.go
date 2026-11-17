@@ -12,7 +12,7 @@ import (
 
 const (
 	freeQuoteT = "Free Quote | Patriot Pest Control"
-	freeQuoteD = "Get a free, no-obligation quote from Patriot Pest Control for your home in Eastern Washington or North Idaho. Tell us the pest and your ZIP and we call you back with a straight price."
+	freeQuoteD = "Get a free, no-obligation quote from Patriot Pest Control for your home in Washington, Idaho or Oregon. Tell us the pest and your ZIP and we call you back with a straight price."
 )
 
 // freeQuoteGet — the dedicated free quote page (/free-quote). Every

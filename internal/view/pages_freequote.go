@@ -15,7 +15,7 @@ const pageFreeQuote = `<section class="block">
     <div class="eyebrow">FREE QUOTE // NO OBLIGATION</div>
     <h1 style="font-family:var(--display);color:var(--cream);font-size:clamp(2rem,6vw,3rem);margin:.4rem 0 .8rem">Get a Free Quote</h1>
     <p class="lead">Tell us what is bugging you and where you are. We call you back with a straight price for your home. No obligation and no pressure.</p>
-    <p style="color:var(--khaki);line-height:1.7">Patriot Pest Control serves Eastern Washington and North Idaho.</p>
+    <p style="color:var(--khaki);line-height:1.7">Patriot Pest Control serves Washington, Idaho &amp; Oregon.</p>
   </div>
 </section>
 
