@@ -31,6 +31,7 @@ const pageSitemap = `<section class="block">
           <a href="/links" style="color:var(--cream);text-decoration:none">All Links ▸</a>
           <a href="/privacy-policy" style="color:var(--cream);text-decoration:none">Privacy Policy ▸</a>
           <a href="/terms-of-use" style="color:var(--cream);text-decoration:none">Terms of Use ▸</a>
+          <a href="/sms-opt-in" style="color:var(--cream);text-decoration:none">Text Message Opt-In ▸</a>
         </div>
       </div>
       {{range $st := .States}}

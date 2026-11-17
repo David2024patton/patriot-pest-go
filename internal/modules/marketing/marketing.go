@@ -126,6 +126,8 @@ func (m *Module) Register(r chi.Router) bool {
 	r.Get("/links", m.page("links", linksT, linksD, nil))
 	r.Get("/free-quote", m.freeQuoteGet)
 	r.With(postLimiter.Middleware).Post("/free-quote", m.freeQuotePost)
+	r.Get("/sms-opt-in", m.smsOptInGet)
+	r.With(postLimiter.Middleware).Post("/sms-opt-in", m.smsOptInPost)
 	r.Get("/search", m.search)
 	r.Get("/sitemap", m.sitemap)
 	r.Get("/sitemap.xml", m.sitemapXML)
@@ -429,7 +431,7 @@ func (m *Module) sitemapXML(w http.ResponseWriter, r *http.Request) {
 	add := func(path, freq string) {
 		urls = append(urls, url{base + path, view.SitemapLastmod[path], freq})
 	}
-	for _, p := range []string{"/", "/about", "/services", "/prices", "/service-areas", "/faqs", "/contact", "/signup", "/blogs", "/referral", "/socials", "/help", "/links", "/privacy-policy", "/terms-of-use", "/free-quote"} {
+	for _, p := range []string{"/", "/about", "/services", "/prices", "/service-areas", "/faqs", "/contact", "/signup", "/blogs", "/referral", "/socials", "/help", "/links", "/privacy-policy", "/terms-of-use", "/sms-opt-in", "/free-quote"} {
 		freq := "weekly"
 		if p == "/" {
 			freq = "daily"
