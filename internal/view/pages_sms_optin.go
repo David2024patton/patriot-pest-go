@@ -14,7 +14,7 @@ const pageSmsOptIn = `<section class="block">
     <div class="eyebrow">TEXTING // OPT-IN</div>
     <h1 style="font-family:var(--display);color:var(--cream);font-size:clamp(2rem,6vw,3rem);margin:.4rem 0 .8rem">Text Message Opt-In</h1>
     <p class="lead">Patriot Pest Control texts customers who ask us to. This page explains the program and exactly how consent is given.</p>
-    <p style="color:var(--khaki);line-height:1.7">Patriot Pest Control serves Eastern Washington and North Idaho.</p>
+    <p style="color:var(--khaki);line-height:1.7">Patriot Pest Control serves Washington, Idaho &amp; Oregon.</p>
   </div>
 </section>
 
