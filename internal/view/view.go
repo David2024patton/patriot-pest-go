@@ -370,17 +370,36 @@ const layoutHTML = `<!DOCTYPE html>
 // Named sub-templates that must exist in the set.
 const namedTemplates = `
 {{define "analytics"}}{{if .AnalyticsOn}}
-{{if .GTag}}<script async src="https://www.googletagmanager.com/gtag/js?id={{.LoaderID}}"></script>
-{{end}}<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  {{if .GTag}}gtag('config', "{{.GTag}}", { 'send_page_view': true, 'anonymize_ip': true });{{end}}
-  {{if .GAds}}gtag('config', "{{.GAds}}");{{end}}
-  document.addEventListener('DOMContentLoaded', function () {
+<style>
+.ppc-consent{position:fixed;left:16px;right:16px;bottom:16px;z-index:120;background:#fff;color:#1c2415;border:2px solid #1c2415;border-radius:16px;box-shadow:0 14px 34px rgba(0,0,0,.28);padding:18px 20px;max-width:560px;margin:0 auto;font-family:inherit}
+.ppc-consent-text{margin:0 0 12px;font-size:15px;line-height:1.5}
+.ppc-consent-row{display:flex;gap:10px;flex-wrap:wrap}
+.ppc-consent-accept{background:#1c2415;color:#fff;border:none;border-radius:999px;padding:11px 26px;font-weight:800;cursor:pointer}
+.ppc-consent-decline{background:#fff;color:#1c2415;border:2px solid rgba(28,36,21,.35);border-radius:999px;padding:11px 26px;font-weight:800;cursor:pointer}
+</style>
+<script>
+/* Cookie consent gate (W3-10): every analytics loader on this site runs
+   only after the visitor accepts. The choice is remembered in
+   localStorage on the visitor device under ppc-consent-v1. Decline, or
+   no choice yet, means no gtag, no Facebook pixel, and no Clarity. */
+(function () {
+  var KEY = "ppc-consent-v1";
+  function choice() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function save(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
+  function loadAnalytics() {
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { dataLayer.push(arguments); };
+    gtag('js', new Date());
+    {{if .GTag}}gtag('config', "{{.GTag}}", { 'send_page_view': true, 'anonymize_ip': true });{{end}}
+    {{if .GAds}}gtag('config', "{{.GAds}}");{{end}}
+    {{if .GTag}}var gt = document.createElement('script'); gt.async = true; gt.src = "https://www.googletagmanager.com/gtag/js?id={{.LoaderID}}"; document.head.appendChild(gt);{{end}}
+    {{if .FBPixel}}!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', "{{.FBPixel}}");
+    fbq('track', 'PageView');{{end}}
+    {{if .Clarity}}(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src='https://www.clarity.ms/tag/'+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,'clarity','script',"{{.Clarity}}");{{end}}
     document.querySelectorAll('a[href^="tel:"]').forEach(function (link) {
       link.addEventListener('click', function () {
-        gtag('event', 'phone_call', { 'event_category': 'engagement', 'event_label': 'Phone Click' });
+        if (window.gtag) { gtag('event', 'phone_call', { 'event_category': 'engagement', 'event_label': 'Phone Click' }); }
         if (window.fbq) { fbq('track', 'Contact', { 'contact_method': 'phone' }); }
       });
     });
@@ -390,20 +409,31 @@ const namedTemplates = `
       });
     });
     document.querySelectorAll('[data-track]').forEach(function (el) {
-      el.addEventListener('click', function () { gtag('event', el.dataset.track, { 'event_category': 'engagement' }); });
+      el.addEventListener('click', function () { if (window.gtag) { gtag('event', el.dataset.track, { 'event_category': 'engagement' }); } });
     });
-  });
+  }
+  var c = choice();
+  if (c === "accepted") { loadAnalytics(); return; }
+  if (c === "declined") { return; }
+  function showBanner() {
+    var bar = document.createElement('div');
+    bar.className = 'ppc-consent'; bar.id = 'ppc-consent';
+    bar.setAttribute('role', 'dialog'); bar.setAttribute('aria-label', 'Cookie choices');
+    var txt = document.createElement('p'); txt.className = 'ppc-consent-text';
+    txt.textContent = 'Patriot Pest Control uses cookies and tracking pixels to see how visitors use this site and to measure ads. No pixel runs until you say yes.';
+    bar.appendChild(txt);
+    var row = document.createElement('div'); row.className = 'ppc-consent-row';
+    var a = document.createElement('button'); a.type = 'button'; a.className = 'ppc-consent-accept'; a.id = 'ppc-consent-accept'; a.textContent = 'Accept';
+    var d = document.createElement('button'); d.type = 'button'; d.className = 'ppc-consent-decline'; d.id = 'ppc-consent-decline'; d.textContent = 'Decline';
+    a.addEventListener('click', function () { save('accepted'); bar.remove(); loadAnalytics(); });
+    d.addEventListener('click', function () { save('declined'); bar.remove(); });
+    row.appendChild(a); row.appendChild(d); bar.appendChild(row);
+    document.body.appendChild(bar);
+  }
+  if (document.body) { showBanner(); } else { document.addEventListener('DOMContentLoaded', showBanner); }
+})();
 </script>
-{{if .FBPixel}}<script>
-!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', "{{.FBPixel}}");
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id={{.FBPixel}}&ev=PageView&noscript=1"></noscript>
-{{end}}{{if .Clarity}}<script>
-(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src='https://www.clarity.ms/tag/'+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,'clarity','script',"{{.Clarity}}");
-</script>
-{{end}}{{end}}{{end}}
+{{end}}{{end}}
 {{define "install-banner"}}
 <div class="ppc-install" id="ppc-install-banner" role="dialog" aria-live="polite" aria-label="Install app">
   <div class="ppc-install-card">
