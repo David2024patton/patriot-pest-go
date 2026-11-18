@@ -44,12 +44,35 @@
   }
 
   // Quick view: fill the shared popup from a hidden source block.
+  // The block is parsed and scrubbed before it lands: executable
+  // elements and event-handler attributes are stripped at the sink,
+  // so markup copied into the popup can never run script, whoever
+  // authored the block.
+  function scrubClone(html) {
+    var doc = new DOMParser().parseFromString("<div>" + html + "</div>", "text/html");
+    var root = doc.body.firstChild;
+    root.querySelectorAll("script, iframe, object, embed, form, link, meta, base, title").forEach(function (el) { el.remove(); });
+    root.querySelectorAll("*").forEach(function (el) {
+      Array.prototype.slice.call(el.attributes || []).forEach(function (at) {
+        var n = at.name.toLowerCase();
+        var v = String(at.value || "").replace(/^\s+/, "").toLowerCase();
+        if (n.indexOf("on") === 0 || (n === "href" && (v.indexOf("javascript:") === 0 || v.indexOf("data:") === 0)) || (n === "src" && v.indexOf("javascript:") === 0)) {
+          el.removeAttribute(at.name);
+        }
+      });
+    });
+    var frag = document.createDocumentFragment();
+    Array.prototype.slice.call(root.childNodes).forEach(function (node) { frag.appendChild(document.importNode(node, true)); });
+    return frag;
+  }
   var qv = document.getElementById("pop-qv");
   document.querySelectorAll("[data-qv]").forEach(function (btn) {
     btn.addEventListener("click", function () {
       var src = document.getElementById(btn.getAttribute("data-qv"));
       if (!src || !qv) return;
-      qv.querySelector(".pop-qv-body").innerHTML = src.innerHTML;
+      var body = qv.querySelector(".pop-qv-body");
+      body.textContent = "";
+      body.appendChild(scrubClone(src.innerHTML));
       var more = qv.querySelector(".pop-qv-more");
       var href = src.getAttribute("data-more");
       if (href) {
