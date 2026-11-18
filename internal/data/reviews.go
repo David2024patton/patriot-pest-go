@@ -112,8 +112,8 @@ func ReplaceGoogleReviews(dbPath string, profile GoogleReviewsProfile, reviews [
 
 // checkpointWAL flushes the write-ahead log into the main database file
 // (PRAGMA wal_checkpoint(TRUNCATE)), retrying briefly while readers hold
-// the log open. It fails when the checkpoint stays busy: the data is
-// readable by this process but not yet durable, and the caller must know.
+// the log open. It reports failure when the checkpoint stays busy:
+// in that case the data is readable by this process but not yet durable.
 func checkpointWAL(db *sql.DB) error {
 	for attempt := 0; attempt < 5; attempt++ {
 		var busy, logPages, checkpointed int

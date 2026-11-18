@@ -1,11 +1,11 @@
 <!--
-INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)
+About this file (a description of what it holds and the conventions it follows).
 
-WHAT THIS FILE IS: the operations book for this project, at docs/RUNBOOK.md.
+This file is the operations book for this project, at docs/RUNBOOK.md.
 How to build it, run it, deploy it, verify it, and where everything lives,
 so anyone can operate the project without tribal knowledge.
 
-EXACT STRUCTURE:
+Structure:
 - "## Build": the real commands, copied from the working build.
 - "## Run locally": how to start it and what you should see.
 - "## Deploy": where it is hosted, how a deploy happens, how to roll back.
@@ -14,12 +14,12 @@ EXACT STRUCTURE:
   credentials are stored (names of vault entries or connectors only).
 - "## Gotchas": the traps already learned the hard way, each with its fix.
 
-RULES:
-- NEVER a credential value in this file: no passwords, keys, or tokens.
-  Pointers to secure storage only.
-- Commands are copied from what actually works; if a command changes,
-  this file changes in the same commit.
-- No secrets, passwords, or tokens in this file, ever.
+Conventions:
+- This file never holds a credential value: no passwords, keys, or
+  tokens. Pointers to secure storage only.
+- Commands are copied from what actually works; when a command
+  changes, this file changes in the same commit.
+- The file holds no secrets, passwords, or tokens.
 -->
 # RUNBOOK: Patriot Pest Control
 
@@ -54,5 +54,5 @@ The server serves the public site; check `/health` and `/ready` answer and the h
 ## Gotchas
 - Push to main is a production deploy; docs-only pushes still rebuild the live site.
 - Twilio acceptance is not delivery: an SMS alert is only proven by a delivered status or recipient confirmation. The SMS alert leg is blocked on A2P 10DLC approval (TODO T-3.7).
-- Do not put phone numbers, links, or email in Google Business Profile post text or artwork; GBP posting is paused under appeal in any case (see DECISIONS.md).
-- Leave Oregon pages and the Arizona Google profile alone until David says otherwise.
+- Google Business Profile post text and artwork carry no phone numbers, links, or email (a policy violation shut posting off once); GBP posting is paused under appeal in any case (see DECISIONS.md).
+- Oregon pages and the Arizona Google profile stand as they were left at the Arizona sale; David's standing instruction is that they stay unchanged.

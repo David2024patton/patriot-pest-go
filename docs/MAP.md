@@ -1,13 +1,13 @@
 <!--
-INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)
+About this file (a description of what it holds and the conventions it follows).
 
-WHAT THIS FILE IS: the whole project laid out, at docs/MAP.md: every
+This file is the whole project laid out, at docs/MAP.md: every
 module, page, screen, engine, and service, and every link between them
-traced BOTH ways (what it points to, and what points back at it). It
-exists so anyone can see the entire system at once and think about it
-whole. A rendered visual version is generated from this file.
+traced both ways (what it points to, and what points back at it), so
+the entire system can be seen at once and thought about whole. A
+rendered visual version is generated from this file.
 
-EXACT STRUCTURE:
+Structure:
 - "## The grid": a table of every node: name, kind (page, screen,
   module, engine, service, external), what it owns.
 - "## Links": a table of every connection: from, to, kind (navigates,
@@ -18,13 +18,13 @@ EXACT STRUCTURE:
 - "## Flows": the two or three main journeys through the system, in
   words, step by step.
 
-RULES:
+Conventions:
 - Every node in the tables appears in the diagram and vice versa.
 - When a module or link is added or removed, this file changes in the
   same commit.
 - Facts only: the map shows what exists, with planned nodes marked
   (planned) so vision and reality never blur.
-- No secrets, passwords, or tokens in this file, ever.
+- The file holds no secrets, passwords, or tokens.
 -->
 # MAP: Patriot Pest Control
 
@@ -90,7 +90,7 @@ flowchart TD
 ```
 
 ## Flows
-1. A customer finds a pest or area page, reads it, and either calls (509) 471-5767 or submits the contact form. The marketing module validates the form (phone required), writes the lead to the AlphaFlux CRM with website-form attribution, and falls back to the local store if capture fails, so no lead is discarded.
+1. A customer finds a pest or area page, reads it, and either calls (509) 471-5767 or submits the contact form. The marketing module validates the form (phone required), writes the lead to the AlphaFlux CRM with website-form attribution, and falls back to the local store if capture fails, so a lead survives a CRM outage; if both stores fail, the visitor is told to call instead of being shown a success message.
 2. A deploy flows from a push to main: Dokploy builds the root Dockerfile, Traefik serves the new container at patriotpest.pro, and the verify checks in docs/RUNBOOK.md confirm the pages, endpoints, name, and number.
 3. A returning customer or staff member follows a sign-in link on the site and is redirected to AlphaFlux, where accounts and dashboards live; this repo never authenticates them.
 4. Reviews: each morning the daily check reads the newest Google reviews, posts owner replies to customer reviews (never to the owner's own), and POSTs the newest 12 plus the profile total and average to /api/reviews/sync. The marketing module checks the sync token and stores the snapshot in SQLite; the home page's Field Reports rail renders the newest five-star customer reviews from that snapshot. The owner's own reviews are stored with the rest but filtered out of the rail (internal/modules/marketing/reviews.go).

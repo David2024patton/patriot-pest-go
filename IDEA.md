@@ -1,11 +1,11 @@
 <!--
-INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)
+About this file (a description of what it holds and the conventions it follows).
 
-WHAT THIS FILE IS: David's idea capture for this project, as full records.
+This file is David's idea capture for this project, as full records.
 When David talks, dictates, or drops a thought about this project in any
-chat, it lands here. Ideas are never silently dropped.
+chat, it lands here, so ideas are not silently dropped.
 
-EXACT STRUCTURE: one entry per idea, newest first:
+Structure: one entry per idea, newest first:
 ## <Category> | <YYYY-MM-DD HH:MM TZ>
 - **David:** "<his words verbatim where on record; otherwise a faithful
   summary marked (summary)>"
@@ -18,12 +18,12 @@ EXACT STRUCTURE: one entry per idea, newest first:
 CATEGORIES: Product, Feature, Design, Tech, Business, Ops, Research,
 Personal. Pick the closest; an idea may be re-filed as it matures.
 
-RULES:
-- Times are recorded only when the source message carried one; never
-  invent a time. Dates always.
+Conventions:
+- Times are recorded only when the source message carried one; dates
+  are always recorded.
 - An idea leaves NEW only via MOVED (with the TODO item id) or KILLED
-  (David's call, with the date). Nothing is deleted.
-- No secrets, passwords, or tokens in this file, ever.
+  (David's call, with the date). Entries are not deleted.
+- The file holds no secrets, passwords, or tokens.
 -->
 # IDEA: Patriot Pest Control
 

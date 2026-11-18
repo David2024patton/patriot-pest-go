@@ -1,25 +1,25 @@
 <!--
-INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)
+About this file (a description of what it holds and the conventions it follows).
 
-WHAT THIS FILE IS: the super-detailed task list for this project. It is the
+This file is the super-detailed task list for this project. It is the
 only place work items live. PLAN.md says why and in what order; ENDGOAL.md
 says what finished looks like; this file says exactly what remains to do.
 
-EXACT STRUCTURE:
+Structure:
 - Phases in order: "## Phase <n>: <name> (PLAN S<m>)".
 - Parked work in its own phase at the end: "## Parked".
 - Every item is one checkbox line: "- [ ] T-<phase>.<n> <task> (proof: <named
   proof>) (PLAN S<m>)". Parked items use T-P.<n> and name what blocks them.
 
-RULES:
-- A box is checked ONLY when its named proof exists (a test, a log line, a
-  bench note, a live check). Never check a box on intention or partial work.
+Conventions:
+- A box is checked only when its named proof exists (a test, a log line,
+  a bench note, a live check), never on intention or partial work.
 - Emulation-proven and bench-proven are different claims; write which one.
-- Item IDs and (PLAN S<n>) tags are stable once published; never renumber
-  casually. A deliberate renumber updates PLAN.md in the same pass.
+- Item IDs and (PLAN S<n>) tags are stable once published. A deliberate
+  renumber updates PLAN.md in the same pass.
 - New work enters as new items at the end of their phase. Completed items
   stay, checked, as the record.
-- No secrets, passwords, or tokens in this file, ever.
+- The file holds no secrets, passwords, or tokens.
 -->
 # TODO: Patriot Pest Control
 

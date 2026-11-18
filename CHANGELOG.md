@@ -1,19 +1,19 @@
 <!--
-INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)
+About this file (a description of what it holds and the conventions it follows).
 
-WHAT THIS FILE IS: the human-readable milestone trail of this project:
+This file is the human-readable milestone trail of this project:
 what shipped, dated, newest first. Git history is the raw record; this
 is the curated one a person can read in a minute.
 
-EXACT STRUCTURE:
+Structure:
 - "## <YYYY-MM-DD>: <milestone in one line>" entries, newest first.
 - Under each: what changed, and the proof or commit it landed in.
 
-RULES:
-- An entry is added when something SHIPS (lands on the main branch or
+Conventions:
+- Entries are added when something ships (lands on the main branch or
   goes live), not when it is started.
 - One entry per milestone, not per commit.
-- No secrets, passwords, or tokens in this file, ever.
+- The file holds no secrets, passwords, or tokens.
 -->
 # CHANGELOG: Patriot Pest Control
 

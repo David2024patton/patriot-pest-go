@@ -1,16 +1,16 @@
 <!--
-INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)
+About this file (a description of what it holds and the conventions it follows).
 
-WHAT THIS FILE IS: the build law for this repo in one page, at docs/RULES.md.
-It states how every module in this project gets built, gated, and proven.
-Project-specific numbers and additions go in a "Project specifics" section
-at the end; the law sections above it come from the github-repo-standard
-skill template and change only when the skill changes.
+This file is the build rules for this repo in one page, at docs/RULES.md:
+how every module in this project gets built, gated, and proven, recorded
+from David Patton's standing build orders. Project-specific numbers and
+additions live in a "Project specifics" section at the end; the sections
+above it come from the github-repo-standard skill template.
 
-RULES:
-- If a project practice conflicts with this page, this page wins until
-  David changes it.
-- No secrets, passwords, or tokens in this file, ever.
+Conventions:
+- Where a project practice conflicts with this page, the page records
+  the current rule until David changes it.
+- The file holds no secrets, passwords, or tokens.
 -->
 # RULES: how this project gets built
 

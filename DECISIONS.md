@@ -1,23 +1,23 @@
 <!--
-INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)
+About this file (a description of what it holds and the conventions it follows).
 
-WHAT THIS FILE IS: the settled-decision log for this project. IDEA.md is
+This file is the settled-decision log for this project. IDEA.md is
 the raw capture of what David said; this file is only the calls that are
-FINAL, so no one re-asks a settled question or quietly reverses a call.
+final, the record that keeps settled questions settled.
 
-EXACT STRUCTURE: one entry per decision, newest first:
+Structure: one entry per decision, newest first:
 ## <YYYY-MM-DD>: <decision in one line>
 - **Decided:** <what was picked>
 - **Why:** <the reason, in plain words>
 - **Supersedes:** <the earlier call it replaces, or "none">
 - **By:** David | <who, with David's approval noted>
 
-RULES:
-- A decision enters here the day it is made, in the same pass as any
-  PLAN or TODO change it causes.
-- Reversing a decision means a NEW entry that names what it supersedes;
-  never edit an old entry into a different decision.
-- No secrets, passwords, or tokens in this file, ever.
+Conventions:
+- Decisions enter here the day they are made, in the same pass as any
+  PLAN or TODO change they cause.
+- A reversal is a new entry that names what it supersedes; old entries
+  are not edited into different decisions.
+- The file holds no secrets, passwords, or tokens.
 -->
 # DECISIONS: Patriot Pest Control
 

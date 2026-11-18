@@ -1,23 +1,23 @@
 <!--
-INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)
+About this file (a description of what it holds and the conventions it follows).
 
-WHAT THIS FILE IS: the living right-now snapshot of this project. Anyone
+This file is the living right-now snapshot of this project. Anyone
 opening the repo cold reads this first and is current in two minutes.
-Updated at the end of every work session on the project; a stale STATUS
-is worse than none, so when you finish work here, update it in the same
-pass.
+It is updated at the end of every work session on the project, in the
+same pass as the work it describes.
 
-EXACT STRUCTURE:
+Structure:
 - "## As of <YYYY-MM-DD>": the date this snapshot was written.
 - "## Proven state": what is done, with its proof named.
 - "## In flight": work currently underway and where it stands.
 - "## Blocked": each blocker and exactly who or what it waits on.
 - "## Next moves": the next three moves, in order, referencing TODO ids.
 
-RULES:
-- Claims here carry the same proof standard as TODO checkboxes.
+Conventions:
+- Claims here carry the same proof standard as TODO checkboxes:
+  each names its evidence.
 - Keep it short: a snapshot, not a history (history is CHANGELOG.md).
-- No secrets, passwords, or tokens in this file, ever.
+- The file holds no secrets, passwords, or tokens.
 -->
 # STATUS: Patriot Pest Control
 
