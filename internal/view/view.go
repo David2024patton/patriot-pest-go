@@ -372,6 +372,12 @@ const namedTemplates = `
 .ppc-consent-row{display:flex;gap:10px;flex-wrap:wrap}
 .ppc-consent-accept{background:#1c2415;color:#fff;border:none;border-radius:999px;padding:11px 26px;font-weight:800;cursor:pointer}
 .ppc-consent-decline{background:#fff;color:#1c2415;border:2px solid rgba(28,36,21,.35);border-radius:999px;padding:11px 26px;font-weight:800;cursor:pointer}
+/* At widths where a fixed bottom nav bar is on screen (the classic bar
+   up to 960px, the pop bar up to 760px), bottom:16px leaves the button
+   row underneath that bar, where no tap can land. Float the banner just
+   above the bar instead, the same lift the install banner uses.
+   Desktop rendering is unchanged. */
+@media (max-width:960px){.ppc-consent{bottom:calc(72px + env(safe-area-inset-bottom))}}
 </style>
 <script>
 /* Cookie consent gate (W3-10): every analytics loader on this site runs
