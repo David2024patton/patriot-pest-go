@@ -117,9 +117,9 @@ if (briefEl){
     "OPERATION ......... PEST-FREE HOME",
     "COMMANDER ......... VET. SKYLER ROSE",
     "THEATER ........... WA / ID / OR",
-    "RESPONSE .......... SAME-DAY AVAILABLE",
-    "WARRANTY .......... 90 DAYS, FULL",
-    "COLLATERAL ........ FAMILY & PET SAFE",
+    "RESPONSE .......... SAME-DAY SERVICE",
+    "WARRANTY .......... 90 DAYS + FREE RE-TREATS",
+    "COLLATERAL ........ FAMILY & PET SAFE WHEN DRY",
     "STATUS ............ >> GO FOR LAUNCH"
   ];
   if (reduced){
@@ -141,7 +141,7 @@ if (briefEl){
 var tick = document.getElementById("ticker-track");
 if (tick && !tick.children.length){
   var CITIES = ["Spokane","Spokane Valley","Cheney","Liberty Lake","Airway Heights","Medical Lake","Deer Park","Mead","Coeur d'Alene","Post Falls","Hayden","Rathdrum","Hermiston","Milton-Freewater"];
-  var seq = CITIES.map(function(c){return "<span><i>▸</i>"+c.toUpperCase()+" - SAME-DAY AVAILABLE</span>";}).join("");
+  var seq = CITIES.map(function(c){return "<span><i>▸</i>"+c.toUpperCase()+" - NOW SERVING</span>";}).join("") + "<span><i>▸</i>SAME-DAY SERVICE - CALL (509) 471-5767</span>";
   tick.innerHTML = seq + seq;
 }
 

@@ -1,10 +1,10 @@
 package view
 
-// AreaCopy carries genuinely local content for one city page. The shared
+// AreaCopy carries local content for one city page. The shared
 // area-detail template renders these fields when present for the city slug;
 // cities without an entry keep the generic template copy.
 type AreaCopy struct {
-	Intro     string // 2-4 sentences, genuinely local (researched, never invented)
+	Intro     string // 2-4 sentences of local color for the city
 	LocalNote string // neighborhoods, geography, landmarks (researched)
 	PestNote  string // local pest pressure notes (researched)
 }

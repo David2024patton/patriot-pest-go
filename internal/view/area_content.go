@@ -178,13 +178,14 @@ func init() {
 			"connects into the broader North Idaho trail network. New subdivisions keep replacing old " +
 			"farmland as Post Falls pushes north toward Rathdrum.",
 		PestNote: "Rodents like mice and rats, ants, spiders, and occasional invaders such as beetles and " +
-			"earwigs are the common Rathdrum pests. Idaho sources add carpenter ants and odorous house ants, " +
-			"black widows, hobo spiders, and wasps and bees nesting around homes as regional regulars.",
+			"earwigs are the common Rathdrum pests. Regional regulars also include carpenter ants and " +
+			"odorous house ants, " +
+			"black widows, hobo spiders, and wasps and bees nesting around homes.",
 	})
 
 	RegisterAreaCopy("spokane", AreaCopy{
 		Intro: "Spokane revolves around its river, which tumbles through downtown in the Spokane Falls. " +
-			"Riverfront Park, the 100 acre site of Expo '74, sits just north of the downtown core, and " +
+			"Riverfront Park, the roughly 100-acre site of Expo '74, sits just north of the downtown core, and " +
 			"River Park Square anchors the shopping and entertainment district. The South Hill rises south " +
 			"of downtown with neighborhoods like South Perry, home to a weekly farmers market. The " +
 			"University District on the east side holds Gonzaga University and branch campuses of " +
@@ -193,8 +194,8 @@ func init() {
 			"by architect Kirtland Kelsey Cutter, and that historic character still defines Riverside " +
 			"Avenue. The Logan neighborhood near Gonzaga mixes student housing with some of the city's " +
 			"oldest homes. North Spokane's Hillyard and Five Mile areas hold the suburban north side.",
-		PestNote: "Spokane sits in one of the few US regions where hobo spiders are well established, " +
-			"documented here since the late 1960s. Odorous house ants, pavement ants, and carpenter ants " +
+		PestNote: "Spokane sits in one of the few US regions where hobo spiders are well established. " +
+			"Odorous house ants, pavement ants, and carpenter ants " +
 			"are the top ant threats, with rodents moving indoors each fall. Yellow jackets and bald " +
 			"faced hornets nest around eaves and sheds all summer, and moles, bed bugs, and the velvety " +
 			"tree ant round out the area's pest list.",
@@ -205,7 +206,7 @@ func init() {
 			"The Spokane River Centennial Trail runs through the valley, past the Spokane Valley Mall and " +
 			"along the river corridor. Dishman Hills Natural Area preserves over 500 acres of hiking land " +
 			"right inside the urban area, and the Saltese Uplands Conservation Area covers about 700 acres " +
-			"to the east. Greenacres anchors the east end, with the 37 mile Centennial Trail following the " +
+			"to the east. Greenacres anchors the east end, with the Centennial Trail following the " +
 			"river from Nine Mile Falls to the state line.",
 		LocalNote: "The valley's economy centers on retail, healthcare, and manufacturing, with the " +
 			"Spokane Business and Industrial Park as a major employer. Schools fall under the Central " +

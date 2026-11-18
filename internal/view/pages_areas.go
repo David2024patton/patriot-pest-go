@@ -21,7 +21,7 @@ const pageAreas = `<section class="block">
           {{range $c := $st.Cities}}<a href="/areas/{{cityslug $c}}" style="color:var(--cream);text-decoration:none">{{.}} ▸</a>
           {{end}}
         </div>
-        <span class="area-note" style="display:block;margin-top:.9rem;font-family:var(--mono);font-size:.7rem;color:var(--olive-300)">● {{len $st.Cities}} ZONE{{if ne (len $st.Cities) 1}}S{{end}} · SAME-DAY AVAILABLE</span>
+        <span class="area-note" style="display:block;margin-top:.9rem;font-family:var(--mono);font-size:.7rem;color:var(--olive-300)">● {{len $st.Cities}} ZONE{{if ne (len $st.Cities) 1}}S{{end}} · SAME-DAY SERVICE</span>
       </div>
       {{end}}
     </div>

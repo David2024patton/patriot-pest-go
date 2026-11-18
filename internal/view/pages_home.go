@@ -96,13 +96,13 @@ const pageHome = `<!-- ============ HERO ============ -->
     <div class="area-grid" data-reveal>
       <div class="area-col"><h3>WA</h3><div class="area-cities">
         <a href="/areas/spokane">Spokane</a><a href="/areas/spokane-valley">Spokane Valley</a><a href="/areas/cheney">Cheney</a><a href="/areas/liberty-lake">Liberty Lake</a><a href="/areas/airway-heights">Airway Heights</a><a href="/areas/medical-lake">Medical Lake</a><a href="/areas/deer-park">Deer Park</a><a href="/areas/mead">Mead</a>
-      </div><span class="area-note">● 8 ZONES · SAME-DAY AVAILABLE</span></div>
+      </div><span class="area-note">● 8 ZONES · SAME-DAY SERVICE</span></div>
       <div class="area-col"><h3>ID</h3><div class="area-cities">
         <a href="/areas/coeur-d-alene">Coeur d'Alene</a><a href="/areas/post-falls">Post Falls</a><a href="/areas/hayden">Hayden</a><a href="/areas/rathdrum">Rathdrum</a>
-      </div><span class="area-note">● 4 ZONES · SAME-DAY AVAILABLE</span></div>
+      </div><span class="area-note">● 4 ZONES · SAME-DAY SERVICE</span></div>
       <div class="area-col"><h3>OR</h3><div class="area-cities">
         <a href="/areas/hermiston">Hermiston</a><a href="/areas/milton-freewater">Milton-Freewater</a>
-      </div><span class="area-note">● 2 ZONES · SAME-DAY AVAILABLE</span></div>
+      </div><span class="area-note">● 2 ZONES · SAME-DAY SERVICE</span></div>
     </div>
   </div>
 </section>

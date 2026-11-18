@@ -7,7 +7,7 @@
    Events sent:
      - page_view on every load
      - link_click on outbound / tel / anchor clicks
-     - easter_egg_click per hit, easter_egg_reveal on jackpot
+     - easter_egg_click per hit, easter_egg_reveal on the win
      - session_end via sendBeacon on pagehide
    Consent: nothing is sent, and no visitor or session id is created,
    until the visitor accepts in the cookie banner (the choice is kept

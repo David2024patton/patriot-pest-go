@@ -206,8 +206,6 @@ table.data .num { font-family: var(--mono); color: var(--khaki); }
 .authx-photo .tag { position: absolute; left: .8rem; bottom: .7rem; font-family: var(--mono); font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; color: var(--cream); background: rgba(14,19,10,.75); padding: .3rem .55rem; border-left: 2px solid var(--orange); }
 @media (prefers-reduced-motion: reduce) { .authx-photo .scan { animation: none; } }
 
-.authx-trust { display: flex; flex-wrap: wrap; gap: .5rem 1.4rem; margin-top: 1.6rem; font-family: var(--mono); font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: var(--khaki); }
-.authx-trust span::before { content: "✓ "; color: var(--olive-300); }
 
 .authx-call { margin-top: 1.8rem; }
 .authx-call .lbl { font-family: var(--mono); font-size: .66rem; letter-spacing: .14em; text-transform: uppercase; color: var(--olive-300); }

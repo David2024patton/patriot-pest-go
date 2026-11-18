@@ -70,7 +70,7 @@ var ldBusiness = map[string]any{
 	"email":       "info@patriotpest.pro",
 	"image":       "https://www.patriotpest.pro/assets/img/og.png",
 	"logo":        "https://www.patriotpest.pro/assets/img/og.png",
-	"description": "Veteran-owned pest control serving Washington, Idaho & Oregon. Same-day service, eco-friendly family & pet safe treatments, 90-day warranty.",
+	"description": "Veteran-owned pest control serving Washington, Idaho & Oregon. Same-day service available, eco-friendly treatments that are family and pet safe when dry, 90-day warranty with free re-treatments.",
 	"priceRange":  "$$",
 	"address": map[string]any{
 		"@type":           "PostalAddress",
@@ -344,7 +344,7 @@ const (
 	contactD  = "Call (509) 471-5767. Free quotes, same-day pest control service, online scheduling 24/7."
 	referralT = "Referral Program - Earn $25 | Patriot Pest Control"
 	veteransT = "Veterans: First Month Free on Annual Plans | Patriot Pest Control"
-	veteransD = "Veterans Day offer from veteran-owned Patriot Pest Control: veterans get their first month free on any annual plan. Book by Nov 11, 2026. Call (509) 471-5767, code VETSDAY."
+	veteransD = "Veterans Day offer from veteran-owned Patriot Pest Control: veterans get their first month free on any annual plan. Call (509) 471-5767, code VETSDAY."
 	referralD = "Refer a neighbor, both get $25. Patriot Pest Control referral program."
 	socialsT  = "Social Media | Patriot Pest Control"
 	socialsD  = "Follow Patriot Pest Control on Facebook and Instagram."
