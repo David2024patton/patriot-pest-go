@@ -71,3 +71,14 @@ Patton and apply to every module, every language, every time.
   Patriot Pest Control (full name wherever there are words).
 - Project docs: TODO.md tracks the work, PLAN.md holds the plan,
   IDEA.md holds David's ideas in his words.
+
+## The relational diagram (David's rule, 2026-11-18)
+- This project always has a relational diagram: docs/MAP.md, nodes and
+  wires for every module, page, and external connection, drawn from
+  the real code in this repo, in readable markdown.
+- After every feature build, and after any change to any part of the
+  project, the diagram is updated in the same commit and the same
+  push/deploy cycle.
+- A feature is not fully landed until the diagram matches it. Where
+  the code and the diagram disagree, the code wins and the diagram is
+  fixed in that same pass.
