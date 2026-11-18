@@ -84,6 +84,11 @@ func (m *Module) smsOptInPost(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// The audit-grade consent record (who, when, which form, exact
+	// wording) is stored on its own; the lead note below stays for
+	// staff readability.
+	m.recordSMSConsent(r, name, phone, "/sms-opt-in", smsOptInConsentWording)
+
 	lead := leadForm{
 		Name:   name,
 		Phone:  phone,

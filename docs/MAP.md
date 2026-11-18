@@ -39,7 +39,7 @@ RULES:
 | internal/modules/report | module | Status dashboard, served only on the report.patriotpest.pro host |
 | Field Reports rail (home page section) | page | Newest five-star Google customer reviews rendered from the stored snapshot; the owner's own reviews are stored but never render |
 | internal/view | module | Templates, embedded assets, PWA files, SEO helpers, pest and area copy |
-| internal/data | module | SQLite content catalog, analytics storage, drafts, local lead fallback store, Google reviews snapshot (newest 12 plus profile total and average) |
+| internal/data | module | SQLite content catalog, analytics storage, drafts, local lead fallback store, Google reviews snapshot (newest 12 plus profile total and average), SMS consent records (structured opt-in proof: who, when, which form, exact wording) |
 | internal/middleware | module | Shared request behavior |
 | Dokploy + Traefik | external | Builds the root Dockerfile on push to main; TLS for patriotpest.pro |
 | AlphaFlux | external | Accounts, dashboards, CRM records and attribution, alert delivery, FieldRoutes, Twilio |

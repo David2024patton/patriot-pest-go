@@ -129,6 +129,9 @@ func (m *Module) freeQuotePost(w http.ResponseWriter, r *http.Request) {
 	}
 	if consent == "yes" {
 		notes.WriteString("\nTexting consent: the customer checked the box on /free-quote agreeing to text messages from Patriot Pest Control about their quote, appointments, and service. Message frequency varies. Message and data rates may apply. Reply STOP to end, HELP for help. Consent is not a condition of purchase.")
+		// The note above is for staff; the audit-grade record (who,
+		// when, which form, exact wording) is stored separately.
+		m.recordSMSConsent(r, name, phone, "/free-quote", freeQuoteConsentWording)
 	} else {
 		notes.WriteString("\nTexting consent: NOT given on the form. Call this lead; do not text until they opt in.")
 	}
