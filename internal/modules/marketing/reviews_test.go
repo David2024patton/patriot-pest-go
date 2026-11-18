@@ -72,3 +72,20 @@ func TestReviewsSyncRejectsBadEntries(t *testing.T) {
 		}
 	}
 }
+
+func TestReviewCardsExcludeOwnerReviews(t *testing.T) {
+	m := &Module{DBPath: filepath.Join(t.TempDir(), "r.db"), ReviewsSyncToken: "sekret"}
+	body := `{"profile":{"total":112,"average":4.8},"reviews":[
+		{"reviewer":"S Rose","rating":5,"text":"Owner review.","date":"12 hours ago"},
+		{"reviewer":"Real Customer","rating":5,"text":"Great work.","date":"a day ago"}
+	]}`
+	rec := httptest.NewRecorder()
+	m.reviewsSync(rec, syncRequest("sekret", body))
+	if rec.Code != http.StatusOK {
+		t.Fatalf("sync: got %d (%s), want 200", rec.Code, rec.Body.String())
+	}
+	cards, _ := m.reviewCards(6)
+	if len(cards) != 1 || cards[0].Reviewer != "Real Customer" {
+		t.Fatalf("cards = %+v, want only Real Customer", cards)
+	}
+}

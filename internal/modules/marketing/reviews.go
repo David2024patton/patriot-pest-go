@@ -120,14 +120,35 @@ func initialsOf(name string) string {
 // reviewCards reads the newest stored 5-star reviews for the pop home
 // rail. A read failure degrades to an empty rail (the section hides)
 // rather than breaking the homepage; the failure is logged.
+// ownerReviewers holds the business owner's own Google display names,
+// normalized (lowercase, single spaces). His reviews are real rows in the
+// stored snapshot, but the rail is customer proof, so they never render
+// as customer reviews (David's call, 2026-11-18: the "S Rose" review is
+// Skyler himself).
+var ownerReviewers = map[string]bool{
+	"s rose":      true,
+	"skyler rose": true,
+}
+
+func isOwnerReviewer(name string) bool {
+	return ownerReviewers[strings.ToLower(strings.Join(strings.Fields(name), " "))]
+}
+
 func (m *Module) reviewCards(limit int) ([]reviewCard, data.GoogleReviewsProfile) {
-	reviews, profile, err := data.LatestGoogleReviews(m.DBPath, 5, limit)
+	// Fetch past the limit so dropping owner reviews cannot shrink the rail.
+	reviews, profile, err := data.LatestGoogleReviews(m.DBPath, 5, limit+10)
 	if err != nil {
 		slog.Error("reviews rail: read failed", "err", err.Error())
 		return nil, data.GoogleReviewsProfile{}
 	}
-	cards := make([]reviewCard, 0, len(reviews))
+	cards := make([]reviewCard, 0, limit)
 	for _, rv := range reviews {
+		if isOwnerReviewer(rv.Reviewer) {
+			continue
+		}
+		if len(cards) >= limit {
+			break
+		}
 		cards = append(cards, reviewCard{
 			Reviewer:  rv.Reviewer,
 			Text:      rv.Text,
