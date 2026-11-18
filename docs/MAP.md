@@ -34,7 +34,7 @@ RULES:
 | Visitor | external | Arrives from search, ads, and social; calls or submits a form |
 | Public website (patriotpest.pro) | page | Marketing pages, pest library, areas, blog, FAQs, prices, referral, search, sitemap, RSS, PWA shell |
 | cmd/server | module | Process start, route composition, legacy redirects, retired /api/* answers, shutdown |
-| internal/modules/marketing | module | Public pages, search, sitemap, forms (contact, signup, free quote, SMS opt-in), lead capture, analytics beacon sink, Google reviews sync door |
+| internal/modules/marketing | module | Public pages, search, sitemap, forms (contact, signup, free quote, SMS opt-in), lead capture, analytics beacon sink (consent-gated), visitor data erasure door (POST /api/track/forget), Google reviews sync door |
 | internal/modules/health | module | /health, /ready, /metrics |
 | internal/modules/report | module | Status dashboard, served only on the report.patriotpest.pro host |
 | Field Reports rail (home page section) | page | Newest five-star Google customer reviews rendered from the stored snapshot; the owner's own reviews are stored but never render |
@@ -58,6 +58,7 @@ RULES:
 | internal/modules/report | internal/data | reads | Data returns the analytics the dashboard renders |
 | internal/modules/marketing | internal/view | reads | View supplies the templates and copy the module serves |
 | internal/modules/marketing | internal/data | writes | Data returns catalog content, stores fallback leads, and holds the reviews snapshot for the module |
+| internal/modules/marketing | internal/data | deletes | POST /api/track/forget removes one visitor's analytics rows when the privacy page's tracking-data control presents that visitor's id |
 | Daily Google reviews check | Google Business Profile | reads | GBP shows the reviews, totals, and reply state the check works from |
 | Daily Google reviews check | internal/modules/marketing | writes | Marketing verifies the sync token and stores the snapshot, answering ok/stored (POST /api/reviews/sync) |
 | Field Reports rail (home page section) | internal/data | reads | Data serves the rail its snapshot through the marketing module's home handler |

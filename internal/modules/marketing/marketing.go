@@ -153,6 +153,7 @@ func (m *Module) Register(r chi.Router) bool {
 	r.With(postLimiter.Middleware).Post("/api/track/view", m.trackEndpoint("pageview"))
 	r.With(postLimiter.Middleware).Post("/api/track/event", m.trackEndpoint("event"))
 	r.With(postLimiter.Middleware).Post("/api/track/session_end", m.trackEndpoint("session_end"))
+	r.With(postLimiter.Middleware).Post("/api/track/forget", m.trackForget)
 	// Google reviews sync — only when REVIEWS_SYNC_TOKEN is set; otherwise
 	// the route is not registered and /api/* answers 410 (fail closed).
 	if m.ReviewsSyncToken != "" {

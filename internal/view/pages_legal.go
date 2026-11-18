@@ -31,6 +31,51 @@ const pageLegal = `<section class="block">
       <p>We use reasonable administrative, technical, and physical safeguards to protect your information. No method is 100% secure, but we work to protect your data.</p>
       <h3>Your Choices</h3>
       <p>You may request access to, correction of, or deletion of your personal information by contacting us at <a href="mailto:info@patriotpest.pro">info@patriotpest.pro</a>.</p>
+      <h3>Your Tracking Data</h3>
+      <p>If you accepted tracking in the cookie banner, this site keeps a random visitor ID in your browser and stores page visits under it in our own analytics. No raw IP addresses are stored. You can erase that data yourself, right now, from this browser:</p>
+      <p><button type="button" id="pp-forget-btn" class="btn btn-primary">Delete my tracking data</button></p>
+      <p id="pp-forget-status" class="muted" role="status"></p>
+      <script>
+      (function () {
+        var btn = document.getElementById("pp-forget-btn");
+        var status = document.getElementById("pp-forget-status");
+        if (!btn || !status) return;
+        btn.addEventListener("click", function () {
+          var ids = [];
+          try {
+            var a = localStorage.getItem("pp_visitor_id"); if (a) ids.push(a);
+            var b = localStorage.getItem("ppc_vid"); if (b) ids.push(b);
+          } catch (e) {}
+          function clearLocal() {
+            try {
+              ["pp_visitor_id", "pp_session_id", "pp_session_ts", "ppc_vid", "ppc_sid", "ppc_last"].forEach(function (k) { localStorage.removeItem(k); sessionStorage.removeItem(k); });
+            } catch (e) {}
+          }
+          if (!ids.length) {
+            clearLocal();
+            status.textContent = "This browser holds no tracking ID, so there is nothing stored under it to delete.";
+            return;
+          }
+          btn.disabled = true;
+          var done = 0, failed = false;
+          ids.forEach(function (id) {
+            fetch("/api/track/forget", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ visitor_id: id }) })
+              .then(function (res) { if (!res.ok) failed = true; })
+              .catch(function () { failed = true; })
+              .then(function () {
+                done++;
+                if (done === ids.length) {
+                  clearLocal();
+                  status.textContent = failed
+                    ? "We could not reach the deletion service. Please email info@patriotpest.pro and we will delete it for you."
+                    : "Done. Your stored visits have been deleted and this browser's tracking IDs have been cleared.";
+                  btn.disabled = false;
+                }
+              });
+          });
+        });
+      })();
+      </script>
       <h3>Contact</h3>
       <p>Questions about this policy? Contact Patriot Pest Control CO, Deer Park, WA 99006, <a href="mailto:info@patriotpest.pro">info@patriotpest.pro</a>, (509) 471-5767.</p>
     </div>
