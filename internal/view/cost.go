@@ -32,7 +32,7 @@ const CostPage = `<!DOCTYPE html>
     <div class="wrap">
       <div class="eyebrow">// QUARTERMASTER REPORT</div>
       <h1>Project <em>Valuation</em> Receipt</h1>
-      <p class="sub">Hostile invoice incoming. This is what a custom web application with CRM integration, payment processing, and tactical design actually costs on the open market. No fluff, no hidden fees — just the raw numbers.</p>
+      <p class="sub">Hostile invoice incoming. This is what a custom web application with CRM integration, payment processing, and tactical design actually costs on the open market. No fluff, no hidden fees. Just the raw numbers.</p>
     </div>
   </section>
 
@@ -57,7 +57,7 @@ const CostPage = `<!DOCTYPE html>
           <div class="receipt-logo">★ PATRIOT PEST CONTROL</div>
           <div class="receipt-meta">
             <span>REPORT #: PPC-2026-001</span>
-            <span>DATE: <span id="receipt-date"></span></span>
+            <span>ESTIMATES AS OF: <span id="receipt-date"></span></span>
             <span>CLASSIFICATION: UNCLASSIFIED</span>
           </div>
           <div class="hazard" style="margin:0.8rem 0 0 0"></div>
@@ -86,7 +86,7 @@ const CostPage = `<!DOCTYPE html>
             <div class="total-divider"></div>
             <div class="total-row grand">
               <span>GRAND TOTAL RANGE</span>
-              <span class="total-amt grand-amt" id="grand-total">$75,000 — $150,000</span>
+              <span class="total-amt grand-amt" id="grand-total">$75,000 - $150,000</span>
             </div>
             <div class="stamp-row">
               <span class="stamp">APPROVED<br>FOR REVIEW</span>
@@ -96,10 +96,12 @@ const CostPage = `<!DOCTYPE html>
 
         <div class="receipt-footer">
           <p><strong>PAYMENT TERMS:</strong> Net 30 upon contract signing. 50% upfront, 50% on delivery.</p>
-          <p><strong>TIMELINE:</strong> <span id="receipt-timeline">3-6 months</span> — Full agency team deployment.</p>
+          <p><strong>TIMELINE:</strong> <span id="receipt-timeline">3-6 months</span>. Full agency team deployment.</p>
           <p><strong>WARRANTY:</strong> 90-day bug-free guarantee. Pests and pixel bugs eliminated.</p>
         </div>
       </div>
+
+      <p id="cost-provenance" class="muted" style="margin-top:1rem"></p>
 
       <div class="factors-section">
         <h3>Field Notes: Agency Pricing Factors</h3>
@@ -118,6 +120,7 @@ const CostPage = `<!DOCTYPE html>
 // CostPricingJSON is the embedded pricing dataset (public/cost/data/pricing.json).
 // Served at GET /cost/data/pricing.json — cost.js fetches it relative to /cost.
 const CostPricingJSON = `{
+  "meta": { "as_of": "2026-11", "source": "Patriot Pest Control internal estimate", "method": "Agency-market estimates for a comparable custom build, worked from the rate factors listed on this page. These are estimates, not quotes or measured prices." },
   "agency_range": { "min": 75000, "max": 150000, "currency": "USD" },
   "breakdown": [
     { "category": "Custom Framework Architecture", "min": 15000, "max": 25000, "description": "Custom PHP 8.3 MVC framework with no off-the-shelf CMS", "color": "#f4772e" },

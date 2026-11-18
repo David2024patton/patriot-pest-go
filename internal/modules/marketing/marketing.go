@@ -558,11 +558,24 @@ func (m *Module) terms(w http.ResponseWriter, r *http.Request) {
 	m.legal(w, r, "terms", termsT, termsD)
 }
 
+// Legal page dates: the day each document's current text took
+// effect. A legal page must never render the viewer's current date
+// as its own revision date (the PHP original did, which made every
+// policy look freshly updated and destroyed the audit trail). Bump
+// the matching date in the same commit that changes the text.
+const (
+	legalPrivacyDate = "2026-11-18" // tracking-data erasure section added
+	legalTermsDate   = "2026-11-11" // checkbox consent model replaced the old terms text
+)
+
 func (m *Module) legal(w http.ResponseWriter, r *http.Request, kind string, title, description string) {
+	date := legalTermsDate
+	if kind == "privacy" {
+		date = legalPrivacyDate
+	}
 	view.Page(w, r, "legal", title, description, metaKeywords, m.base(map[string]any{
 		"LegalKind": kind,
-		// PHP renders date('F j, Y') from the current date.
-		"LegalDate": time.Now().Format("2006-01-02"),
+		"LegalDate": date,
 	}))
 }
 

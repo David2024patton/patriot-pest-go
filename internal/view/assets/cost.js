@@ -102,12 +102,16 @@ class CostReceiptRenderer {
     requestAnimationFrame(update);
   }
 
-  /* Set receipt date */
-  setReceiptDate() {
+  /* Receipt date: the date of the figures themselves (meta.as_of in
+     pricing.json), never the day the page happens to be viewed. */
+  setReceiptDate(data) {
     const el = document.getElementById('receipt-date');
     if (!el) return;
-    const now = new Date();
-    el.textContent = now.toISOString().split('T')[0].replace(/-/g, '.');
+    el.textContent = (data && data.meta && data.meta.as_of) ? data.meta.as_of.replace(/-/g, '.') : 'unknown';
+    const prov = document.getElementById('cost-provenance');
+    if (prov && data && data.meta) {
+      prov.textContent = 'About these figures: ' + data.meta.method + ' Source: ' + data.meta.source + ', ' + data.meta.as_of + '.';
+    }
   }
 
   /* Animate summary card values */
@@ -126,10 +130,13 @@ class CostReceiptRenderer {
     const container = document.getElementById('receipt-items');
     if (!container) return;
 
-    const maxValue = Math.max(...data.breakdown.map(d => d.max));
+    /* Threat percent compares range midpoints, so a wide range with
+       a low floor cannot outrank a consistently higher cost. */
+    const mid = (d) => (d.min + d.max) / 2;
+    const maxMid = Math.max(...data.breakdown.map(mid));
 
     container.innerHTML = data.breakdown.map((item, index) => {
-      const percent = ((item.max / maxValue) * 100).toFixed(0);
+      const percent = ((mid(item) / maxMid) * 100).toFixed(0);
       const color = item.color || this.colors[index % this.colors.length];
       return [
         '<div class="receipt-item">',
@@ -202,12 +209,12 @@ class CostReceiptRenderer {
     /* Start bugfield immediately */
     this.initBugfield();
 
-    /* Set receipt date */
-    this.setReceiptDate();
-
     /* Load data */
     const data = await this.loadData();
     if (!data) return;
+
+    /* Receipt date comes from the data, not the viewer's clock */
+    this.setReceiptDate(data);
 
     /* Render all sections */
     this.renderSummaryCards(data);
