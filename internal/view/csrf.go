@@ -45,16 +45,17 @@ func CSRFField(w http.ResponseWriter, r *http.Request) template.HTML {
 }
 
 // csrfCookie builds the double-submit cookie: HttpOnly so JS cannot read it,
-// Secure on TLS so it never travels in the clear, SameSite=Lax against CSRF.
+// always Secure so it never travels in the clear (the site is HTTPS-only
+// behind Traefik; X-Forwarded-Proto is client-supplied and never decides
+// cookie security), SameSite=Lax against CSRF.
 func csrfCookie(name, value string, r *http.Request) *http.Cookie {
-	secure := r.TLS != nil || r.Header.Get("X-Forwarded-Proto") == "https"
 	return &http.Cookie{
 		Name:     name,
 		Value:    value,
 		Path:     "/",
 		SameSite: http.SameSiteLaxMode,
 		HttpOnly: true,
-		Secure:   secure,
+		Secure:   true,
 	}
 }
 

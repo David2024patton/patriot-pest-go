@@ -84,7 +84,8 @@ func TestSessionFlow(t *testing.T) {
 	}
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest(http.MethodPost, "/login", nil)
-	r.Header.Set("X-Forwarded-Proto", "https")
+	// No X-Forwarded-Proto header: the session cookie must still be
+	// Secure. Cookie security never comes from that client header.
 	if err := m.createSession(db, w, r, "skyler@patriotpest.pro"); err != nil {
 		t.Fatal(err)
 	}

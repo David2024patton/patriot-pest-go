@@ -533,10 +533,9 @@ func canonical(r *http.Request) string {
 	if !canonicalHosts[host] {
 		host = "www.patriotpest.pro"
 	}
+	// The site is HTTPS-only; the scheme is never taken from the
+	// client-supplied X-Forwarded-Proto header.
 	scheme := "https"
-	if r.Header.Get("X-Forwarded-Proto") == "http" {
-		scheme = "http"
-	}
 	return scheme + "://" + host + r.URL.Path
 }
 
@@ -548,10 +547,9 @@ func SiteBase(r *http.Request) string {
 	if !canonicalHosts[host] {
 		host = "www.patriotpest.pro"
 	}
+	// The site is HTTPS-only; the scheme is never taken from the
+	// client-supplied X-Forwarded-Proto header.
 	scheme := "https"
-	if r.Header.Get("X-Forwarded-Proto") == "http" {
-		scheme = "http"
-	}
 	return scheme + "://" + host
 }
 

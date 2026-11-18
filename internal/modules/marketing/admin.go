@@ -189,18 +189,20 @@ func (m *Module) adminLoginPost(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Could not start a session.", http.StatusInternalServerError)
 		return
 	}
-	secure := r.TLS != nil || r.Header.Get("X-Forwarded-Proto") == "https"
+	// Cookie security: the site is served only over HTTPS (Traefik
+	// terminates TLS), so cookies are always Secure. The flag is never
+	// derived from X-Forwarded-Proto, which a client can spoof.
 	http.SetCookie(w, &http.Cookie{
 		Name: adminSessionCookie, Value: token, Path: "/admin",
 		MaxAge: int(adminSessionTTL.Seconds()), HttpOnly: true,
-		Secure: secure, SameSite: http.SameSiteLaxMode,
+		Secure: true, SameSite: http.SameSiteLaxMode,
 	})
 	// Tracker exclusion flag: tracker.js skips beaconing when this is set,
 	// so owner visits never pollute the dashboard.
 	http.SetCookie(w, &http.Cookie{
 		Name: adminFlagCookie, Value: "1", Path: "/",
 		MaxAge: int(adminSessionTTL.Seconds()), HttpOnly: false,
-		Secure: secure, SameSite: http.SameSiteLaxMode,
+		Secure: true, SameSite: http.SameSiteLaxMode,
 	})
 	slog.Info("admin: login", "email", email)
 	http.Redirect(w, r, "/admin", http.StatusFound)

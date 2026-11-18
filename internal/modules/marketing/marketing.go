@@ -847,14 +847,15 @@ func (m *Module) csrfField(r *http.Request, w http.ResponseWriter) template.HTML
 		tok = c.Value
 	} else {
 		tok = newCSRFToken()
-		secure := r.TLS != nil || r.Header.Get("X-Forwarded-Proto") == "https"
+		// Always Secure: HTTPS-only deployment; X-Forwarded-Proto is
+		// client-supplied and never decides cookie security.
 		http.SetCookie(w, &http.Cookie{
 			Name:     csrfCookieName,
 			Value:    tok,
 			Path:     "/",
 			SameSite: http.SameSiteLaxMode,
 			HttpOnly: true,
-			Secure:   secure,
+			Secure:   true,
 		})
 	}
 	return template.HTML(`<input type="hidden" name="_csrf" value="` + tok + `">`)

@@ -236,11 +236,13 @@ func (m *Module) createSession(db *sql.DB, w http.ResponseWriter, r *http.Reques
 		VALUES (?, ?, ?, ?)`, sha256Hex(token), email, now.Unix(), now.Add(sessionTTL).Unix()); err != nil {
 		return err
 	}
-	secure := r.TLS != nil || r.Header.Get("X-Forwarded-Proto") == "https"
+	// Always Secure: the site is HTTPS-only behind Traefik, and
+	// X-Forwarded-Proto is client-supplied, so it is never trusted
+	// to decide cookie security.
 	http.SetCookie(w, &http.Cookie{
 		Name: sessionCookieName, Value: token, Path: "/",
 		MaxAge: int(sessionTTL.Seconds()), HttpOnly: true,
-		Secure: secure, SameSite: http.SameSiteLaxMode,
+		Secure: true, SameSite: http.SameSiteLaxMode,
 	})
 	return nil
 }
