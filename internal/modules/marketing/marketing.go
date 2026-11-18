@@ -42,6 +42,10 @@ type Module struct {
 	// forms fall back to the local store.
 	AlphaFluxURL string
 	AlphaFluxKey string
+	// ReviewsSyncToken gates POST /api/reviews/sync, the feed that keeps
+	// the homepage Field Reports rail on the newest real Google reviews
+	// (reviews.go). Empty = the route is not registered (fail closed).
+	ReviewsSyncToken string
 	// adminEmails / adminHash gate the /admin analytics console. Populated
 	// by initAdmin from ADMIN_EMAILS / ADMIN_PASSWORD_HASH; empty means the
 	// console is disabled and its routes are not registered.
@@ -149,6 +153,11 @@ func (m *Module) Register(r chi.Router) bool {
 	r.With(postLimiter.Middleware).Post("/api/track/view", m.trackEndpoint("pageview"))
 	r.With(postLimiter.Middleware).Post("/api/track/event", m.trackEndpoint("event"))
 	r.With(postLimiter.Middleware).Post("/api/track/session_end", m.trackEndpoint("session_end"))
+	// Google reviews sync — only when REVIEWS_SYNC_TOKEN is set; otherwise
+	// the route is not registered and /api/* answers 410 (fail closed).
+	if m.ReviewsSyncToken != "" {
+		r.With(postLimiter.Middleware).Post("/api/reviews/sync", m.reviewsSync)
+	}
 	// Admin analytics console — only when ADMIN_EMAILS + ADMIN_PASSWORD_HASH
 	// are set; otherwise these routes do not exist (404, fail closed).
 	m.initAdmin()
@@ -368,6 +377,7 @@ func (m *Module) base(extra map[string]any) map[string]any {
 // library, ordered for display (sort_order).
 func (m *Module) home(w http.ResponseWriter, r *http.Request) {
 	pests := data.AllPests()
+	reviews, reviewsProfile := m.reviewCards(6)
 	if view.IsPopHost(r.Host) {
 		// Pop UI homepage (pop.patriotpest.pro): same real data, plus the
 		// latest posts, the service states, and the quote form's CSRF +
@@ -377,18 +387,24 @@ func (m *Module) home(w http.ResponseWriter, r *http.Request) {
 			posts = posts[:6]
 		}
 		view.Page(w, r, "home-pop", homeT, homeD, metaKeywords, m.base(map[string]any{
-			"Pests":       pests,
-			"PestCount":   len(pests),
-			"Posts":       posts,
-			"States":      data.States(),
-			"Csrf":        m.csrfField(r, w),
-			"PestOptions": pestOptionsHTML(""),
+			"Pests":          pests,
+			"PestCount":      len(pests),
+			"Posts":          posts,
+			"States":         data.States(),
+			"Csrf":           m.csrfField(r, w),
+			"PestOptions":    pestOptionsHTML(""),
+			"Reviews":        reviews,
+			"ReviewsTotal":   reviewsProfile.Total,
+			"ReviewsAverage": reviewsProfile.Average,
 		}))
 		return
 	}
 	view.Page(w, r, "home", homeT, homeD, metaKeywords, m.base(map[string]any{
-		"Pests":     pests,
-		"PestCount": len(pests),
+		"Pests":          pests,
+		"PestCount":      len(pests),
+		"Reviews":        reviews,
+		"ReviewsTotal":   reviewsProfile.Total,
+		"ReviewsAverage": reviewsProfile.Average,
 	}))
 }
 

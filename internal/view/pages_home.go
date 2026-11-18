@@ -137,18 +137,21 @@ const pageHome = `<!-- ============ HERO ============ -->
   </div>
 </section>
 
-<!-- ============ FIELD REPORTS ============ -->
+<!-- ============ FIELD REPORTS (real Google reviews, newest first) ============ -->
+{{if .Reviews}}
 <section id="reports" class="block alt">
   <div class="wrap">
     <div class="eyebrow">SEC. 06 // FIELD REPORTS</div>
     <h2 data-reveal>Debriefs from <em>the front line.</em></h2>
+    {{if .ReviewsTotal}}<p class="lead" data-reveal>{{.ReviewsAverage}} stars &middot; {{.ReviewsTotal}} Google reviews &middot; newest first</p>{{end}}
     <div class="grid g3">
-      <div class="card report" data-reveal><span class="ver">VERIFIED</span><span class="rid">REPORT #WA-0117</span><div class="stars">★★★★★</div><p>"Patriot Pest Control saved our home from a serious ant infestation. Professional, thorough, and the results were immediate."</p><div class="who"><span class="avatar">SM</span><div><b>Sarah M.</b><small>WASHINGTON</small></div></div></div>
-      <div class="card report" data-reveal><span class="ver">VERIFIED</span><span class="rid">REPORT #WA-0242</span><div class="stars">★★★★★</div><p>"We've used Patriot for our restaurant for 2 years. Reliable, discreet, always on time. Our health inspections have never been better."</p><div class="who"><span class="avatar">JT</span><div><b>James T.</b><small>LIBERTY LAKE, WA</small></div></div></div>
-      <div class="card report" data-reveal><span class="ver">VERIFIED</span><span class="rid">REPORT #ID-0089</span><div class="stars">★★★★★</div><p>"Fast response and eco-friendly products safe for my kids and pets. The technician was knowledgeable and explained everything."</p><div class="who"><span class="avatar">LR</span><div><b>Lisa R.</b><small>COEUR D'ALENE, ID</small></div></div></div>
+      {{range .Reviews}}
+      <div class="card report" data-reveal><span class="ver">GOOGLE REVIEW</span><div class="stars">{{.Stars}}</div>{{if .Text}}<p>&ldquo;{{.Text}}&rdquo;</p>{{end}}<div class="who"><span class="avatar">{{.Initials}}</span><div><b>{{.Reviewer}}</b><small>{{if .DateLabel}}{{upper .DateLabel}} &middot; {{end}}GOOGLE</small></div></div></div>
+      {{end}}
     </div>
   </div>
 </section>
+{{end}}
 
 <!-- ============ BUG BLASTER ============ -->
 <section id="bugblaster-sec" class="block">
