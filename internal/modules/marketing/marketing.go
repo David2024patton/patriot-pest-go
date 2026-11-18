@@ -208,6 +208,12 @@ func (m *Module) trackEndpoint(defaultKind string) http.HandlerFunc {
 		if c, ok := p["consent"].(bool); !ok || !c {
 			return
 		}
+		// Admin exclusion: requests carrying the admin flag cookie
+		// (set at admin login) are the owner's own visits; they are
+		// never stored, so they never reach the dashboard.
+		if c, err := r.Cookie(adminFlagCookie); err == nil && c.Value == "1" {
+			return
+		}
 		str := func(keys ...string) string {
 			for _, k := range keys {
 				if v, ok := p[k].(string); ok && v != "" {
@@ -852,10 +858,11 @@ var csrfTokenRe = regexp.MustCompile(`^[0-9a-f]{64}$`)
 func (m *Module) csrfField(r *http.Request, w http.ResponseWriter) template.HTML {
 	c, err := r.Cookie(csrfCookieName)
 	tok := ""
-	if err == nil && csrfTokenRe.MatchString(c.Value) {
+	if err == nil && csrfTokenRe.MatchString(c.Value) && data.CSRFTokenRegistered(c.Value) {
 		tok = c.Value
 	} else {
 		tok = newCSRFToken()
+		data.RegisterCSRFToken(tok)
 		// Always Secure: HTTPS-only deployment; X-Forwarded-Proto is
 		// client-supplied and never decides cookie security.
 		http.SetCookie(w, &http.Cookie{
@@ -870,13 +877,18 @@ func (m *Module) csrfField(r *http.Request, w http.ResponseWriter) template.HTML
 	return template.HTML(`<input type="hidden" name="_csrf" value="` + tok + `">`)
 }
 
-// csrfOK verifies the submitted token against the cookie (constant-time),
-// mirroring Csrf::check.
+// csrfOK verifies the submitted token against the cookie (constant-time)
+// AND against the server registry: the token must be one this server
+// issued. A cookie planted by a sibling subdomain or a network
+// attacker was never registered, so a matching pair alone fails.
 func csrfOK(got, expected string) bool {
 	if got == "" || expected == "" {
 		return false
 	}
-	return subtle.ConstantTimeCompare([]byte(got), []byte(expected)) == 1
+	if subtle.ConstantTimeCompare([]byte(got), []byte(expected)) != 1 {
+		return false
+	}
+	return data.CSRFTokenRegistered(got)
 }
 
 // contactGet — the contact + free-quote form page.

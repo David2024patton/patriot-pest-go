@@ -121,6 +121,13 @@ func (m *Module) requireAdmin(next http.Handler) http.Handler {
 	})
 }
 
+// PurgeExpiredAdminSessions deletes expired admin sessions. It runs
+// on a schedule from cmd/server as well as opportunistically at
+// login, so expired rows are collected even when nobody signs in.
+func PurgeExpiredAdminSessions(db *sql.DB) {
+	purgeExpiredSessions(db)
+}
+
 // purgeExpiredSessions deletes dead admin sessions (opportunistic, on login).
 func purgeExpiredSessions(db *sql.DB) {
 	if _, err := db.Exec(`DELETE FROM admin_sessions WHERE expires_at<=?`, time.Now().Unix()); err != nil {
@@ -170,7 +177,7 @@ func (m *Module) adminLoginPost(w http.ResponseWriter, r *http.Request) {
 	}
 	okPass := bcrypt.CompareHashAndPassword(m.adminHash, []byte(password)) == nil
 	if !allowed || !okPass {
-		slog.Warn("admin: failed login", "email", email)
+		slog.Warn("admin: failed login", "ip", clientIP(r))
 		w.WriteHeader(http.StatusUnauthorized)
 		m.renderLogin(w, r, "Invalid email or password.")
 		return
@@ -197,11 +204,14 @@ func (m *Module) adminLoginPost(w http.ResponseWriter, r *http.Request) {
 		MaxAge: int(adminSessionTTL.Seconds()), HttpOnly: true,
 		Secure: true, SameSite: http.SameSiteLaxMode,
 	})
-	// Tracker exclusion flag: tracker.js skips beaconing when this is set,
-	// so owner visits never pollute the dashboard.
+	// Tracker exclusion flag. The track endpoints in this module
+	// (trackEndpoint) refuse to store any event whose request carries
+	// this cookie, so owner visits never reach the dashboard. The
+	// cookie is HttpOnly: the browser sends it on its own, and no page
+	// script needs to read it.
 	http.SetCookie(w, &http.Cookie{
 		Name: adminFlagCookie, Value: "1", Path: "/",
-		MaxAge: int(adminSessionTTL.Seconds()), HttpOnly: false,
+		MaxAge: int(adminSessionTTL.Seconds()), HttpOnly: true,
 		Secure: true, SameSite: http.SameSiteLaxMode,
 	})
 	slog.Info("admin: login", "email", email)
@@ -219,7 +229,7 @@ func (m *Module) adminLogout(w http.ResponseWriter, r *http.Request) {
 		http.SetCookie(w, &http.Cookie{Name: name, Value: "", Path: path, MaxAge: -1, HttpOnly: httpOnly})
 	}
 	clearCookie(adminSessionCookie, "/admin", true)
-	clearCookie(adminFlagCookie, "/", false)
+	clearCookie(adminFlagCookie, "/", true)
 	http.Redirect(w, r, "/", http.StatusFound)
 }
 

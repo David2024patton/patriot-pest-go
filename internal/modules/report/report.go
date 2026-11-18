@@ -276,6 +276,13 @@ func (m *Module) destroySession(w http.ResponseWriter, r *http.Request) {
 	http.SetCookie(w, &http.Cookie{Name: sessionCookieName, Value: "", Path: "/", MaxAge: -1, HttpOnly: true})
 }
 
+// PurgeExpiredReportSessions deletes expired report sessions. It
+// runs on a schedule from cmd/server as well as opportunistically at
+// login, so expired rows are collected even when nobody signs in.
+func PurgeExpiredReportSessions(db *sql.DB) {
+	purgeExpiredReportSessions(db)
+}
+
 func purgeExpiredReportSessions(db *sql.DB) {
 	if _, err := db.Exec(`DELETE FROM report_sessions WHERE expires_at<=?`, time.Now().Unix()); err != nil {
 		slog.Warn("report: session purge failed", "err", err.Error())

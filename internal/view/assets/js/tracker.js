@@ -13,8 +13,10 @@
 
    Respects:
      - navigator.doNotTrack === "1"  -> sends nothing
-     - ppc_admin=1 cookie (set at admin login) -> sends nothing,
-       so the owners' own visits never pollute the dashboard
+     - admin visits: the ppc_admin cookie set at admin login is
+       HttpOnly, so this script cannot read it; the track endpoints
+       refuse to store any request that carries it, which keeps the
+       owners' own visits out of the dashboard
      - the cookie banner choice (localStorage ppc-consent-v1): no id
        is created and nothing is sent until the visitor accepts, the
        same gate the banner applies to third-party analytics. Sends
@@ -25,7 +27,6 @@
 
   /* ---------- opt-outs ---------- */
   if (navigator.doNotTrack === "1") return;
-  if (/(?:^|;\s*)ppc_admin=1(?:;|$)/.test(document.cookie)) return;
 
   /* ---------- storage helpers (private mode may throw) ---------- */
   function lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }

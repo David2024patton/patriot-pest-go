@@ -147,8 +147,8 @@ func TestAdminLoginAcceptsAndServesDashboard(t *testing.T) {
 			}
 		case adminFlagCookie:
 			sawFlag = true
-			if c.HttpOnly {
-				t.Error("tracker-exclusion cookie must be readable by tracker.js (not HttpOnly)")
+			if !c.HttpOnly {
+				t.Error("tracker-exclusion cookie must be HttpOnly: exclusion is enforced by the track endpoints server-side, no script reads it")
 			}
 		}
 	}

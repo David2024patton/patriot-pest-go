@@ -5,6 +5,8 @@ import (
 	"net/http/httptest"
 	"strings"
 	"testing"
+
+	"github.com/David2024patton/patriot-pest-go/internal/data"
 )
 
 // TestCSRFFieldRejectsPlantedCookie covers the regression where the hidden input
@@ -14,6 +16,7 @@ import (
 // attribute unescaped.
 func TestCSRFFieldRejectsPlantedCookie(t *testing.T) {
 	valid := strings.Repeat("ab", 32) // 64 characters, matches what we issue
+	data.RegisterCSRFToken(valid)     // issued by the server, so it may be reused
 	hostile := `"><script>alert(1)</script>` + strings.Repeat("a", 40)
 
 	cases := []struct {
@@ -25,6 +28,7 @@ func TestCSRFFieldRejectsPlantedCookie(t *testing.T) {
 		{"a planting attempt is replaced", hostile, true},
 		{"a short value is replaced", "abc", true},
 		{"garbage of valid length is replaced", strings.Repeat("<", 64), true},
+		{"a well-formed token we never issued is replaced", strings.Repeat("cd", 32), true},
 	}
 
 	for _, tc := range cases {

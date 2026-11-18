@@ -52,4 +52,16 @@ func TestTrackEndpointRequiresConsentMarker(t *testing.T) {
 	if n := count(); n != 1 {
 		t.Fatalf("event with consent:true not stored (%d rows)", n)
 	}
+
+	// The admin flag cookie excludes the owner's own visits even when
+	// consent is present.
+	req := httptest.NewRequest(http.MethodPost, "/api/track/view", strings.NewReader(`{"consent":true,"vid":"v1","sid":"s1","path":"/admin-visit"}`))
+	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("User-Agent", browserUA)
+	req.AddCookie(&http.Cookie{Name: adminFlagCookie, Value: "1"})
+	rec := httptest.NewRecorder()
+	h(rec, req)
+	if n := count(); n != 1 {
+		t.Fatalf("admin-flagged event was stored (%d rows, want still 1)", n)
+	}
 }

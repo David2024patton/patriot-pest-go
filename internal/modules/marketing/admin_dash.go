@@ -491,10 +491,26 @@ function feedURL(){
   if(feedQ && feedQ.value) u += "&q=" + encodeURIComponent(feedQ.value);
   return u;
 }
+function scrubFeed(doc){
+  var bad = doc.querySelectorAll("script, iframe, object, embed, form, link, meta, base, title");
+  bad.forEach(function(el){ el.remove(); });
+  doc.querySelectorAll("*").forEach(function(el){
+    Array.prototype.slice.call(el.attributes || []).forEach(function(at){
+      var n = at.name.toLowerCase();
+      var v = String(at.value || "").replace(/^\s+/, "").toLowerCase();
+      if(n.indexOf("on") === 0 || ((n === "href" || n === "src") && (v.indexOf("javascript:") === 0 || v.indexOf("data:") === 0))){
+        el.removeAttribute(at.name);
+      }
+    });
+  });
+}
 function refreshFeed(){
   if(!feedBody) return;
   fetch(feedURL(), {credentials: "same-origin"}).then(function(r){ return r.text(); }).then(function(html){
-    feedBody.innerHTML = html;
+    var doc = new DOMParser().parseFromString("<table><tbody>" + html + "</tbody></table>", "text/html");
+    scrubFeed(doc);
+    feedBody.textContent = "";
+    doc.querySelectorAll("tr").forEach(function(row){ feedBody.appendChild(document.importNode(row, true)); });
   }).catch(function(){});
 }
 var feedTimer = null;

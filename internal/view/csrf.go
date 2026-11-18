@@ -4,6 +4,8 @@ package view
 // randomness is unavailable the request 500s instead of issuing a weak token.
 
 import (
+	"github.com/David2024patton/patriot-pest-go/internal/data"
+
 	"crypto/rand"
 	"crypto/subtle"
 	"encoding/hex"
@@ -28,7 +30,7 @@ var csrfTokenRe = regexp.MustCompile(`^[0-9a-f]{64}$`)
 // request gets a 500, never a guessable token.
 func CSRFField(w http.ResponseWriter, r *http.Request) template.HTML {
 	tok := ""
-	if ck, err := r.Cookie(CSRFCookieName); err == nil && csrfTokenRe.MatchString(ck.Value) {
+	if ck, err := r.Cookie(CSRFCookieName); err == nil && csrfTokenRe.MatchString(ck.Value) && data.CSRFTokenRegistered(ck.Value) {
 		tok = ck.Value
 	} else {
 		b := make([]byte, 32)
@@ -37,6 +39,7 @@ func CSRFField(w http.ResponseWriter, r *http.Request) template.HTML {
 			return template.HTML("")
 		}
 		tok = hex.EncodeToString(b)
+		data.RegisterCSRFToken(tok)
 		http.SetCookie(w, csrfCookie(CSRFCookieName, tok, r))
 	}
 	// Escaped as well as validated: the token is hex, but the attribute is
@@ -59,12 +62,17 @@ func csrfCookie(name, value string, r *http.Request) *http.Cookie {
 	}
 }
 
-// VerifyCSRF checks the posted _csrf field against the cookie (constant time).
+// VerifyCSRF checks the posted _csrf field against the cookie (constant
+// time) and against the server registry: the token must be one this
+// server issued, so a planted cookie and field pair cannot pass.
 func VerifyCSRF(r *http.Request) bool {
 	expected := ""
 	if ck, err := r.Cookie(CSRFCookieName); err == nil {
 		expected = ck.Value
 	}
 	got := r.FormValue("_csrf")
-	return got != "" && subtle.ConstantTimeCompare([]byte(got), []byte(expected)) == 1
+	if got == "" || subtle.ConstantTimeCompare([]byte(got), []byte(expected)) != 1 {
+		return false
+	}
+	return data.CSRFTokenRegistered(got)
 }

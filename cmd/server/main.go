@@ -102,6 +102,26 @@ func main() {
 		logger.Info("module enabled", "module", "marketing")
 	}
 
+	// Expired login sessions are purged on an hourly schedule (and
+	// once at startup), not only when someone happens to sign in, so
+	// dead session rows never pile up unbounded.
+	if pdb, err := data.AnalyticsDB(cfg.DBPath); err == nil {
+		go func() {
+			purge := func() {
+				marketing.PurgeExpiredAdminSessions(pdb)
+				report.PurgeExpiredReportSessions(pdb)
+			}
+			purge()
+			t := time.NewTicker(time.Hour)
+			defer t.Stop()
+			for range t.C {
+				purge()
+			}
+		}()
+	} else {
+		logger.Warn("session purge scheduler off: analytics db unavailable", "err", err)
+	}
+
 	loginRedirect := http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
 		http.Redirect(w, req, "/", http.StatusFound)
 	})
