@@ -1,8 +1,9 @@
 PATRIOT PEST CONTROL: FULL TEXT COPY OF THE REPO
 Repo: David2024patton/patriot-pest-go
-Commit: 52db9d54cf438300482653d5d60cb868a6d5620f
+Commit: 07db00a6b5820d95993688c466816d52d08f0550
 Built: 2026-11-18 (America/New_York)
-Files: 153 (every text file in full; binary files are listed with size and sha256)
+Files: 164 total, 130 text files in full, 34 binary files as stubs
+This copy was rebuilt after the critic cycle 1 fix loop (all 52 findings dispositioned).
 
 ==============================================================================
 FILE: .dockerignore
@@ -16,12 +17,10 @@ data/
 storage/logs
 node_modules
 
-
 ==============================================================================
 FILE: .gitattributes
 ==============================================================================
 * text=auto eol=lf
-
 
 ==============================================================================
 FILE: .gitignore
@@ -48,26 +47,25 @@ storage/uploads/
 /go-deploy.tar.gz
 node_modules/
 
-
 ==============================================================================
 FILE: CHANGELOG.md
 ==============================================================================
 <!--
-INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)
+About this file (a description of what it holds and the conventions it follows).
 
-WHAT THIS FILE IS: the human-readable milestone trail of this project:
+This file is the human-readable milestone trail of this project:
 what shipped, dated, newest first. Git history is the raw record; this
 is the curated one a person can read in a minute.
 
-EXACT STRUCTURE:
+Structure:
 - "## <YYYY-MM-DD>: <milestone in one line>" entries, newest first.
 - Under each: what changed, and the proof or commit it landed in.
 
-RULES:
-- An entry is added when something SHIPS (lands on the main branch or
+Conventions:
+- Entries are added when something ships (lands on the main branch or
   goes live), not when it is started.
 - One entry per milestone, not per commit.
-- No secrets, passwords, or tokens in this file, ever.
+- The file holds no secrets, passwords, or tokens.
 -->
 # CHANGELOG: Patriot Pest Control
 
@@ -80,30 +78,29 @@ RULES:
 ## 2026-10-14: Arizona removed, one public number, site health pass
 - Arizona removed everywhere on the site and (509) 471-5767 became the only public number (commits d09deda and the same-day sweep); photo compression and async decoding for speed; heading order cleaned; website health report reached a clean sweep (commit 4552898).
 
-
 ==============================================================================
 FILE: DECISIONS.md
 ==============================================================================
 <!--
-INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)
+About this file (a description of what it holds and the conventions it follows).
 
-WHAT THIS FILE IS: the settled-decision log for this project. IDEA.md is
+This file is the settled-decision log for this project. IDEA.md is
 the raw capture of what David said; this file is only the calls that are
-FINAL, so no one re-asks a settled question or quietly reverses a call.
+final, the record that keeps settled questions settled.
 
-EXACT STRUCTURE: one entry per decision, newest first:
+Structure: one entry per decision, newest first:
 ## <YYYY-MM-DD>: <decision in one line>
 - **Decided:** <what was picked>
 - **Why:** <the reason, in plain words>
 - **Supersedes:** <the earlier call it replaces, or "none">
 - **By:** David | <who, with David's approval noted>
 
-RULES:
-- A decision enters here the day it is made, in the same pass as any
-  PLAN or TODO change it causes.
-- Reversing a decision means a NEW entry that names what it supersedes;
-  never edit an old entry into a different decision.
-- No secrets, passwords, or tokens in this file, ever.
+Conventions:
+- Decisions enter here the day they are made, in the same pass as any
+  PLAN or TODO change they cause.
+- A reversal is a new entry that names what it supersedes; old entries
+  are not edited into different decisions.
+- The file holds no secrets, passwords, or tokens.
 -->
 # DECISIONS: Patriot Pest Control
 
@@ -136,7 +133,6 @@ RULES:
 - **Why:** The year is already paid; the value move is tuning it, not cancelling it.
 - **Supersedes:** the earlier cancellation consideration
 - **By:** David
-
 
 ==============================================================================
 FILE: Dockerfile
@@ -180,19 +176,17 @@ EXPOSE 3000
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 CMD ["/app/patriot-server","-health"]
 ENTRYPOINT ["/app/patriot-server"]
 
-
 ==============================================================================
 FILE: ENDGOAL.md
 ==============================================================================
 <!--
-INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)
+About this file (a description of what it holds and the conventions it follows).
 
-WHAT THIS FILE IS: the end state this project exists to reach, in plain
-words. TODO.md and PLAN.md serve this file; work continues until the end
-goal is reached. When David restates or extends the end goal, update this
-file the same day and let PLAN/TODO follow.
+This file is the end state this project exists to reach, in plain
+words. TODO.md and PLAN.md serve this file. When David restates or extends
+the end goal, this file is updated the same day and PLAN/TODO follow.
 
-EXACT STRUCTURE:
+Structure:
 - "## The end state": the finished project described as the experience of
   the person using it, start to finish.
 - "## How we will know it is reached": observable conditions, each one
@@ -200,11 +194,11 @@ EXACT STRUCTURE:
 - "## Not in the end state": explicit exclusions David has set, so the
   goal cannot drift.
 
-RULES:
-- Sourced from David's stated vision, the repo README and features, and
-  what he has talked about in the record. Never invented. Where the
-  record is thin, say the end state at the level the record supports.
-- No secrets, passwords, or tokens in this file, ever.
+Conventions:
+- Content is sourced from David's stated vision, the repo README and
+  features, and what he has talked about in the record. Where the
+  record is thin, the end state is stated at the level it supports.
+- The file holds no secrets, passwords, or tokens.
 -->
 # ENDGOAL: Patriot Pest Control
 
@@ -231,18 +225,17 @@ Patriot Pest Control runs as a complete operation on the AlphaFlux platform, wit
 - No phone numbers, links, or email addresses inside Google Business Profile post text or artwork.
 - No lead alert address guessed; Skyler's address is configured only when he or David confirms it.
 
-
 ==============================================================================
 FILE: IDEA.md
 ==============================================================================
 <!--
-INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)
+About this file (a description of what it holds and the conventions it follows).
 
-WHAT THIS FILE IS: David's idea capture for this project, as full records.
+This file is David's idea capture for this project, as full records.
 When David talks, dictates, or drops a thought about this project in any
-chat, it lands here. Ideas are never silently dropped.
+chat, it lands here, so ideas are not silently dropped.
 
-EXACT STRUCTURE: one entry per idea, newest first:
+Structure: one entry per idea, newest first:
 ## <Category> | <YYYY-MM-DD HH:MM TZ>
 - **David:** "<his words verbatim where on record; otherwise a faithful
   summary marked (summary)>"
@@ -255,12 +248,12 @@ EXACT STRUCTURE: one entry per idea, newest first:
 CATEGORIES: Product, Feature, Design, Tech, Business, Ops, Research,
 Personal. Pick the closest; an idea may be re-filed as it matures.
 
-RULES:
-- Times are recorded only when the source message carried one; never
-  invent a time. Dates always.
+Conventions:
+- Times are recorded only when the source message carried one; dates
+  are always recorded.
 - An idea leaves NEW only via MOVED (with the TODO item id) or KILLED
-  (David's call, with the date). Nothing is deleted.
-- No secrets, passwords, or tokens in this file, ever.
+  (David's call, with the date). Entries are not deleted.
+- The file holds no secrets, passwords, or tokens.
 -->
 # IDEA: Patriot Pest Control
 
@@ -308,18 +301,17 @@ David's idea capture for Patriot Pest Control. Every idea lands here as a full r
 - **Stats:** would take: the AlphaFlux platform modules plus this site as the front door; effort: L; value: one system runs the whole operation instead of disconnected tools; depends on: AlphaFlux console work.
 - **Status:** MOVED to TODO T-3.1 and Phase 4 (T-4.1 to T-4.6) for the website pieces; the platform pieces stay in AlphaFlux.
 
-
 ==============================================================================
 FILE: PLAN.md
 ==============================================================================
 <!--
-INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)
+About this file (a description of what it holds and the conventions it follows).
 
-WHAT THIS FILE IS: the whole plan for this project, step by step. ENDGOAL.md
+This file is the whole plan for this project, step by step. ENDGOAL.md
 is the destination; this file is the route; TODO.md is the work list. When
-the plan changes, this file changes FIRST, then TODO.md follows.
+the plan changes, this file changes first, then TODO.md follows.
 
-EXACT STRUCTURE:
+Structure:
 - "## S1: What it is" (the product in plain words, who it serves).
 - "## S2: Architecture" (the grid: modules, what each owns, the seams).
 - Build steps as numbered sections "## S<n>: <step name> (TODO Phase <n>)",
@@ -328,13 +320,13 @@ EXACT STRUCTURE:
   shape where that matters.
 - A final "## S<last>: Open questions" section (owner named per question).
 
-RULES:
-- Section numbers are stable once published; TODO items point at them with
-  (PLAN S<n>). Renumber only in a deliberate pass that updates both files.
+Conventions:
+- Section numbers are stable once published; TODO items point at them
+  with (PLAN S<n>). A renumber is a deliberate pass that updates both files.
 - Facts only: what is decided is stated, what is open is an open question.
-- Before designing a step, check the shelf: take or retrofit what already
-  exists under a usable license instead of rebuilding it.
-- No secrets, passwords, or tokens in this file, ever.
+- Steps are designed against the shelf first: what already exists under
+  a usable license is taken or retrofitted instead of rebuilt.
+- The file holds no secrets, passwords, or tokens.
 -->
 # PLAN: Patriot Pest Control
 
@@ -400,30 +392,29 @@ Format, tests, lint, vulnerability scanning, secret scanning, accessibility, lin
 - How should call tracking be added without replacing the only public number? (owner: David and Skyler)
 - Should the "Book online" wording point to a booking flow, and which one? (owner: Skyler and David)
 
-
 ==============================================================================
 FILE: README.md
 ==============================================================================
 <!--
-INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)
+About this file (a description of what it holds and the conventions it follows).
 
-WHAT THIS FILE IS: the project's front door on GitHub. A stranger decides
-in ten seconds whether this project is real. Everything here must be true
+This file is the project's front door on GitHub. A stranger decides
+in ten seconds whether this project is real. Everything here is true
 today: badges only when true, status only with proof, quickstart commands
 copied from the working build.
 
-EXACT STRUCTURE: centered title in exact brand casing, one-line promise,
+Structure: centered title in exact brand casing, one-line promise,
 true badges, the standard-files link row, What it is, Quickstart, the
 module map (the grid), Status, License. Full art direction lives in the
 github-repo-standard skill (README standard + README-PATTERNS.md).
 
-RULES:
+Conventions:
 - Brand casing is exact: AlphaVision, AlphaFlux, iTaK, Mimir,
   Patriot Pest Control in full.
 - David's taste: black background with a bright color on top so things
   pop is his preferred look; black and red are his favorite scheme, not
   a law. Each project picks its own palette.
-- No secrets, passwords, or tokens in this file, ever.
+- The file holds no secrets, passwords, or tokens.
 -->
 <div align="center">
 
@@ -514,30 +505,29 @@ The public site and CRM lead leg are live and were verified on 2026-10-16. Two a
 
 No LICENSE file is present in this repository, so public visibility is not a reuse license. Patriot Pest Control website content belongs to its owner. The connected business platform is AlphaFlux.
 
-
 ==============================================================================
 FILE: STATUS.md
 ==============================================================================
 <!--
-INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)
+About this file (a description of what it holds and the conventions it follows).
 
-WHAT THIS FILE IS: the living right-now snapshot of this project. Anyone
+This file is the living right-now snapshot of this project. Anyone
 opening the repo cold reads this first and is current in two minutes.
-Updated at the end of every work session on the project; a stale STATUS
-is worse than none, so when you finish work here, update it in the same
-pass.
+It is updated at the end of every work session on the project, in the
+same pass as the work it describes.
 
-EXACT STRUCTURE:
+Structure:
 - "## As of <YYYY-MM-DD>": the date this snapshot was written.
 - "## Proven state": what is done, with its proof named.
 - "## In flight": work currently underway and where it stands.
 - "## Blocked": each blocker and exactly who or what it waits on.
 - "## Next moves": the next three moves, in order, referencing TODO ids.
 
-RULES:
-- Claims here carry the same proof standard as TODO checkboxes.
+Conventions:
+- Claims here carry the same proof standard as TODO checkboxes:
+  each names its evidence.
 - Keep it short: a snapshot, not a history (history is CHANGELOG.md).
-- No secrets, passwords, or tokens in this file, ever.
+- The file holds no secrets, passwords, or tokens.
 -->
 # STATUS: Patriot Pest Control
 
@@ -563,32 +553,31 @@ RULES:
 2. Add the repeatable local startup check proving ready state (TODO T-0.5).
 3. Record the Dokploy rollback path for a bad main push (TODO T-0.6).
 
-
 ==============================================================================
 FILE: TODO.md
 ==============================================================================
 <!--
-INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)
+About this file (a description of what it holds and the conventions it follows).
 
-WHAT THIS FILE IS: the super-detailed task list for this project. It is the
+This file is the super-detailed task list for this project. It is the
 only place work items live. PLAN.md says why and in what order; ENDGOAL.md
 says what finished looks like; this file says exactly what remains to do.
 
-EXACT STRUCTURE:
+Structure:
 - Phases in order: "## Phase <n>: <name> (PLAN S<m>)".
 - Parked work in its own phase at the end: "## Parked".
 - Every item is one checkbox line: "- [ ] T-<phase>.<n> <task> (proof: <named
   proof>) (PLAN S<m>)". Parked items use T-P.<n> and name what blocks them.
 
-RULES:
-- A box is checked ONLY when its named proof exists (a test, a log line, a
-  bench note, a live check). Never check a box on intention or partial work.
+Conventions:
+- A box is checked only when its named proof exists (a test, a log line,
+  a bench note, a live check), never on intention or partial work.
 - Emulation-proven and bench-proven are different claims; write which one.
-- Item IDs and (PLAN S<n>) tags are stable once published; never renumber
-  casually. A deliberate renumber updates PLAN.md in the same pass.
+- Item IDs and (PLAN S<n>) tags are stable once published. A deliberate
+  renumber updates PLAN.md in the same pass.
 - New work enters as new items at the end of their phase. Completed items
   stay, checked, as the record.
-- No secrets, passwords, or tokens in this file, ever.
+- The file holds no secrets, passwords, or tokens.
 -->
 # TODO: Patriot Pest Control
 
@@ -661,7 +650,6 @@ The detailed task list for the Patriot Pest Control public website. Rules: a box
 - T-P.2 Skyler lead alert email address (blocked on: David or Skyler; do not guess). (PLAN S6)
 - T-P.3 SMS alert delivery (blocked on: approved A2P brand and campaign). (PLAN S6)
 - T-P.4 Any customer, staff, or admin dashboard work (blocked on: belongs in AlphaFlux, not this repo). (PLAN S2)
-
 
 ==============================================================================
 FILE: cmd/server/main.go
@@ -770,6 +758,26 @@ func main() {
 		logger.Info("module enabled", "module", "marketing")
 	}
 
+	// Expired login sessions are purged on an hourly schedule (and
+	// once at startup), not only when someone happens to sign in, so
+	// dead session rows never pile up unbounded.
+	if pdb, err := data.AnalyticsDB(cfg.DBPath); err == nil {
+		go func() {
+			purge := func() {
+				marketing.PurgeExpiredAdminSessions(pdb)
+				report.PurgeExpiredReportSessions(pdb)
+			}
+			purge()
+			t := time.NewTicker(time.Hour)
+			defer t.Stop()
+			for range t.C {
+				purge()
+			}
+		}()
+	} else {
+		logger.Warn("session purge scheduler off: analytics db unavailable", "err", err)
+	}
+
 	loginRedirect := http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
 		http.Redirect(w, req, "/", http.StatusFound)
 	})
@@ -853,7 +861,6 @@ func recoverer(logger *slog.Logger) func(http.Handler) http.Handler {
 	}
 }
 
-
 ==============================================================================
 FILE: configs/feature-flags.yaml
 ==============================================================================
@@ -873,20 +880,19 @@ kanban: true
 knowledge: true
 ai_autonomous: false
 
-
 ==============================================================================
 FILE: docs/MAP.md
 ==============================================================================
 <!--
-INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)
+About this file (a description of what it holds and the conventions it follows).
 
-WHAT THIS FILE IS: the whole project laid out, at docs/MAP.md: every
+This file is the whole project laid out, at docs/MAP.md: every
 module, page, screen, engine, and service, and every link between them
-traced BOTH ways (what it points to, and what points back at it). It
-exists so anyone can see the entire system at once and think about it
-whole. A rendered visual version is generated from this file.
+traced both ways (what it points to, and what points back at it), so
+the entire system can be seen at once and thought about whole. A
+rendered visual version is generated from this file.
 
-EXACT STRUCTURE:
+Structure:
 - "## The grid": a table of every node: name, kind (page, screen,
   module, engine, service, external), what it owns.
 - "## Links": a table of every connection: from, to, kind (navigates,
@@ -897,13 +903,13 @@ EXACT STRUCTURE:
 - "## Flows": the two or three main journeys through the system, in
   words, step by step.
 
-RULES:
+Conventions:
 - Every node in the tables appears in the diagram and vice versa.
 - When a module or link is added or removed, this file changes in the
   same commit.
 - Facts only: the map shows what exists, with planned nodes marked
   (planned) so vision and reality never blur.
-- No secrets, passwords, or tokens in this file, ever.
+- The file holds no secrets, passwords, or tokens.
 -->
 # MAP: Patriot Pest Control
 
@@ -913,12 +919,12 @@ RULES:
 | Visitor | external | Arrives from search, ads, and social; calls or submits a form |
 | Public website (patriotpest.pro) | page | Marketing pages, pest library, areas, blog, FAQs, prices, referral, search, sitemap, RSS, PWA shell |
 | cmd/server | module | Process start, route composition, legacy redirects, retired /api/* answers, shutdown |
-| internal/modules/marketing | module | Public pages, search, sitemap, forms (contact, signup, free quote, SMS opt-in), lead capture, analytics beacon sink, Google reviews sync door |
+| internal/modules/marketing | module | Public pages, search, sitemap, forms (contact, signup, free quote, SMS opt-in), lead capture, analytics beacon sink (consent-gated), visitor data erasure door (POST /api/track/forget), Google reviews sync door |
 | internal/modules/health | module | /health, /ready, /metrics |
 | internal/modules/report | module | Status dashboard, served only on the report.patriotpest.pro host |
 | Field Reports rail (home page section) | page | Newest five-star Google customer reviews rendered from the stored snapshot; the owner's own reviews are stored but never render |
 | internal/view | module | Templates, embedded assets, PWA files, SEO helpers, pest and area copy |
-| internal/data | module | SQLite content catalog, analytics storage, drafts, local lead fallback store, Google reviews snapshot (newest 12 plus profile total and average) |
+| internal/data | module | SQLite content catalog, analytics storage, drafts, local lead fallback store, Google reviews snapshot (newest 12 plus profile total and average), SMS consent records (structured opt-in proof: who, when, which form, exact wording) |
 | internal/middleware | module | Shared request behavior |
 | Dokploy + Traefik | external | Builds the root Dockerfile on push to main; TLS for patriotpest.pro |
 | AlphaFlux | external | Accounts, dashboards, CRM records and attribution, alert delivery, FieldRoutes, Twilio |
@@ -937,6 +943,7 @@ RULES:
 | internal/modules/report | internal/data | reads | Data returns the analytics the dashboard renders |
 | internal/modules/marketing | internal/view | reads | View supplies the templates and copy the module serves |
 | internal/modules/marketing | internal/data | writes | Data returns catalog content, stores fallback leads, and holds the reviews snapshot for the module |
+| internal/modules/marketing | internal/data | deletes | POST /api/track/forget removes one visitor's analytics rows when the privacy page's tracking-data control presents that visitor's id |
 | Daily Google reviews check | Google Business Profile | reads | GBP shows the reviews, totals, and reply state the check works from |
 | Daily Google reviews check | internal/modules/marketing | writes | Marketing verifies the sync token and stores the snapshot, answering ok/stored (POST /api/reviews/sync) |
 | Field Reports rail (home page section) | internal/data | reads | Data serves the rail its snapshot through the marketing module's home handler |
@@ -968,28 +975,27 @@ flowchart TD
 ```
 
 ## Flows
-1. A customer finds a pest or area page, reads it, and either calls (509) 471-5767 or submits the contact form. The marketing module validates the form (phone required), writes the lead to the AlphaFlux CRM with website-form attribution, and falls back to the local store if capture fails, so no lead is discarded.
+1. A customer finds a pest or area page, reads it, and either calls (509) 471-5767 or submits the contact form. The marketing module validates the form (phone required), writes the lead to the AlphaFlux CRM with website-form attribution, and falls back to the local store if capture fails, so a lead survives a CRM outage; if both stores fail, the visitor is told to call instead of being shown a success message.
 2. A deploy flows from a push to main: Dokploy builds the root Dockerfile, Traefik serves the new container at patriotpest.pro, and the verify checks in docs/RUNBOOK.md confirm the pages, endpoints, name, and number.
 3. A returning customer or staff member follows a sign-in link on the site and is redirected to AlphaFlux, where accounts and dashboards live; this repo never authenticates them.
 4. Reviews: each morning the daily check reads the newest Google reviews, posts owner replies to customer reviews (never to the owner's own), and POSTs the newest 12 plus the profile total and average to /api/reviews/sync. The marketing module checks the sync token and stores the snapshot in SQLite; the home page's Field Reports rail renders the newest five-star customer reviews from that snapshot. The owner's own reviews are stored with the rest but filtered out of the rail (internal/modules/marketing/reviews.go).
-
 
 ==============================================================================
 FILE: docs/RULES.md
 ==============================================================================
 <!--
-INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)
+About this file (a description of what it holds and the conventions it follows).
 
-WHAT THIS FILE IS: the build law for this repo in one page, at docs/RULES.md.
-It states how every module in this project gets built, gated, and proven.
-Project-specific numbers and additions go in a "Project specifics" section
-at the end; the law sections above it come from the github-repo-standard
-skill template and change only when the skill changes.
+This file is the build rules for this repo in one page, at docs/RULES.md:
+how every module in this project gets built, gated, and proven, recorded
+from David Patton's standing build orders. Project-specific numbers and
+additions live in a "Project specifics" section at the end; the sections
+above it come from the github-repo-standard skill template.
 
-RULES:
-- If a project practice conflicts with this page, this page wins until
-  David changes it.
-- No secrets, passwords, or tokens in this file, ever.
+Conventions:
+- Where a project practice conflicts with this page, the page records
+  the current rule until David changes it.
+- The file holds no secrets, passwords, or tokens.
 -->
 # RULES: how this project gets built
 
@@ -1062,18 +1068,17 @@ Patton and apply to every module, every language, every time.
   the code and the diagram disagree, the code wins and the diagram is
   fixed in that same pass.
 
-
 ==============================================================================
 FILE: docs/RUNBOOK.md
 ==============================================================================
 <!--
-INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)
+About this file (a description of what it holds and the conventions it follows).
 
-WHAT THIS FILE IS: the operations book for this project, at docs/RUNBOOK.md.
+This file is the operations book for this project, at docs/RUNBOOK.md.
 How to build it, run it, deploy it, verify it, and where everything lives,
 so anyone can operate the project without tribal knowledge.
 
-EXACT STRUCTURE:
+Structure:
 - "## Build": the real commands, copied from the working build.
 - "## Run locally": how to start it and what you should see.
 - "## Deploy": where it is hosted, how a deploy happens, how to roll back.
@@ -1082,12 +1087,12 @@ EXACT STRUCTURE:
   credentials are stored (names of vault entries or connectors only).
 - "## Gotchas": the traps already learned the hard way, each with its fix.
 
-RULES:
-- NEVER a credential value in this file: no passwords, keys, or tokens.
-  Pointers to secure storage only.
-- Commands are copied from what actually works; if a command changes,
-  this file changes in the same commit.
-- No secrets, passwords, or tokens in this file, ever.
+Conventions:
+- This file never holds a credential value: no passwords, keys, or
+  tokens. Pointers to secure storage only.
+- Commands are copied from what actually works; when a command
+  changes, this file changes in the same commit.
+- The file holds no secrets, passwords, or tokens.
 -->
 # RUNBOOK: Patriot Pest Control
 
@@ -1122,9 +1127,8 @@ The server serves the public site; check `/health` and `/ready` answer and the h
 ## Gotchas
 - Push to main is a production deploy; docs-only pushes still rebuild the live site.
 - Twilio acceptance is not delivery: an SMS alert is only proven by a delivered status or recipient confirmation. The SMS alert leg is blocked on A2P 10DLC approval (TODO T-3.7).
-- Do not put phone numbers, links, or email in Google Business Profile post text or artwork; GBP posting is paused under appeal in any case (see DECISIONS.md).
-- Leave Oregon pages and the Arizona Google profile alone until David says otherwise.
-
+- Google Business Profile post text and artwork carry no phone numbers, links, or email (a policy violation shut posting off once); GBP posting is paused under appeal in any case (see DECISIONS.md).
+- Oregon pages and the Arizona Google profile stand as they were left at the Arizona sale; David's standing instruction is that they stay unchanged.
 
 ==============================================================================
 FILE: go.mod
@@ -1155,7 +1159,6 @@ require (
 	modernc.org/mathutil v1.7.1 // indirect
 	modernc.org/memory v1.11.0 // indirect
 )
-
 
 ==============================================================================
 FILE: go.sum
@@ -1237,7 +1240,6 @@ modernc.org/strutil v1.2.1/go.mod h1:EHkiggD70koQxjVdSBM3JKM7k6L0FbGE5eymy9i3B9A
 modernc.org/token v1.1.0 h1:Xl7Ap9dKaEs5kLoOQeQmPWevfnk/DM5qcLcYlA8ys6Y=
 modernc.org/token v1.1.0/go.mod h1:UGzOrNV1mAFSEB63lOFHIpNRUVMvYTc6yu1SMY/XTDM=
 
-
 ==============================================================================
 FILE: internal/config/config.go
 ==============================================================================
@@ -1312,7 +1314,6 @@ func envBool(k string, def bool) bool {
 	}
 	return strings.EqualFold(v, "true") || v == "1" || strings.EqualFold(v, "yes")
 }
-
 
 ==============================================================================
 FILE: internal/data/analytics.go
@@ -1855,7 +1856,6 @@ func dayLabel(dayStart int64) string {
 	return time.Unix(dayStart, 0).UTC().Format("2006-01-02")
 }
 
-
 ==============================================================================
 FILE: internal/data/analytics_device.go
 ==============================================================================
@@ -1935,7 +1935,6 @@ func ParseDevice(ua string) DeviceInfo {
 	}
 	return d
 }
-
 
 ==============================================================================
 FILE: internal/data/analytics_expand_test.go
@@ -2345,7 +2344,6 @@ func TestReferrerDomains(t *testing.T) {
 	}
 }
 
-
 ==============================================================================
 FILE: internal/data/analytics_geo.go
 ==============================================================================
@@ -2462,7 +2460,6 @@ func LookupGeo(ipStr string) GeoInfo {
 	}
 	return g
 }
-
 
 ==============================================================================
 FILE: internal/data/analytics_stats.go
@@ -3299,7 +3296,6 @@ func QueryFeed(db *sql.DB, limit int, kindFilter, pageFilter string) ([]FeedHit,
 	return out, rows.Err()
 }
 
-
 ==============================================================================
 FILE: internal/data/analytics_test.go
 ==============================================================================
@@ -3479,6 +3475,256 @@ func TestInsertEventCaps(t *testing.T) {
 	}
 }
 
+==============================================================================
+FILE: internal/data/consent.go
+==============================================================================
+package data
+
+// SMS consent records: the structured audit trail for text-message
+// opt-ins given on the public forms (/free-quote, /sms-opt-in).
+//
+// A consent written only as prose inside a lead's Notes field cannot
+// answer a carrier or TCPA audit: who consented, when, from which
+// form, and to exactly what wording. Every checked consent box on a
+// public form therefore also lands here as its own row, with the
+// exact wording the visitor saw and the wording version in force at
+// the time. The lead note stays for staff readability; this table is
+// the record of proof.
+
+import (
+	"database/sql"
+	"fmt"
+	"time"
+)
+
+// SMSConsentRecord is one stored opt-in.
+type SMSConsentRecord struct {
+	ConsentedAt    int64 // Unix seconds, UTC
+	Name           string
+	Phone          string
+	Source         string // the form path, e.g. "/free-quote"
+	Wording        string // the exact checkbox label the visitor agreed to
+	WordingVersion string // version tag for the wording, e.g. "2026-11 v1"
+	IP             string // submitting IP, as seen by the server
+}
+
+// EnsureConsentTables creates the consent schema when missing. Safe to
+// run on every write; production databases pick the table up with no
+// migration step.
+func EnsureConsentTables(db *sql.DB) error {
+	_, err := db.Exec(`CREATE TABLE IF NOT EXISTS sms_consent_records (
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		consented_at INTEGER NOT NULL,
+		name TEXT NOT NULL DEFAULT '',
+		phone TEXT NOT NULL,
+		source TEXT NOT NULL DEFAULT '',
+		wording TEXT NOT NULL,
+		wording_version TEXT NOT NULL DEFAULT '',
+		ip TEXT NOT NULL DEFAULT ''
+	)`)
+	if err != nil {
+		return fmt.Errorf("consent schema: %w", err)
+	}
+	return nil
+}
+
+// StoreSMSConsent appends one consent record. ConsentedAt is stamped
+// here when the caller leaves it zero, so the stored time is the
+// server's receive time, never a client-supplied value.
+func StoreSMSConsent(dbPath string, rec SMSConsentRecord) error {
+	db, err := AnalyticsDB(dbPath)
+	if err != nil {
+		return err
+	}
+	if err := EnsureConsentTables(db); err != nil {
+		return err
+	}
+	if rec.ConsentedAt == 0 {
+		rec.ConsentedAt = time.Now().Unix()
+	}
+	_, err = db.Exec(`INSERT INTO sms_consent_records
+		(consented_at, name, phone, source, wording, wording_version, ip)
+		VALUES (?, ?, ?, ?, ?, ?, ?)`,
+		rec.ConsentedAt, rec.Name, rec.Phone, rec.Source,
+		rec.Wording, rec.WordingVersion, rec.IP)
+	if err != nil {
+		return fmt.Errorf("consent insert: %w", err)
+	}
+	return nil
+}
+
+// ListSMSConsents returns stored consent records, newest first. Used
+// by audits and tests; the public site never renders it.
+func ListSMSConsents(dbPath string, limit int) ([]SMSConsentRecord, error) {
+	db, err := AnalyticsDB(dbPath)
+	if err != nil {
+		return nil, err
+	}
+	if err := EnsureConsentTables(db); err != nil {
+		return nil, err
+	}
+	if limit <= 0 {
+		limit = 50
+	}
+	rows, err := db.Query(`SELECT consented_at, name, phone, source, wording, wording_version, ip
+		FROM sms_consent_records ORDER BY id DESC LIMIT ?`, limit)
+	if err != nil {
+		return nil, fmt.Errorf("consent list: %w", err)
+	}
+	defer rows.Close()
+	var out []SMSConsentRecord
+	for rows.Next() {
+		var rec SMSConsentRecord
+		if err := rows.Scan(&rec.ConsentedAt, &rec.Name, &rec.Phone, &rec.Source,
+			&rec.Wording, &rec.WordingVersion, &rec.IP); err != nil {
+			return nil, fmt.Errorf("consent scan: %w", err)
+		}
+		out = append(out, rec)
+	}
+	return out, rows.Err()
+}
+
+==============================================================================
+FILE: internal/data/consent_test.go
+==============================================================================
+package data
+
+import (
+	"path/filepath"
+	"testing"
+)
+
+func TestStoreAndListSMSConsent(t *testing.T) {
+	dbPath := filepath.Join(t.TempDir(), "consent.db")
+	rec := SMSConsentRecord{
+		Name:           "Test Person",
+		Phone:          "+15095550100",
+		Source:         "/free-quote",
+		Wording:        "Yes, Patriot Pest Control may text me.",
+		WordingVersion: "2026-11 v1",
+		IP:             "203.0.113.9",
+	}
+	if err := StoreSMSConsent(dbPath, rec); err != nil {
+		t.Fatalf("store: %v", err)
+	}
+	got, err := ListSMSConsents(dbPath, 10)
+	if err != nil {
+		t.Fatalf("list: %v", err)
+	}
+	if len(got) != 1 {
+		t.Fatalf("want 1 record, got %d", len(got))
+	}
+	g := got[0]
+	if g.Phone != rec.Phone || g.Source != rec.Source || g.Wording != rec.Wording ||
+		g.WordingVersion != rec.WordingVersion || g.Name != rec.Name || g.IP != rec.IP {
+		t.Fatalf("round trip mismatch: %+v", g)
+	}
+	if g.ConsentedAt == 0 {
+		t.Fatal("consented_at was not stamped")
+	}
+}
+
+==============================================================================
+FILE: internal/data/csrf_registry.go
+==============================================================================
+package data
+
+// CSRF token registry: the server-side half of the double-submit
+// cookie pattern (critic cycle 1, finding 7).
+//
+// A cookie-only double-submit check proves nothing when an attacker
+// can plant the cookie (a sibling subdomain, a network foothold):
+// they set the cookie and submit the matching field, and the pair
+// agrees because both halves are theirs. So every token the server
+// issues is also registered here, by hash, and verification requires
+// the token to be one the server actually issued within the last 24
+// hours. A planted cookie value was never registered, so it fails.
+//
+// The registry is process memory on purpose: tokens are short-lived
+// form credentials, and a restart simply makes open forms reload.
+
+import (
+	"crypto/sha256"
+	"encoding/hex"
+	"sync"
+	"time"
+)
+
+// csrfTokenMaxAge bounds how long an issued token stays verifiable.
+const csrfTokenMaxAge = 24 * time.Hour
+
+var csrfRegistry = struct {
+	sync.Mutex
+	byHash    map[string]int64 // sha256 hex of token -> issued-at Unix seconds
+	lastPrune int64
+}{byHash: map[string]int64{}}
+
+func csrfHash(token string) string {
+	sum := sha256.Sum256([]byte(token))
+	return hex.EncodeToString(sum[:])
+}
+
+// RegisterCSRFToken records a freshly issued token. Called by every
+// code path that mints a CSRF token (the marketing module's form
+// field and the view package's field share this registry, because
+// they share the cookie).
+func RegisterCSRFToken(token string) {
+	if token == "" {
+		return
+	}
+	now := time.Now().Unix()
+	csrfRegistry.Lock()
+	defer csrfRegistry.Unlock()
+	csrfRegistry.byHash[csrfHash(token)] = now
+	if now-csrfRegistry.lastPrune > 3600 {
+		csrfRegistry.lastPrune = now
+		cutoff := now - int64(csrfTokenMaxAge.Seconds())
+		for h, at := range csrfRegistry.byHash {
+			if at < cutoff {
+				delete(csrfRegistry.byHash, h)
+			}
+		}
+	}
+}
+
+// CSRFTokenRegistered reports whether the server issued this token
+// within the acceptance window.
+func CSRFTokenRegistered(token string) bool {
+	if token == "" {
+		return false
+	}
+	csrfRegistry.Lock()
+	defer csrfRegistry.Unlock()
+	at, ok := csrfRegistry.byHash[csrfHash(token)]
+	if !ok {
+		return false
+	}
+	return time.Now().Unix()-at <= int64(csrfTokenMaxAge.Seconds())
+}
+
+==============================================================================
+FILE: internal/data/csrf_registry_test.go
+==============================================================================
+package data
+
+import "testing"
+
+func TestCSRFRegistry(t *testing.T) {
+	if CSRFTokenRegistered("never-issued") {
+		t.Fatal("unregistered token verified")
+	}
+	RegisterCSRFToken("issued-token-abc")
+	if !CSRFTokenRegistered("issued-token-abc") {
+		t.Fatal("registered token did not verify")
+	}
+	if CSRFTokenRegistered("issued-token-abd") {
+		t.Fatal("a different token verified against the registry")
+	}
+	RegisterCSRFToken("")
+	if CSRFTokenRegistered("") {
+		t.Fatal("empty token verified")
+	}
+}
 
 ==============================================================================
 FILE: internal/data/data.go
@@ -3552,6 +3798,13 @@ var (
 // body HTML at load time. Content is sanitized on save, but the save path
 // lives outside this repo — read-time sanitizing is the backstop.
 var htmlSanitizer = bluemonday.UGCPolicy()
+
+// SanitizeHTML runs the blog body policy (the same one catalog loads
+// use) over HTML from any other source, so every body that reaches a
+// post page has passed the identical pass.
+func SanitizeHTML(html string) string {
+	return htmlSanitizer.Sanitize(html)
+}
 
 // Load reads the catalog from dbPath (database/patriot.db). Safe to call once;
 // subsequent calls return the cached store. An error is returned when the
@@ -3801,7 +4054,6 @@ func FindCity(slug string) (city, code, stateName string, ok bool) {
 // _ keeps time used for future TTL cache.
 var _ = time.Second
 
-
 ==============================================================================
 FILE: internal/data/drafts_test.go
 ==============================================================================
@@ -3848,6 +4100,87 @@ func TestDraftPostFiltering(t *testing.T) {
 	}
 }
 
+==============================================================================
+FILE: internal/data/forget.go
+==============================================================================
+package data
+
+// Visitor data erasure: the deletion path behind the privacy page's
+// "delete my tracking data" control (critic cycle 1, finding 4).
+//
+// The first-party analytics store rows under a persistent visitor id.
+// A visitor who asks for erasure gets every analytics row carrying
+// their id deleted. The id itself is never logged by the caller; the
+// returned count is the receipt.
+
+import (
+	"fmt"
+)
+
+// DeleteVisitorAnalytics removes every analytics event stored under
+// visitorID and returns how many rows were deleted.
+func DeleteVisitorAnalytics(dbPath, visitorID string) (int64, error) {
+	db, err := AnalyticsDB(dbPath)
+	if err != nil {
+		return 0, err
+	}
+	if err := EnsureAnalyticsTables(db); err != nil {
+		return 0, err
+	}
+	res, err := db.Exec(`DELETE FROM analytics_events WHERE visitor_id = ?`, visitorID)
+	if err != nil {
+		return 0, fmt.Errorf("visitor delete: %w", err)
+	}
+	n, err := res.RowsAffected()
+	if err != nil {
+		return 0, fmt.Errorf("visitor delete count: %w", err)
+	}
+	return n, nil
+}
+
+==============================================================================
+FILE: internal/data/forget_test.go
+==============================================================================
+package data
+
+import (
+	"path/filepath"
+	"testing"
+)
+
+func TestDeleteVisitorAnalytics(t *testing.T) {
+	dbPath := filepath.Join(t.TempDir(), "forget.db")
+	db, err := AnalyticsDB(dbPath)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := EnsureAnalyticsTables(db); err != nil {
+		t.Fatal(err)
+	}
+	for _, e := range []Event{
+		{TS: 100, VisitorID: "visitor-a", SessionID: "s1", Kind: "pageview", Path: "/"},
+		{TS: 101, VisitorID: "visitor-a", SessionID: "s1", Kind: "click", Path: "/prices"},
+		{TS: 102, VisitorID: "visitor-b", SessionID: "s2", Kind: "pageview", Path: "/"},
+	} {
+		if err := InsertEvent(db, e); err != nil {
+			t.Fatal(err)
+		}
+	}
+	n, err := DeleteVisitorAnalytics(dbPath, "visitor-a")
+	if err != nil {
+		t.Fatalf("delete: %v", err)
+	}
+	if n != 2 {
+		t.Fatalf("deleted %d rows, want 2", n)
+	}
+	var left int
+	if err := db.QueryRow(`SELECT COUNT(*) FROM analytics_events`).Scan(&left); err != nil {
+		t.Fatal(err)
+	}
+	if left != 1 {
+		t.Fatalf("%d rows left, want 1 (the other visitor)", left)
+	}
+}
 
 ==============================================================================
 FILE: internal/data/reviews.go
@@ -3966,8 +4299,8 @@ func ReplaceGoogleReviews(dbPath string, profile GoogleReviewsProfile, reviews [
 
 // checkpointWAL flushes the write-ahead log into the main database file
 // (PRAGMA wal_checkpoint(TRUNCATE)), retrying briefly while readers hold
-// the log open. It fails when the checkpoint stays busy: the data is
-// readable by this process but not yet durable, and the caller must know.
+// the log open. It reports failure when the checkpoint stays busy:
+// in that case the data is readable by this process but not yet durable.
 func checkpointWAL(db *sql.DB) error {
 	for attempt := 0; attempt < 5; attempt++ {
 		var busy, logPages, checkpointed int
@@ -4019,7 +4352,6 @@ func LatestGoogleReviews(dbPath string, minRating, limit int) ([]GoogleReview, G
 	}
 	return out, profile, nil
 }
-
 
 ==============================================================================
 FILE: internal/data/signup.go
@@ -4081,7 +4413,6 @@ func CreateSignup(dbPath, name, email, phone, city, state, zip string) SignupRes
 	}
 	return SignupResult{true, "Welcome back. Your account details were updated.", nil}
 }
-
 
 ==============================================================================
 FILE: internal/middleware/middleware.go
@@ -4301,7 +4632,6 @@ func TimeoutExcept(d time.Duration, skipPrefixes ...string) func(http.Handler) h
 	}
 }
 
-
 ==============================================================================
 FILE: internal/modules/health/health.go
 ==============================================================================
@@ -4355,7 +4685,6 @@ func (m *Module) metrics(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/plain; version=0.0.4")
 	_, _ = fmt.Fprintf(w, "# HELP patriot_requests_total\n# TYPE patriot_requests_total counter\npatriot_requests_total %d\n", custommw.RequestsTotal())
 }
-
 
 ==============================================================================
 FILE: internal/modules/marketing/admin.go
@@ -4483,6 +4812,13 @@ func (m *Module) requireAdmin(next http.Handler) http.Handler {
 	})
 }
 
+// PurgeExpiredAdminSessions deletes expired admin sessions. It runs
+// on a schedule from cmd/server as well as opportunistically at
+// login, so expired rows are collected even when nobody signs in.
+func PurgeExpiredAdminSessions(db *sql.DB) {
+	purgeExpiredSessions(db)
+}
+
 // purgeExpiredSessions deletes dead admin sessions (opportunistic, on login).
 func purgeExpiredSessions(db *sql.DB) {
 	if _, err := db.Exec(`DELETE FROM admin_sessions WHERE expires_at<=?`, time.Now().Unix()); err != nil {
@@ -4532,7 +4868,7 @@ func (m *Module) adminLoginPost(w http.ResponseWriter, r *http.Request) {
 	}
 	okPass := bcrypt.CompareHashAndPassword(m.adminHash, []byte(password)) == nil
 	if !allowed || !okPass {
-		slog.Warn("admin: failed login", "email", email)
+		slog.Warn("admin: failed login", "ip", clientIP(r))
 		w.WriteHeader(http.StatusUnauthorized)
 		m.renderLogin(w, r, "Invalid email or password.")
 		return
@@ -4551,18 +4887,23 @@ func (m *Module) adminLoginPost(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Could not start a session.", http.StatusInternalServerError)
 		return
 	}
-	secure := r.TLS != nil || r.Header.Get("X-Forwarded-Proto") == "https"
+	// Cookie security: the site is served only over HTTPS (Traefik
+	// terminates TLS), so cookies are always Secure. The flag is never
+	// derived from X-Forwarded-Proto, which a client can spoof.
 	http.SetCookie(w, &http.Cookie{
 		Name: adminSessionCookie, Value: token, Path: "/admin",
 		MaxAge: int(adminSessionTTL.Seconds()), HttpOnly: true,
-		Secure: secure, SameSite: http.SameSiteLaxMode,
+		Secure: true, SameSite: http.SameSiteLaxMode,
 	})
-	// Tracker exclusion flag: tracker.js skips beaconing when this is set,
-	// so owner visits never pollute the dashboard.
+	// Tracker exclusion flag. The track endpoints in this module
+	// (trackEndpoint) refuse to store any event whose request carries
+	// this cookie, so owner visits never reach the dashboard. The
+	// cookie is HttpOnly: the browser sends it on its own, and no page
+	// script needs to read it.
 	http.SetCookie(w, &http.Cookie{
 		Name: adminFlagCookie, Value: "1", Path: "/",
-		MaxAge: int(adminSessionTTL.Seconds()), HttpOnly: false,
-		Secure: secure, SameSite: http.SameSiteLaxMode,
+		MaxAge: int(adminSessionTTL.Seconds()), HttpOnly: true,
+		Secure: true, SameSite: http.SameSiteLaxMode,
 	})
 	slog.Info("admin: login", "email", email)
 	http.Redirect(w, r, "/admin", http.StatusFound)
@@ -4579,7 +4920,7 @@ func (m *Module) adminLogout(w http.ResponseWriter, r *http.Request) {
 		http.SetCookie(w, &http.Cookie{Name: name, Value: "", Path: path, MaxAge: -1, HttpOnly: httpOnly})
 	}
 	clearCookie(adminSessionCookie, "/admin", true)
-	clearCookie(adminFlagCookie, "/", false)
+	clearCookie(adminFlagCookie, "/", true)
 	http.Redirect(w, r, "/", http.StatusFound)
 }
 
@@ -4650,7 +4991,6 @@ func (m *Module) renderLogin(w http.ResponseWriter, r *http.Request, errMsg stri
 	w.Header().Set("X-Robots-Tag", "noindex, nofollow")
 	_, _ = w.Write([]byte(sb.String()))
 }
-
 
 ==============================================================================
 FILE: internal/modules/marketing/admin_dash.go
@@ -5148,10 +5488,26 @@ function feedURL(){
   if(feedQ && feedQ.value) u += "&q=" + encodeURIComponent(feedQ.value);
   return u;
 }
+function scrubFeed(doc){
+  var bad = doc.querySelectorAll("script, iframe, object, embed, form, link, meta, base, title");
+  bad.forEach(function(el){ el.remove(); });
+  doc.querySelectorAll("*").forEach(function(el){
+    Array.prototype.slice.call(el.attributes || []).forEach(function(at){
+      var n = at.name.toLowerCase();
+      var v = String(at.value || "").replace(/^\s+/, "").toLowerCase();
+      if(n.indexOf("on") === 0 || ((n === "href" || n === "src") && (v.indexOf("javascript:") === 0 || v.indexOf("data:") === 0))){
+        el.removeAttribute(at.name);
+      }
+    });
+  });
+}
 function refreshFeed(){
   if(!feedBody) return;
   fetch(feedURL(), {credentials: "same-origin"}).then(function(r){ return r.text(); }).then(function(html){
-    feedBody.innerHTML = html;
+    var doc = new DOMParser().parseFromString("<table><tbody>" + html + "</tbody></table>", "text/html");
+    scrubFeed(doc);
+    feedBody.textContent = "";
+    doc.querySelectorAll("tr").forEach(function(row){ feedBody.appendChild(document.importNode(row, true)); });
   }).catch(function(){});
 }
 var feedTimer = null;
@@ -5177,7 +5533,6 @@ func statCard(k, v, s string) string {
 	return `<div class="card"><div class="k">` + esc(k) + `</div><div class="v">` + esc(v) +
 		`</div><div class="s">` + esc(s) + `</div></div>`
 }
-
 
 ==============================================================================
 FILE: internal/modules/marketing/admin_sections.go
@@ -5211,7 +5566,7 @@ func (m *Module) secOverview(db *sql.DB, days int, now int64) (string, error) {
 		return "", err
 	}
 	var sb strings.Builder
-	sb.WriteString(sectionHead("Overview", "The whole funnel at a glance. Last "+strconv.Itoa(days)+" days."))
+	sb.WriteString(sectionHead("Overview", "The whole funnel at a glance. Last "+strconv.Itoa(days)+" days (rolling 24-hour days). Bots and admin visits are excluded; only visits made after a cookie-banner accept are counted."))
 	sb.WriteString(`<div class="cards">`)
 	sb.WriteString(statCard("PAGEVIEWS", fnum(st.Pageviews), "pages loaded"))
 	sb.WriteString(statCard("UNIQUE VISITORS", fnum(st.Visitors), "distinct browsers"))
@@ -5278,6 +5633,16 @@ func (m *Module) secOverview(db *sql.DB, days int, now int64) (string, error) {
 		`<p class="muted"><a href="/admin?s=devices&days=` + strconv.Itoa(days) +
 		`" style="color:var(--khaki)">Full device report &rarr;</a></p></div>`)
 	sb.WriteString(`</div></div>`)
+
+	// Definitions: what these numbers actually count, on the surface
+	// where they are read.
+	sb.WriteString(`<div class="panel"><h2>HOW THESE NUMBERS ARE COUNTED</h2>` +
+		`<p class="muted" style="line-height:1.7">A visitor is a random ID stored in the visitor's browser (localStorage). ` +
+		`Clearing storage or switching devices counts as a new visitor. NEW VISITORS means first seen inside this window; ` +
+		`RETURNING means the same ID was seen before the window opened. BOUNCE RATE is the share of sessions with a ` +
+		`single pageview; a visitor who reads one page and then calls (509) 471-5767 counts as a bounce here. ` +
+		`AVG SESSION is the time from a session's first pageview to its last, averaged over all sessions; ` +
+		`single-page sessions count as 0:00.</p></div>`)
 	return sb.String(), nil
 }
 
@@ -5456,7 +5821,6 @@ func (m *Module) secTraffic(r *http.Request, db *sql.DB, days int, now int64) (s
 	sb.WriteString(`</div>`)
 	return sb.String(), nil
 }
-
 
 ==============================================================================
 FILE: internal/modules/marketing/admin_sections2.go
@@ -5761,7 +6125,6 @@ func (m *Module) adminFeed(w http.ResponseWriter, r *http.Request) {
 	_, _ = w.Write([]byte(feedRows(feed, time.Now().Unix())))
 }
 
-
 ==============================================================================
 FILE: internal/modules/marketing/admin_test.go
 ==============================================================================
@@ -5880,7 +6243,7 @@ func TestAdminLoginAcceptsAndServesDashboard(t *testing.T) {
 	_, r := adminRouter(t)
 
 	// Seed one pageview through the real beacon endpoint.
-	beaconBody := `{"vid":"v1","sid":"s1","path":"/prices-test","ref":"https://www.google.com/","utm_source":"","utm_medium":""}`
+	beaconBody := `{"consent":true,"vid":"v1","sid":"s1","path":"/prices-test","ref":"https://www.google.com/","utm_source":"","utm_medium":""}`
 	breq := httptest.NewRequest(http.MethodPost, "/api/track/view", strings.NewReader(beaconBody))
 	breq.Header.Set("Content-Type", "application/json")
 	breq.Header.Set("User-Agent", browserUA)
@@ -5914,8 +6277,8 @@ func TestAdminLoginAcceptsAndServesDashboard(t *testing.T) {
 			}
 		case adminFlagCookie:
 			sawFlag = true
-			if c.HttpOnly {
-				t.Error("tracker-exclusion cookie must be readable by tracker.js (not HttpOnly)")
+			if !c.HttpOnly {
+				t.Error("tracker-exclusion cookie must be HttpOnly: exclusion is enforced by the track endpoints server-side, no script reads it")
 			}
 		}
 	}
@@ -5998,11 +6361,102 @@ func TestAdminDashboardRejectsBadRange(t *testing.T) {
 	if rec.Code != http.StatusOK {
 		t.Fatalf("/admin?days=banana = %d, want 200 (defaults to 30)", rec.Code)
 	}
-	if !strings.Contains(rec.Body.String(), "Last 30 days.") {
+	if !strings.Contains(rec.Body.String(), "Last 30 days") {
 		t.Error("bad days param did not default to 30")
 	}
 }
 
+==============================================================================
+FILE: internal/modules/marketing/consent_record.go
+==============================================================================
+package marketing
+
+// Structured SMS consent recording (critic cycle 1, finding 2).
+//
+// The consent checkbox labels below are quoted verbatim from the
+// public forms: freeQuoteConsentWording is the label beside the box
+// on /free-quote (internal/view/pages_freequote.go) and
+// smsOptInConsentWording is the label on /sms-opt-in
+// (internal/view/pages_sms_optin.go). If a label ever changes, change
+// its constant in the same commit and bump smsConsentWordingVersion:
+// the stored record must always carry the exact words the visitor
+// agreed to, or the record proves nothing.
+
+import (
+	"log/slog"
+	"net/http"
+
+	"github.com/David2024patton/patriot-pest-go/internal/data"
+)
+
+// smsConsentWordingVersion tags the wording set currently live on
+// the public forms.
+const smsConsentWordingVersion = "2026-11 v1"
+
+const freeQuoteConsentWording = "Yes, Patriot Pest Control may text me about my quote, my appointments, and my service. Message frequency varies. Message and data rates may apply. Reply STOP to end, HELP for help. Consent is not a condition of purchase."
+
+const smsOptInConsentWording = "Yes, Patriot Pest Control may text me about my appointments and service. Message frequency varies. Message and data rates may apply. Reply STOP to end, HELP for help. Consent is not a condition of purchase."
+
+// recordSMSConsent stores one structured consent record for a checked
+// box. A store failure is logged loudly with the phone number so staff
+// can reconcile by hand; it never blocks the visitor's own request,
+// because the lead itself still carries the consent note.
+func (m *Module) recordSMSConsent(r *http.Request, name, phone, source, wording string) {
+	rec := data.SMSConsentRecord{
+		Name:           name,
+		Phone:          phone,
+		Source:         source,
+		Wording:        wording,
+		WordingVersion: smsConsentWordingVersion,
+		IP:             clientIP(r),
+	}
+	if err := data.StoreSMSConsent(m.DBPath, rec); err != nil {
+		slog.Error("sms consent record store failed", "err", err, "phone", phone, "source", source)
+		return
+	}
+	slog.Info("sms consent recorded", "source", source, "phone", phone, "wording_version", smsConsentWordingVersion)
+}
+
+==============================================================================
+FILE: internal/modules/marketing/consent_record_test.go
+==============================================================================
+package marketing
+
+import (
+	"net/http/httptest"
+	"path/filepath"
+	"testing"
+
+	"github.com/David2024patton/patriot-pest-go/internal/data"
+)
+
+// The structured consent record is the audit artifact for a checked
+// box: it must land with the form's exact wording and version.
+func TestRecordSMSConsentStoresStructuredRecord(t *testing.T) {
+	m := &Module{DBPath: filepath.Join(t.TempDir(), "consent.db")}
+	r := httptest.NewRequest("POST", "/free-quote", nil)
+	r.RemoteAddr = "203.0.113.9:5555"
+	m.recordSMSConsent(r, "Test Person", "+15095550100", "/free-quote", freeQuoteConsentWording)
+
+	got, err := data.ListSMSConsents(m.DBPath, 10)
+	if err != nil {
+		t.Fatalf("list: %v", err)
+	}
+	if len(got) != 1 {
+		t.Fatalf("want 1 consent record, got %d", len(got))
+	}
+	rec := got[0]
+	if rec.Wording != freeQuoteConsentWording {
+		t.Fatalf("stored wording drifted from the form label: %q", rec.Wording)
+	}
+	if rec.WordingVersion != smsConsentWordingVersion || rec.Source != "/free-quote" ||
+		rec.Phone != "+15095550100" || rec.Name != "Test Person" {
+		t.Fatalf("record fields wrong: %+v", rec)
+	}
+	if rec.ConsentedAt == 0 {
+		t.Fatal("consent record has no timestamp")
+	}
+}
 
 ==============================================================================
 FILE: internal/modules/marketing/freequote.go
@@ -6138,6 +6592,9 @@ func (m *Module) freeQuotePost(w http.ResponseWriter, r *http.Request) {
 	}
 	if consent == "yes" {
 		notes.WriteString("\nTexting consent: the customer checked the box on /free-quote agreeing to text messages from Patriot Pest Control about their quote, appointments, and service. Message frequency varies. Message and data rates may apply. Reply STOP to end, HELP for help. Consent is not a condition of purchase.")
+		// The note above is for staff; the audit-grade record (who,
+		// when, which form, exact wording) is stored separately.
+		m.recordSMSConsent(r, name, phone, "/free-quote", freeQuoteConsentWording)
 	} else {
 		notes.WriteString("\nTexting consent: NOT given on the form. Call this lead; do not text until they opt in.")
 	}
@@ -6173,7 +6630,6 @@ func (m *Module) freeQuotePost(w http.ResponseWriter, r *http.Request) {
 		"PestOptions":    pestOptionsHTML(""),
 	})
 }
-
 
 ==============================================================================
 FILE: internal/modules/marketing/leads.go
@@ -6312,7 +6768,6 @@ func pestOptionsHTML(selected string) template.HTML {
 	return template.HTML(b.String())
 }
 
-
 ==============================================================================
 FILE: internal/modules/marketing/leads_test.go
 ==============================================================================
@@ -6409,7 +6864,6 @@ func TestLeadDetailAndPests(t *testing.T) {
 		t.Error("submitted pest must render selected")
 	}
 }
-
 
 ==============================================================================
 FILE: internal/modules/marketing/main_test.go
@@ -6508,7 +6962,6 @@ func seedCatalog(dbPath string) error {
 	return nil
 }
 
-
 ==============================================================================
 FILE: internal/modules/marketing/marketing.go
 ==============================================================================
@@ -6584,7 +7037,7 @@ var ldBusiness = map[string]any{
 	"email":       "info@patriotpest.pro",
 	"image":       "https://www.patriotpest.pro/assets/img/og.png",
 	"logo":        "https://www.patriotpest.pro/assets/img/og.png",
-	"description": "Veteran-owned pest control serving Washington, Idaho & Oregon. Same-day service, eco-friendly family & pet safe treatments, 90-day warranty.",
+	"description": "Veteran-owned pest control serving Washington, Idaho & Oregon. Same-day service available, eco-friendly treatments that are family and pet safe when dry, 90-day warranty with free re-treatments.",
 	"priceRange":  "$$",
 	"address": map[string]any{
 		"@type":           "PostalAddress",
@@ -6667,6 +7120,7 @@ func (m *Module) Register(r chi.Router) bool {
 	r.With(postLimiter.Middleware).Post("/api/track/view", m.trackEndpoint("pageview"))
 	r.With(postLimiter.Middleware).Post("/api/track/event", m.trackEndpoint("event"))
 	r.With(postLimiter.Middleware).Post("/api/track/session_end", m.trackEndpoint("session_end"))
+	r.With(postLimiter.Middleware).Post("/api/track/forget", m.trackForget)
 	// Google reviews sync — only when REVIEWS_SYNC_TOKEN is set; otherwise
 	// the route is not registered and /api/* answers 410 (fail closed).
 	if m.ReviewsSyncToken != "" {
@@ -6711,6 +7165,20 @@ func (m *Module) trackEndpoint(defaultKind string) http.HandlerFunc {
 		}
 		var p map[string]any
 		if err := json.Unmarshal(body, &p); err != nil {
+			return
+		}
+		// Consent gate: the first-party trackers send consent:true only
+		// after the visitor accepts in the cookie banner. Anything else
+		// (no marker, declined, a script that ignores the banner) is
+		// dropped here, so no geo, device, or identity data is stored
+		// for a visitor who never said yes.
+		if c, ok := p["consent"].(bool); !ok || !c {
+			return
+		}
+		// Admin exclusion: requests carrying the admin flag cookie
+		// (set at admin login) are the owner's own visits; they are
+		// never stored, so they never reach the dashboard.
+		if c, err := r.Cookie(adminFlagCookie); err == nil && c.Value == "1" {
 			return
 		}
 		str := func(keys ...string) string {
@@ -6843,7 +7311,7 @@ const (
 	contactD  = "Call (509) 471-5767. Free quotes, same-day pest control service, online scheduling 24/7."
 	referralT = "Referral Program - Earn $25 | Patriot Pest Control"
 	veteransT = "Veterans: First Month Free on Annual Plans | Patriot Pest Control"
-	veteransD = "Veterans Day offer from veteran-owned Patriot Pest Control: veterans get their first month free on any annual plan. Book by Nov 11, 2026. Call (509) 471-5767, code VETSDAY."
+	veteransD = "Veterans Day offer from veteran-owned Patriot Pest Control: veterans get their first month free on any annual plan. Call (509) 471-5767, code VETSDAY."
 	referralD = "Refer a neighbor, both get $25. Patriot Pest Control referral program."
 	socialsT  = "Social Media | Patriot Pest Control"
 	socialsD  = "Follow Patriot Pest Control on Facebook and Instagram."
@@ -7057,11 +7525,24 @@ func (m *Module) terms(w http.ResponseWriter, r *http.Request) {
 	m.legal(w, r, "terms", termsT, termsD)
 }
 
+// Legal page dates: the day each document's current text took
+// effect. A legal page must never render the viewer's current date
+// as its own revision date (the PHP original did, which made every
+// policy look freshly updated and destroyed the audit trail). Bump
+// the matching date in the same commit that changes the text.
+const (
+	legalPrivacyDate = "2026-11-18" // tracking-data erasure section added
+	legalTermsDate   = "2026-11-11" // checkbox consent model replaced the old terms text
+)
+
 func (m *Module) legal(w http.ResponseWriter, r *http.Request, kind string, title, description string) {
+	date := legalTermsDate
+	if kind == "privacy" {
+		date = legalPrivacyDate
+	}
 	view.Page(w, r, "legal", title, description, metaKeywords, m.base(map[string]any{
 		"LegalKind": kind,
-		// PHP renders date('F j, Y') from the current date.
-		"LegalDate": time.Now().Format("2006-01-02"),
+		"LegalDate": date,
 	}))
 }
 
@@ -7357,30 +7838,37 @@ var csrfTokenRe = regexp.MustCompile(`^[0-9a-f]{64}$`)
 func (m *Module) csrfField(r *http.Request, w http.ResponseWriter) template.HTML {
 	c, err := r.Cookie(csrfCookieName)
 	tok := ""
-	if err == nil && csrfTokenRe.MatchString(c.Value) {
+	if err == nil && csrfTokenRe.MatchString(c.Value) && data.CSRFTokenRegistered(c.Value) {
 		tok = c.Value
 	} else {
 		tok = newCSRFToken()
-		secure := r.TLS != nil || r.Header.Get("X-Forwarded-Proto") == "https"
+		data.RegisterCSRFToken(tok)
+		// Always Secure: HTTPS-only deployment; X-Forwarded-Proto is
+		// client-supplied and never decides cookie security.
 		http.SetCookie(w, &http.Cookie{
 			Name:     csrfCookieName,
 			Value:    tok,
 			Path:     "/",
 			SameSite: http.SameSiteLaxMode,
 			HttpOnly: true,
-			Secure:   secure,
+			Secure:   true,
 		})
 	}
 	return template.HTML(`<input type="hidden" name="_csrf" value="` + tok + `">`)
 }
 
-// csrfOK verifies the submitted token against the cookie (constant-time),
-// mirroring Csrf::check.
+// csrfOK verifies the submitted token against the cookie (constant-time)
+// AND against the server registry: the token must be one this server
+// issued. A cookie planted by a sibling subdomain or a network
+// attacker was never registered, so a matching pair alone fails.
 func csrfOK(got, expected string) bool {
 	if got == "" || expected == "" {
 		return false
 	}
-	return subtle.ConstantTimeCompare([]byte(got), []byte(expected)) == 1
+	if subtle.ConstantTimeCompare([]byte(got), []byte(expected)) != 1 {
+		return false
+	}
+	return data.CSRFTokenRegistered(got)
 }
 
 // contactGet — the contact + free-quote form page.
@@ -7474,11 +7962,26 @@ func (m *Module) contactPost(w http.ResponseWriter, r *http.Request) {
 		Detail: leadDetail("Contact form", pest, zip),
 		Notes:  message,
 	}
+	delivered := true
 	if err := m.captureLead(lead); err != nil {
 		slog.Error("contact lead capture failed, saving locally", "err", err, "email", email, "phone", phone)
 		if res := data.CreateSignup(m.DBPath, name, email, phone, "", "", zip); !res.OK {
 			slog.Error("contact lead local save failed", "err", res.Err, "email", email, "phone", phone, "message", message)
+			delivered = false
 		}
+	}
+	if !delivered {
+		// Both stores refused the lead. The visitor is told plainly
+		// instead of being shown a success message for a message the
+		// business never received.
+		w.WriteHeader(http.StatusInternalServerError)
+		view.PageStatus(w, r, 500, "contact", contactT, contactD, metaKeywords, m.base(map[string]any{
+			"Errors":      []string{"We could not save your message just now. Please call (509) 471-5767 and we will take it by phone."},
+			"OldName":     name, "OldEmail": email, "OldPhone": phone, "OldMessage": message,
+			"OldZip": zip, "OldPest": pest,
+			"Csrf": m.csrfField(r, w), "PestOptions": pestOptionsHTML(pest),
+		}))
+		return
 	}
 	slog.Info("Contact form submitted", "email", email)
 	view.Page(w, r, "contact", contactT, contactD, metaKeywords, m.base(map[string]any{
@@ -7511,7 +8014,6 @@ func pubRFC1123(s string) string {
 	return t.Format(time.RFC1123)
 }
 
-
 ==============================================================================
 FILE: internal/modules/marketing/post_overrides.go
 ==============================================================================
@@ -7519,10 +8021,12 @@ package marketing
 
 import "github.com/David2024patton/patriot-pest-go/internal/data"
 
-// postBodyOverrides replaces the stored body_html of select blog posts with
-// longer, audit-compliant articles. Keys are post slugs. The content below is
-// static and authored in source, so it does not need the bluemonday pass that
-// database-loaded bodies get. It uses only plain markup (p, h3, ul, li) that
+// postBodyOverrides replaces the stored body_html of select blog posts
+// with longer articles. Keys are post slugs. The content is static and
+// authored in source, and it passes through the same bluemonday policy
+// as database-loaded bodies when it is applied (see
+// applyPostBodyOverride): being authored in source is not an exemption
+// from the sanitizer. It uses only plain markup (p, h3, ul, li) that
 // the post template renders inside .prose.
 var postBodyOverrides = map[string]string{
 	"rodent-proof-your-home": `<p>Every October, as the first hard frost settles over the Inland Northwest, rodents start house hunting. The fields around Spokane and Coeur d'Alene go cold and quiet, natural food dries up, and your heated home with its pantry, pet food, and cozy wall voids looks like the best real estate in the county. Mice and rats do not wander in by accident. They follow warmth, food odor, and shelter, and once one finds a way in, the rest of the family follows the scent trail.</p>
@@ -7590,10 +8094,9 @@ func applyPostBodyOverride(p *data.Post) {
 		return
 	}
 	if body, ok := postBodyOverrides[p.Slug]; ok {
-		p.BodyHTML = body
+		p.BodyHTML = data.SanitizeHTML(body)
 	}
 }
-
 
 ==============================================================================
 FILE: internal/modules/marketing/reviews.go
@@ -7760,7 +8263,6 @@ func (m *Module) reviewCards(limit int) ([]reviewCard, data.GoogleReviewsProfile
 	return cards, profile
 }
 
-
 ==============================================================================
 FILE: internal/modules/marketing/reviews_test.go
 ==============================================================================
@@ -7856,7 +8358,6 @@ func TestReviewCardsExcludeOwnerReviews(t *testing.T) {
 	}
 }
 
-
 ==============================================================================
 FILE: internal/modules/marketing/search.go
 ==============================================================================
@@ -7946,7 +8447,6 @@ func truncateDesc(s string) string {
 	}
 	return s
 }
-
 
 ==============================================================================
 FILE: internal/modules/marketing/seo_links_test.go
@@ -8273,7 +8773,6 @@ func addLink(t *testing.T, from, href string, seen map[string]bool, queue *[]str
 	}
 }
 
-
 ==============================================================================
 FILE: internal/modules/marketing/seo_test.go
 ==============================================================================
@@ -8376,7 +8875,6 @@ func TestLegalPagesServe(t *testing.T) {
 		}
 	}
 }
-
 
 ==============================================================================
 FILE: internal/modules/marketing/signup.go
@@ -8529,7 +9027,6 @@ func isZipSafe(s string) bool {
 	}
 	return digits > 0
 }
-
 ==============================================================================
 FILE: internal/modules/marketing/sms_optin.go
 ==============================================================================
@@ -8619,6 +9116,11 @@ func (m *Module) smsOptInPost(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// The audit-grade consent record (who, when, which form, exact
+	// wording) is stored on its own; the lead note below stays for
+	// staff readability.
+	m.recordSMSConsent(r, name, phone, "/sms-opt-in", smsOptInConsentWording)
+
 	lead := leadForm{
 		Name:   name,
 		Phone:  phone,
@@ -8642,7 +9144,6 @@ func (m *Module) smsOptInPost(w http.ResponseWriter, r *http.Request) {
 		"Csrf":           m.csrfField(r, w),
 	})
 }
-
 
 ==============================================================================
 FILE: internal/modules/marketing/static/manifest.webmanifest
@@ -8681,7 +9182,6 @@ FILE: internal/modules/marketing/static/manifest.webmanifest
     }
   ]
 }
-
 
 ==============================================================================
 FILE: internal/modules/marketing/static/sw.js
@@ -8782,6 +9282,208 @@ self.addEventListener("fetch", function (event) {
   }
 });
 
+==============================================================================
+FILE: internal/modules/marketing/track_consent_test.go
+==============================================================================
+package marketing
+
+import (
+	"net/http"
+	"net/http/httptest"
+	"path/filepath"
+	"strings"
+	"testing"
+
+	"github.com/David2024patton/patriot-pest-go/internal/data"
+)
+
+// The track endpoints store nothing unless the payload carries the
+// consent marker the first-party trackers add after a banner accept.
+func TestTrackEndpointRequiresConsentMarker(t *testing.T) {
+	m := &Module{DBPath: filepath.Join(t.TempDir(), "track.db")}
+	h := m.trackEndpoint("view")
+	post := func(body string) {
+		req := httptest.NewRequest(http.MethodPost, "/api/track/view", strings.NewReader(body))
+		req.Header.Set("Content-Type", "application/json")
+		req.Header.Set("User-Agent", browserUA)
+		rec := httptest.NewRecorder()
+		h(rec, req)
+		if rec.Code != http.StatusAccepted {
+			t.Fatalf("status = %d, want 202 (the endpoint always answers 202)", rec.Code)
+		}
+	}
+	count := func() int {
+		db, err := data.AnalyticsDB(m.DBPath)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if err := data.EnsureAnalyticsTables(db); err != nil {
+			t.Fatal(err)
+		}
+		var n int
+		if err := db.QueryRow(`SELECT COUNT(*) FROM analytics_events`).Scan(&n); err != nil {
+			t.Fatal(err)
+		}
+		return n
+	}
+
+	post(`{"vid":"v1","sid":"s1","path":"/no-consent"}`)
+	if n := count(); n != 0 {
+		t.Fatalf("event without consent marker was stored (%d rows)", n)
+	}
+	post(`{"consent":false,"vid":"v1","sid":"s1","path":"/declined"}`)
+	if n := count(); n != 0 {
+		t.Fatalf("event with consent:false was stored (%d rows)", n)
+	}
+	post(`{"consent":true,"vid":"v1","sid":"s1","path":"/accepted"}`)
+	if n := count(); n != 1 {
+		t.Fatalf("event with consent:true not stored (%d rows)", n)
+	}
+
+	// The admin flag cookie excludes the owner's own visits even when
+	// consent is present.
+	req := httptest.NewRequest(http.MethodPost, "/api/track/view", strings.NewReader(`{"consent":true,"vid":"v1","sid":"s1","path":"/admin-visit"}`))
+	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("User-Agent", browserUA)
+	req.AddCookie(&http.Cookie{Name: adminFlagCookie, Value: "1"})
+	rec := httptest.NewRecorder()
+	h(rec, req)
+	if n := count(); n != 1 {
+		t.Fatalf("admin-flagged event was stored (%d rows, want still 1)", n)
+	}
+}
+
+==============================================================================
+FILE: internal/modules/marketing/track_forget.go
+==============================================================================
+package marketing
+
+// POST /api/track/forget: the visitor-facing erasure path for the
+// first-party analytics (critic cycle 1, finding 4). The privacy
+// page's tracking-data control sends the visitor ids this browser
+// holds; the server deletes every analytics row stored under them.
+// Knowing the id is the credential: ids are random 122-bit or
+// 256-bit values that are never published, so a request can only
+// erase the rows of a browser that actually holds the id.
+
+import (
+	"encoding/json"
+	"io"
+	"log/slog"
+	"net/http"
+	"regexp"
+
+	"github.com/David2024patton/patriot-pest-go/internal/data"
+)
+
+// The two id shapes the first-party trackers issue: the beacon's
+// UUID and the shell tracker's 64-character hex string.
+var (
+	visitorUUIDRe = regexp.MustCompile(`^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$`)
+	visitorHexRe  = regexp.MustCompile(`^[0-9a-f]{64}$`)
+)
+
+func validVisitorID(id string) bool {
+	return visitorUUIDRe.MatchString(id) || visitorHexRe.MatchString(id)
+}
+
+func (m *Module) trackForget(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	body, err := io.ReadAll(io.LimitReader(r.Body, 16*1024))
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		_, _ = w.Write([]byte(`{"ok":false,"error":"could not read request"}`))
+		return
+	}
+	var p map[string]any
+	if err := json.Unmarshal(body, &p); err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		_, _ = w.Write([]byte(`{"ok":false,"error":"invalid request"}`))
+		return
+	}
+	id, _ := p["visitor_id"].(string)
+	if id == "" {
+		id, _ = p["vid"].(string)
+	}
+	if !validVisitorID(id) {
+		w.WriteHeader(http.StatusBadRequest)
+		_, _ = w.Write([]byte(`{"ok":false,"error":"unknown visitor id"}`))
+		return
+	}
+	n, err := data.DeleteVisitorAnalytics(m.DBPath, id)
+	if err != nil {
+		slog.Error("track forget: delete failed", "err", err)
+		w.WriteHeader(http.StatusInternalServerError)
+		_, _ = w.Write([]byte(`{"ok":false,"error":"delete failed"}`))
+		return
+	}
+	// The id is a credential-grade random value; only the count is
+	// logged, never the id itself.
+	slog.Info("track forget: visitor rows deleted", "deleted", n)
+	_ = json.NewEncoder(w).Encode(map[string]any{"ok": true, "deleted": n})
+}
+
+==============================================================================
+FILE: internal/modules/marketing/track_forget_test.go
+==============================================================================
+package marketing
+
+import (
+	"net/http"
+	"net/http/httptest"
+	"path/filepath"
+	"strings"
+	"testing"
+
+	"github.com/David2024patton/patriot-pest-go/internal/data"
+)
+
+// The forget endpoint erases exactly the rows stored under the
+// presented visitor id and rejects ids that match neither tracker
+// format.
+func TestTrackForgetDeletesVisitorRows(t *testing.T) {
+	dbPath := filepath.Join(t.TempDir(), "forget.db")
+	m := &Module{DBPath: dbPath}
+	db, err := data.AnalyticsDB(dbPath)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := data.EnsureAnalyticsTables(db); err != nil {
+		t.Fatal(err)
+	}
+	vid := "123e4567-e89b-12d3-a456-426614174000"
+	for _, e := range []data.Event{
+		{TS: 100, VisitorID: vid, SessionID: "s1", Kind: "pageview", Path: "/"},
+		{TS: 101, VisitorID: "other-visitor", SessionID: "s2", Kind: "pageview", Path: "/"},
+	} {
+		if err := data.InsertEvent(db, e); err != nil {
+			t.Fatal(err)
+		}
+	}
+
+	post := func(body string) *httptest.ResponseRecorder {
+		req := httptest.NewRequest(http.MethodPost, "/api/track/forget", strings.NewReader(body))
+		req.Header.Set("Content-Type", "application/json")
+		rec := httptest.NewRecorder()
+		m.trackForget(rec, req)
+		return rec
+	}
+
+	if rec := post(`{"visitor_id":"not-an-id"}`); rec.Code != http.StatusBadRequest {
+		t.Fatalf("bad id: status = %d, want 400", rec.Code)
+	}
+	rec := post(`{"visitor_id":"` + vid + `"}`)
+	if rec.Code != http.StatusOK || !strings.Contains(rec.Body.String(), `"deleted":1`) {
+		t.Fatalf("forget: status = %d body = %s, want 200 with deleted 1", rec.Code, rec.Body.String())
+	}
+	var left int
+	if err := db.QueryRow(`SELECT COUNT(*) FROM analytics_events`).Scan(&left); err != nil {
+		t.Fatal(err)
+	}
+	if left != 1 {
+		t.Fatalf("%d rows left, want 1 (the other visitor)", left)
+	}
+}
 
 ==============================================================================
 FILE: internal/modules/report/dashboard.go
@@ -9241,7 +9943,6 @@ button:hover{filter:brightness(1.1)}
 .alt a{color:var(--muted)}
 `
 
-
 ==============================================================================
 FILE: internal/modules/report/report.go
 ==============================================================================
@@ -9483,11 +10184,13 @@ func (m *Module) createSession(db *sql.DB, w http.ResponseWriter, r *http.Reques
 		VALUES (?, ?, ?, ?)`, sha256Hex(token), email, now.Unix(), now.Add(sessionTTL).Unix()); err != nil {
 		return err
 	}
-	secure := r.TLS != nil || r.Header.Get("X-Forwarded-Proto") == "https"
+	// Always Secure: the site is HTTPS-only behind Traefik, and
+	// X-Forwarded-Proto is client-supplied, so it is never trusted
+	// to decide cookie security.
 	http.SetCookie(w, &http.Cookie{
 		Name: sessionCookieName, Value: token, Path: "/",
 		MaxAge: int(sessionTTL.Seconds()), HttpOnly: true,
-		Secure: secure, SameSite: http.SameSiteLaxMode,
+		Secure: true, SameSite: http.SameSiteLaxMode,
 	})
 	return nil
 }
@@ -9519,6 +10222,13 @@ func (m *Module) destroySession(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	http.SetCookie(w, &http.Cookie{Name: sessionCookieName, Value: "", Path: "/", MaxAge: -1, HttpOnly: true})
+}
+
+// PurgeExpiredReportSessions deletes expired report sessions. It
+// runs on a schedule from cmd/server as well as opportunistically at
+// login, so expired rows are collected even when nobody signs in.
+func PurgeExpiredReportSessions(db *sql.DB) {
+	purgeExpiredReportSessions(db)
 }
 
 func purgeExpiredReportSessions(db *sql.DB) {
@@ -9637,7 +10347,6 @@ func writeAuthPage(w http.ResponseWriter, title, heading, sub, intro, errMsg, fo
 	_, _ = w.Write([]byte(sb.String()))
 }
 
-
 ==============================================================================
 FILE: internal/modules/report/report_test.go
 ==============================================================================
@@ -9727,7 +10436,8 @@ func TestSessionFlow(t *testing.T) {
 	}
 	w := httptest.NewRecorder()
 	r := httptest.NewRequest(http.MethodPost, "/login", nil)
-	r.Header.Set("X-Forwarded-Proto", "https")
+	// No X-Forwarded-Proto header: the session cookie must still be
+	// Secure. Cookie security never comes from that client header.
 	if err := m.createSession(db, w, r, "skyler@patriotpest.pro"); err != nil {
 		t.Fatal(err)
 	}
@@ -9909,7 +10619,6 @@ func TestRegisterAddsMiddleware(t *testing.T) {
 	}
 }
 
-
 ==============================================================================
 FILE: internal/view/analytics.go
 ==============================================================================
@@ -9985,7 +10694,6 @@ func applyAnalytics(d map[string]any) {
 	d["FBPixel"] = a.FBPixel
 	d["Clarity"] = a.Clarity
 }
-
 ==============================================================================
 FILE: internal/view/area_content.go
 ==============================================================================
@@ -10169,13 +10877,14 @@ func init() {
 			"connects into the broader North Idaho trail network. New subdivisions keep replacing old " +
 			"farmland as Post Falls pushes north toward Rathdrum.",
 		PestNote: "Rodents like mice and rats, ants, spiders, and occasional invaders such as beetles and " +
-			"earwigs are the common Rathdrum pests. Idaho sources add carpenter ants and odorous house ants, " +
-			"black widows, hobo spiders, and wasps and bees nesting around homes as regional regulars.",
+			"earwigs are the common Rathdrum pests. Regional regulars also include carpenter ants and " +
+			"odorous house ants, " +
+			"black widows, hobo spiders, and wasps and bees nesting around homes.",
 	})
 
 	RegisterAreaCopy("spokane", AreaCopy{
 		Intro: "Spokane revolves around its river, which tumbles through downtown in the Spokane Falls. " +
-			"Riverfront Park, the 100 acre site of Expo '74, sits just north of the downtown core, and " +
+			"Riverfront Park, the roughly 100-acre site of Expo '74, sits just north of the downtown core, and " +
 			"River Park Square anchors the shopping and entertainment district. The South Hill rises south " +
 			"of downtown with neighborhoods like South Perry, home to a weekly farmers market. The " +
 			"University District on the east side holds Gonzaga University and branch campuses of " +
@@ -10184,8 +10893,8 @@ func init() {
 			"by architect Kirtland Kelsey Cutter, and that historic character still defines Riverside " +
 			"Avenue. The Logan neighborhood near Gonzaga mixes student housing with some of the city's " +
 			"oldest homes. North Spokane's Hillyard and Five Mile areas hold the suburban north side.",
-		PestNote: "Spokane sits in one of the few US regions where hobo spiders are well established, " +
-			"documented here since the late 1960s. Odorous house ants, pavement ants, and carpenter ants " +
+		PestNote: "Spokane sits in one of the few US regions where hobo spiders are well established. " +
+			"Odorous house ants, pavement ants, and carpenter ants " +
 			"are the top ant threats, with rodents moving indoors each fall. Yellow jackets and bald " +
 			"faced hornets nest around eaves and sheds all summer, and moles, bed bugs, and the velvety " +
 			"tree ant round out the area's pest list.",
@@ -10196,7 +10905,7 @@ func init() {
 			"The Spokane River Centennial Trail runs through the valley, past the Spokane Valley Mall and " +
 			"along the river corridor. Dishman Hills Natural Area preserves over 500 acres of hiking land " +
 			"right inside the urban area, and the Saltese Uplands Conservation Area covers about 700 acres " +
-			"to the east. Greenacres anchors the east end, with the 37 mile Centennial Trail following the " +
+			"to the east. Greenacres anchors the east end, with the Centennial Trail following the " +
 			"river from Nine Mile Falls to the state line.",
 		LocalNote: "The valley's economy centers on retail, healthcare, and manufacturing, with the " +
 			"Spokane Business and Industrial Park as a major employer. Schools fall under the Central " +
@@ -10209,17 +10918,16 @@ func init() {
 	})
 }
 
-
 ==============================================================================
 FILE: internal/view/area_overrides.go
 ==============================================================================
 package view
 
-// AreaCopy carries genuinely local content for one city page. The shared
+// AreaCopy carries local content for one city page. The shared
 // area-detail template renders these fields when present for the city slug;
 // cities without an entry keep the generic template copy.
 type AreaCopy struct {
-	Intro     string // 2-4 sentences, genuinely local (researched, never invented)
+	Intro     string // 2-4 sentences of local color for the city
 	LocalNote string // neighborhoods, geography, landmarks (researched)
 	PestNote  string // local pest pressure notes (researched)
 }
@@ -10238,7 +10946,6 @@ func AreaCopyFor(slug string) (AreaCopy, bool) {
 	return c, ok
 }
 
-
 ==============================================================================
 FILE: internal/view/assets.go
 ==============================================================================
@@ -10250,7 +10957,6 @@ import "embed"
 
 //go:embed assets/*
 var Assets embed.FS
-
 
 ==============================================================================
 FILE: internal/view/assets/admin.css
@@ -10463,8 +11169,6 @@ table.data .num { font-family: var(--mono); color: var(--khaki); }
 .authx-photo .tag { position: absolute; left: .8rem; bottom: .7rem; font-family: var(--mono); font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; color: var(--cream); background: rgba(14,19,10,.75); padding: .3rem .55rem; border-left: 2px solid var(--orange); }
 @media (prefers-reduced-motion: reduce) { .authx-photo .scan { animation: none; } }
 
-.authx-trust { display: flex; flex-wrap: wrap; gap: .5rem 1.4rem; margin-top: 1.6rem; font-family: var(--mono); font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: var(--khaki); }
-.authx-trust span::before { content: "✓ "; color: var(--olive-300); }
 
 .authx-call { margin-top: 1.8rem; }
 .authx-call .lbl { font-family: var(--mono); font-size: .66rem; letter-spacing: .14em; text-transform: uppercase; color: var(--olive-300); }
@@ -10501,7 +11205,6 @@ table.data .num { font-family: var(--mono); color: var(--khaki); }
 
 /* big spaced code entry */
 .authx-code { text-align: center; font-family: var(--mono) !important; font-size: 1.9rem !important; letter-spacing: .5em; text-indent: .5em; }
-
 
 ==============================================================================
 FILE: internal/view/assets/app.css
@@ -10924,7 +11627,6 @@ body.appshell-body .inline-form { display: inline-flex; align-items: center; gap
 .block.paper .eyebrow::before{background:#a52f1e}
 .report .declass{color:#a52f1e;border-color:#a52f1e}
 
-
 ==============================================================================
 FILE: internal/view/assets/app.js
 ==============================================================================
@@ -11026,12 +11728,11 @@ FILE: internal/view/assets/app.js
   });
 })();
 
-
 ==============================================================================
 FILE: internal/view/assets/beacon.css
 ==============================================================================
 /* ============================================================
-   BEACON.CSS - Easter egg + jackpot (ORDER 1) + retention toasts
+   BEACON.CSS - Easter egg + retention toasts
    Ported verbatim from Rockwell ASSETS/CREATIVE/EASTER_EGG/preview.html.
    Uses the :root tokens already defined in styles.css.
    Loaded only when the egg_enabled site setting is on.
@@ -11110,21 +11811,26 @@ FILE: internal/view/assets/beacon.css
   .strip{transition:none !important}
 }
 
-
 ==============================================================================
 FILE: internal/view/assets/beacon.js
 ==============================================================================
 /* ============================================================
-   BEACON.JS - first-party retention beacon + THE BEACON easter egg
-   ORDER 1 + ORDER 3. Loaded when the track_enabled site setting is on.
+   BEACON.JS - first-party retention beacon + the Beacon easter egg.
+   Loaded when the track_enabled site setting is on.
    Self-gating: the egg module only runs when #egg exists (egg_enabled
-   renders it); the tracking module runs on both marketing and app shells.
-   Fire rules per Nash RETENTION_EVENT_CONTRACT.md:
+   renders it); the tracking module runs on both marketing and app
+   shells.
+   Events sent:
      - page_view on every load
      - link_click on outbound / tel / anchor clicks
-     - easter_egg_click per hit, easter_egg_reveal on jackpot
+     - easter_egg_click per hit, easter_egg_reveal on the win
      - session_end via sendBeacon on pagehide
-   All strings Hamilton locked, zero em dashes.
+   Consent: nothing is sent, and no visitor or session id is created,
+   until the visitor accepts in the cookie banner (the choice is kept
+   in localStorage under ppc-consent-v1, the same key the banner and
+   the third-party analytics gate use). A Do Not Track signal also
+   suppresses every send. Accepted sends carry consent:true, and the
+   server stores nothing without that marker.
    ============================================================ */
 (function(){
 "use strict";
@@ -11138,6 +11844,7 @@ function uuid(){
   return h(b[0])+h(b[1])+h(b[2])+h(b[3])+"-"+h(b[4])+h(b[5])+"-"+h(b[6])+h(b[7])+"-"+h(b[8])+h(b[9])+"-"+h(b[10])+h(b[11])+h(b[12])+h(b[13])+h(b[14])+h(b[15]);
 }
 function getVisitor(){
+  if (!trackingAllowed()) return "";
   var v;
   try { v = localStorage.getItem("pp_visitor_id"); } catch(e){}
   if(!v || !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(v)){
@@ -11148,6 +11855,7 @@ function getVisitor(){
 }
 var SESSION_TTL = 30*60*1000; // 30 minutes inactivity ends a session
 function getSession(){
+  if (!trackingAllowed()) return "";
   var s, ts;
   try { s = sessionStorage.getItem("pp_session_id"); ts = parseInt(sessionStorage.getItem("pp_session_ts")||"0",10); } catch(e){}
   var now = Date.now();
@@ -11162,8 +11870,16 @@ function getSession(){
 function nowIso(){ return new Date().toISOString(); }
 function pagePath(){ var p = location.pathname || "/"; return p.length>255 ? p.slice(0,255) : p; }
 
+/* ---------- consent ---------- */
+function trackingAllowed(){
+  if (navigator.doNotTrack === "1" || window.doNotTrack === "1") return false;
+  try { return localStorage.getItem("ppc-consent-v1") === "accepted"; } catch(e){ return false; }
+}
+
 /* ---------- send (contract: same-origin JSON, server answers 204) ---------- */
 function fire(kind, payload){
+  if (!trackingAllowed()) return;
+  payload.consent = true;
   try {
     if (navigator.sendBeacon) {
       navigator.sendBeacon("/api/track/"+kind, new Blob([JSON.stringify(payload)], {type:"application/json"}));
@@ -11216,7 +11932,8 @@ function wireSessionEnd(){
 }
 
 /* ============================================================
-   THE BEACON // easter egg (ORDER 1) // ported from Rockwell preview
+   The Beacon easter egg: a hidden cache the visitor hunts across
+   page corners; five hits open the reward modal.
    ============================================================ */
 function initEgg(){
   var egg = document.getElementById("egg");
@@ -11230,7 +11947,10 @@ function initEgg(){
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var CORNERS = ["br","tr","bl","tl"];
   var KEY_HITS = "pp_egg_hits", KEY_CLAIMED = "pp_egg_claimed";
-  var CODE = "PATRIOT25";
+  // The reward code is rendered into the modal markup by the server;
+  // this script only needs its length for the reel count, so the code
+  // itself never ships inside this file.
+  var CODE = (codeDrop && codeDrop.textContent) ? codeDrop.textContent.trim() : "";
   var hits = parseInt(sessionStorage.getItem(KEY_HITS)||"0",10);
   var claimed = sessionStorage.getItem(KEY_CLAIMED)==="1";
 
@@ -11250,7 +11970,7 @@ function initEgg(){
     var next = CORNERS[(cur+1)%CORNERS.length];
     egg.setAttribute("data-corner", next);
   }
-  /* build reels: one strip per char of PATRIOT25 */
+  /* build reels: one strip per character of the reward code */
   var CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   function buildReels(){
     var html = "";
@@ -11265,6 +11985,7 @@ function initEgg(){
   buildReels();
   function spinReels(cb){
     var strips = reels.querySelectorAll(".strip");
+    if (!strips.length) { cb(); return; }
     var done = 0;
     function settle(strip, spins, idx){
       var h = 42;
@@ -11337,7 +12058,6 @@ if (document.readyState === "loading") {
   fireView(); wireLinks(); wireSessionEnd(); initEgg();
 }
 })();
-
 
 ==============================================================================
 FILE: internal/view/assets/cost.css
@@ -11584,7 +12304,6 @@ section { position: relative; z-index: 1; }
   .stamp { font-size: .7rem; padding: .35rem .8rem; }
 }
 
-
 ==============================================================================
 FILE: internal/view/assets/cost.js
 ==============================================================================
@@ -11692,12 +12411,16 @@ class CostReceiptRenderer {
     requestAnimationFrame(update);
   }
 
-  /* Set receipt date */
-  setReceiptDate() {
+  /* Receipt date: the date of the figures themselves (meta.as_of in
+     pricing.json), never the day the page happens to be viewed. */
+  setReceiptDate(data) {
     const el = document.getElementById('receipt-date');
     if (!el) return;
-    const now = new Date();
-    el.textContent = now.toISOString().split('T')[0].replace(/-/g, '.');
+    el.textContent = (data && data.meta && data.meta.as_of) ? data.meta.as_of.replace(/-/g, '.') : 'unknown';
+    const prov = document.getElementById('cost-provenance');
+    if (prov && data && data.meta) {
+      prov.textContent = 'About these figures: ' + data.meta.method + ' Source: ' + data.meta.source + ', ' + data.meta.as_of + '.';
+    }
   }
 
   /* Animate summary card values */
@@ -11716,10 +12439,13 @@ class CostReceiptRenderer {
     const container = document.getElementById('receipt-items');
     if (!container) return;
 
-    const maxValue = Math.max(...data.breakdown.map(d => d.max));
+    /* Threat percent compares range midpoints, so a wide range with
+       a low floor cannot outrank a consistently higher cost. */
+    const mid = (d) => (d.min + d.max) / 2;
+    const maxMid = Math.max(...data.breakdown.map(mid));
 
     container.innerHTML = data.breakdown.map((item, index) => {
-      const percent = ((item.max / maxValue) * 100).toFixed(0);
+      const percent = ((mid(item) / maxMid) * 100).toFixed(0);
       const color = item.color || this.colors[index % this.colors.length];
       return [
         '<div class="receipt-item">',
@@ -11792,12 +12518,12 @@ class CostReceiptRenderer {
     /* Start bugfield immediately */
     this.initBugfield();
 
-    /* Set receipt date */
-    this.setReceiptDate();
-
     /* Load data */
     const data = await this.loadData();
     if (!data) return;
+
+    /* Receipt date comes from the data, not the viewer's clock */
+    this.setReceiptDate(data);
 
     /* Render all sections */
     this.renderSummaryCards(data);
@@ -11816,177 +12542,142 @@ document.addEventListener('DOMContentLoaded', () => {
   renderer.init();
 });
 
-
 ==============================================================================
 FILE: internal/view/assets/icons/apple-touch-icon.png
 ==============================================================================
 [binary file: 1527 bytes, sha256 64e4e19ca78378435747aa69c7a2734098298d09a942f3e05f2196641405d0c9]
-
 ==============================================================================
 FILE: internal/view/assets/icons/icon-192.png
 ==============================================================================
 [binary file: 1677 bytes, sha256 c8e519f2b876d295655e0836e437b1453f79f1e95a24aae717309754506e59ef]
-
 ==============================================================================
 FILE: internal/view/assets/icons/icon-512.png
 ==============================================================================
 [binary file: 4869 bytes, sha256 767076636339b571c3ecc519c3ba15e97d8c320afda8e65f8f7313620addcdc6]
-
 ==============================================================================
 FILE: internal/view/assets/img/og-area.png
 ==============================================================================
 [binary file: 29312 bytes, sha256 addd2ec0488f561bdca52d728125c62d2180350c6b918f673b33a3d6ad5c0965]
-
 ==============================================================================
 FILE: internal/view/assets/img/og-blog.png
 ==============================================================================
 [binary file: 28858 bytes, sha256 fd982ec3e8792848331dd653b5d6ee2a4db6b56f8fae71c977a688cc32f65b00]
-
 ==============================================================================
 FILE: internal/view/assets/img/og-pest.png
 ==============================================================================
 [binary file: 29008 bytes, sha256 b1790e436b28e20e3fe5efca8145893e2c21710028cce949a7a9903ba7c7afdd]
-
 ==============================================================================
 FILE: internal/view/assets/img/og.png
 ==============================================================================
 [binary file: 8052 bytes, sha256 1dee7ba77c92ce1c088576ffa66cb1846757f667c45f13c06d0c53d565a4f4f2]
-
 ==============================================================================
 FILE: internal/view/assets/img/pests/ants.jpg
 ==============================================================================
 [binary file: 50522 bytes, sha256 d2032564d96e1a9ba6e7ba2c921326ee69ec9ee1b4918bcd8b306559b83f5d0b]
-
 ==============================================================================
 FILE: internal/view/assets/img/pests/bats.jpg
 ==============================================================================
 [binary file: 59088 bytes, sha256 85aa6d63b01ebea13655769ecdb14376d361a17282f2d5371f6fd0b6e6fd5d1f]
-
 ==============================================================================
 FILE: internal/view/assets/img/pests/bed-bugs.jpg
 ==============================================================================
 [binary file: 91765 bytes, sha256 33fff4d726e2e0dd440882581ce8066c9d9505e3b07a47357007938937d7c443]
-
 ==============================================================================
 FILE: internal/view/assets/img/pests/bees.jpg
 ==============================================================================
 [binary file: 55310 bytes, sha256 bda6fe19cd8cd5322782188b64a6489e4c50120d997ea98a3148120c1cad6240]
-
 ==============================================================================
 FILE: internal/view/assets/img/pests/box-elder-bugs.jpg
 ==============================================================================
 [binary file: 79613 bytes, sha256 6d4631bfc753b008e37934ae4589550d0dff6605b3a46c89131c4c01bffb2213]
-
 ==============================================================================
 FILE: internal/view/assets/img/pests/cockroaches.jpg
 ==============================================================================
 [binary file: 57072 bytes, sha256 7ed0141b0a78eb61c246db2407cb5ab720b5a61786e34ab5a29b5864a5c6996a]
-
 ==============================================================================
 FILE: internal/view/assets/img/pests/crickets.jpg
 ==============================================================================
 [binary file: 64707 bytes, sha256 94e502eb2c9c7f70bf717c64e385cc08cc73f8cf2035aaa6ac05fd934b16f268]
-
 ==============================================================================
 FILE: internal/view/assets/img/pests/fleas-ticks.jpg
 ==============================================================================
 [binary file: 74926 bytes, sha256 0ca6da2a18135cc8c05017d5a8271712bd244750b45d6347c05ff860e940e9bc]
-
 ==============================================================================
 FILE: internal/view/assets/img/pests/fleas.jpg
 ==============================================================================
 [binary file: 73473 bytes, sha256 6b69698f07c19dfa150992acf85b3d3544d57fb5682cbf100c228bfb56540150]
-
 ==============================================================================
 FILE: internal/view/assets/img/pests/fruit-flies.jpg
 ==============================================================================
 [binary file: 52563 bytes, sha256 2bb1d73ee5a3cbeaea7647f0ed3431973df6defbcea1e04412588fdf3be533e6]
-
 ==============================================================================
 FILE: internal/view/assets/img/pests/gophers.jpg
 ==============================================================================
 [binary file: 185777 bytes, sha256 6ec9b0083cbb8861015eba6a971ecb5a314e05a60d7c779f7f13213705123315]
-
 ==============================================================================
 FILE: internal/view/assets/img/pests/hornets.jpg
 ==============================================================================
 [binary file: 76562 bytes, sha256 2398198bf982c7ede12c0a0c1e3cfc67062a6b01e08ddc70c70032d615e9e23d]
-
 ==============================================================================
 FILE: internal/view/assets/img/pests/moles.jpg
 ==============================================================================
 [binary file: 125031 bytes, sha256 ff536252bbe3f82e2b3daf49aba3e0b1ea7ab00aa4acdf2537108cc4d64ecd25]
-
 ==============================================================================
 FILE: internal/view/assets/img/pests/mosquitoes.jpg
 ==============================================================================
 [binary file: 37840 bytes, sha256 95cfca1bcb5e4fd43fce38ee1216673e2f572a7531d470b0e244f1263002612b]
-
 ==============================================================================
 FILE: internal/view/assets/img/pests/pack-rats.jpg
 ==============================================================================
 [binary file: 89350 bytes, sha256 c0b5ed604ea2909322fa841e2a275870b020b8db8a92550c8a91cee23a6b3641]
-
 ==============================================================================
 FILE: internal/view/assets/img/pests/pantry-pests.jpg
 ==============================================================================
 [binary file: 87498 bytes, sha256 b442e92c0b1317ce1214dda6149bf6131c6dd95e5e040f454ac64a01b9f3d205]
-
 ==============================================================================
 FILE: internal/view/assets/img/pests/raccoons.jpg
 ==============================================================================
 [binary file: 142607 bytes, sha256 21203fb19446563a2a4d5c8d2cc6562543f52acfd192f447e09c77870e0f8c44]
-
 ==============================================================================
 FILE: internal/view/assets/img/pests/rodents.jpg
 ==============================================================================
 [binary file: 139599 bytes, sha256 e7cd04954059569c7535855603bc96f8f91afa29d517d87879033298b39697d0]
-
 ==============================================================================
 FILE: internal/view/assets/img/pests/scorpions.jpg
 ==============================================================================
 [binary file: 138791 bytes, sha256 2d3042e969bb4293cde800da59ee694205e22fbb774834f5b7d62ed9906b91c5]
-
 ==============================================================================
 FILE: internal/view/assets/img/pests/silverfish.jpg
 ==============================================================================
 [binary file: 31769 bytes, sha256 165c8607247cf14468bfbe243540fe0515073532d776fe4f254a4d672b1cdc04]
-
 ==============================================================================
 FILE: internal/view/assets/img/pests/spiders.jpg
 ==============================================================================
 [binary file: 65274 bytes, sha256 7dcc19881a770b38b93e4ade5cd413c4df568d331868abcf3be38d7ab7a6beb7]
-
 ==============================================================================
 FILE: internal/view/assets/img/pests/squirrels.jpg
 ==============================================================================
 [binary file: 120037 bytes, sha256 fbf3f140112f12af32089e953304728270c325440f52961200ad890d1bf4b3ab]
-
 ==============================================================================
 FILE: internal/view/assets/img/pests/stink-bugs.jpg
 ==============================================================================
 [binary file: 95563 bytes, sha256 2edaedd9b80419258c753980b2cbcff3c5ee6fcdfb15c41fca38b78781c8e7da]
-
 ==============================================================================
 FILE: internal/view/assets/img/pests/termites.jpg
 ==============================================================================
 [binary file: 42984 bytes, sha256 a6607590cd24e713f52f642c0950929bff1a50601d52112c4d724f40bbb08b76]
-
 ==============================================================================
 FILE: internal/view/assets/img/pests/ticks.jpg
 ==============================================================================
 [binary file: 119697 bytes, sha256 bc39d84a0a0945ec492d5704b070c49fc702afbc4d34726fe8856bc4d7d154e9]
-
 ==============================================================================
 FILE: internal/view/assets/img/pests/wasps.jpg
 ==============================================================================
 [binary file: 115904 bytes, sha256 bec32c8e5913bcd00634641a45500dc7c2741679c46cafb9bf34fed7e6e17e38]
-
 ==============================================================================
 FILE: internal/view/assets/img/pests/yellow-jackets.jpg
 ==============================================================================
 [binary file: 80208 bytes, sha256 c894cf131756013fb64401982eb02034d8c11d7bc5b61cee9a5c307cba3f65ce]
-
 ==============================================================================
 FILE: internal/view/assets/js/bugblaster.js
 ==============================================================================
@@ -12219,7 +12910,6 @@ FILE: internal/view/assets/js/bugblaster.js
   }
 })();
 
-
 ==============================================================================
 FILE: internal/view/assets/js/pop.js
 ==============================================================================
@@ -12269,12 +12959,35 @@ FILE: internal/view/assets/js/pop.js
   }
 
   // Quick view: fill the shared popup from a hidden source block.
+  // The block is parsed and scrubbed before it lands: executable
+  // elements and event-handler attributes are stripped at the sink,
+  // so markup copied into the popup can never run script, whoever
+  // authored the block.
+  function scrubClone(html) {
+    var doc = new DOMParser().parseFromString("<div>" + html + "</div>", "text/html");
+    var root = doc.body.firstChild;
+    root.querySelectorAll("script, iframe, object, embed, form, link, meta, base, title").forEach(function (el) { el.remove(); });
+    root.querySelectorAll("*").forEach(function (el) {
+      Array.prototype.slice.call(el.attributes || []).forEach(function (at) {
+        var n = at.name.toLowerCase();
+        var v = String(at.value || "").replace(/^\s+/, "").toLowerCase();
+        if (n.indexOf("on") === 0 || (n === "href" && (v.indexOf("javascript:") === 0 || v.indexOf("data:") === 0)) || (n === "src" && v.indexOf("javascript:") === 0)) {
+          el.removeAttribute(at.name);
+        }
+      });
+    });
+    var frag = document.createDocumentFragment();
+    Array.prototype.slice.call(root.childNodes).forEach(function (node) { frag.appendChild(document.importNode(node, true)); });
+    return frag;
+  }
   var qv = document.getElementById("pop-qv");
   document.querySelectorAll("[data-qv]").forEach(function (btn) {
     btn.addEventListener("click", function () {
       var src = document.getElementById(btn.getAttribute("data-qv"));
       if (!src || !qv) return;
-      qv.querySelector(".pop-qv-body").innerHTML = src.innerHTML;
+      var body = qv.querySelector(".pop-qv-body");
+      body.textContent = "";
+      body.appendChild(scrubClone(src.innerHTML));
       var more = qv.querySelector(".pop-qv-more");
       var href = src.getAttribute("data-more");
       if (href) {
@@ -12315,7 +13028,6 @@ FILE: internal/view/assets/js/pop.js
   });
 })();
 
-
 ==============================================================================
 FILE: internal/view/assets/js/tracker.js
 ==============================================================================
@@ -12334,15 +13046,20 @@ FILE: internal/view/assets/js/tracker.js
 
    Respects:
      - navigator.doNotTrack === "1"  -> sends nothing
-     - ppc_admin=1 cookie (set at admin login) -> sends nothing,
-       so the owners' own visits never pollute the dashboard
+     - admin visits: the ppc_admin cookie set at admin login is
+       HttpOnly, so this script cannot read it; the track endpoints
+       refuse to store any request that carries it, which keeps the
+       owners' own visits out of the dashboard
+     - the cookie banner choice (localStorage ppc-consent-v1): no id
+       is created and nothing is sent until the visitor accepts, the
+       same gate the banner applies to third-party analytics. Sends
+       carry consent:true; the server stores nothing without it.
    ============================================================ */
 (function () {
   "use strict";
 
   /* ---------- opt-outs ---------- */
   if (navigator.doNotTrack === "1") return;
-  if (/(?:^|;\s*)ppc_admin=1(?:;|$)/.test(document.cookie)) return;
 
   /* ---------- storage helpers (private mode may throw) ---------- */
   function lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
@@ -12363,6 +13080,9 @@ FILE: internal/view/assets/js/tracker.js
   }
 
   function validId(v) { return typeof v === "string" && /^[0-9a-f]{64}$/.test(v); }
+
+  /* ---------- consent gate ---------- */
+  if (lsGet("ppc-consent-v1") !== "accepted") return;
 
   /* ---------- visitor id (persistent) ---------- */
   var vid = lsGet("ppc_vid");
@@ -12417,6 +13137,7 @@ FILE: internal/view/assets/js/tracker.js
     if (window.screen) { sw = window.screen.width | 0; sh = window.screen.height | 0; }
   } catch (e) {}
   send("/api/track/view", {
+    consent: true,
     vid: vid,
     sid: sid,
     path: pagePath(),
@@ -12454,6 +13175,7 @@ FILE: internal/view/assets/js/tracker.js
         ("." + cap(el.className.trim().split(/\s+/).join("."), 60)) : "");
 
     send("/api/track/event", {
+      consent: true,
       vid: vid,
       sid: sid,
       path: pagePath(),
@@ -12465,7 +13187,6 @@ FILE: internal/view/assets/js/tracker.js
     });
   }, false);
 })();
-
 
 ==============================================================================
 FILE: internal/view/assets/main.js
@@ -12589,9 +13310,9 @@ if (briefEl){
     "OPERATION ......... PEST-FREE HOME",
     "COMMANDER ......... VET. SKYLER ROSE",
     "THEATER ........... WA / ID / OR",
-    "RESPONSE .......... SAME-DAY AVAILABLE",
-    "WARRANTY .......... 90 DAYS, FULL",
-    "COLLATERAL ........ FAMILY & PET SAFE",
+    "RESPONSE .......... SAME-DAY SERVICE",
+    "WARRANTY .......... 90 DAYS + FREE RE-TREATS",
+    "COLLATERAL ........ FAMILY & PET SAFE WHEN DRY",
     "STATUS ............ >> GO FOR LAUNCH"
   ];
   if (reduced){
@@ -12613,7 +13334,7 @@ if (briefEl){
 var tick = document.getElementById("ticker-track");
 if (tick && !tick.children.length){
   var CITIES = ["Spokane","Spokane Valley","Cheney","Liberty Lake","Airway Heights","Medical Lake","Deer Park","Mead","Coeur d'Alene","Post Falls","Hayden","Rathdrum","Hermiston","Milton-Freewater"];
-  var seq = CITIES.map(function(c){return "<span><i>▸</i>"+c.toUpperCase()+" - SAME-DAY AVAILABLE</span>";}).join("");
+  var seq = CITIES.map(function(c){return "<span><i>▸</i>"+c.toUpperCase()+" - NOW SERVING</span>";}).join("") + "<span><i>▸</i>SAME-DAY SERVICE - CALL (509) 471-5767</span>";
   tick.innerHTML = seq + seq;
 }
 
@@ -12624,18 +13345,6 @@ document.querySelectorAll(".faq-q").forEach(function(btn){
     var ans = item.querySelector(".faq-a");
     var open = item.classList.toggle("open");
     ans.style.maxHeight = open ? ans.scrollHeight+"px" : "0";
-  });
-});
-
-/* ---------- forms (demo submit) ---------- */
-document.querySelectorAll("form[data-demo]").forEach(function(form){
-  form.addEventListener("submit", function(e){
-    e.preventDefault();
-    var ok = form.querySelector(".form-success");
-    if (ok){ ok.classList.add("show"); ok.scrollIntoView({behavior: reduced?"auto":"smooth", block:"center"}); }
-    form.reset();
-    // Fire GA4 conversion event after successful demo submission
-    if (window.gtag) gtag('event', 'generate_lead', { 'event_category': 'engagement', 'event_label': 'Contact Form' });
   });
 });
 
@@ -12716,7 +13425,6 @@ if (window.gsap && window.ScrollTrigger){
   });
 }
 })();
-
 
 ==============================================================================
 FILE: internal/view/assets/pop.css
@@ -12987,7 +13695,6 @@ td{padding:11px 10px;border-bottom:1px solid #E3DCC4;font-weight:600}
   .form-row{grid-template-columns:1fr}
 }
 
-
 ==============================================================================
 FILE: internal/view/assets/pwa-install.css
 ==============================================================================
@@ -13049,7 +13756,6 @@ FILE: internal/view/assets/pwa-install.css
   }
   .ppc-install-x:hover{color:var(--orange)}
 }
-
 
 ==============================================================================
 FILE: internal/view/assets/pwa-install.js
@@ -13145,7 +13851,6 @@ FILE: internal/view/assets/pwa-install.js
   else if (mq.addListener) { mq.addListener(onMq); }
 })();
 
-
 ==============================================================================
 FILE: internal/view/assets/styles.css
 ==============================================================================
@@ -13217,7 +13922,7 @@ nav .brand .star{color:var(--orange);font-size:1.15rem;display:inline-block;anim
 .navlinks{display:flex;gap:1.15rem;align-items:center;flex-wrap:wrap}
 /* Card descriptions only exist in the mobile menu; the desktop rail stays words. */
 .navlinks .nl-desc{display:none}
-/* Inline SVG web icons. No emoji anywhere on this site (David's rule). */
+/* Inline SVG web icons; the site's icon set is drawn, not emoji. */
 .ic{width:1.05em;height:1.05em;vertical-align:-.16em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
 .ic.fill{fill:currentColor;stroke:none}
 @media(min-width:961px){
@@ -14354,7 +15059,6 @@ html.js.no-gsap [data-reveal]{opacity:1;transform:none}
   .dossier-stamp{top:10px;right:12px}
 }
 
-
 ==============================================================================
 FILE: internal/view/cost.go
 ==============================================================================
@@ -14392,7 +15096,7 @@ const CostPage = `<!DOCTYPE html>
     <div class="wrap">
       <div class="eyebrow">// QUARTERMASTER REPORT</div>
       <h1>Project <em>Valuation</em> Receipt</h1>
-      <p class="sub">Hostile invoice incoming. This is what a custom web application with CRM integration, payment processing, and tactical design actually costs on the open market. No fluff, no hidden fees — just the raw numbers.</p>
+      <p class="sub">Hostile invoice incoming. This is what a custom web application with CRM integration, payment processing, and tactical design actually costs on the open market. No fluff, no hidden fees. Just the raw numbers.</p>
     </div>
   </section>
 
@@ -14417,7 +15121,7 @@ const CostPage = `<!DOCTYPE html>
           <div class="receipt-logo">★ PATRIOT PEST CONTROL</div>
           <div class="receipt-meta">
             <span>REPORT #: PPC-2026-001</span>
-            <span>DATE: <span id="receipt-date"></span></span>
+            <span>ESTIMATES AS OF: <span id="receipt-date"></span></span>
             <span>CLASSIFICATION: UNCLASSIFIED</span>
           </div>
           <div class="hazard" style="margin:0.8rem 0 0 0"></div>
@@ -14446,7 +15150,7 @@ const CostPage = `<!DOCTYPE html>
             <div class="total-divider"></div>
             <div class="total-row grand">
               <span>GRAND TOTAL RANGE</span>
-              <span class="total-amt grand-amt" id="grand-total">$75,000 — $150,000</span>
+              <span class="total-amt grand-amt" id="grand-total">$75,000 - $150,000</span>
             </div>
             <div class="stamp-row">
               <span class="stamp">APPROVED<br>FOR REVIEW</span>
@@ -14456,10 +15160,12 @@ const CostPage = `<!DOCTYPE html>
 
         <div class="receipt-footer">
           <p><strong>PAYMENT TERMS:</strong> Net 30 upon contract signing. 50% upfront, 50% on delivery.</p>
-          <p><strong>TIMELINE:</strong> <span id="receipt-timeline">3-6 months</span> — Full agency team deployment.</p>
+          <p><strong>TIMELINE:</strong> <span id="receipt-timeline">3-6 months</span>. Full agency team deployment.</p>
           <p><strong>WARRANTY:</strong> 90-day bug-free guarantee. Pests and pixel bugs eliminated.</p>
         </div>
       </div>
+
+      <p id="cost-provenance" class="muted" style="margin-top:1rem"></p>
 
       <div class="factors-section">
         <h3>Field Notes: Agency Pricing Factors</h3>
@@ -14478,6 +15184,7 @@ const CostPage = `<!DOCTYPE html>
 // CostPricingJSON is the embedded pricing dataset (public/cost/data/pricing.json).
 // Served at GET /cost/data/pricing.json — cost.js fetches it relative to /cost.
 const CostPricingJSON = `{
+  "meta": { "as_of": "2026-11", "source": "Patriot Pest Control internal estimate", "method": "Agency-market estimates for a comparable custom build, worked from the rate factors listed on this page. These are estimates, not quotes or measured prices." },
   "agency_range": { "min": 75000, "max": 150000, "currency": "USD" },
   "breakdown": [
     { "category": "Custom Framework Architecture", "min": 15000, "max": 25000, "description": "Custom PHP 8.3 MVC framework with no off-the-shelf CMS", "color": "#f4772e" },
@@ -14500,7 +15207,6 @@ const CostPricingJSON = `{
   ]
 }`
 
-
 ==============================================================================
 FILE: internal/view/csrf.go
 ==============================================================================
@@ -14510,6 +15216,8 @@ package view
 // randomness is unavailable the request 500s instead of issuing a weak token.
 
 import (
+	"github.com/David2024patton/patriot-pest-go/internal/data"
+
 	"crypto/rand"
 	"crypto/subtle"
 	"encoding/hex"
@@ -14534,7 +15242,7 @@ var csrfTokenRe = regexp.MustCompile(`^[0-9a-f]{64}$`)
 // request gets a 500, never a guessable token.
 func CSRFField(w http.ResponseWriter, r *http.Request) template.HTML {
 	tok := ""
-	if ck, err := r.Cookie(CSRFCookieName); err == nil && csrfTokenRe.MatchString(ck.Value) {
+	if ck, err := r.Cookie(CSRFCookieName); err == nil && csrfTokenRe.MatchString(ck.Value) && data.CSRFTokenRegistered(ck.Value) {
 		tok = ck.Value
 	} else {
 		b := make([]byte, 32)
@@ -14543,6 +15251,7 @@ func CSRFField(w http.ResponseWriter, r *http.Request) template.HTML {
 			return template.HTML("")
 		}
 		tok = hex.EncodeToString(b)
+		data.RegisterCSRFToken(tok)
 		http.SetCookie(w, csrfCookie(CSRFCookieName, tok, r))
 	}
 	// Escaped as well as validated: the token is hex, but the attribute is
@@ -14551,29 +15260,34 @@ func CSRFField(w http.ResponseWriter, r *http.Request) template.HTML {
 }
 
 // csrfCookie builds the double-submit cookie: HttpOnly so JS cannot read it,
-// Secure on TLS so it never travels in the clear, SameSite=Lax against CSRF.
+// always Secure so it never travels in the clear (the site is HTTPS-only
+// behind Traefik; X-Forwarded-Proto is client-supplied and never decides
+// cookie security), SameSite=Lax against CSRF.
 func csrfCookie(name, value string, r *http.Request) *http.Cookie {
-	secure := r.TLS != nil || r.Header.Get("X-Forwarded-Proto") == "https"
 	return &http.Cookie{
 		Name:     name,
 		Value:    value,
 		Path:     "/",
 		SameSite: http.SameSiteLaxMode,
 		HttpOnly: true,
-		Secure:   secure,
+		Secure:   true,
 	}
 }
 
-// VerifyCSRF checks the posted _csrf field against the cookie (constant time).
+// VerifyCSRF checks the posted _csrf field against the cookie (constant
+// time) and against the server registry: the token must be one this
+// server issued, so a planted cookie and field pair cannot pass.
 func VerifyCSRF(r *http.Request) bool {
 	expected := ""
 	if ck, err := r.Cookie(CSRFCookieName); err == nil {
 		expected = ck.Value
 	}
 	got := r.FormValue("_csrf")
-	return got != "" && subtle.ConstantTimeCompare([]byte(got), []byte(expected)) == 1
+	if got == "" || subtle.ConstantTimeCompare([]byte(got), []byte(expected)) != 1 {
+		return false
+	}
+	return data.CSRFTokenRegistered(got)
 }
-
 
 ==============================================================================
 FILE: internal/view/csrf_test.go
@@ -14585,6 +15299,8 @@ import (
 	"net/http/httptest"
 	"strings"
 	"testing"
+
+	"github.com/David2024patton/patriot-pest-go/internal/data"
 )
 
 // TestCSRFFieldRejectsPlantedCookie covers the regression where the hidden input
@@ -14594,6 +15310,7 @@ import (
 // attribute unescaped.
 func TestCSRFFieldRejectsPlantedCookie(t *testing.T) {
 	valid := strings.Repeat("ab", 32) // 64 characters, matches what we issue
+	data.RegisterCSRFToken(valid)     // issued by the server, so it may be reused
 	hostile := `"><script>alert(1)</script>` + strings.Repeat("a", 40)
 
 	cases := []struct {
@@ -14605,6 +15322,7 @@ func TestCSRFFieldRejectsPlantedCookie(t *testing.T) {
 		{"a planting attempt is replaced", hostile, true},
 		{"a short value is replaced", "abc", true},
 		{"garbage of valid length is replaced", strings.Repeat("<", 64), true},
+		{"a well-formed token we never issued is replaced", strings.Repeat("cd", 32), true},
 	}
 
 	for _, tc := range cases {
@@ -14677,7 +15395,6 @@ func TestCSRFRoundTrip(t *testing.T) {
 	}
 }
 
-
 ==============================================================================
 FILE: internal/view/errors.go
 ==============================================================================
@@ -14724,7 +15441,6 @@ func NotFound(w http.ResponseWriter) {
 	_, _ = w.Write([]byte(err404HTML))
 }
 
-
 ==============================================================================
 FILE: internal/view/fixture_consent_test.go
 ==============================================================================
@@ -14764,7 +15480,6 @@ func TestWriteConsentFixture(t *testing.T) {
 		t.Fatal(err)
 	}
 }
-
 
 ==============================================================================
 FILE: internal/view/geo.go
@@ -14829,7 +15544,6 @@ func PhoneFor(r *http.Request) Phone {
 	return Phone{Display: p.Display, Tel: "tel:" + p.Tel, Label: p.Label, IsAZ: false, Other: other}
 }
 
-
 ==============================================================================
 FILE: internal/view/page.go
 ==============================================================================
@@ -14860,7 +15574,6 @@ func PageStatus(w http.ResponseWriter, r *http.Request, status int, page, title,
 	applyAnalytics(d)
 	render(w, r, d, status)
 }
-
 ==============================================================================
 FILE: internal/view/pages.go
 ==============================================================================
@@ -14889,7 +15602,6 @@ func init() {
 	RegisterPageTemplate("sitemap", pageSitemap)
 	RegisterPageTemplate("legal", pageLegal)
 }
-
 
 ==============================================================================
 FILE: internal/view/pages_admin.go
@@ -15118,7 +15830,6 @@ const pageDashApiKeys = `
 </div>
 `
 
-
 ==============================================================================
 FILE: internal/view/pages_areas.go
 ==============================================================================
@@ -15145,7 +15856,7 @@ const pageAreas = `<section class="block">
           {{range $c := $st.Cities}}<a href="/areas/{{cityslug $c}}" style="color:var(--cream);text-decoration:none">{{.}} ▸</a>
           {{end}}
         </div>
-        <span class="area-note" style="display:block;margin-top:.9rem;font-family:var(--mono);font-size:.7rem;color:var(--olive-300)">● {{len $st.Cities}} ZONE{{if ne (len $st.Cities) 1}}S{{end}} · SAME-DAY AVAILABLE</span>
+        <span class="area-note" style="display:block;margin-top:.9rem;font-family:var(--mono);font-size:.7rem;color:var(--olive-300)">● {{len $st.Cities}} ZONE{{if ne (len $st.Cities) 1}}S{{end}} · SAME-DAY SERVICE</span>
       </div>
       {{end}}
     </div>
@@ -15228,7 +15939,6 @@ const pageAreaDetail = `<section class="block">
   </div>
 </section>`
 
-
 ==============================================================================
 FILE: internal/view/pages_blog_index.go
 ==============================================================================
@@ -15266,7 +15976,6 @@ const pageBlogIndex = `<section class="block">
     {{end}}
   </div>
 </section>`
-
 
 ==============================================================================
 FILE: internal/view/pages_blog_post.go
@@ -15329,7 +16038,6 @@ const pageBlogPost = `<article class="block">
   </div>
 </section>
 {{end}}`
-
 
 ==============================================================================
 FILE: internal/view/pages_contact.go
@@ -15432,7 +16140,6 @@ const pageContact = `<section class="block">
     </div>
   </div>
 </section>`
-
 
 ==============================================================================
 FILE: internal/view/pages_dashboards.go
@@ -15557,7 +16264,6 @@ const pageDashStaff = `
 </div>
 `
 
-
 ==============================================================================
 FILE: internal/view/pages_dashboards_test.go
 ==============================================================================
@@ -15621,7 +16327,6 @@ func TestDashboardsCompile(t *testing.T) {
 		})
 	}
 }
-
 
 ==============================================================================
 FILE: internal/view/pages_faqs.go
@@ -15724,7 +16429,6 @@ const pageFaqs = `<section class="block">
   </div>
 </section>
 `
-
 
 ==============================================================================
 FILE: internal/view/pages_freequote.go
@@ -15847,7 +16551,6 @@ func init() {
 	RegisterPageTemplate("free-quote", pageFreeQuote)
 }
 
-
 ==============================================================================
 FILE: internal/view/pages_help.go
 ==============================================================================
@@ -15892,7 +16595,6 @@ const pageHelp = `<section class="block">
     </div>
   </div>
 </section>`
-
 
 ==============================================================================
 FILE: internal/view/pages_home.go
@@ -15995,13 +16697,13 @@ const pageHome = `<!-- ============ HERO ============ -->
     <div class="area-grid" data-reveal>
       <div class="area-col"><h3>WA</h3><div class="area-cities">
         <a href="/areas/spokane">Spokane</a><a href="/areas/spokane-valley">Spokane Valley</a><a href="/areas/cheney">Cheney</a><a href="/areas/liberty-lake">Liberty Lake</a><a href="/areas/airway-heights">Airway Heights</a><a href="/areas/medical-lake">Medical Lake</a><a href="/areas/deer-park">Deer Park</a><a href="/areas/mead">Mead</a>
-      </div><span class="area-note">● 8 ZONES · SAME-DAY AVAILABLE</span></div>
+      </div><span class="area-note">● 8 ZONES · SAME-DAY SERVICE</span></div>
       <div class="area-col"><h3>ID</h3><div class="area-cities">
         <a href="/areas/coeur-d-alene">Coeur d'Alene</a><a href="/areas/post-falls">Post Falls</a><a href="/areas/hayden">Hayden</a><a href="/areas/rathdrum">Rathdrum</a>
-      </div><span class="area-note">● 4 ZONES · SAME-DAY AVAILABLE</span></div>
+      </div><span class="area-note">● 4 ZONES · SAME-DAY SERVICE</span></div>
       <div class="area-col"><h3>OR</h3><div class="area-cities">
         <a href="/areas/hermiston">Hermiston</a><a href="/areas/milton-freewater">Milton-Freewater</a>
-      </div><span class="area-note">● 2 ZONES · SAME-DAY AVAILABLE</span></div>
+      </div><span class="area-note">● 2 ZONES · SAME-DAY SERVICE</span></div>
     </div>
   </div>
 </section>
@@ -16088,7 +16790,6 @@ const pageHome = `<!-- ============ HERO ============ -->
 </section>
 `
 
-
 ==============================================================================
 FILE: internal/view/pages_legal.go
 ==============================================================================
@@ -16125,6 +16826,51 @@ const pageLegal = `<section class="block">
       <p>We use reasonable administrative, technical, and physical safeguards to protect your information. No method is 100% secure, but we work to protect your data.</p>
       <h3>Your Choices</h3>
       <p>You may request access to, correction of, or deletion of your personal information by contacting us at <a href="mailto:info@patriotpest.pro">info@patriotpest.pro</a>.</p>
+      <h3>Your Tracking Data</h3>
+      <p>If you accepted tracking in the cookie banner, this site keeps a random visitor ID in your browser and stores page visits under it in our own analytics. No raw IP addresses are stored. You can erase that data yourself, right now, from this browser:</p>
+      <p><button type="button" id="pp-forget-btn" class="btn btn-primary">Delete my tracking data</button></p>
+      <p id="pp-forget-status" class="muted" role="status"></p>
+      <script>
+      (function () {
+        var btn = document.getElementById("pp-forget-btn");
+        var status = document.getElementById("pp-forget-status");
+        if (!btn || !status) return;
+        btn.addEventListener("click", function () {
+          var ids = [];
+          try {
+            var a = localStorage.getItem("pp_visitor_id"); if (a) ids.push(a);
+            var b = localStorage.getItem("ppc_vid"); if (b) ids.push(b);
+          } catch (e) {}
+          function clearLocal() {
+            try {
+              ["pp_visitor_id", "pp_session_id", "pp_session_ts", "ppc_vid", "ppc_sid", "ppc_last"].forEach(function (k) { localStorage.removeItem(k); sessionStorage.removeItem(k); });
+            } catch (e) {}
+          }
+          if (!ids.length) {
+            clearLocal();
+            status.textContent = "This browser holds no tracking ID, so there is nothing stored under it to delete.";
+            return;
+          }
+          btn.disabled = true;
+          var done = 0, failed = false;
+          ids.forEach(function (id) {
+            fetch("/api/track/forget", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ visitor_id: id }) })
+              .then(function (res) { if (!res.ok) failed = true; })
+              .catch(function () { failed = true; })
+              .then(function () {
+                done++;
+                if (done === ids.length) {
+                  clearLocal();
+                  status.textContent = failed
+                    ? "We could not reach the deletion service. Please email info@patriotpest.pro and we will delete it for you."
+                    : "Done. Your stored visits have been deleted and this browser's tracking IDs have been cleared.";
+                  btn.disabled = false;
+                }
+              });
+          });
+        });
+      })();
+      </script>
       <h3>Contact</h3>
       <p>Questions about this policy? Contact Patriot Pest Control CO, Deer Park, WA 99006, <a href="mailto:info@patriotpest.pro">info@patriotpest.pro</a>, (509) 471-5767.</p>
     </div>
@@ -16155,7 +16901,6 @@ const pageLegal = `<section class="block">
     {{end}}
   </div>
 </section>`
-
 
 ==============================================================================
 FILE: internal/view/pages_links.go
@@ -16227,7 +16972,6 @@ const pageLinks = `<section class="block">
     </div>
   </div>
 </section>`
-
 
 ==============================================================================
 FILE: internal/view/pages_pest.go
@@ -16382,7 +17126,6 @@ const pagePest = `<!-- ===== THREAT FILE HEADER ===== -->
     </div>
   </div>
 </section>`
-
 
 ==============================================================================
 FILE: internal/view/pages_phase1.go
@@ -16672,7 +17415,6 @@ const pageApiKeyAudit = `
 </div></div>
 `
 
-
 ==============================================================================
 FILE: internal/view/pages_phase2.go
 ==============================================================================
@@ -16850,7 +17592,6 @@ const pageDashInbox = `
   {{ end }}
 </div></div>
 `
-
 
 ==============================================================================
 FILE: internal/view/pages_pop.go
@@ -17147,7 +17888,6 @@ const pageHomePop = `<!-- ============ POP HERO ============ -->
 </div>
 `
 
-
 ==============================================================================
 FILE: internal/view/pages_prices.go
 ==============================================================================
@@ -17258,7 +17998,6 @@ const pagePrices = `<section class="block">
 </section>
 `
 
-
 ==============================================================================
 FILE: internal/view/pages_referral.go
 ==============================================================================
@@ -17293,7 +18032,6 @@ const pageReferral = `<section class="block">
     </div>
   </div>
 </section>`
-
 
 ==============================================================================
 FILE: internal/view/pages_search.go
@@ -17350,7 +18088,6 @@ const pageSearch = `<section class="block">
 {{end}}
   </div>
 </section>`
-
 
 ==============================================================================
 FILE: internal/view/pages_services.go
@@ -17450,7 +18187,6 @@ const pageAbout = `<section class="block">
 </section>
 `
 
-
 ==============================================================================
 FILE: internal/view/pages_signup.go
 ==============================================================================
@@ -17532,7 +18268,6 @@ const pageSignup = `<section class="block">
 func init() {
 	RegisterPageTemplate("signup", pageSignup)
 }
-
 ==============================================================================
 FILE: internal/view/pages_sitemap.go
 ==============================================================================
@@ -17583,7 +18318,6 @@ const pageSitemap = `<section class="block">
     </div>
   </div>
 </section>`
-
 
 ==============================================================================
 FILE: internal/view/pages_sms_optin.go
@@ -17714,7 +18448,6 @@ func init() {
 	RegisterPageTemplate("sms-opt-in", pageSmsOptIn)
 }
 
-
 ==============================================================================
 FILE: internal/view/pages_socials.go
 ==============================================================================
@@ -17748,7 +18481,6 @@ const pageSocials = `<section class="block">
   </div>
 </section>`
 
-
 ==============================================================================
 FILE: internal/view/pages_veterans.go
 ==============================================================================
@@ -17762,7 +18494,7 @@ const pageVeterans = `<section class="block">
   <div class="wrap">
     <div class="eyebrow">VETERANS DAY // THANK YOU FOR YOUR SERVICE</div>
     <h1 style="font-family:var(--display);color:var(--cream);font-size:clamp(2rem,6vw,3rem);margin:.4rem 0 .8rem">Veterans: your first month is <em>free.</em></h1>
-    <p class="lead">Patriot Pest Control is veteran-owned. This Veterans Day, any U.S. military veteran who signs up for an annual pest control plan gets the first month free. Book by Wednesday, November 11, 2026.</p>
+    <p class="lead">Patriot Pest Control is veteran-owned. This Veterans Day, any U.S. military veteran who signs up for an annual pest control plan gets the first month free.</p>
   </div>
 </section>
 
@@ -17771,7 +18503,7 @@ const pageVeterans = `<section class="block">
     <div class="steps" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem">
       <div class="card step"><span class="plan-tier">THE OFFER</span><h3 style="font-family:var(--display);color:var(--cream)">First Month Free</h3><p style="color:var(--khaki);line-height:1.7;margin-top:.5rem">Sign up for any 12-month plan (Bronze $49/mo, Silver $59/mo, or Gold $79/mo) and your first month is on us. One offer per household, for new annual plan signups, and it cannot be combined with other offers.</p></div>
       <div class="card step"><span class="plan-tier">WHO QUALIFIES</span><h3 style="font-family:var(--display);color:var(--cream)">U.S. Military Veterans</h3><p style="color:var(--khaki);line-height:1.7;margin-top:.5rem">Show any one of these when you sign up: a VA health care ID card, a DD Form 214, a military or retiree ID card, or the veteran designation on your state driver's license.</p></div>
-      <div class="card step"><span class="plan-tier">HOW TO REDEEM</span><h3 style="font-family:var(--display);color:var(--cream)">Use Code VETSDAY</h3><p style="color:var(--khaki);line-height:1.7;margin-top:.5rem">Call or text (509) 471-5767 and mention code VETSDAY, or sign up online and put VETSDAY in the notes. Book by November 11, 2026.</p></div>
+      <div class="card step"><span class="plan-tier">HOW TO REDEEM</span><h3 style="font-family:var(--display);color:var(--cream)">Use Code VETSDAY</h3><p style="color:var(--khaki);line-height:1.7;margin-top:.5rem">Call or text (509) 471-5767 and mention code VETSDAY, or sign up online and put VETSDAY in the notes.</p></div>
     </div>
     <div class="promise" style="margin-top:1.6rem"><b>Veteran-owned:</b> Patriot Pest Control is owned and run by Skyler Rose, a U.S. Military Veteran, based in Deer Park, Washington. Serving Spokane, Spokane Valley, Cheney, Liberty Lake, Airway Heights, Medical Lake, Deer Park, and Mead in Washington, and Coeur d'Alene, Post Falls, Hayden, and Rathdrum in Idaho.</div>
   </div>
@@ -17790,7 +18522,6 @@ const pageVeterans = `<section class="block">
 func init() {
 	RegisterPageTemplate("veterans", pageVeterans)
 }
-
 
 ==============================================================================
 FILE: internal/view/pest_copy_insects.go
@@ -18128,7 +18859,6 @@ func init() {
 	})
 }
 
-
 ==============================================================================
 FILE: internal/view/pest_copy_wildlife.go
 ==============================================================================
@@ -18234,7 +18964,6 @@ func init() {
 
 }
 
-
 ==============================================================================
 FILE: internal/view/pest_overrides.go
 ==============================================================================
@@ -18274,7 +19003,6 @@ func pestCopyForSlug(slug, cat string) PestCopy {
 	}
 	return PestCopyFor(cat)
 }
-
 
 ==============================================================================
 FILE: internal/view/pop_layout.go
@@ -18407,7 +19135,6 @@ const layoutPopHTML = `<!DOCTYPE html>
 </html>
 `
 
-
 ==============================================================================
 FILE: internal/view/seo_links.go
 ==============================================================================
@@ -18463,7 +19190,6 @@ func AreaPestsFor(code string) []data.Pest {
 	}
 	return out
 }
-
 
 ==============================================================================
 FILE: internal/view/sitemap_lastmod_gen.go
@@ -18537,7 +19263,6 @@ var SitemapLastmod = map[string]string{
 	"/veterans":                        "2026-11-05",
 }
 
-
 ==============================================================================
 FILE: internal/view/sms_consent.go
 ==============================================================================
@@ -18553,7 +19278,6 @@ package view
 // Used by the contact form and the signup form, the two public pages that
 // collect a phone number. Kept as one constant so they cannot drift apart.
 const smsConsent = `<p class="sms-consent" style="color:var(--khaki);font-size:.8rem;line-height:1.5;margin:.4rem 0 0">By providing your phone number you agree to receive calls and text messages from Patriot Pest Control CO about your appointments, estimates and service. Consent is not a condition of purchase. Message frequency varies. Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help. See our <a href="/privacy-policy">Privacy Policy</a> and <a href="/terms-of-use">Terms</a>.</p>`
-
 
 ==============================================================================
 FILE: internal/view/view.go
@@ -19093,10 +19817,9 @@ func canonical(r *http.Request) string {
 	if !canonicalHosts[host] {
 		host = "www.patriotpest.pro"
 	}
+	// The site is HTTPS-only; the scheme is never taken from the
+	// client-supplied X-Forwarded-Proto header.
 	scheme := "https"
-	if r.Header.Get("X-Forwarded-Proto") == "http" {
-		scheme = "http"
-	}
 	return scheme + "://" + host + r.URL.Path
 }
 
@@ -19108,10 +19831,9 @@ func SiteBase(r *http.Request) string {
 	if !canonicalHosts[host] {
 		host = "www.patriotpest.pro"
 	}
+	// The site is HTTPS-only; the scheme is never taken from the
+	// client-supplied X-Forwarded-Proto header.
 	scheme := "https"
-	if r.Header.Get("X-Forwarded-Proto") == "http" {
-		scheme = "http"
-	}
 	return scheme + "://" + host
 }
 
@@ -19147,7 +19869,6 @@ func render(w http.ResponseWriter, r *http.Request, d map[string]any, status int
 func requestIDOf(r *http.Request) string {
 	return custommw.RequestIDFromContext(r.Context())
 }
-
 
 ==============================================================================
 FILE: migrations/001_init.surql
@@ -19272,7 +19993,6 @@ DEFINE TABLE notifications SCHEMAFULL;
 DEFINE FIELD read ON notifications TYPE bool DEFAULT false;
 
 
-
 ==============================================================================
 FILE: pkg/crypto/crypto.go
 ==============================================================================
@@ -19341,7 +20061,6 @@ func Decrypt(cipherHex, key string) (string, error) {
 	}
 	return string(pt), nil
 }
-
 
 ==============================================================================
 FILE: tools/sitemap-lastmod/main.go
@@ -19524,4 +20243,3 @@ func fatal(err error) {
 	fmt.Fprintln(os.Stderr, "sitemap-lastmod:", err)
 	os.Exit(1)
 }
-
