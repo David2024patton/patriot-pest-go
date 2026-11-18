@@ -231,7 +231,7 @@ func TestAdminDashboardRejectsBadRange(t *testing.T) {
 	if rec.Code != http.StatusOK {
 		t.Fatalf("/admin?days=banana = %d, want 200 (defaults to 30)", rec.Code)
 	}
-	if !strings.Contains(rec.Body.String(), "Last 30 days.") {
+	if !strings.Contains(rec.Body.String(), "Last 30 days") {
 		t.Error("bad days param did not default to 30")
 	}
 }

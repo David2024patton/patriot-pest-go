@@ -155,18 +155,6 @@ document.querySelectorAll(".faq-q").forEach(function(btn){
   });
 });
 
-/* ---------- forms (demo submit) ---------- */
-document.querySelectorAll("form[data-demo]").forEach(function(form){
-  form.addEventListener("submit", function(e){
-    e.preventDefault();
-    var ok = form.querySelector(".form-success");
-    if (ok){ ok.classList.add("show"); ok.scrollIntoView({behavior: reduced?"auto":"smooth", block:"center"}); }
-    form.reset();
-    // Fire GA4 conversion event after successful demo submission
-    if (window.gtag) gtag('event', 'generate_lead', { 'event_category': 'engagement', 'event_label': 'Contact Form' });
-  });
-});
-
 /* ---------- GSAP ---------- */
 if (window.gsap && window.ScrollTrigger){
   gsap.registerPlugin(ScrollTrigger);

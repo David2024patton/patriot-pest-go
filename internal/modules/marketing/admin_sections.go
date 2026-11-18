@@ -27,7 +27,7 @@ func (m *Module) secOverview(db *sql.DB, days int, now int64) (string, error) {
 		return "", err
 	}
 	var sb strings.Builder
-	sb.WriteString(sectionHead("Overview", "The whole funnel at a glance. Last "+strconv.Itoa(days)+" days."))
+	sb.WriteString(sectionHead("Overview", "The whole funnel at a glance. Last "+strconv.Itoa(days)+" days (rolling 24-hour days). Bots and admin visits are excluded; only visits made after a cookie-banner accept are counted."))
 	sb.WriteString(`<div class="cards">`)
 	sb.WriteString(statCard("PAGEVIEWS", fnum(st.Pageviews), "pages loaded"))
 	sb.WriteString(statCard("UNIQUE VISITORS", fnum(st.Visitors), "distinct browsers"))
@@ -94,6 +94,16 @@ func (m *Module) secOverview(db *sql.DB, days int, now int64) (string, error) {
 		`<p class="muted"><a href="/admin?s=devices&days=` + strconv.Itoa(days) +
 		`" style="color:var(--khaki)">Full device report &rarr;</a></p></div>`)
 	sb.WriteString(`</div></div>`)
+
+	// Definitions: what these numbers actually count, on the surface
+	// where they are read.
+	sb.WriteString(`<div class="panel"><h2>HOW THESE NUMBERS ARE COUNTED</h2>` +
+		`<p class="muted" style="line-height:1.7">A visitor is a random ID stored in the visitor's browser (localStorage). ` +
+		`Clearing storage or switching devices counts as a new visitor. NEW VISITORS means first seen inside this window; ` +
+		`RETURNING means the same ID was seen before the window opened. BOUNCE RATE is the share of sessions with a ` +
+		`single pageview; a visitor who reads one page and then calls (509) 471-5767 counts as a bounce here. ` +
+		`AVG SESSION is the time from a session's first pageview to its last, averaged over all sessions; ` +
+		`single-page sessions count as 0:00.</p></div>`)
 	return sb.String(), nil
 }
 

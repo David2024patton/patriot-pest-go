@@ -2,10 +2,12 @@ package marketing
 
 import "github.com/David2024patton/patriot-pest-go/internal/data"
 
-// postBodyOverrides replaces the stored body_html of select blog posts with
-// longer, audit-compliant articles. Keys are post slugs. The content below is
-// static and authored in source, so it does not need the bluemonday pass that
-// database-loaded bodies get. It uses only plain markup (p, h3, ul, li) that
+// postBodyOverrides replaces the stored body_html of select blog posts
+// with longer articles. Keys are post slugs. The content is static and
+// authored in source, and it passes through the same bluemonday policy
+// as database-loaded bodies when it is applied (see
+// applyPostBodyOverride): being authored in source is not an exemption
+// from the sanitizer. It uses only plain markup (p, h3, ul, li) that
 // the post template renders inside .prose.
 var postBodyOverrides = map[string]string{
 	"rodent-proof-your-home": `<p>Every October, as the first hard frost settles over the Inland Northwest, rodents start house hunting. The fields around Spokane and Coeur d'Alene go cold and quiet, natural food dries up, and your heated home with its pantry, pet food, and cozy wall voids looks like the best real estate in the county. Mice and rats do not wander in by accident. They follow warmth, food odor, and shelter, and once one finds a way in, the rest of the family follows the scent trail.</p>
@@ -73,6 +75,6 @@ func applyPostBodyOverride(p *data.Post) {
 		return
 	}
 	if body, ok := postBodyOverrides[p.Slug]; ok {
-		p.BodyHTML = body
+		p.BodyHTML = data.SanitizeHTML(body)
 	}
 }

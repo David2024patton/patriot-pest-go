@@ -995,11 +995,26 @@ func (m *Module) contactPost(w http.ResponseWriter, r *http.Request) {
 		Detail: leadDetail("Contact form", pest, zip),
 		Notes:  message,
 	}
+	delivered := true
 	if err := m.captureLead(lead); err != nil {
 		slog.Error("contact lead capture failed, saving locally", "err", err, "email", email, "phone", phone)
 		if res := data.CreateSignup(m.DBPath, name, email, phone, "", "", zip); !res.OK {
 			slog.Error("contact lead local save failed", "err", res.Err, "email", email, "phone", phone, "message", message)
+			delivered = false
 		}
+	}
+	if !delivered {
+		// Both stores refused the lead. The visitor is told plainly
+		// instead of being shown a success message for a message the
+		// business never received.
+		w.WriteHeader(http.StatusInternalServerError)
+		view.PageStatus(w, r, 500, "contact", contactT, contactD, metaKeywords, m.base(map[string]any{
+			"Errors":      []string{"We could not save your message just now. Please call (509) 471-5767 and we will take it by phone."},
+			"OldName":     name, "OldEmail": email, "OldPhone": phone, "OldMessage": message,
+			"OldZip": zip, "OldPest": pest,
+			"Csrf": m.csrfField(r, w), "PestOptions": pestOptionsHTML(pest),
+		}))
+		return
 	}
 	slog.Info("Contact form submitted", "email", email)
 	view.Page(w, r, "contact", contactT, contactD, metaKeywords, m.base(map[string]any{

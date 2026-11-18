@@ -68,6 +68,13 @@ var (
 // lives outside this repo — read-time sanitizing is the backstop.
 var htmlSanitizer = bluemonday.UGCPolicy()
 
+// SanitizeHTML runs the blog body policy (the same one catalog loads
+// use) over HTML from any other source, so every body that reaches a
+// post page has passed the identical pass.
+func SanitizeHTML(html string) string {
+	return htmlSanitizer.Sanitize(html)
+}
+
 // Load reads the catalog from dbPath (database/patriot.db). Safe to call once;
 // subsequent calls return the cached store. An error is returned when the
 // catalog cannot be read — the caller decides whether to fail or run degraded,
