@@ -1,14 +1,20 @@
 /* ============================================================
-   BEACON.JS - first-party retention beacon + THE BEACON easter egg
-   ORDER 1 + ORDER 3. Loaded when the track_enabled site setting is on.
+   BEACON.JS - first-party retention beacon + the Beacon easter egg.
+   Loaded when the track_enabled site setting is on.
    Self-gating: the egg module only runs when #egg exists (egg_enabled
-   renders it); the tracking module runs on both marketing and app shells.
-   Fire rules per Nash RETENTION_EVENT_CONTRACT.md:
+   renders it); the tracking module runs on both marketing and app
+   shells.
+   Events sent:
      - page_view on every load
      - link_click on outbound / tel / anchor clicks
      - easter_egg_click per hit, easter_egg_reveal on jackpot
      - session_end via sendBeacon on pagehide
-   All strings Hamilton locked, zero em dashes.
+   Consent: nothing is sent, and no visitor or session id is created,
+   until the visitor accepts in the cookie banner (the choice is kept
+   in localStorage under ppc-consent-v1, the same key the banner and
+   the third-party analytics gate use). A Do Not Track signal also
+   suppresses every send. Accepted sends carry consent:true, and the
+   server stores nothing without that marker.
    ============================================================ */
 (function(){
 "use strict";
@@ -22,6 +28,7 @@ function uuid(){
   return h(b[0])+h(b[1])+h(b[2])+h(b[3])+"-"+h(b[4])+h(b[5])+"-"+h(b[6])+h(b[7])+"-"+h(b[8])+h(b[9])+"-"+h(b[10])+h(b[11])+h(b[12])+h(b[13])+h(b[14])+h(b[15]);
 }
 function getVisitor(){
+  if (!trackingAllowed()) return "";
   var v;
   try { v = localStorage.getItem("pp_visitor_id"); } catch(e){}
   if(!v || !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(v)){
@@ -32,6 +39,7 @@ function getVisitor(){
 }
 var SESSION_TTL = 30*60*1000; // 30 minutes inactivity ends a session
 function getSession(){
+  if (!trackingAllowed()) return "";
   var s, ts;
   try { s = sessionStorage.getItem("pp_session_id"); ts = parseInt(sessionStorage.getItem("pp_session_ts")||"0",10); } catch(e){}
   var now = Date.now();
@@ -46,8 +54,16 @@ function getSession(){
 function nowIso(){ return new Date().toISOString(); }
 function pagePath(){ var p = location.pathname || "/"; return p.length>255 ? p.slice(0,255) : p; }
 
+/* ---------- consent ---------- */
+function trackingAllowed(){
+  if (navigator.doNotTrack === "1" || window.doNotTrack === "1") return false;
+  try { return localStorage.getItem("ppc-consent-v1") === "accepted"; } catch(e){ return false; }
+}
+
 /* ---------- send (contract: same-origin JSON, server answers 204) ---------- */
 function fire(kind, payload){
+  if (!trackingAllowed()) return;
+  payload.consent = true;
   try {
     if (navigator.sendBeacon) {
       navigator.sendBeacon("/api/track/"+kind, new Blob([JSON.stringify(payload)], {type:"application/json"}));
@@ -100,7 +116,8 @@ function wireSessionEnd(){
 }
 
 /* ============================================================
-   THE BEACON // easter egg (ORDER 1) // ported from Rockwell preview
+   The Beacon easter egg: a hidden cache the visitor hunts across
+   page corners; five hits open the reward modal.
    ============================================================ */
 function initEgg(){
   var egg = document.getElementById("egg");
@@ -114,7 +131,10 @@ function initEgg(){
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var CORNERS = ["br","tr","bl","tl"];
   var KEY_HITS = "pp_egg_hits", KEY_CLAIMED = "pp_egg_claimed";
-  var CODE = "PATRIOT25";
+  // The reward code is rendered into the modal markup by the server;
+  // this script only needs its length for the reel count, so the code
+  // itself never ships inside this file.
+  var CODE = (codeDrop && codeDrop.textContent) ? codeDrop.textContent.trim() : "";
   var hits = parseInt(sessionStorage.getItem(KEY_HITS)||"0",10);
   var claimed = sessionStorage.getItem(KEY_CLAIMED)==="1";
 
@@ -134,7 +154,7 @@ function initEgg(){
     var next = CORNERS[(cur+1)%CORNERS.length];
     egg.setAttribute("data-corner", next);
   }
-  /* build reels: one strip per char of PATRIOT25 */
+  /* build reels: one strip per character of the reward code */
   var CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   function buildReels(){
     var html = "";
@@ -149,6 +169,7 @@ function initEgg(){
   buildReels();
   function spinReels(cb){
     var strips = reels.querySelectorAll(".strip");
+    if (!strips.length) { cb(); return; }
     var done = 0;
     function settle(strip, spins, idx){
       var h = 42;

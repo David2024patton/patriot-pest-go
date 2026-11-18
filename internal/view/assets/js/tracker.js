@@ -15,6 +15,10 @@
      - navigator.doNotTrack === "1"  -> sends nothing
      - ppc_admin=1 cookie (set at admin login) -> sends nothing,
        so the owners' own visits never pollute the dashboard
+     - the cookie banner choice (localStorage ppc-consent-v1): no id
+       is created and nothing is sent until the visitor accepts, the
+       same gate the banner applies to third-party analytics. Sends
+       carry consent:true; the server stores nothing without it.
    ============================================================ */
 (function () {
   "use strict";
@@ -42,6 +46,9 @@
   }
 
   function validId(v) { return typeof v === "string" && /^[0-9a-f]{64}$/.test(v); }
+
+  /* ---------- consent gate ---------- */
+  if (lsGet("ppc-consent-v1") !== "accepted") return;
 
   /* ---------- visitor id (persistent) ---------- */
   var vid = lsGet("ppc_vid");
@@ -96,6 +103,7 @@
     if (window.screen) { sw = window.screen.width | 0; sh = window.screen.height | 0; }
   } catch (e) {}
   send("/api/track/view", {
+    consent: true,
     vid: vid,
     sid: sid,
     path: pagePath(),
@@ -133,6 +141,7 @@
         ("." + cap(el.className.trim().split(/\s+/).join("."), 60)) : "");
 
     send("/api/track/event", {
+      consent: true,
       vid: vid,
       sid: sid,
       path: pagePath(),

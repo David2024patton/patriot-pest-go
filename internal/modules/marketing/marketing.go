@@ -199,6 +199,14 @@ func (m *Module) trackEndpoint(defaultKind string) http.HandlerFunc {
 		if err := json.Unmarshal(body, &p); err != nil {
 			return
 		}
+		// Consent gate: the first-party trackers send consent:true only
+		// after the visitor accepts in the cookie banner. Anything else
+		// (no marker, declined, a script that ignores the banner) is
+		// dropped here, so no geo, device, or identity data is stored
+		// for a visitor who never said yes.
+		if c, ok := p["consent"].(bool); !ok || !c {
+			return
+		}
 		str := func(keys ...string) string {
 			for _, k := range keys {
 				if v, ok := p[k].(string); ok && v != "" {

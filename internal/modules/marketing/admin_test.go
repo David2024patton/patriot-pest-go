@@ -113,7 +113,7 @@ func TestAdminLoginAcceptsAndServesDashboard(t *testing.T) {
 	_, r := adminRouter(t)
 
 	// Seed one pageview through the real beacon endpoint.
-	beaconBody := `{"vid":"v1","sid":"s1","path":"/prices-test","ref":"https://www.google.com/","utm_source":"","utm_medium":""}`
+	beaconBody := `{"consent":true,"vid":"v1","sid":"s1","path":"/prices-test","ref":"https://www.google.com/","utm_source":"","utm_medium":""}`
 	breq := httptest.NewRequest(http.MethodPost, "/api/track/view", strings.NewReader(beaconBody))
 	breq.Header.Set("Content-Type", "application/json")
 	breq.Header.Set("User-Agent", browserUA)
